@@ -11,6 +11,7 @@ specifiers:
   '@types/node': ^17.0.18
   '@types/react': ^17.0.39
   '@types/react-dom': ^17.0.11
+  axios: ^0.26.0
   dayjs: ^1.10.7
   firebase: ^9.6.7
   firebase-admin: ^10.0.2
@@ -32,6 +33,7 @@ dependencies:
   '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.0.23
   '@tailwindcss/forms': 0.4.0_tailwindcss@3.0.23
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.23
+  axios: 0.26.0
   dayjs: 1.10.7
   firebase: 9.6.7
   firebase-admin: 10.0.2
@@ -1334,6 +1336,14 @@ packages:
     dev: false
     optional: true
 
+  /axios/0.26.0:
+    resolution: {integrity: sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==}
+    dependencies:
+      follow-redirects: 1.14.9
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: false
@@ -1896,6 +1906,16 @@ packages:
       - bufferutil
       - encoding
       - utf-8-validate
+    dev: false
+
+  /follow-redirects/1.14.9:
+    resolution: {integrity: sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /fs-extra/10.0.0:
