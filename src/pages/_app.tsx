@@ -33,7 +33,7 @@ const NextApp: NextPage<AppProps> = props => {
           <Component {...pageProps} />
         </main>
       </div>
-      <footer className="flex justify-center mt-10">
+      <footer className="flex justify-center my-10">
         <p className="text-gray-500">© 2022 Pradit Amusement</p>
       </footer>
     </Fragment>
