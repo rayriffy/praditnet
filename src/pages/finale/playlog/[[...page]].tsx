@@ -1,7 +1,4 @@
-import { Fragment } from 'react'
-
 import { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
 
 import { Navbar } from '../../../modules/finale/home/components/navbar'
 import { PlaylogRenderer } from '../../../modules/finale/playlog/components/playlogRenderer'
@@ -27,10 +24,14 @@ const Page: NextPage<Props> = props => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getPaginatedPlaylogs } = await import('../../../modules/finale/playlog/services/getPaginatedPlaylogs')
 
-  const paginatedPlaylogs = await getPaginatedPlaylogs()
+  
+  const { page = ['1'] } = ctx.params
+  const paginatedPage = Number(page[0])
+  
+  const paginatedPlaylogs = await getPaginatedPlaylogs(paginatedPage)
 
   return {
     props: {
