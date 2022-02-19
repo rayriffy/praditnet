@@ -10,7 +10,7 @@ const Page: NextPage = () => {
           <img className="h-8 w-auto" src="/assets/pamuse.svg" />
           <div className="border rounded px-2 py-1 flex items-center hover:cursor-pointer">
             <p className="text-gray-700 font-medium mr-2">
-              5000 0000 0000 0000
+              8594
             </p>
             <CreditCardIcon className="w-6 h-6 text-gray-700" />
           </div>
