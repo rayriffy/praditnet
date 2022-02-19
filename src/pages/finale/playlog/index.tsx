@@ -3,6 +3,10 @@ import { Fragment } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 
+import { Navbar } from '../../../modules/finale/home/components/navbar'
+import { PlaylogRenderer } from '../../../modules/finale/playlog/components/playlogRenderer'
+import { Pagination } from '../../../modules/finale/playlog/components/pagination'
+
 import { UserPlaylog } from '../../../modules/finale/home/@types/UserPlaylog'
 
 interface Props {
@@ -12,21 +16,13 @@ interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { playlogs } = props
+  const { playlogs, page, maxPage } = props
 
   return (
     <div className="mt-4">
-      <div className="grid grid-cols-1 gap-6">
-        {playlogs.map(playlog => (
-          <div className="p-4 md:p-6 bg-slate-100 rounded-xl flex">
-            <img className="w-32 md:w-48 h-auto rounded" src={`https://praditnet-cdn.rayriffy.com/finale/jacket/${playlog.musicId}.png`} loading="lazy" />
-            <div className="ml-6">
-              <h1 className="font-semibold text-2xl text-gray-900">{playlog.musicTitle}</h1>
-              <p className="py-2 text-3xl">{playlog.achievement.toFixed(2)}%</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Navbar />
+      <PlaylogRenderer playlogs={playlogs} />
+      <Pagination current={page} max={maxPage} />
     </div>
   )
 }
