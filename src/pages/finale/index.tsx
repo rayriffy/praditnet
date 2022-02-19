@@ -13,8 +13,20 @@ interface Props {
 
 const navbars = [
   {
+    id: '',
+    title: 'Home',
+  },
+  {
     id: 'playlog',
     title: 'Playlog',
+  },
+  {
+    id: 'collection',
+    title: 'Collection',
+  },
+  {
+    id: 'score',
+    title: 'Score',
   },
 ]
 
@@ -23,7 +35,7 @@ const Page: NextPage<Props> = props => {
   return (
     <div className="mt-4">
       <ProfileCard profile={profile} />
-      <div className="grid grid-cols-4 gap-6 mt-2">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4">
         {navbars.map(navbar => (
           <Link href={`/finale/${navbar.id}`}>
             <a
