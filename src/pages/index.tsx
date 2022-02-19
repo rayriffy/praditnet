@@ -24,7 +24,7 @@ const Page: NextPage = () => {
             <div className="mt-1 py-1 px-4 flex justify-between items-center">
               <div>
                 <p className="text-lg font-semibold">Ray</p>
-                <p className="text-sm">Rating: 11.57</p>
+                <p className="text-sm">Rating: <b className="font-semibold">11.57</b></p>
               </div>
               <ArrowRightIcon className="w-6 h-6" />
             </div>
@@ -37,7 +37,7 @@ const Page: NextPage = () => {
             <div className="mt-1 py-1 px-4 flex justify-between items-center">
               <div>
                 <p className="text-lg font-semibold">Ray</p>
-                <p className="text-sm">Rating: 14.71</p>
+                <p className="text-sm">Rating: <b className="font-semibold">14.71</b></p>
               </div>
               <ArrowRightIcon className="w-6 h-6" />
             </div>
@@ -50,7 +50,7 @@ const Page: NextPage = () => {
             <div className="mt-1 py-1 px-4 flex justify-between items-center">
               <div>
                 <p className="text-lg font-semibold">RAY</p>
-                <p className="text-sm">Rating: 12.93</p>
+                <p className="text-sm">Rating: <b className="font-semibold">12.93</b></p>
               </div>
               <ArrowRightIcon className="w-6 h-6" />
             </div>
