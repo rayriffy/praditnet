@@ -21,6 +21,8 @@ export const getUserProfile = async (): Promise<UserProfile> => {
       luid: process.env.DEMO_LUID,
     })
 
+  await knex.destroy()
+
   return {
     displayName: userProfile[0].user_name,
     rating: {

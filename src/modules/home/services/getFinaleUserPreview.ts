@@ -12,7 +12,7 @@ export const getFinaleUserPreview = async (): Promise<UserPreview> => {
       luid: process.env.DEMO_LUID,
     })
 
-  console.log(data)
+  await knex.destroy()
 
   if (data.length === 0) {
     return null

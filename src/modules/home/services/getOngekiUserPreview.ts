@@ -12,6 +12,8 @@ export const getOngekiUserPreview = async (): Promise<UserPreview> => {
       luid: process.env.DEMO_LUID,
     })
 
+  await knex.destroy()
+
   if (data.length === 0) {
     return null
   } else {
