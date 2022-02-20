@@ -4,6 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import AppleProvider from "next-auth/providers/apple"
 
 import { Sequelize } from "sequelize"
+import 'mariadb'
 import SequelizeAdapter from "@next-auth/sequelize-adapter"
 
 const {
@@ -13,7 +14,7 @@ const {
   DATABASE_PORT,
 } = process.env
 
-const sequelize = new Sequelize(`mysql://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/praditnet`)
+const sequelize = new Sequelize(`mariadb://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/praditnet`)
 
 export default NextAuth({
   adapter: SequelizeAdapter(sequelize),
