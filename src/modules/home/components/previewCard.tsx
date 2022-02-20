@@ -19,7 +19,7 @@ export const PreviewCard = memo<Props>(props => {
   const { game, userPreview } = props
 
   return (
-    <Link href={`/dashboard/${game.id}`}>
+    <Link href={`/${game.id}`}>
       <a
         className={classNames(
           userPreview === null || userPreview === undefined

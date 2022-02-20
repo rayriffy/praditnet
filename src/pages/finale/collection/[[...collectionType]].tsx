@@ -55,7 +55,7 @@ const Page: NextPage<Props> = props => {
         {collectionTypes.map(collectionType => (
           <Link
             key={`collection-${collectionType.id}`}
-            href={`/dashboard/finale/collection/${collectionType.id}`}
+            href={`/finale/collection/${collectionType.id}`}
           >
             <a
               className={classNames(
