@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
@@ -8,6 +8,7 @@ import { games } from '../modules/home/constants/games'
 import { PreviewCard } from '../modules/home/components/previewCard'
 
 import { UserPreview } from '../modules/home/@types/UserPreview'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   finale: UserPreview
@@ -16,6 +17,12 @@ interface Props {
 }
 
 const Page: NextPage<Props> = props => {
+  const { data: session, status } = useSession()
+
+  useEffect(() => {
+    console.log({ session, status })
+  }, [session, status])
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mt-14">
       {games.map(game => (
