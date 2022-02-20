@@ -13,7 +13,7 @@ const {
   DATABASE_PORT,
 } = process.env
 
-const sequelize = new Sequelize(`mariadb://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/praditnet`)
+const sequelize = new Sequelize(`mysql://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/praditnet`)
 
 export default NextAuth({
   adapter: SequelizeAdapter(sequelize),
