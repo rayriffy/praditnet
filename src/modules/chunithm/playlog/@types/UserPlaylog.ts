@@ -8,6 +8,7 @@ export interface UserPlaylog {
   isAllJustice: number
   isFullCombo: number
   playDate: string
+  difficulty: string
   judge: {
     justiceCritical: number
     justice: number

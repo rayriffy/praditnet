@@ -19,7 +19,7 @@ export const PlaylogRenderer = memo<Props>(props => {
           className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl flex"
           key={`playlog-${playlog.id}`}
         >
-          <div className="w-28 md:w-48 shrink-0 flex items-start">
+          <div className="w-32 md:w-48 shrink-0 flex items-start">
             <img
               className="w-full h-auto rounded"
               src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${playlog.musicId}.png`}
@@ -27,12 +27,21 @@ export const PlaylogRenderer = memo<Props>(props => {
             />
           </div>
           <div className="ml-6 w-full">
-            <h1 className="font-bold text-2xl text-gray-900 break-all">
-              {playlog.musicTitle}
-            </h1>
-            <p className="py-2 text-2xl md:text-4xl font-light">
-              {playlog.score.toLocaleString()}
-            </p>
+            <div className="flex justify-between items-center">
+              <h1 className="font-bold text-2xl text-gray-900 break-all">
+                {playlog.musicTitle}
+              </h1>
+              <p className="bg-violet-500 text-white py-1 px-4 text-center rounded-lg shrink-0 ml-2">16+</p>
+            </div>
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="py-2 text-2xl md:text-4xl font-light">
+                  {playlog.score.toLocaleString()}
+                </p>
+                <p className="text-gray-900">{playlog.playDate}</p>
+              </div>
+              <span>#RANK#</span>
+            </div>
             <div className="pt-4 flex flex-col">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {judges.map(judge => (

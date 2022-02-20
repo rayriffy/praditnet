@@ -3,6 +3,7 @@ import chunk from 'lodash/chunk'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
 
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 import { paginationItems } from '../../../../core/constants/paginationItems'
@@ -11,6 +12,7 @@ import { UserPlaylog } from '../@types/UserPlaylog'
 
 dayjs.extend(utc)
 dayjs.extend(timezone)
+dayjs.extend(localizedFormat)
 
 export const getPaginatedPlaylogs = async (page: number = 1) => {
   const knex = createKnexInstance()
@@ -26,7 +28,7 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
         'chunew_user_playlog.user_id'
       )
       .count(),
-      knex('chunew_user_data')
+    knex('chunew_user_data')
       .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
       .where({
         luid: process.env.DEMO_LUID,
@@ -57,6 +59,7 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
         'chunew_user_playlog.judge_guilty as judgeGuilty',
         'chunew_user_playlog.judge_justice as judgeJustice',
         'chunew_user_playlog.judge_heaven as judgeHeaven',
+        'chunew_user_playlog.level as difficulty'
       )
       .limit(paginationItems)
       .offset((page - 1) * paginationItems),
@@ -74,13 +77,25 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
       isClear: playlog.playIsClear,
       isAllJustice: playlog.playIsAllJustice,
       isFullCombo: playlog.playIsFullCombo,
+      difficulty:
+        playlog.difficulty === 5
+          ? 'ultima'
+          : playlog.difficulty === 4
+          ? 'world'
+          : playlog.difficulty === 3
+          ? 'master'
+          : playlog.difficulty === 2
+          ? 'export'
+          : playlog.difficulty === 1
+          ? 'advanced'
+          : 'basic',
       judge: {
         justiceCritical: playlog.judgeCritical + playlog.judgeHeaven,
         justice: playlog.judgeJustice,
         attack: playlog.judgeAttack,
         miss: playlog.judgeGuilty,
       },
-      playDate: dayjs.tz(playlog.playDate, 'Asia/Tokyo').toISOString(),
+      playDate: dayjs.tz(playlog.playDate, 'Asia/Tokyo').format('lll'),
     }
   })
 
