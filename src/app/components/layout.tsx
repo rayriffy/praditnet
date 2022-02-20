@@ -2,18 +2,12 @@ import { Fragment, FunctionComponent, useEffect } from 'react'
 
 import Link from 'next/link'
 import { CreditCardIcon } from '@heroicons/react/solid'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 export const Layout: FunctionComponent = props => {
   const { children } = props
 
-  const { data: session, status } = useSession()
   const router = useRouter()
-
-  useEffect(() => {
-    console.log({router, status, session})
-  }, [])
 
   return (
     <Fragment>
