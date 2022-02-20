@@ -39,6 +39,7 @@
     "firebase-admin": "^10.0.2",
     "knex": "^1.0.3",
     "lodash": "^4.17.21",
+    "mariadb": "^2.5.6",
     "mysql": "^2.18.1",
     "next": "^12.1.0",
     "next-auth": "^4.2.1",
