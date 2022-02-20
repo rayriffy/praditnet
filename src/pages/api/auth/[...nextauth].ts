@@ -17,6 +17,9 @@ const {
 const sequelize = new Sequelize(`mariadb://${DATABASE_USER}:${DATABASE_PASS}@${DATABASE_HOST}:${DATABASE_PORT}/praditnet`)
 
 export default NextAuth({
+  session: {
+    strategy: "database"
+  },
   adapter: SequelizeAdapter(sequelize, {
     models: {
       User: sequelize.define("user", {
