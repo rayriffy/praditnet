@@ -2,21 +2,20 @@ export const collectionTypes = [
   {
     id: 'icon',
     name: 'Icon',
-    equipKey: 'icon_id',
+    itemKind: 2,
   },
   {
     id: 'frame',
     name: 'Frame',
-    equipKey: 'frame_id',
+    itemKind: 5,
   },
   {
     id: 'nameplate',
     name: 'Nameplate',
-    equipKey: 'nameplate_id',
+    itemKind: 4,
   },
-  {
-    id: 'title',
-    name: 'Title',
-    equipKey: 'trophy_id',
-  },
+  // {
+  //   id: 'title',
+  //   name: 'Title',
+  // },
 ]

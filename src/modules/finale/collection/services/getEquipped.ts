@@ -23,6 +23,8 @@ export const getEquipped = async () => {
       'praditnet_finale_title.name as titleName',
     )
 
+  await knex.destroy()
+
   const selectedRow = databaseEquipped[0]
 
   return {
