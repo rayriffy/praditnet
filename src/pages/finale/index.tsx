@@ -19,12 +19,14 @@ const Page: NextPage<Props> = props => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getUserProfile } = await import(
     '../../modules/finale/home/services/getUserProfile'
   )
 
   const userProfile = await getUserProfile()
+
+  ctx.res.setHeader('Cache-Control', 'max-age=300, public')
 
   return {
     props: {
