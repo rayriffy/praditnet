@@ -53,6 +53,7 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
         'chunew_user_playlog.is_clear as playIsClear',
         'chunew_user_playlog.is_all_justice as playIsAllJustice',
         'chunew_user_playlog.is_full_combo as playIsFullCombo',
+        'chunew_user_playlog.is_new_record as playIsHighScore',
         'chunew_user_playlog.user_play_date as playDate',
         'chunew_user_playlog.judge_attack as judgeAttack',
         'chunew_user_playlog.judge_critical as judgeCritical',
@@ -74,9 +75,10 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
       musicTitle: playlog.musicTitle,
       musicArtist: playlog.musicArtist,
       score: playlog.playScore,
-      isClear: playlog.playIsClear,
-      isAllJustice: playlog.playIsAllJustice,
-      isFullCombo: playlog.playIsFullCombo,
+      isClear: playlog.playIsClear === 1,
+      isAllJustice: playlog.playIsAllJustice === 1,
+      isFullCombo: playlog.playIsFullCombo === 1,
+      isHighScore: playlog.playIsHighScore === 1,
       difficulty:
         playlog.difficulty === 5
           ? 'ultima'

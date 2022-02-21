@@ -29,7 +29,7 @@ export const PlaylogRenderer = memo<Props>(props => {
           </div>
           <div className="sm:ml-6 w-full">
             <div className="flex justify-between items-center">
-              <h1 className="font-bold text-2xl text-gray-900 break-all">
+              <h1 className="font-bold text-2xl text-gray-900">
                 {playlog.musicTitle}
               </h1>
               <p className="bg-violet-500 text-white py-1 px-4 text-center rounded-lg shrink-0 ml-2">
@@ -48,6 +48,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 src={`/assets/chunithm/rank/${
                   ranks.find(rank => rank.score <= playlog.score).id
                 }.png`}
+                loading="lazy"
               />
             </div>
             <div className="pt-4 flex flex-col">
@@ -67,7 +68,27 @@ export const PlaylogRenderer = memo<Props>(props => {
                   </div>
                 ))}
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
+                <div
+                  className={classNames(
+                    playlog.isClear
+                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      : 'from-gray-300 to-zinc-300 text-gray-600',
+                    'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
+                  )}
+                >
+                  CLEAR
+                </div>
+                <div
+                  className={classNames(
+                    playlog.isHighScore
+                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      : 'from-gray-300 to-zinc-300 text-gray-600',
+                    'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
+                  )}
+                >
+                  NEW RECORD
+                </div>
                 <div
                   className={classNames(
                     playlog.isFullCombo

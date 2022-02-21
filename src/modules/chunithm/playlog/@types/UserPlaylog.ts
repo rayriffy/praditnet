@@ -4,9 +4,10 @@ export interface UserPlaylog {
   musicTitle: number
   musicArtist: number
   score: number
-  isClear: number
-  isAllJustice: number
-  isFullCombo: number
+  isClear: boolean
+  isAllJustice: boolean
+  isFullCombo: boolean
+  isHighScore: boolean
   playDate: string
   difficulty: string
   judge: {
