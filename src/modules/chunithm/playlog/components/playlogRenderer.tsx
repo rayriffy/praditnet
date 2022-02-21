@@ -4,6 +4,7 @@ import { classNames } from '../../../../core/services/classNames'
 
 import { UserPlaylog } from '../@types/UserPlaylog'
 import { judges } from '../constants/judges'
+import { ranks } from '../constants/ranks'
 
 interface Props {
   playlogs: UserPlaylog[]
@@ -31,7 +32,9 @@ export const PlaylogRenderer = memo<Props>(props => {
               <h1 className="font-bold text-2xl text-gray-900 break-all">
                 {playlog.musicTitle}
               </h1>
-              <p className="bg-violet-500 text-white py-1 px-4 text-center rounded-lg shrink-0 ml-2">16+</p>
+              <p className="bg-violet-500 text-white py-1 px-4 text-center rounded-lg shrink-0 ml-2">
+                16+
+              </p>
             </div>
             <div className="flex justify-between items-center">
               <div>
@@ -40,7 +43,12 @@ export const PlaylogRenderer = memo<Props>(props => {
                 </p>
                 <p className="text-gray-900">{playlog.playDate}</p>
               </div>
-              <span>#RANK#</span>
+              <img
+                className="w-28"
+                src={`/assets/chunithm/rank/${
+                  ranks.find(rank => rank.score < playlog.score).id
+                }.png`}
+              />
             </div>
             <div className="pt-4 flex flex-col">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
