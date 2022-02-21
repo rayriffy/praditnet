@@ -46,7 +46,7 @@ export const PlaylogRenderer = memo<Props>(props => {
               <img
                 className="w-28"
                 src={`/assets/chunithm/rank/${
-                  ranks.find(rank => rank.score < playlog.score).id
+                  ranks.find(rank => rank.score <= playlog.score).id
                 }.png`}
               />
             </div>
