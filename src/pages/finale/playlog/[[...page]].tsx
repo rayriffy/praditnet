@@ -25,12 +25,13 @@ const Page: NextPage<Props> = props => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
-  const { getPaginatedPlaylogs } = await import('../../../modules/finale/playlog/services/getPaginatedPlaylogs')
+  const { getPaginatedPlaylogs } = await import(
+    '../../../modules/finale/playlog/services/getPaginatedPlaylogs'
+  )
 
-  
   const { page = ['1'] } = ctx.params
   const paginatedPage = Number(page[0])
-  
+
   const paginatedPlaylogs = await getPaginatedPlaylogs(paginatedPage)
 
   ctx.res.setHeader('Cache-Control', 'max-age=300, public')

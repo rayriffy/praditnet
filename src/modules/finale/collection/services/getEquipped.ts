@@ -8,10 +8,26 @@ export const getEquipped = async () => {
     .where({
       luid: process.env.DEMO_LUID,
     })
-    .join('praditnet_finale_icon', 'maimai_user_data.icon_id', 'praditnet_finale_icon.id')
-    .join('praditnet_finale_frame', 'maimai_user_data.frame_id', 'praditnet_finale_frame.id')
-    .join('praditnet_finale_nameplate', 'maimai_user_data.nameplate_id', 'praditnet_finale_nameplate.id')
-    .join('praditnet_finale_title', 'maimai_user_data.trophy_id', 'praditnet_finale_title.id')
+    .join(
+      'praditnet_finale_icon',
+      'maimai_user_data.icon_id',
+      'praditnet_finale_icon.id'
+    )
+    .join(
+      'praditnet_finale_frame',
+      'maimai_user_data.frame_id',
+      'praditnet_finale_frame.id'
+    )
+    .join(
+      'praditnet_finale_nameplate',
+      'maimai_user_data.nameplate_id',
+      'praditnet_finale_nameplate.id'
+    )
+    .join(
+      'praditnet_finale_title',
+      'maimai_user_data.trophy_id',
+      'praditnet_finale_title.id'
+    )
     .select(
       'praditnet_finale_icon.id as iconId',
       'praditnet_finale_icon.name as iconName',
@@ -20,7 +36,7 @@ export const getEquipped = async () => {
       'praditnet_finale_nameplate.id as nameplateId',
       'praditnet_finale_nameplate.name as nameplateName',
       'praditnet_finale_title.id as titleId',
-      'praditnet_finale_title.name as titleName',
+      'praditnet_finale_title.name as titleName'
     )
 
   await knex.destroy()

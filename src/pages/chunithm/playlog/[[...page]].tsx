@@ -16,7 +16,9 @@ interface Props {
 const Page: NextPage<Props> = props => {
   const { page, maxPage, playlogs } = props
 
-  useEffect(() => { console.log(props) }, [])
+  useEffect(() => {
+    console.log(props)
+  }, [])
 
   return (
     <div className="mt-4">
@@ -28,11 +30,13 @@ const Page: NextPage<Props> = props => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
-  const { getPaginatedPlaylogs } = await import('../../../modules/chunithm/playlog/services/getPaginatedPlaylogs')
-  
+  const { getPaginatedPlaylogs } = await import(
+    '../../../modules/chunithm/playlog/services/getPaginatedPlaylogs'
+  )
+
   const { page = ['1'] } = ctx.params
   const paginatedPage = Number(page[0])
-  
+
   const paginatedPlaylogs = await getPaginatedPlaylogs(paginatedPage)
 
   ctx.res.setHeader('Cache-Control', 'max-age=300, public')

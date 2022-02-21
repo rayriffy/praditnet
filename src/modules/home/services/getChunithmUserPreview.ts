@@ -11,7 +11,7 @@ export const getChunithmUserPreview = async (): Promise<UserPreview> => {
     .where({
       luid: process.env.DEMO_LUID,
     })
-  
+
   await knex.destroy()
 
   if (data.length === 0) {

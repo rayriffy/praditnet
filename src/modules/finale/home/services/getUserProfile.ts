@@ -1,4 +1,3 @@
-
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 
 import { UserProfile } from '../@types/UserProfile'

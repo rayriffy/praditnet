@@ -9,7 +9,10 @@ import { Layout } from '../app/components/layout'
 import '../styles/tailwind.css'
 
 const NextApp: NextPage<AppProps> = props => {
-  const { Component, pageProps: { session, ...pageProps } } = props
+  const {
+    Component,
+    pageProps: { session, ...pageProps },
+  } = props
 
   return (
     <Fragment>

@@ -78,7 +78,9 @@ const Page: NextPage<Props> = props => {
                     collectionType.id === 'icon' ? 'w-1/2 md:w-full' : 'w-full'
                   )}
                   src={`https://praditnet-cdn.rayriffy.com/finale/${
-                    collectionType.id === 'frame' ? 'frameMini' : collectionType.id
+                    collectionType.id === 'frame'
+                      ? 'frameMini'
+                      : collectionType.id
                   }/${props[collectionType.id].id}.png`}
                 />
               ) : null}

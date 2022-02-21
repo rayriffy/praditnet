@@ -28,23 +28,38 @@ export const PlaylogRenderer = memo<Props>(props => {
             />
           </div>
           <div className="sm:ml-6 w-full">
-            <div className="flex justify-between items-center">
-              <h1 className="font-bold text-2xl text-gray-900">
-                {playlog.musicTitle}
-              </h1>
-              <p className="bg-violet-500 text-white py-1 px-4 text-center rounded-lg shrink-0 ml-2">
-                16+
-              </p>
-            </div>
+            <span
+              className={classNames(
+                playlog.difficulty === 'master'
+                  ? 'bg-purple-500'
+                  : playlog.difficulty === 'expert'
+                  ? 'bg-red-500'
+                  : playlog.difficulty === 'advanced'
+                  ? 'bg-orange-500'
+                  : playlog.difficulty === 'basic'
+                  ? 'bg-emerald-500'
+                  : playlog.difficulty === 'ultima'
+                  ? 'bg-gradient-to-tr from-red-500 to-gray-900'
+                  : 'bg-gradient-to-r from-sky-500 via-rose-500 to-lime-500',
+                'py-1 px-2 text-white text-xs uppercase rounded'
+              )}
+            >
+              {playlog.difficulty}
+            </span>
+            <h1 className="font-bold text-2xl text-gray-900 mt-3">
+              {playlog.musicTitle}
+            </h1>
             <div className="flex justify-between items-center">
               <div>
                 <p className="py-2 text-2xl md:text-4xl font-light">
                   {playlog.score.toLocaleString()}
                 </p>
-                <p className="text-gray-700 text-sm">Track {playlog.track} · {playlog.playDate}</p>
+                <p className="text-gray-700 text-sm">
+                  Track {playlog.track} · {playlog.playDate}
+                </p>
               </div>
               <img
-                className="w-28"
+                className="w-32"
                 src={`/assets/chunithm/rank/${
                   ranks.find(rank => rank.score <= playlog.score).id
                 }.png`}
@@ -72,7 +87,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 <div
                   className={classNames(
                     playlog.isClear
-                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      ? 'from-amber-400 to-yellow-400 text-gray-900'
                       : 'from-gray-300 to-zinc-300 text-gray-600',
                     'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
                   )}
@@ -82,7 +97,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 <div
                   className={classNames(
                     playlog.isHighScore
-                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      ? 'from-amber-400 to-yellow-400 text-gray-900'
                       : 'from-gray-300 to-zinc-300 text-gray-600',
                     'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
                   )}
@@ -92,7 +107,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 <div
                   className={classNames(
                     playlog.isFullCombo
-                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      ? 'from-amber-400 to-yellow-400 text-gray-900'
                       : 'from-gray-300 to-zinc-300 text-gray-600',
                     'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
                   )}
@@ -102,7 +117,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 <div
                   className={classNames(
                     playlog.isAllJustice
-                      ? 'from-amber-400 to-yellow-500 text-gray-900'
+                      ? 'from-amber-400 to-yellow-400 text-gray-900'
                       : 'from-gray-300 to-zinc-300 text-gray-600',
                     'text-xs bg-gradient-to-b text-center rounded py-0.5 font-bold'
                   )}

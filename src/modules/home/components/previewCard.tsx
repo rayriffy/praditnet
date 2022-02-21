@@ -50,7 +50,10 @@ export const PreviewCard = memo<Props>(props => {
               <div>
                 <p className="text-lg font-semibold">{userPreview.name}</p>
                 <p className="text-sm">
-                  Rating: <b className="font-semibold">{userPreview.rating.toFixed(2)}</b>
+                  Rating:{' '}
+                  <b className="font-semibold">
+                    {userPreview.rating.toFixed(2)}
+                  </b>
                 </p>
               </div>
               <ArrowRightIcon className="w-6 h-6" />

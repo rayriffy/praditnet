@@ -45,8 +45,9 @@ export const Item = memo<Props>(props => {
     <div className="flex justify-end mt-4">
       <button
         className={classNames(
-          error ? 'from-rose-500 to-red-500 cursor-pointer' :
-          isProcess
+          error
+            ? 'from-rose-500 to-red-500 cursor-pointer'
+            : isProcess
             ? 'from-sky-400 to-blue-400 animate-pulse cursor-wait'
             : isEquippable
             ? 'from-sky-500 to-blue-500 hover:from-sky-400 hover:to-blue-400 cursor-pointer'
@@ -71,7 +72,9 @@ export const Item = memo<Props>(props => {
       {type !== 'icon' && setButtonElement}
       <div className="shrink-0 flex items-center">
         <img
-          src={`https://praditnet-cdn.rayriffy.com/finale/${type === 'frame' ? 'frameMini' : type}/${item.id}.png`}
+          src={`https://praditnet-cdn.rayriffy.com/finale/${
+            type === 'frame' ? 'frameMini' : type
+          }/${item.id}.png`}
           className={classNames(type === 'icon' ? 'w-24' : 'w-full')}
           loading="lazy"
         />

@@ -83,13 +83,13 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
       isHighScore: playlog.playIsHighScore === 1,
       difficulty:
         playlog.difficulty === 5
-          ? 'ultima'
+          ? "world's end"
           : playlog.difficulty === 4
-          ? 'world'
+          ? 'ultima'
           : playlog.difficulty === 3
           ? 'master'
           : playlog.difficulty === 2
-          ? 'export'
+          ? 'expert'
           : playlog.difficulty === 1
           ? 'advanced'
           : 'basic',

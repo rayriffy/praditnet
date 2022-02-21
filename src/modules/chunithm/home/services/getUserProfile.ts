@@ -1,4 +1,3 @@
-
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 
 import { UserProfile } from '../@types/UserProfile'
@@ -16,7 +15,7 @@ export const getUserProfile = async (): Promise<UserProfile> => {
       'trophy_id',
       'character_id',
       'nameplate_id',
-      'voice_id',
+      'voice_id'
     )
     .where({
       luid: process.env.DEMO_LUID,

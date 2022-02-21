@@ -22,7 +22,9 @@ const Page: NextPage<Props> = props => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
-  const { getUserProfile } = await import('../../modules/chunithm/home/services/getUserProfile')
+  const { getUserProfile } = await import(
+    '../../modules/chunithm/home/services/getUserProfile'
+  )
 
   const userProfile = await getUserProfile()
 
@@ -30,8 +32,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
-      profile: userProfile
-    }
+      profile: userProfile,
+    },
   }
 }
 
