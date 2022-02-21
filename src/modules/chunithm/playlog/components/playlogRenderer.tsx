@@ -17,7 +17,7 @@ export const PlaylogRenderer = memo<Props>(props => {
     <div className="grid grid-cols-1 gap-6">
       {playlogs.map(playlog => (
         <div
-          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl sm:flex"
+          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 dark:from-gray-700 dark:to-slate-700 rounded-xl sm:flex"
           key={`playlog-${playlog.id}`}
         >
           <div className="mx-auto mb-4 sm:m-0 w-48 md:w-48 shrink-0 flex items-start">
@@ -46,15 +46,15 @@ export const PlaylogRenderer = memo<Props>(props => {
             >
               {playlog.difficulty}
             </span>
-            <h1 className="font-bold text-2xl text-gray-900 mt-3">
+            <h1 className="font-bold text-2xl text-gray-900 dark:text-white mt-3">
               {playlog.musicTitle}
             </h1>
             <div className="flex justify-between items-center">
               <div>
-                <p className="py-2 text-2xl md:text-4xl font-light">
+                <p className="py-2 text-2xl md:text-4xl font-light dark:text-white">
                   {playlog.score.toLocaleString()}
                 </p>
-                <p className="text-gray-700 text-sm">
+                <p className="text-gray-700 text-sm dark:text-gray-300">
                   Track {playlog.track} · {playlog.playDate}
                 </p>
               </div>

@@ -3,6 +3,7 @@ import { Fragment, FunctionComponent, useEffect } from 'react'
 import Link from 'next/link'
 import { CreditCardIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/router'
+import { PAmuse } from './pamuse'
 
 export const Layout: FunctionComponent = props => {
   const { children } = props
@@ -15,12 +16,12 @@ export const Layout: FunctionComponent = props => {
         <header className="flex justify-between items-center mb-8">
           <Link href="/">
             <a>
-              <img className="h-8 w-auto" src="/assets/pamuse.svg" />
+              <PAmuse />
             </a>
           </Link>
-          <div className="border rounded px-2 py-1 flex items-center hover:cursor-pointer">
-            <p className="text-gray-700 font-medium mr-2">8594</p>
-            <CreditCardIcon className="w-6 h-6 text-gray-700" />
+          <div className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-gray-800">
+            <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">8594</p>
+            <CreditCardIcon className="w-6 h-6 text-gray-700 dark:text-gray-100" />
           </div>
         </header>
         <main>{children}</main>
