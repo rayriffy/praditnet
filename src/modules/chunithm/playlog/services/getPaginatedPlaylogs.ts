@@ -47,12 +47,18 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
       .select(
         'praditnet_chunithm_music.id as musicId',
         'praditnet_chunithm_music.title as musicTitle',
-        'praditnet_chunithm_music.artist as musicArtist',
+        // 'praditnet_chunithm_music.artist as musicArtist',
+        'praditnet_chunithm_music.level_basic as musicLevel_basic',
+        'praditnet_chunithm_music.level_advanced as musicLevel_advanced',
+        'praditnet_chunithm_music.level_expert as musicLevel_expert',
+        'praditnet_chunithm_music.level_master as musicLevel_master',
+        'praditnet_chunithm_music.level_ultima as musicLevel_ultima',
         'chunew_user_playlog.id as playId',
         'chunew_user_playlog.score as playScore',
         'chunew_user_playlog.track as playTrack',
         'chunew_user_playlog.is_clear as playIsClear',
         'chunew_user_playlog.is_all_justice as playIsAllJustice',
+        'chunew_user_playlog.full_chain_kind as playIsFullChain',
         'chunew_user_playlog.is_full_combo as playIsFullCombo',
         'chunew_user_playlog.is_new_record as playIsHighScore',
         'chunew_user_playlog.user_play_date as playDate',
@@ -70,29 +76,32 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
   await knex.destroy()
 
   const processedPlaylogs: UserPlaylog[] = userPlaylogs.map(playlog => {
+    const difficulty = playlog.difficulty === 5
+      ? "world's end"
+      : playlog.difficulty === 4
+      ? 'ultima'
+      : playlog.difficulty === 3
+      ? 'master'
+      : playlog.difficulty === 2
+      ? 'expert'
+      : playlog.difficulty === 1
+      ? 'advanced'
+      : 'basic'
+
     return {
       id: playlog.playId,
       musicId: playlog.musicId,
       musicTitle: playlog.musicTitle,
-      musicArtist: playlog.musicArtist,
+      // musicArtist: playlog.musicArtist,
       score: playlog.playScore,
       track: playlog.playTrack,
       isClear: playlog.playIsClear === 1,
       isAllJustice: playlog.playIsAllJustice === 1,
+      isFullChain: playlog.playIsFullChain === 1,
       isFullCombo: playlog.playIsFullCombo === 1,
       isHighScore: playlog.playIsHighScore === 1,
-      difficulty:
-        playlog.difficulty === 5
-          ? "world's end"
-          : playlog.difficulty === 4
-          ? 'ultima'
-          : playlog.difficulty === 3
-          ? 'master'
-          : playlog.difficulty === 2
-          ? 'expert'
-          : playlog.difficulty === 1
-          ? 'advanced'
-          : 'basic',
+      difficulty: difficulty,
+      level: playlog[`musicLevel_${difficulty}`] ?? 0,
       judge: {
         justiceCritical: playlog.judgeCritical + playlog.judgeHeaven,
         justice: playlog.judgeJustice,
