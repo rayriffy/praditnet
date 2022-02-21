@@ -41,7 +41,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                 <p className="py-2 text-2xl md:text-4xl font-light">
                   {playlog.score.toLocaleString()}
                 </p>
-                <p className="text-gray-900">{playlog.playDate}</p>
+                <p className="text-gray-700 text-sm">Track {playlog.track} · {playlog.playDate}</p>
               </div>
               <img
                 className="w-28"

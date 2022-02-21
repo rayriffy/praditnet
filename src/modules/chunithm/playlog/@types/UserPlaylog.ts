@@ -4,6 +4,7 @@ export interface UserPlaylog {
   musicTitle: number
   musicArtist: number
   score: number
+  track: number
   isClear: boolean
   isAllJustice: boolean
   isFullCombo: boolean
