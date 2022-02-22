@@ -11,7 +11,7 @@ body,
 }
 
 html {
-  @apply dark:bg-gray-900
+  @apply dark:bg-gray-900;
 }
 
 h1,

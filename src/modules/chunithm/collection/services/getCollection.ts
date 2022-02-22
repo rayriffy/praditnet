@@ -6,7 +6,7 @@ export const getCollection = async (itemType: string) => {
 
   const [
     // equippableItems,
-    items
+    items,
   ] = await Promise.all([
     // knex('chunew_user_data')
     // .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')

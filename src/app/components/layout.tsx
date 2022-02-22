@@ -20,7 +20,9 @@ export const Layout: FunctionComponent = props => {
             </a>
           </Link>
           <div className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-gray-800">
-            <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">8594</p>
+            <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">
+              8594
+            </p>
             <CreditCardIcon className="w-6 h-6 text-gray-700 dark:text-gray-100" />
           </div>
         </header>

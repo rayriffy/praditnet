@@ -30,7 +30,7 @@ export const getEquipped = async () => {
       'praditnet_chunithm_nameplate.id as nameplateId',
       'praditnet_chunithm_nameplate.name as nameplateName',
       'praditnet_chunithm_systemVoice.id as systemVoiceId',
-      'praditnet_chunithm_systemVoice.name as systemVoiceName',
+      'praditnet_chunithm_systemVoice.name as systemVoiceName'
     )
 
   await knex.destroy()

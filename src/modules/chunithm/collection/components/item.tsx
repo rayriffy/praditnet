@@ -25,7 +25,13 @@ export const Item = memo<Props>(props => {
           src={`https://praditnet-cdn.rayriffy.com/chunithm/${
             type === 'character' ? 'character/icon' : type
           }/${item.id}.png`}
-          className={classNames(type === 'character' ? 'w-24 bg-gray-100 rounded overflow-hidden' : type === 'systemVoice' ? 'w-52 mx-auto' : 'w-full')}
+          className={classNames(
+            type === 'character'
+              ? 'w-24 bg-gray-100 rounded overflow-hidden'
+              : type === 'systemVoice'
+              ? 'w-52 mx-auto'
+              : 'w-full'
+          )}
           loading="lazy"
         />
       </div>

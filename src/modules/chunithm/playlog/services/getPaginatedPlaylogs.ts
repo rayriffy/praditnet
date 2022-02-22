@@ -76,17 +76,18 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
   await knex.destroy()
 
   const processedPlaylogs: UserPlaylog[] = userPlaylogs.map(playlog => {
-    const difficulty = playlog.difficulty === 5
-      ? "world's end"
-      : playlog.difficulty === 4
-      ? 'ultima'
-      : playlog.difficulty === 3
-      ? 'master'
-      : playlog.difficulty === 2
-      ? 'expert'
-      : playlog.difficulty === 1
-      ? 'advanced'
-      : 'basic'
+    const difficulty =
+      playlog.difficulty === 5
+        ? "world's end"
+        : playlog.difficulty === 4
+        ? 'ultima'
+        : playlog.difficulty === 3
+        ? 'master'
+        : playlog.difficulty === 2
+        ? 'expert'
+        : playlog.difficulty === 1
+        ? 'advanced'
+        : 'basic'
 
     return {
       id: playlog.playId,

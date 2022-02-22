@@ -69,9 +69,17 @@ const Page: NextPage<Props> = props => {
                 <img
                   className={classNames(
                     'mx-auto',
-                    collectionType.id === 'character' ? 'w-1/3 md:w-2/3 bg-gray-100 rounded overflow-hidden' : collectionType.id === 'systemVoice' ? 'w-2/3 md:w-full' : 'w-full'
+                    collectionType.id === 'character'
+                      ? 'w-1/3 md:w-2/3 bg-gray-100 rounded overflow-hidden'
+                      : collectionType.id === 'systemVoice'
+                      ? 'w-2/3 md:w-full'
+                      : 'w-full'
                   )}
-                  src={`https://praditnet-cdn.rayriffy.com/chunithm/${collectionType.id}${collectionType.id === 'character' ? '/icon' : ''}/${props[collectionType.id].id}.png`}
+                  src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+                    collectionType.id
+                  }${collectionType.id === 'character' ? '/icon' : ''}/${
+                    props[collectionType.id].id
+                  }.png`}
                 />
               ) : null}
             </a>
