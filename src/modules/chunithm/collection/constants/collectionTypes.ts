@@ -3,7 +3,7 @@ export const collectionTypes = [
     id: 'character',
     name: 'Character',
     // itemKind: 2,
-    aquaKey: 'character_id',
+    aquaKey: 'chara_illust_id',
   },
   {
     id: 'nameplate',
