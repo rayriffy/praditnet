@@ -16,7 +16,7 @@ export const ProfileCard = memo<Props>(props => {
           <div className="bg-gray-50 border-2 border-gray-700 rounded-md overflow-hidden shadow">
             <img
               className="h-24 w-auto"
-              src={`https://praditnet-cdn.rayriffy.com/chunithm/character/${equipped.character}.png`}
+              src={`https://praditnet-cdn.rayriffy.com/chunithm/character/icon/${equipped.character}.png`}
             />
           </div>
           <div className="ml-4 h-full flex flex-col justify-between">
