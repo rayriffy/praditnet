@@ -5,7 +5,7 @@ import passport from 'passport'
 
 import { setLoginSession } from '../../../core/services/authentication/session/setLoginSession'
 
-import { User } from '../../../core/@types/User'
+import { UserAuth } from '../../../core/@types/db/UserAuth'
 import { passportLocal } from '../../../core/services/authentication/passportLocal'
 
 const authenticate = (method, req, res) =>
@@ -25,7 +25,7 @@ const api = nc<NextApiRequest, NextApiResponse>()
   .use(passport.initialize())
   .post(async (req, res) => {
     try {
-      const user = (await authenticate('local', req, res)) as User
+      const user = (await authenticate('local', req, res)) as UserAuth
       // session is the payload to save in the token, it may contain basic info about the user
       const session = { ...user }
 

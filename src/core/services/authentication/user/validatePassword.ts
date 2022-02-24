@@ -1,8 +1,8 @@
 import crypto from 'crypto'
 
-import { User } from '../../../@types/User'
+import { UserAuth } from '../../../@types/db/UserAuth'
 
-export const validatePassword = (user: User, inputPassword: string) => {
+export const validatePassword = (user: UserAuth, inputPassword: string) => {
   const inputHash = crypto
     .pbkdf2Sync(inputPassword, user.salt, 1000, 64, 'sha512')
     .toString('hex')

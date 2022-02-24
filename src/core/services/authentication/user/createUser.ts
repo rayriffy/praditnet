@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import { nanoid } from 'nanoid'
 import dayjs from 'dayjs'
 
-import { User } from '../../../@types/User'
+import { UserAuth } from '../../../@types/db/UserAuth'
 import { createKnexInstance } from '../../createKnexInstance'
 
 export const createUser = async (username: string, password: string) => {
@@ -22,7 +22,7 @@ export const createUser = async (username: string, password: string) => {
   const knex = createKnexInstance()
 
   try {
-    await knex<User>('praditnet_user_auth').insert(payload)
+    await knex<UserAuth>('praditnet_user_auth').insert(payload)
 
     return {
       username,
