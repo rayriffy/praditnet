@@ -4,6 +4,9 @@ module.exports = withPreact({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  env: {
+    RECAPCHA_SITE_KEY: process.env.RECAPCHA_SITE_KEY,
+  },
   async headers() {
     return [
       {

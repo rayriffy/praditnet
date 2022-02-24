@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { useEffect } from 'react'
 
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { PlaylogRenderer } from '../../../modules/chunithm/playlog/components/playlogRenderer'
@@ -15,10 +14,6 @@ interface Props {
 
 const Page: NextPage<Props> = props => {
   const { page, maxPage, playlogs } = props
-
-  useEffect(() => {
-    console.log(props)
-  }, [])
 
   return (
     <div className="mt-4">

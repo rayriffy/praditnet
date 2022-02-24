@@ -44,13 +44,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   )
 
   // check for user session
-  // const user = await getApiUserSession(ctx.req)
+  const user = await getApiUserSession(ctx.req)
 
-  // if (user === null || user === undefined) {
-  //   ctx.res.statusCode = 302
-  //   ctx.res.setHeader('location', '/login')
-  //   ctx.res.end()
-  // }
+  if (user === null || user === undefined) {
+    ctx.res.statusCode = 302
+    ctx.res.setHeader('location', '/login')
+    ctx.res.end()
+  }
 
   const finaleUserPreview = await getFinaleUserPreview()
   const chunithmUserPreview = await getChunithmUserPreview()

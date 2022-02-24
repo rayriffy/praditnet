@@ -15,6 +15,7 @@ specifiers:
   '@types/passport-local': ^1.0.34
   '@types/react': ^17.0.39
   '@types/react-dom': ^17.0.11
+  '@types/react-google-recaptcha': ^2.1.4
   axios: ^0.26.0
   cookie: ^0.4.2
   dayjs: ^1.10.7
@@ -35,6 +36,7 @@ specifiers:
   prettier: ^2.5.1
   react: npm:@preact/compat@^17.0.3
   react-dom: npm:@preact/compat@^17.0.3
+  react-google-recaptcha: ^2.1.0
   react-ssr-prepass: npm:preact-ssr-prepass@^1.2.0
   tailwindcss: ^3.0.23
   typescript: ^4.5.5
@@ -64,6 +66,7 @@ dependencies:
   preact-render-to-string: 5.1.20_preact@10.6.6
   react: /@preact/compat/17.0.3_preact@10.6.6
   react-dom: /@preact/compat/17.0.3_preact@10.6.6
+  react-google-recaptcha: 2.1.0_@preact+compat@17.0.3
   react-ssr-prepass: /preact-ssr-prepass/1.2.0_preact@10.6.6
   tailwindcss: 3.0.23
   web-api-hooks: 3.0.2_@preact+compat@17.0.3
@@ -77,6 +80,7 @@ devDependencies:
   '@types/passport-local': 1.0.34
   '@types/react': 17.0.39
   '@types/react-dom': 17.0.11
+  '@types/react-google-recaptcha': 2.1.4
   husky: 7.0.4
   lint-staged: 12.3.4
   prettier: 2.5.1
@@ -649,6 +653,12 @@ packages:
 
   /@types/react-dom/17.0.11:
     resolution: {integrity: sha512-f96K3k+24RaLGVu/Y2Ng3e1EbZ8/cVJvypZWd7cy0ofCBaf2lcM46xNhycMZ2xGwbBjRql7hOlZ+e2WlJ5MH3Q==}
+    dependencies:
+      '@types/react': 17.0.39
+    dev: true
+
+  /@types/react-google-recaptcha/2.1.4:
+    resolution: {integrity: sha512-ZtL13ZpdIADXhZNaGppD5ueSMon19eemuhwGjnmPtK4+OH98v2jkFWuiSVQRvAl8KN5oZdxnTk6sJX6oXBlRvw==}
     dependencies:
       '@types/react': 17.0.39
     dev: true
@@ -1303,6 +1313,12 @@ packages:
     dependencies:
       function-bind: 1.1.1
 
+  /hoist-non-react-statics/3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+    dependencies:
+      react-is: 16.13.1
+    dev: false
+
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
@@ -1580,6 +1596,13 @@ packages:
       slice-ansi: 4.0.0
       wrap-ansi: 6.2.0
     dev: true
+
+  /loose-envify/1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
+    dependencies:
+      js-tokens: 4.0.0
+    dev: false
 
   /lru-cache/6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
@@ -2010,6 +2033,14 @@ packages:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
     dev: false
 
+  /prop-types/15.8.1:
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: false
+
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
@@ -2032,6 +2063,30 @@ packages:
   /quick-lru/5.1.1:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
+    dev: false
+
+  /react-async-script/1.2.0_@preact+compat@17.0.3:
+    resolution: {integrity: sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      prop-types: 15.8.1
+      react: /@preact/compat/17.0.3_preact@10.6.6
+    dev: false
+
+  /react-google-recaptcha/2.1.0_@preact+compat@17.0.3:
+    resolution: {integrity: sha512-K9jr7e0CWFigi8KxC3WPvNqZZ47df2RrMAta6KmRoE4RUi7Ys6NmNjytpXpg4HI/svmQJLKR+PncEPaNJ98DqQ==}
+    peerDependencies:
+      react: '>=16.4.1'
+    dependencies:
+      prop-types: 15.8.1
+      react: /@preact/compat/17.0.3_preact@10.6.6
+      react-async-script: 1.2.0_@preact+compat@17.0.3
+    dev: false
+
+  /react-is/16.13.1:
+    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
   /read-pkg-up/7.0.1:

@@ -5,9 +5,19 @@ import { get } from '../cookie/get'
 
 const { PASSPORT_SECRET } = process.env
 
+interface LoginSession {
+  id: number
+  uid: string
+  username: string
+  hash: string
+  salt: string
+  createdAt: number
+  maxAge: number
+}
+
 export const getLoginSession = async (
   req: NextApiRequest | GetServerSidePropsContext['req']
-) => {
+): Promise<LoginSession> => {
   const token = get(req)
 
   if (!token) return

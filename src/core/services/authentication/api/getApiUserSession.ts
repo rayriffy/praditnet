@@ -1,4 +1,5 @@
 import { GetServerSidePropsContext } from 'next'
+
 import { getLoginSession } from '../session/getLoginSession'
 import { findUser } from '../user/findUser'
 
@@ -7,7 +8,7 @@ export const getApiUserSession = async (
 ) => {
   try {
     const session = await getLoginSession(req)
-    const user = (session && (await findUser(session))) ?? null
+    const user = (session && (await findUser(session.username))) ?? null
 
     return user
   } catch (error) {

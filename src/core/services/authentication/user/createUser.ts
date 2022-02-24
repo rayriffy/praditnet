@@ -23,14 +23,19 @@ export const createUser = async (username: string, password: string) => {
 
   try {
     await knex<UserAuth>('praditnet_user_auth').insert(payload)
+    await knex('praditnet_user_data').insert({
+      uid: payload.uid,
+    })
+
+    await knex.destroy()
 
     return {
       username,
       createdAt: payload.createdAt,
     }
   } catch (e) {
+    await knex.destroy()
+
     throw new Error('dupe-username')
-  } finally {
-    knex.destroy()
   }
 }
