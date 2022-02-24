@@ -1,5 +1,7 @@
 import { memo, useCallback, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import axios from 'axios'
 
 import { classNames } from '../../../../core/services/classNames'
@@ -22,6 +24,8 @@ export const Item = memo<Props>(props => {
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
 
+  const router = useRouter()
+
   const onSet = useCallback(async () => {
     setIsProcess(true)
 
@@ -31,6 +35,7 @@ export const Item = memo<Props>(props => {
         type,
         id: item.id,
       })
+      router.push('/finale/collection')
     } catch (e) {
       setError(true)
       setTimeout(() => {
