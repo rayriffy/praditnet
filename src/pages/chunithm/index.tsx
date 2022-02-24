@@ -28,8 +28,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   const userProfile = await getUserProfile()
 
-  ctx.res.setHeader('Cache-Control', 'max-age=300, public')
-
   return {
     props: {
       profile: userProfile,

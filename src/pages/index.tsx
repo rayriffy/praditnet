@@ -44,8 +44,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const chunithmUserPreview = await getChunithmUserPreview()
   const ongekiUserPreview = await getOngekiUserPreview()
 
-  ctx.res.setHeader('Cache-Control', 'max-age=300, public')
-
   return {
     props: {
       finale: finaleUserPreview,

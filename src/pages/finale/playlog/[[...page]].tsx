@@ -34,8 +34,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   const paginatedPlaylogs = await getPaginatedPlaylogs(paginatedPage)
 
-  ctx.res.setHeader('Cache-Control', 'max-age=300, public')
-
   return {
     props: {
       page: paginatedPlaylogs.page,

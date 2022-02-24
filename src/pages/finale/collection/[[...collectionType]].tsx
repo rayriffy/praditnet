@@ -131,8 +131,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       ? await getCollection(targetCollectionType as string)
       : null
 
-  ctx.res.setHeader('Cache-Control', 'max-age=60, public')
-
   return {
     props: {
       ...equipped,
