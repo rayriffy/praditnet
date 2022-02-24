@@ -77,9 +77,11 @@ const Page: NextPage<Props> = props => {
                   )}
                   src={`https://praditnet-cdn.rayriffy.com/chunithm/${
                     collectionType.id
-                  }${collectionType.id === 'character' ? '/icon' : ''}/${
-                    props[collectionType.id].id
-                  }.png`}
+                  }${
+                    ['character', 'systemVoice'].includes(collectionType.id)
+                      ? '/icon'
+                      : ''
+                  }/${props[collectionType.id].id}.png`}
                 />
               ) : null}
             </a>

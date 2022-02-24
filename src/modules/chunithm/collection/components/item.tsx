@@ -22,8 +22,8 @@ export const Item = memo<Props>(props => {
     >
       <div className="shrink-0 flex items-center">
         <img
-          src={`https://praditnet-cdn.rayriffy.com/chunithm/${
-            type === 'character' ? 'character/icon' : type
+          src={`https://praditnet-cdn.rayriffy.com/chunithm/${type}${
+            ['character', 'systemVoice'].includes(type) ? '/icon' : ''
           }/${item.id}.png`}
           className={classNames(
             type === 'character'
