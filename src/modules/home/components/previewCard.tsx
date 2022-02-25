@@ -1,4 +1,4 @@
-import { Fragment, memo } from 'react'
+import { Fragment, memo, useMemo } from 'react'
 
 import Link from 'next/link'
 import { ArrowRightIcon } from '@heroicons/react/solid'
@@ -18,17 +18,9 @@ interface Props {
 export const PreviewCard = memo<Props>(props => {
   const { game, userPreview } = props
 
-  return (
-    <Link href={`/${game.id}`}>
-      <a
-        className={classNames(
-          userPreview === null || userPreview === undefined
-            ? 'hover:cursor-not-allowed grayscale'
-            : 'hover:cursor-pointer',
-          game.background,
-          'bg-gradient-to-r px-5 py-4 rounded-2xl relative text-white pt-14 transition duration-300 hover:scale-105'
-        )}
-      >
+  const cardContent = useMemo(
+    () => (
+      <Fragment>
         <img
           src={`/assets/logo/${game.id}.png`}
           className="h-24 w-auto mx-auto absolute -top-10 left-0 right-0"
@@ -60,7 +52,40 @@ export const PreviewCard = memo<Props>(props => {
             </Fragment>
           )}
         </div>
-      </a>
-    </Link>
+      </Fragment>
+    ),
+    []
+  )
+
+  return (
+    <Fragment>
+      {userPreview === null || userPreview === undefined ? (
+        <div
+          className={classNames(
+            userPreview === null || userPreview === undefined
+              ? 'hover:cursor-not-allowed grayscale'
+              : 'hover:cursor-pointer',
+            game.background,
+            'bg-gradient-to-r px-5 py-4 rounded-2xl relative text-white pt-14 transition duration-300 hover:scale-105'
+          )}
+        >
+          {cardContent}
+        </div>
+      ) : (
+        <Link href={`/${game.id}`}>
+          <a
+            className={classNames(
+              userPreview === null || userPreview === undefined
+                ? 'hover:cursor-not-allowed grayscale'
+                : 'hover:cursor-pointer',
+              game.background,
+              'bg-gradient-to-r px-5 py-4 rounded-2xl relative text-white pt-14 transition duration-300 hover:scale-105'
+            )}
+          >
+            {cardContent}
+          </a>
+        </Link>
+      )}
+    </Fragment>
   )
 })

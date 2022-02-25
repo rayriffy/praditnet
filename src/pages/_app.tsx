@@ -19,7 +19,11 @@ const NextApp: NextPage<AppProps> = props => {
       <Head>
         <title>PraditNET</title>
       </Head>
-      <Layout>
+      <Layout
+        cardId={
+          pageProps.user === undefined ? undefined : pageProps.user.cardId
+        }
+      >
         <Component {...pageProps} />
       </Layout>
     </Fragment>

@@ -1,10 +1,11 @@
 import { GetServerSidePropsContext } from 'next'
+import { NextRequest } from 'next/server'
 
 import { getLoginSession } from '../session/getLoginSession'
-import { findUser } from '../user/findUser'
+import { findUser } from './findUser'
 
 export const getApiUserSession = async (
-  req: GetServerSidePropsContext['req']
+  req: NextRequest | GetServerSidePropsContext['req']
 ) => {
   try {
     const session = await getLoginSession(req)

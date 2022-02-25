@@ -8,8 +8,9 @@ import { games } from '../modules/home/constants/games'
 import { PreviewCard } from '../modules/home/components/previewCard'
 
 import { UserPreview } from '../modules/home/@types/UserPreview'
+import { AppProps } from '../app/@types/AppProps'
 
-interface Props {
+interface Props extends AppProps {
   finale: UserPreview
   chunithm: UserPreview
   ongeki: UserPreview
@@ -52,12 +53,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     ctx.res.end()
   }
 
-  const finaleUserPreview = await getFinaleUserPreview()
-  const chunithmUserPreview = await getChunithmUserPreview()
-  const ongekiUserPreview = await getOngekiUserPreview()
+  const finaleUserPreview = await getFinaleUserPreview(user.card_luid ?? '')
+  const chunithmUserPreview = await getChunithmUserPreview(user.card_luid ?? '')
+  const ongekiUserPreview = await getOngekiUserPreview(user.card_luid ?? '')
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       finale: finaleUserPreview,
       chunithm: chunithmUserPreview,
       ongeki: ongekiUserPreview,

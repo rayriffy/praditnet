@@ -16,6 +16,7 @@ const Page: NextPage = props => {
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
 
+    setProgress(true)
     setError(null)
 
     const payload = {
@@ -24,6 +25,7 @@ const Page: NextPage = props => {
     }
 
     if (payload.password !== event.currentTarget.rpassword.value) {
+      setProgress(false)
       setError(`The passwords don't match`)
       return
     }
@@ -32,13 +34,14 @@ const Page: NextPage = props => {
       const res = await axios.post('/api/authentication/register', payload)
 
       if (res.status === 200) {
-        router.push('/login')
+        router.push('/')
       } else {
         throw new Error(res.data())
       }
     } catch (error) {
       console.error('An unexpected error happened occurred:', error)
       setError(error.message)
+      setProgress(false)
     }
   }
 

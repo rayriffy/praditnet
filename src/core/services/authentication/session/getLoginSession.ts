@@ -1,5 +1,6 @@
 import Iron from '@hapi/iron'
 import { GetServerSidePropsContext, NextApiRequest } from 'next'
+import { NextRequest } from 'next/server'
 
 import { get } from '../cookie/get'
 
@@ -16,7 +17,7 @@ interface LoginSession {
 }
 
 export const getLoginSession = async (
-  req: NextApiRequest | GetServerSidePropsContext['req']
+  req: NextApiRequest | GetServerSidePropsContext['req'] | NextRequest
 ): Promise<LoginSession> => {
   const token = get(req)
 
