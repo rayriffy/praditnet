@@ -15,8 +15,6 @@ export const Layout: FunctionComponent<Props> = props => {
 
   const router = useRouter()
 
-  console.log({ cardId })
-
   return (
     <Fragment>
       <div className="mx-auto max-w-3xl mt-12 px-6">
