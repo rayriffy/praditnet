@@ -48,25 +48,29 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const user = await getApiUserSession(ctx.req)
 
   if (user === null || user === undefined) {
-    ctx.res.statusCode = 302
-    ctx.res.setHeader('location', '/login')
-    ctx.res.end()
-    return
-  }
-
-  const finaleUserPreview = await getFinaleUserPreview(user.card_luid ?? '')
-  const chunithmUserPreview = await getChunithmUserPreview(user.card_luid ?? '')
-  const ongekiUserPreview = await getOngekiUserPreview(user.card_luid ?? '')
-
-  return {
-    props: {
-      user: {
-        cardId: user.card_luid,
+    return {
+      redirect: {
+        statusCode: 302,
+        destination: '/login',
       },
-      finale: finaleUserPreview,
-      chunithm: chunithmUserPreview,
-      ongeki: ongekiUserPreview,
-    },
+    }
+  } else {
+    const finaleUserPreview = await getFinaleUserPreview(user.card_luid ?? '')
+    const chunithmUserPreview = await getChunithmUserPreview(
+      user.card_luid ?? ''
+    )
+    const ongekiUserPreview = await getOngekiUserPreview(user.card_luid ?? '')
+
+    return {
+      props: {
+        user: {
+          cardId: user.card_luid,
+        },
+        finale: finaleUserPreview,
+        chunithm: chunithmUserPreview,
+        ongeki: ongekiUserPreview,
+      },
+    }
   }
 }
 
