@@ -1,4 +1,5 @@
 import { NextApiHandler } from 'next'
+import { getApiUserSession } from '../../../../core/services/authentication/api/getApiUserSession'
 
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 import { collectionTypes } from '../../../../modules/finale/collection/constants/collectionTypes'
@@ -7,7 +8,7 @@ const api: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const { type, id } = req.body
 
-    const targetCard = process.env.DEMO_LUID
+    const user = await getApiUserSession(req)
     const targetItemKind = collectionTypes.find(o => o.id === type).itemKind
     const targetAquaKey = collectionTypes.find(o => o.id === type).aquaKey
 
@@ -18,7 +19,7 @@ const api: NextApiHandler = async (req, res) => {
         await knex('maimai_user_data')
           .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
           .where({
-            luid: targetCard,
+            luid: user.card_luid,
           })
           .join(
             'maimai_user_item',
@@ -41,7 +42,7 @@ const api: NextApiHandler = async (req, res) => {
         await knex('maimai_user_data')
           .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
           .where({
-            luid: targetCard,
+            luid: user.card_luid,
           })
           .update(targetAquaKey, id)
 
