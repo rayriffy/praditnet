@@ -9,6 +9,7 @@ import { BiTransfer } from 'react-icons/bi'
 import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
 
 import { AppProps } from '../app/@types/AppProps'
+import axios from 'axios'
 
 interface Props {
   userData: {
@@ -34,6 +35,18 @@ const Page: NextPage<Props> = props => {
 
     setProgress(true)
     setError(null)
+
+    try {
+      const inputCardId = event.currentTarget.accessCode.value
+      await axios.post('/api/card/set', {
+        cardId: inputCardId,
+      })
+
+      window.location.reload()
+    } catch (e) {
+      setError(e.response.data.message)
+      setProgress(false)
+    }
   }
 
   return (

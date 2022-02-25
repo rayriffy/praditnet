@@ -1,8 +1,7 @@
-import { Fragment, FunctionComponent, useEffect } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 
 import Link from 'next/link'
 import { ArrowRightIcon, CreditCardIcon } from '@heroicons/react/solid'
-import { useRouter } from 'next/router'
 
 import { PAmuse } from './pamuse'
 
@@ -12,8 +11,6 @@ interface Props {
 
 export const Layout: FunctionComponent<Props> = props => {
   const { children, cardId } = props
-
-  const router = useRouter()
 
   return (
     <Fragment>
