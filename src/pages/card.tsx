@@ -1,22 +1,27 @@
 import { Fragment } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
 
 import { BiTransfer } from 'react-icons/bi'
-import { LogoutIcon } from '@heroicons/react/solid'
+import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
 
 import { AppProps } from '../app/@types/AppProps'
-import Link from 'next/link'
 
 interface Props {
   userData: {
     cardId: string
     chunkedCardId: string[]
   }
+  card: {
+    luid: string | null
+    createdAt: string | null
+  }
 }
 
 const Page: NextPage<Props> = props => {
   const { cardId, chunkedCardId } = props.userData
+  const { createdAt } = props.card
 
   return (
     <div>
@@ -26,7 +31,9 @@ const Page: NextPage<Props> = props => {
             <p className="font-mono text-gray-700 text-lg sm:text-xl">
               {chunkedCardId.join(' ')}
             </p>
-            <p className="font-mono text-gray-700 text-sm">Created at: 02/22</p>
+            <p className="font-mono text-gray-700 text-sm">
+              Created at: {createdAt ?? '--/--'}
+            </p>
           </div>
         </div>
         <button
@@ -34,9 +41,9 @@ const Page: NextPage<Props> = props => {
           className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           <span className="absolute left-4 flex items-center top-0 bottom-0">
-            <BiTransfer />
+            {cardId !== null ? <BiTransfer /> : <PlusIcon className="w-4" />}
           </span>
-          Transfer card
+          {cardId !== null ? 'Transfer card' : 'Bind card'}
         </button>
         <Link href="/api/authentication/logout">
           <a className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
@@ -56,6 +63,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getApiUserSession } = await import(
     '../core/services/authentication/api/getApiUserSession'
   )
+  const { getCardData } = await import('../modules/card/services/getCardData')
 
   // check for user session
   const user = await getApiUserSession(ctx.req)
@@ -69,12 +77,18 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
+  const cardData = await getCardData(user.card_luid)
+
   return {
     props: {
       userData: {
         cardId: user.card_luid,
-        chunkedCardId: chunk(user.card_luid, 4).map(chunk => chunk.join('')),
+        chunkedCardId:
+          user.card_luid === null
+            ? Array.from({ length: 5 }).map(() => `----`)
+            : chunk(user.card_luid, 4).map(chunk => chunk.join('')),
       },
+      card: cardData,
     },
   }
 }
