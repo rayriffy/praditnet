@@ -138,6 +138,11 @@ const Page: NextPage<Props> = props => {
                           compared to number behind card
                         </b>
                       </p>
+                      {error !== null && (
+                        <p className="bg-red-100 rounded-md mt-2 text-sm px-4 py-3 text-red-800">
+                          {error}
+                        </p>
+                      )}
                     </div>
                     <div className="my-4">
                       <input
