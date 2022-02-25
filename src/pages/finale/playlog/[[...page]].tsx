@@ -6,6 +6,7 @@ import { Pagination } from '../../../modules/finale/playlog/components/paginatio
 
 import { UserPlaylog } from '../../../modules/finale/home/@types/UserPlaylog'
 import { AppProps } from '../../../app/@types/AppProps'
+import { useEffect } from 'react'
 
 interface Props extends AppProps {
   page: number
@@ -15,6 +16,10 @@ interface Props extends AppProps {
 
 const Page: NextPage<Props> = props => {
   const { playlogs, page, maxPage } = props
+
+  useEffect(() => {
+    console.log({ playlogs })
+  }, [playlogs])
 
   return (
     <div className="mt-4">

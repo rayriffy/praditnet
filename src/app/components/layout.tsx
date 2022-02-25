@@ -32,7 +32,7 @@ export const Layout: FunctionComponent<Props> = props => {
                 </div>
               )}
               <Link href="/card">
-                <a className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-gray-800">
+                <a className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-neutral-700">
                   <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">
                     {cardId === null ? (
                       <span className="text-sm">Not set up</span>

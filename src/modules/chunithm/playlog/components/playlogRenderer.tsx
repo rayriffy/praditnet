@@ -17,7 +17,7 @@ export const PlaylogRenderer = memo<Props>(props => {
     <div className="grid grid-cols-1 gap-6">
       {playlogs.map(playlog => (
         <div
-          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 dark:from-gray-700 dark:to-slate-700 rounded-xl sm:flex"
+          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 rounded-xl sm:flex"
           key={`playlog-${playlog.id}`}
         >
           <div className="mx-auto mb-4 sm:m-0 w-60 md:w-48 shrink-0 flex items-start">
