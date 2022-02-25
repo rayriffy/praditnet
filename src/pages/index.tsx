@@ -1,8 +1,4 @@
-import { Fragment, useEffect } from 'react'
-
 import { GetServerSideProps, NextPage } from 'next'
-
-import { ArrowRightIcon, CreditCardIcon } from '@heroicons/react/solid'
 
 import { games } from '../modules/home/constants/games'
 import { PreviewCard } from '../modules/home/components/previewCard'

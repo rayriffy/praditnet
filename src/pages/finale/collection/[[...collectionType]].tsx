@@ -113,6 +113,21 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getCollection } = await import(
     '../../../modules/finale/collection/services/getCollection'
   )
+  const { getApiUserSession } = await import(
+    '../../../core/services/authentication/api/getApiUserSession'
+  )
+
+  // check for user session
+  const user = await getApiUserSession(ctx.req)
+
+  if (user === null || user === undefined) {
+    return {
+      redirect: {
+        statusCode: 302,
+        destination: '/login',
+      },
+    }
+  }
 
   const targetCollectionType = collectionType[0]
 
@@ -125,10 +140,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const equipped = await getEquipped()
+  const equipped = await getEquipped(user.card_luid)
   const collection =
     targetCollectionType !== undefined
-      ? await getCollection(targetCollectionType as string)
+      ? await getCollection(user.card_luid, targetCollectionType as string)
       : null
 
   return {

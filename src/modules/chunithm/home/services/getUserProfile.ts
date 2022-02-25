@@ -2,7 +2,7 @@ import { createKnexInstance } from '../../../../core/services/createKnexInstance
 
 import { UserProfile } from '../@types/UserProfile'
 
-export const getUserProfile = async (): Promise<UserProfile> => {
+export const getUserProfile = async (cardId: string): Promise<UserProfile> => {
   const knex = createKnexInstance()
 
   const userProfile = await knex('chunew_user_data')
@@ -18,7 +18,7 @@ export const getUserProfile = async (): Promise<UserProfile> => {
       'voice_id'
     )
     .where({
-      luid: process.env.DEMO_LUID,
+      luid: cardId,
     })
 
   await knex.destroy()

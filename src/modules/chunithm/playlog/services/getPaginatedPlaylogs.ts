@@ -14,13 +14,16 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(localizedFormat)
 
-export const getPaginatedPlaylogs = async (page: number = 1) => {
+export const getPaginatedPlaylogs = async (
+  cardId: string,
+  page: number = 1
+) => {
   const knex = createKnexInstance()
   const [allPlaylogs, userPlaylogs] = await Promise.all([
     knex('chunew_user_data')
       .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
       .where({
-        luid: process.env.DEMO_LUID,
+        luid: cardId,
       })
       .join(
         'chunew_user_playlog',
@@ -31,7 +34,7 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
     knex('chunew_user_data')
       .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
       .where({
-        luid: process.env.DEMO_LUID,
+        luid: cardId,
       })
       .join(
         'chunew_user_playlog',

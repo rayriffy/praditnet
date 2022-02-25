@@ -12,13 +12,16 @@ import { UserPlaylog } from '../../home/@types/UserPlaylog'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
-export const getPaginatedPlaylogs = async (page: number = 1) => {
+export const getPaginatedPlaylogs = async (
+  cardId: string,
+  page: number = 1
+) => {
   const knex = createKnexInstance()
   const [allPlaylogs, userPlaylogs] = await Promise.all([
     knex('maimai_user_data')
       .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
       .where({
-        luid: process.env.DEMO_LUID,
+        luid: cardId,
       })
       .join(
         'maimai_user_playlog',
@@ -29,7 +32,7 @@ export const getPaginatedPlaylogs = async (page: number = 1) => {
     knex('maimai_user_data')
       .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
       .where({
-        luid: process.env.DEMO_LUID,
+        luid: cardId,
       })
       .join(
         'maimai_user_playlog',

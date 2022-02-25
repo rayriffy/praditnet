@@ -1,7 +1,7 @@
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 import { collectionTypes } from '../constants/collectionTypes'
 
-export const getCollection = async (itemType: string) => {
+export const getCollection = async (cardId: string, itemType: string) => {
   const knex = createKnexInstance()
 
   const [

@@ -1,12 +1,12 @@
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 
-export const getEquipped = async () => {
+export const getEquipped = async (cardId: string) => {
   const knex = createKnexInstance()
 
   const databaseEquipped = await knex('maimai_user_data')
     .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
     .where({
-      luid: process.env.DEMO_LUID,
+      luid: cardId,
     })
     .join(
       'praditnet_finale_icon',

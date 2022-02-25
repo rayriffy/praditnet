@@ -23,8 +23,23 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getUserProfile } = await import(
     '../../modules/finale/home/services/getUserProfile'
   )
+  const { getApiUserSession } = await import(
+    '../../core/services/authentication/api/getApiUserSession'
+  )
 
-  const userProfile = await getUserProfile()
+  // check for user session
+  const user = await getApiUserSession(ctx.req)
+
+  if (user === null || user === undefined) {
+    return {
+      redirect: {
+        statusCode: 302,
+        destination: '/login',
+      },
+    }
+  }
+
+  const userProfile = await getUserProfile(user.card_luid)
 
   return {
     props: {
