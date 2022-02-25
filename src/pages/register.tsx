@@ -47,7 +47,9 @@ const Page: NextPage = props => {
 
   return (
     <div className="mx-auto max-w-md py-6">
-      <h1 className="text-4xl font-bold text-gray-900">Register</h1>
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+        Register
+      </h1>
 
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         <ReCAPTCHA
@@ -108,7 +110,7 @@ const Page: NextPage = props => {
           <button
             type="submit"
             disabled={progress}
-            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400 disabled:hover:bg-indigo-500 disabled:cursor-wait"
+            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400 disabled:hover:bg-indigo-500 disabled:cursor-wait dark:bg-indigo-100 dark:text-indigo-700"
           >
             Register
           </button>

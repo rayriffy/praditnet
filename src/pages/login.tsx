@@ -40,7 +40,9 @@ const Page: NextPage = props => {
 
   return (
     <div className="mx-auto max-w-md py-6">
-      <h1 className="text-4xl font-bold text-gray-900">Login</h1>
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+        Login
+      </h1>
 
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         <ReCAPTCHA
@@ -98,11 +100,11 @@ const Page: NextPage = props => {
             </label> */}
           </div>
 
-          <div className="text-sm">
+          <div className="text-sm dark:text-white">
             Not having an account?{' '}
             <a
               href="/register"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
             >
               Create one
             </a>
@@ -113,7 +115,7 @@ const Page: NextPage = props => {
           <button
             type="submit"
             disabled={progress}
-            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400 disabled:hover:bg-indigo-500 disabled:cursor-wait"
+            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:bg-indigo-400 disabled:hover:bg-indigo-500 disabled:cursor-wait dark:bg-indigo-100 dark:text-indigo-700"
           >
             Login
           </button>
