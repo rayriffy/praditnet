@@ -33,7 +33,7 @@ const api: NextApiHandler = async (req, res) => {
           .count()
       )[0]['count(*)']
 
-      if (databaseItemCount === 0) {
+      if (databaseItemCount === 0 && user.god_mode === 0) {
         // non eqipable because item still locked
         return res.status(400).send({
           message: 'not unlock yet',

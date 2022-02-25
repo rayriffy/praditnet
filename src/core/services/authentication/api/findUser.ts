@@ -4,6 +4,7 @@ import { UserAuth } from '../../../@types/db/UserAuth'
 
 interface UserWithData extends UserAuth {
   card_luid: string | null
+  god_mode: number
 }
 
 export const findUser = async (username: string): Promise<UserWithData> => {

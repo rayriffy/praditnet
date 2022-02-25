@@ -34,6 +34,7 @@ interface Props extends AppProps {
     id: number
     name: string
   }
+  godMode: boolean
   collection: {
     type: string
     equippable: number[]
@@ -48,7 +49,7 @@ interface Props extends AppProps {
 }
 
 const Page: NextPage<Props> = props => {
-  const { collection } = props
+  const { collection, godMode } = props
 
   return (
     <Fragment>
@@ -96,7 +97,9 @@ const Page: NextPage<Props> = props => {
             <Item
               type={collection.type}
               item={item}
-              isEquippable={collection.equippable.some(o => o === item.id)}
+              isEquippable={
+                godMode || collection.equippable.some(o => o === item.id)
+              }
               key={`collection-item-${collection.type}-${item.id}`}
             />
           ))}
@@ -153,6 +156,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       user: {
         cardId: user.card_luid,
       },
+      godMode: user.god_mode === 1,
       ...equipped,
       collection,
     },
