@@ -9,11 +9,11 @@ import { Dialog, Transition } from '@headlessui/react'
 import { E } from '../core/components/e'
 import { BiTransfer } from 'react-icons/bi'
 import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
-
-import { AppProps } from '../app/@types/AppProps'
+import { userInfo } from 'os'
 
 interface Props {
   userData: {
+    username: string
     cardId: string
     chunkedCardId: string[]
   }
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { cardId, chunkedCardId } = props.userData
+  const { cardId, chunkedCardId, username } = props.userData
   const { createdAt } = props.card
 
   const [progress, setProgress] = useState<boolean>(false)
@@ -56,6 +56,11 @@ const Page: NextPage<Props> = props => {
         <div className="w-full aspect-[3.37/2.125] overflow-hidden bg-gradient-to-tr from-blue-50 to-gray-50 rounded-xl transition duration-300 hover:shadow-2xl hover:shadow-blue-50 relative hover:scale-105">
           <E className="absolute -top-24 right-10 w-5/6" />
           <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8">
+            {cardId !== null && (
+              <p className="font-mono text-gray-700 text-xs">
+                Owned by {username}
+              </p>
+            )}
             <p className="font-mono text-gray-800 text-lg sm:text-xl">
               {chunkedCardId.join(' ')}
             </p>
@@ -150,6 +155,9 @@ const Page: NextPage<Props> = props => {
                       <input
                         type="text"
                         name="accessCode"
+                        inputMode="numeric"
+                        pattern="^[\dabcdef]{20}$"
+                        required
                         id="accessCode"
                         disabled={progress}
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md disabled:bg-gray-50 disabled:cursor-wait transition"
@@ -208,6 +216,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   return {
     props: {
       userData: {
+        username: user.username,
         cardId: user.card_luid,
         chunkedCardId:
           user.card_luid === null

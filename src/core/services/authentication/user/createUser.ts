@@ -36,6 +36,6 @@ export const createUser = async (username: string, password: string) => {
   } catch (e) {
     await knex.destroy()
 
-    throw new Error('dupe-username')
+    throw new Error('Username has already been taken!')
   }
 }

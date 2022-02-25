@@ -9,7 +9,7 @@ export const passportLocal = new Local.Strategy((username, password, done) => {
       if (user && validatePassword(user, password)) {
         done(null, user)
       } else {
-        done(new Error('Invalid username and password combination'))
+        done(new Error('Username or password is incorrect!'))
       }
     })
     .catch(error => {

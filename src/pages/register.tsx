@@ -26,7 +26,7 @@ const Page: NextPage = props => {
 
     if (payload.password !== event.currentTarget.rpassword.value) {
       setProgress(false)
-      setError(`The passwords don't match`)
+      setError(`The passwords doesn't match`)
       return
     }
 
@@ -40,7 +40,7 @@ const Page: NextPage = props => {
       }
     } catch (error) {
       console.error('An unexpected error happened occurred:', error)
-      setError(error.message)
+      setError(error.response.data)
       setProgress(false)
     }
   }
@@ -50,6 +50,12 @@ const Page: NextPage = props => {
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
         Register
       </h1>
+
+      {error !== null && (
+        <p className="bg-red-100 rounded-md mt-4 -mb-2 text-sm px-4 py-3 text-red-800">
+          {error}
+        </p>
+      )}
 
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         <ReCAPTCHA
