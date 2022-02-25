@@ -15,7 +15,9 @@ import { classNames } from '../../../core/services/classNames'
 import { collectionTypes } from '../../../modules/finale/collection/constants/collectionTypes'
 import { Navbar } from '../../../modules/finale/home/components/navbar'
 
-interface Props {
+import { AppProps } from '../../../app/@types/AppProps'
+
+interface Props extends AppProps {
   icon: {
     id: number
     name: string
@@ -148,6 +150,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       ...equipped,
       collection,
     },

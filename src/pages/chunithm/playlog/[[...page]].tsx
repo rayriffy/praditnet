@@ -5,8 +5,9 @@ import { PlaylogRenderer } from '../../../modules/chunithm/playlog/components/pl
 import { Pagination } from '../../../modules/chunithm/playlog/components/pagination'
 
 import { UserPlaylog } from '../../../modules/chunithm/playlog/@types/UserPlaylog'
+import { AppProps } from '../../../app/@types/AppProps'
 
-interface Props {
+interface Props extends AppProps {
   page: number
   maxPage: number
   playlogs: UserPlaylog[]
@@ -54,6 +55,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       page: paginatedPlaylogs.page,
       maxPage: paginatedPlaylogs.maxPage,
       playlogs: paginatedPlaylogs.playlogs,

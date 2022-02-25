@@ -6,7 +6,9 @@ import { UserProfile } from '../../modules/chunithm/home/@types/UserProfile'
 import { ProfileCard } from '../../modules/chunithm/home/components/profileCard'
 import { Navbar } from '../../modules/chunithm/home/components/navbar'
 
-interface Props {
+import { AppProps } from '../../app/@types/AppProps'
+
+interface Props extends AppProps {
   profile: UserProfile
 }
 
@@ -45,6 +47,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       profile: userProfile,
     },
   }

@@ -4,8 +4,9 @@ import { ProfileCard } from '../../modules/finale/home/components/profileCard'
 import { Navbar } from '../../modules/finale/home/components/navbar'
 
 import { UserProfile } from '../../modules/finale/home/@types/UserProfile'
+import { AppProps } from '../../app/@types/AppProps'
 
-interface Props {
+interface Props extends AppProps {
   profile: UserProfile
 }
 
@@ -43,6 +44,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       profile: userProfile,
     },
   }

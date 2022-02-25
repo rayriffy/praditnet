@@ -15,7 +15,9 @@ import { classNames } from '../../../core/services/classNames'
 import { collectionTypes } from '../../../modules/chunithm/collection/constants/collectionTypes'
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 
-interface Props {
+import { AppProps } from '../../../app/@types/AppProps'
+
+interface Props extends AppProps {
   character: {
     id: number
     name: string
@@ -147,6 +149,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       ...equipped,
       collection,
     },

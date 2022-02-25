@@ -5,8 +5,9 @@ import { PlaylogRenderer } from '../../../modules/finale/playlog/components/play
 import { Pagination } from '../../../modules/finale/playlog/components/pagination'
 
 import { UserPlaylog } from '../../../modules/finale/home/@types/UserPlaylog'
+import { AppProps } from '../../../app/@types/AppProps'
 
-interface Props {
+interface Props extends AppProps {
   page: number
   maxPage: number
   playlogs: UserPlaylog[]
@@ -54,6 +55,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       page: paginatedPlaylogs.page,
       maxPage: paginatedPlaylogs.maxPage,
       playlogs: paginatedPlaylogs.playlogs,

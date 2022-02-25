@@ -29,7 +29,7 @@ export const Layout: FunctionComponent<Props> = props => {
               {cardId === null && (
                 <div className="hidden md:flex md:items-center">
                   <p className="text-gray-700">
-                    Click here to add your card to your account
+                    Click here to add your card into account
                   </p>
                   <ArrowRightIcon className="w-4 h-4 mx-2" />
                 </div>
