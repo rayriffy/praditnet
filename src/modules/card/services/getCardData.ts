@@ -22,8 +22,6 @@ export const getCardData = async (card_luid: string | null) => {
     luid: card_luid,
   })
 
-  console.log(segaCard[0])
-
   const payload = {
     luid: segaCard[0].luid,
     createdAt: dayjs

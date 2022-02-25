@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { FormEventHandler, Fragment, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
@@ -25,10 +25,19 @@ const Page: NextPage<Props> = props => {
   const { cardId, chunkedCardId } = props.userData
   const { createdAt } = props.card
 
+  const [progress, setProgress] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
+
   const [open, setOpen] = useState(false)
+  const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault()
+
+    setProgress(true)
+    setError(null)
+  }
 
   return (
-    <Fragment>
+    <div>
       <div className="max-w-md mx-auto space-y-6">
         <div className="w-full aspect-[3.37/2.125] bg-gradient-to-tr from-blue-50 to-gray-50 rounded-xl transition duration-300 hover:shadow-2xl hover:shadow-blue-50 relative hover:scale-105">
           <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8">
@@ -95,7 +104,10 @@ const Page: NextPage<Props> = props => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6">
+              <form
+                onSubmit={onSubmit}
+                className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6"
+              >
                 <div>
                   <div className="mt-3 text-left">
                     <Dialog.Title
@@ -119,7 +131,8 @@ const Page: NextPage<Props> = props => {
                         type="text"
                         name="accessCode"
                         id="accessCode"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                        disabled={progress}
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md disabled:bg-gray-50 disabled:cursor-wait transition"
                         placeholder="Access code"
                       />
                     </div>
@@ -127,26 +140,27 @@ const Page: NextPage<Props> = props => {
                 </div>
                 <div className="mt-5 sm:mt-6 space-y-4">
                   <button
-                    type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
-                    onClick={() => setOpen(false)}
+                    type="submit"
+                    disabled={progress}
+                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm disabled:bg-indigo-400 disabled:hover:bg-indigo-500 disabled:cursor-wait transition "
                   >
                     {cardId !== null ? 'Transfer' : 'Bind'}
                   </button>
                   <button
                     type="button"
-                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-base font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    disabled={progress}
+                    className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white hover:bg-gray-50 text-base font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm disabled:bg-gray-100 disabled:cursor-wait transition  "
                     onClick={() => setOpen(false)}
                   >
                     Cancel
                   </button>
                 </div>
-              </div>
+              </form>
             </Transition.Child>
           </div>
         </Dialog>
       </Transition.Root>
-    </Fragment>
+    </div>
   )
 }
 

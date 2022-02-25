@@ -1,6 +1,4 @@
-const withPreact = require('next-plugin-preact')
-
-module.exports = withPreact({
+module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -20,4 +18,4 @@ module.exports = withPreact({
       },
     ]
   },
-})
+}
