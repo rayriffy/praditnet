@@ -51,6 +51,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     ctx.res.statusCode = 302
     ctx.res.setHeader('location', '/login')
     ctx.res.end()
+    return
   }
 
   const finaleUserPreview = await getFinaleUserPreview(user.card_luid ?? '')
