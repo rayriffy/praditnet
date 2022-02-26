@@ -22,7 +22,7 @@ export const getCollection = async (cardId: string, itemType: string) => {
     //     item_kind: collectionTypes.find(o => o.id === itemType).itemKind,
     //   })
     //   .select('maimai_user_item.item_id as itemId'),
-    knex(`praditnet_chunithm_${itemType}`),
+    knex(`praditnet_chunithm_${itemType === 'icon' ? 'character' : itemType}`),
   ])
 
   await knex.destroy()
