@@ -19,7 +19,7 @@ import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { AppProps } from '../../../app/@types/AppProps'
 
 interface Props extends AppProps {
-  icon: {
+  character: {
     id: number
     name: string
   }
@@ -72,22 +72,20 @@ const Page: NextPage<Props> = props => {
                 <div className="flex justify-center">
                   <Image
                     className={classNames(
-                      collectionType.id === 'icon'
+                      collectionType.id === 'character'
                         ? 'w-1/3 md:w-2/3 bg-gray-100 rounded overflow-hidden'
                         : collectionType.id === 'systemVoice'
                         ? 'w-2/3 md:w-full'
                         : 'w-full'
                     )}
                     src={`https://praditnet-cdn.rayriffy.com/chunithm/${
-                      collectionType.id === 'icon'
-                        ? 'character'
-                        : collectionType.id
+                      collectionType.id
                     }${
-                      ['icon', 'systemVoice'].includes(collectionType.id)
+                      ['character', 'systemVoice'].includes(collectionType.id)
                         ? '/icon'
                         : ''
                     }/${props[collectionType.id].id}.png`}
-                    {...(collectionType.id === 'icon'
+                    {...(collectionType.id === 'character'
                       ? {
                           width: 96,
                           height: 96,

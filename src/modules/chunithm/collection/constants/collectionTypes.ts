@@ -1,7 +1,7 @@
 export const collectionTypes = [
   {
-    id: 'icon',
-    name: 'Icon',
+    id: 'character',
+    name: 'Character',
     // itemKind: 2,
     aquaKey: 'chara_illust_id',
   },

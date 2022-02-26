@@ -79,11 +79,11 @@ export const Item = memo<Props>(props => {
   return (
     <div
       className={classNames(
-        type !== 'icon' ? 'flex-col-reverse' : '',
+        type !== 'character' ? 'flex-col-reverse' : '',
         'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100 dark:bg-radial-at-r dark:from-sky-300 dark:to-blue-300'
       )}
     >
-      {type !== 'icon' && (
+      {type !== 'character' && (
         <div className="flex justify-between items-center">
           <div className="my-auto">
             {type === 'systemVoice' && <Voice systemVoiceId={item.id} />}
@@ -93,19 +93,17 @@ export const Item = memo<Props>(props => {
       )}
       <div className="shrink-0 flex items-center justify-center">
         <Image
-          src={`https://praditnet-cdn.rayriffy.com/chunithm/${
-            type === 'icon' ? 'character' : type
-          }${['icon', 'systemVoice'].includes(type) ? '/icon' : ''}/${
-            item.id
-          }.png`}
+          src={`https://praditnet-cdn.rayriffy.com/chunithm/${type}${
+            ['character', 'systemVoice'].includes(type) ? '/icon' : ''
+          }/${item.id}.png`}
           className={classNames(
-            type === 'icon'
+            type === 'character'
               ? 'w-24 bg-gray-100 rounded overflow-hidden'
               : type === 'systemVoice'
               ? 'w-52 mx-auto'
               : 'w-full'
           )}
-          {...(type === 'icon'
+          {...(type === 'character'
             ? {
                 width: 96,
                 height: 96,
@@ -123,7 +121,7 @@ export const Item = memo<Props>(props => {
       </div>
       <div
         className={classNames(
-          type === 'icon' ? 'pl-4' : 'mb-2',
+          type === 'character' ? 'pl-4' : 'mb-2',
           'flex flex-col justify-between w-full'
         )}
       >
@@ -135,7 +133,7 @@ export const Item = memo<Props>(props => {
             </p>
           )}
         </div>
-        {type === 'icon' && setButtonElement}
+        {type === 'character' && setButtonElement}
       </div>
     </div>
   )

@@ -10,7 +10,7 @@ export const getEquipped = async (cardId: string) => {
     })
     .join(
       'praditnet_chunithm_character',
-      'chunew_user_data.chara_illust_id',
+      'chunew_user_data.character_id',
       'praditnet_chunithm_character.id'
     )
     .join(
@@ -24,7 +24,7 @@ export const getEquipped = async (cardId: string) => {
       'praditnet_chunithm_systemVoice.id'
     )
     .select(
-      'chunew_user_data.chara_illust_id as iconId',
+      'praditnet_chunithm_character.id as characterId',
       'praditnet_chunithm_character.name as characterName',
       'praditnet_chunithm_character.works as characterWorks',
       'praditnet_chunithm_nameplate.id as nameplateId',
@@ -38,8 +38,8 @@ export const getEquipped = async (cardId: string) => {
   const selectedRow = databaseEquipped[0]
 
   return {
-    icon: {
-      id: selectedRow.iconId,
+    character: {
+      id: selectedRow.characterId,
       name: selectedRow.characterName,
     },
     nameplate: {
