@@ -9,7 +9,6 @@ import { Dialog, Transition } from '@headlessui/react'
 import { E } from '../core/components/e'
 import { BiTransfer } from 'react-icons/bi'
 import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
-import { userInfo } from 'os'
 
 interface Props {
   userData: {
@@ -40,7 +39,7 @@ const Page: NextPage<Props> = props => {
     try {
       const inputCardId = event.currentTarget.accessCode.value
       await axios.post('/api/card/set', {
-        cardId: inputCardId,
+        cardId: inputCardId.toLowerCase(),
       })
 
       window.location.reload()
@@ -158,9 +157,10 @@ const Page: NextPage<Props> = props => {
                         type="text"
                         name="accessCode"
                         inputMode="numeric"
-                        pattern="^[\dabcdef]{20}$"
+                        pattern="^[\dabcdefABCDEF]{20}$"
                         required
                         id="accessCode"
+                        maxLength={20}
                         disabled={progress}
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md disabled:bg-gray-50 disabled:cursor-wait transition"
                         placeholder="Access code"
