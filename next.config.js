@@ -5,6 +5,9 @@ module.exports = {
   env: {
     RECAPCHA_SITE_KEY: process.env.RECAPCHA_SITE_KEY,
   },
+  images: {
+    loader: 'custom',
+  },
   async headers() {
     return [
       {

@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Image } from '../../../../core/components/image'
 
 import { classNames } from '../../../../core/services/classNames'
 
@@ -21,10 +22,11 @@ export const PlaylogRenderer = memo<Props>(props => {
           key={`playlog-${playlog.id}`}
         >
           <div className="mx-auto mb-4 sm:m-0 w-60 md:w-48 shrink-0 flex items-start">
-            <img
-              className="w-full h-auto rounded"
+            <Image
               src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${playlog.musicId}.png`}
-              loading="lazy"
+              width={300}
+              height={300}
+              className="w-full h-auto rounded"
             />
           </div>
           <div className="sm:ml-6 w-full mt-3">

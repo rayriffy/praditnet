@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/solid'
 
 import { Item } from '../../../modules/chunithm/collection/components/item'
+import { Image } from '../../../core/components/image'
 
 import { classNames } from '../../../core/services/classNames'
 import { collectionTypes } from '../../../modules/chunithm/collection/constants/collectionTypes'
@@ -68,23 +69,38 @@ const Page: NextPage<Props> = props => {
                 <PencilAltIcon className="text-white w-6" />
               </div>
               {collectionType.id !== 'title' ? (
-                <img
-                  className={classNames(
-                    'mx-auto',
-                    collectionType.id === 'character'
-                      ? 'w-1/3 md:w-2/3 bg-gray-100 rounded overflow-hidden'
-                      : collectionType.id === 'systemVoice'
-                      ? 'w-2/3 md:w-full'
-                      : 'w-full'
-                  )}
-                  src={`https://praditnet-cdn.rayriffy.com/chunithm/${
-                    collectionType.id
-                  }${
-                    ['character', 'systemVoice'].includes(collectionType.id)
-                      ? '/icon'
-                      : ''
-                  }/${props[collectionType.id].id}.png`}
-                />
+                <div className="flex justify-center">
+                  <Image
+                    className={classNames(
+                      collectionType.id === 'character'
+                        ? 'w-1/3 md:w-2/3 bg-gray-100 rounded overflow-hidden'
+                        : collectionType.id === 'systemVoice'
+                        ? 'w-2/3 md:w-full'
+                        : 'w-full'
+                    )}
+                    src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+                      collectionType.id
+                    }${
+                      ['character', 'systemVoice'].includes(collectionType.id)
+                        ? '/icon'
+                        : ''
+                    }/${props[collectionType.id].id}.png`}
+                    {...(collectionType.id === 'character'
+                      ? {
+                          width: 96,
+                          height: 96,
+                        }
+                      : collectionType.id === 'nameplate'
+                      ? {
+                          width: 576,
+                          height: 228,
+                        }
+                      : {
+                          width: 400,
+                          height: 256,
+                        })}
+                  />
+                </div>
               ) : null}
             </a>
           </Link>

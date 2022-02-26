@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 
 import { Voice } from './voice'
+import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 
 interface Props {
@@ -91,7 +92,7 @@ export const Item = memo<Props>(props => {
         </div>
       )}
       <div className="shrink-0 flex items-center">
-        <img
+        <Image
           src={`https://praditnet-cdn.rayriffy.com/chunithm/${type}${
             ['character', 'systemVoice'].includes(type) ? '/icon' : ''
           }/${item.id}.png`}
@@ -102,7 +103,20 @@ export const Item = memo<Props>(props => {
               ? 'w-52 mx-auto'
               : 'w-full'
           )}
-          loading="lazy"
+          {...(type === 'character'
+            ? {
+                width: 96,
+                height: 96,
+              }
+            : type === 'nameplate'
+            ? {
+                width: 576,
+                height: 228,
+              }
+            : {
+                width: 400,
+                height: 256,
+              })}
         />
       </div>
       <div

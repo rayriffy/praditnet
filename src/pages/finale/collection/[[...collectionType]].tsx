@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/solid'
 
 import { Item } from '../../../modules/finale/collection/components/item'
+import { Image } from '../../../core/components/image'
 
 import { classNames } from '../../../core/services/classNames'
 import { collectionTypes } from '../../../modules/finale/collection/constants/collectionTypes'
@@ -75,17 +76,35 @@ const Page: NextPage<Props> = props => {
                 <PencilAltIcon className="text-white w-6" />
               </div>
               {collectionType.id !== 'title' ? (
-                <img
-                  className={classNames(
-                    'mx-auto',
-                    collectionType.id === 'icon' ? 'w-1/2 md:w-full' : 'w-full'
-                  )}
-                  src={`https://praditnet-cdn.rayriffy.com/finale/${
-                    collectionType.id === 'frame'
-                      ? 'frameMini'
-                      : collectionType.id
-                  }/${props[collectionType.id].id}.png`}
-                />
+                <div className="flex justify-center">
+                  <Image
+                    className={classNames(
+                      'mx-auto',
+                      collectionType.id === 'icon'
+                        ? 'w-1/2 md:w-full'
+                        : 'w-full'
+                    )}
+                    src={`https://praditnet-cdn.rayriffy.com/finale/${
+                      collectionType.id === 'frame'
+                        ? 'frameMini'
+                        : collectionType.id
+                    }/${props[collectionType.id].id}.png`}
+                    {...(collectionType.id === 'frame'
+                      ? {
+                          width: 308,
+                          height: 128,
+                        }
+                      : collectionType.id === 'icon'
+                      ? {
+                          width: 96,
+                          height: 96,
+                        }
+                      : {
+                          width: 284,
+                          height: 96,
+                        })}
+                  />
+                </div>
               ) : null}
             </a>
           </Link>

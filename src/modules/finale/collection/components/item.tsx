@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import axios from 'axios'
 
+import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 
 interface Props {
@@ -76,12 +77,25 @@ export const Item = memo<Props>(props => {
     >
       {type !== 'icon' && setButtonElement}
       <div className="shrink-0 flex items-center">
-        <img
+        <Image
           src={`https://praditnet-cdn.rayriffy.com/finale/${
             type === 'frame' ? 'frameMini' : type
           }/${item.id}.png`}
           className={classNames(type === 'icon' ? 'w-24' : 'w-full')}
-          loading="lazy"
+          {...(type === 'frame'
+            ? {
+                width: 308,
+                height: 128,
+              }
+            : type === 'icon'
+            ? {
+                width: 96,
+                height: 96,
+              }
+            : {
+                width: 284,
+                height: 96,
+              })}
         />
       </div>
       <div
