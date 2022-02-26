@@ -24,10 +24,6 @@ interface Props {
 const Page: NextPage<Props> = props => {
   const { music, difficulty, selfScore, leaderboard } = props
 
-  useEffect(() => {
-    console.log(props)
-  }, [])
-
   return (
     <div className="mt-4">
       <Navbar />

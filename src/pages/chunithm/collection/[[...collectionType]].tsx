@@ -45,8 +45,6 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { collection } = props
 
-  console.log(props)
-
   return (
     <Fragment>
       <Navbar />

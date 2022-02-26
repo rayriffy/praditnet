@@ -17,10 +17,6 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { playlogs, page, maxPage } = props
 
-  useEffect(() => {
-    console.log({ playlogs })
-  }, [playlogs])
-
   return (
     <div className="mt-4">
       <Navbar />
