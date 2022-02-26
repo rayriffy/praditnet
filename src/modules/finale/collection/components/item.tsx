@@ -63,7 +63,13 @@ export const Item = memo<Props>(props => {
         disabled={isProcess || !isEquippable}
         onClick={onSet}
       >
-        {error ? 'Failed' : isEquippable ? 'Set' : 'Locked'}
+        {error
+          ? 'Failed'
+          : isProcess
+          ? 'Working...'
+          : isEquippable
+          ? 'Set'
+          : 'Locked'}
       </button>
     </div>
   )
