@@ -96,8 +96,8 @@ const Page: NextPage<Props> = props => {
                           height: 228,
                         }
                       : {
-                          width: 400,
-                          height: 256,
+                          width: 200,
+                          height: 128,
                         })}
                   />
                 </div>
