@@ -52,7 +52,7 @@ const Page: NextPage<Props> = props => {
 
   return (
     <div>
-      <div className="max-w-md mx-auto space-y-6">
+      <div className="max-w-md mx-auto space-y-8">
         <div className="w-full aspect-[3.37/2.125] overflow-hidden bg-gradient-to-tr from-blue-50 to-gray-50 rounded-xl transition duration-300 hover:shadow-2xl hover:shadow-blue-50 relative hover:scale-105">
           <E className="absolute -top-24 right-10 w-5/6" />
           <div className="absolute bottom-6 left-6 md:bottom-8 md:left-8">
@@ -69,24 +69,26 @@ const Page: NextPage<Props> = props => {
             </p>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => setOpen(o => !o)}
-          className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          <span className="absolute left-4 flex items-center top-0 bottom-0">
-            {cardId !== null ? <BiTransfer /> : <PlusIcon className="w-4" />}
-          </span>
-          {cardId !== null ? 'Transfer card' : 'Bind card'}
-        </button>
-        <Link href="/api/authentication/logout">
-          <a className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+        <div className="space-y-4">
+          <button
+            type="button"
+            onClick={() => setOpen(o => !o)}
+            className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
             <span className="absolute left-4 flex items-center top-0 bottom-0">
-              <LogoutIcon className="w-4" />
+              {cardId !== null ? <BiTransfer /> : <PlusIcon className="w-4" />}
             </span>
-            Logout
-          </a>
-        </Link>
+            {cardId !== null ? 'Transfer card' : 'Bind card'}
+          </button>
+          <Link href="/api/authentication/logout">
+            <a className="inline-flex w-full justify-center relative items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+              <span className="absolute left-4 flex items-center top-0 bottom-0">
+                <LogoutIcon className="w-4" />
+              </span>
+              Logout
+            </a>
+          </Link>
+        </div>
       </div>
 
       <Transition.Root show={open} as={Fragment}>
