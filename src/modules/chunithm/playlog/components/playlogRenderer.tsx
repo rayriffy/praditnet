@@ -29,7 +29,7 @@ export const PlaylogRenderer = memo<Props>(props => {
               className="w-full h-auto rounded"
             />
           </div>
-          <div className="sm:ml-6 w-full mt-3">
+          <div className="sm:ml-6 w-full mt-4 sm:mt-0">
             <div className="flex flex-row sm:flex-col-reverse justify-between items-start">
               <h1 className="font-bold text-2xl text-gray-900 dark:text-white mr-4 mt-0 sm:mt-2">
                 {playlog.musicTitle}
