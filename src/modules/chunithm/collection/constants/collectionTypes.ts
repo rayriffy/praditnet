@@ -3,18 +3,18 @@ export const collectionTypes = [
     id: 'character',
     name: 'Character',
     // itemKind: 2,
-    aquaKey: 'chara_illust_id',
+    aquaKeys: ['character_id', 'chara_illust_id'],
   },
   {
     id: 'nameplate',
     name: 'Nameplate',
     // itemKind: 4,
-    aquaKey: 'nameplate_id',
+    aquaKeys: ['nameplate_id'],
   },
   {
     id: 'systemVoice',
     name: 'System Voice',
     // itemKind: 4,
-    aquaKey: 'voice_id',
+    aquaKeys: ['voice_id'],
   },
 ]

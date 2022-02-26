@@ -9,17 +9,21 @@ const api: NextApiHandler = async (req, res) => {
     const { type, id } = req.body
 
     const user = await getApiUserSession(req)
-    const targetAquaKey = collectionTypes.find(o => o.id === type).aquaKey
+    const targetAquaKeys = collectionTypes.find(o => o.id === type).aquaKeys
 
     const knex = createKnexInstance()
 
     try {
-      await knex('chunew_user_data')
-        .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
-        .where({
-          luid: user.card_luid,
-        })
-        .update(targetAquaKey, id)
+      await Promise.all(
+        targetAquaKeys.map(targetAquaKey =>
+          knex('chunew_user_data')
+            .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
+            .where({
+              luid: user.card_luid,
+            })
+            .update(targetAquaKey, id)
+        )
+      )
 
       await knex.destroy()
 

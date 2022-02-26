@@ -28,7 +28,7 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <div className="mx-auto max-w-xl">
-        <div className="bg-white p-6 border rounded-md flex">
+        <div className="bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 p-6 rounded-md flex">
           <div className="w-32 sm:w-48 shrink-0">
             <Image
               src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
@@ -53,7 +53,7 @@ const Page: NextPage<Props> = props => {
               )}
             >
               <p className="bg-purple-500 uppercase text-xs font-extrabold text-white rounded px-2 mb-2">
-                Master
+                {difficulty.name}
               </p>
               <div className="bg-neutral-700 text-white rounded px-2 py-0.5 text-sm flex justify-between">
                 <p>Your score</p>
@@ -62,7 +62,7 @@ const Page: NextPage<Props> = props => {
             </div>
           </div>
         </div>
-        <h1 className="text-gray-800 font-bold text-2xl sm:text-4xl mt-6 mb-2">
+        <h1 className="text-gray-800 font-bold text-2xl sm:text-3xl mt-6 mb-2">
           Leaderboard
         </h1>
         <div>
