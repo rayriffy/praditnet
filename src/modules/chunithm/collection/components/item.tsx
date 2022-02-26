@@ -91,7 +91,7 @@ export const Item = memo<Props>(props => {
           {setButtonElement}
         </div>
       )}
-      <div className="shrink-0 flex items-center">
+      <div className="shrink-0 flex items-center justify-center">
         <Image
           src={`https://praditnet-cdn.rayriffy.com/chunithm/${type}${
             ['character', 'systemVoice'].includes(type) ? '/icon' : ''
@@ -114,8 +114,8 @@ export const Item = memo<Props>(props => {
                 height: 228,
               }
             : {
-                width: 400,
-                height: 256,
+                width: 208,
+                height: 133.12,
               })}
         />
       </div>
