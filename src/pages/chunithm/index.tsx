@@ -2,10 +2,11 @@ import { Fragment } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
-import { UserProfile } from '../../modules/chunithm/home/@types/UserProfile'
+import { Image } from '../../core/components/image'
 import { ProfileCard } from '../../modules/chunithm/home/components/profileCard'
 import { Navbar } from '../../modules/chunithm/home/components/navbar'
 
+import { UserProfile } from '../../modules/chunithm/home/@types/UserProfile'
 import { AppProps } from '../../app/@types/AppProps'
 
 interface Props extends AppProps {
@@ -19,6 +20,13 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <ProfileCard profile={profile} />
       <Navbar />
+      <div className="mt-4 flex justify-center">
+        <Image
+          src={`https://praditnet-cdn.rayriffy.com/chunithm/character/deka/${profile.equipped.character}.png`}
+          width={500}
+          height={500}
+        />
+      </div>
     </div>
   )
 }
