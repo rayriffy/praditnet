@@ -30,7 +30,14 @@ export const getEquipped = async (cardId: string) => {
       'praditnet_chunithm_nameplate.id as nameplateId',
       'praditnet_chunithm_nameplate.name as nameplateName',
       'praditnet_chunithm_systemVoice.id as systemVoiceId',
-      'praditnet_chunithm_systemVoice.name as systemVoiceName'
+      'praditnet_chunithm_systemVoice.name as systemVoiceName',
+      'chunew_user_data.avatar_front as avatarFrontId',
+      'chunew_user_data.avatar_head as avatarHeadId',
+      'chunew_user_data.avatar_back as avatarBackId',
+      'chunew_user_data.avatar_face as avatarFaceId',
+      'chunew_user_data.avatar_item as avatarItemId',
+      'chunew_user_data.avatar_skin as avatarSkinId',
+      'chunew_user_data.avatar_wear as avatarWearId'
     )
 
   await knex.destroy()
@@ -49,6 +56,34 @@ export const getEquipped = async (cardId: string) => {
     systemVoice: {
       id: selectedRow.systemVoiceId,
       name: selectedRow.systemVoiceName,
+    },
+    avatarFront: {
+      id: selectedRow.avatarFrontId,
+      name: '',
+    },
+    avatarHead: {
+      id: selectedRow.avatarHeadId,
+      name: '',
+    },
+    avatarBack: {
+      id: selectedRow.avatarBackId,
+      name: '',
+    },
+    avatarFace: {
+      id: selectedRow.avatarFaceId,
+      name: '',
+    },
+    avatarItem: {
+      id: selectedRow.avatarItemId,
+      name: '',
+    },
+    avatarSkin: {
+      id: selectedRow.avatarSkinId,
+      name: '',
+    },
+    avatarWear: {
+      id: selectedRow.avatarWearId,
+      name: '',
     },
   }
 }

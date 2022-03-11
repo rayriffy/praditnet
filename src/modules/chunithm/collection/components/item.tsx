@@ -7,9 +7,10 @@ import axios from 'axios'
 import { Voice } from './voice'
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
+import { CollectionType } from '../constants/collectionTypes'
 
 interface Props {
-  type: string
+  collection: CollectionType
   isEquippable?: boolean
   item: {
     id: number
@@ -19,7 +20,7 @@ interface Props {
 }
 
 export const Item = memo<Props>(props => {
-  const { item, type, isEquippable = true } = props
+  const { item, collection, isEquippable = true } = props
 
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
@@ -32,7 +33,7 @@ export const Item = memo<Props>(props => {
     try {
       // todo: create api to set item
       await axios.post('/api/chunithm/collection/set', {
-        type,
+        type: collection.id,
         id: item.id,
       })
       router.push('/chunithm/collection')
@@ -79,49 +80,38 @@ export const Item = memo<Props>(props => {
   return (
     <div
       className={classNames(
-        type !== 'character' ? 'flex-col-reverse' : '',
+        collection.id !== 'character' ? 'flex-col-reverse' : '',
         'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100 dark:bg-radial-at-r dark:from-sky-300 dark:to-blue-300'
       )}
     >
-      {type !== 'character' && (
+      {collection.id !== 'character' && (
         <div className="flex justify-between items-center">
           <div className="my-auto">
-            {type === 'systemVoice' && <Voice systemVoiceId={item.id} />}
+            {collection.id === 'systemVoice' && (
+              <Voice systemVoiceId={item.id} />
+            )}
           </div>
           {setButtonElement}
         </div>
       )}
       <div className="shrink-0 flex items-center justify-center">
         <Image
-          src={`https://praditnet-cdn.rayriffy.com/chunithm/${type}${
-            ['character', 'systemVoice'].includes(type) ? '/icon' : ''
+          src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+            collection.assetPath ?? collection.id
           }/${item.id}.png`}
           className={classNames(
-            type === 'character'
+            collection.id === 'character'
               ? 'w-24 bg-gray-100 rounded overflow-hidden'
-              : type === 'systemVoice'
+              : collection.id === 'systemVoice'
               ? 'w-52 mx-auto'
               : 'w-full'
           )}
-          {...(type === 'character'
-            ? {
-                width: 96,
-                height: 96,
-              }
-            : type === 'nameplate'
-            ? {
-                width: 576,
-                height: 228,
-              }
-            : {
-                width: 208,
-                height: 133.12,
-              })}
+          {...collection.image}
         />
       </div>
       <div
         className={classNames(
-          type === 'character' ? 'pl-4' : 'mb-2',
+          collection.id === 'character' ? 'pl-4' : 'mb-2',
           'flex flex-col justify-between w-full'
         )}
       >
@@ -133,7 +123,7 @@ export const Item = memo<Props>(props => {
             </p>
           )}
         </div>
-        {type === 'character' && setButtonElement}
+        {collection.id === 'character' && setButtonElement}
       </div>
     </div>
   )

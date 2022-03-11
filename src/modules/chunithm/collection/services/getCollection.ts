@@ -4,6 +4,8 @@ import { collectionTypes } from '../constants/collectionTypes'
 export const getCollection = async (cardId: string, itemType: string) => {
   const knex = createKnexInstance()
 
+  const targetCollectionType = collectionTypes.find(o => o.id === itemType)
+
   const [
     // equippableItems,
     items,
@@ -22,17 +24,29 @@ export const getCollection = async (cardId: string, itemType: string) => {
     //     item_kind: collectionTypes.find(o => o.id === itemType).itemKind,
     //   })
     //   .select('maimai_user_item.item_id as itemId'),
-    knex(`praditnet_chunithm_${itemType}`),
+    knex(
+      `praditnet_chunithm_${
+        itemType.startsWith('avatar') ? 'avatarAccessory' : itemType
+      }`
+    ).where(
+      itemType.startsWith('avatar')
+        ? {
+            category: targetCollectionType.category,
+          }
+        : true
+    ),
   ])
 
   await knex.destroy()
 
   return {
     type: itemType,
-    items: items.map(item => ({
-      id: item.id,
-      name: item.name,
-      works: item?.works ?? null,
-    })),
+    items: items
+      .map(item => ({
+        id: item.id,
+        name: item.name,
+        works: item?.works ?? null,
+      }))
+      .filter(o => !o.name.startsWith('CPU0')),
   }
 }
