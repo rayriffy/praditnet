@@ -1,18 +1,8 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
-
-import {
-  ArrowRightIcon,
-  PencilAltIcon,
-  PencilIcon,
-} from '@heroicons/react/solid'
 
 import { Item } from '../../../modules/chunithm/collection/components/item'
-import { Image } from '../../../core/components/image'
-
-import { classNames } from '../../../core/services/classNames'
 import { collectionTypes } from '../../../modules/chunithm/collection/constants/collectionTypes'
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 

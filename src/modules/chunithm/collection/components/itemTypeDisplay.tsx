@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 
 import Link from 'next/link'
 
@@ -15,6 +15,11 @@ interface Props {
 
 export const ItemTypeDisplay = memo<Props>(props => {
   const { collectionType, equippedId } = props
+
+  const isSmallItem = useMemo(
+    () => ['character', 'avatar'].some(o => collectionType.id.startsWith(o)),
+    []
+  )
 
   return (
     <Link href={`/chunithm/collection/${collectionType.id}`}>
@@ -33,17 +38,13 @@ export const ItemTypeDisplay = memo<Props>(props => {
         {collectionType.id !== 'title' ? (
           <div
             className={classNames(
-              ['character', 'avatar'].some(o => collectionType.id.startsWith(o))
-                ? 'w-28'
-                : '',
+              isSmallItem ? 'w-28' : '',
               'flex justify-center mx-auto'
             )}
           >
             <Image
               className={classNames(
-                ['character', 'avatar'].some(o =>
-                  collectionType.id.startsWith(o)
-                )
+                isSmallItem
                   ? 'w-24 rounded overflow-hidden'
                   : // ? 'w-1/3 md:w-2/3 rounded overflow-hidden'
                   collectionType.id === 'systemVoice'
