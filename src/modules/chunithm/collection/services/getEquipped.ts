@@ -28,6 +28,11 @@ export const getEquipped = async (cardId: string) => {
       'chunew_user_data.map_icon_id',
       'praditnet_chunithm_mapIcon.id'
     )
+    .join(
+      'praditnet_chunithm_frame',
+      'chunew_user_data.frame_id',
+      'praditnet_chunithm_frame.id'
+    )
     .select(
       'praditnet_chunithm_character.id as characterId',
       'praditnet_chunithm_character.name as characterName',
@@ -44,7 +49,9 @@ export const getEquipped = async (cardId: string) => {
       'chunew_user_data.avatar_skin as avatarSkinId',
       'chunew_user_data.avatar_wear as avatarWearId',
       'praditnet_chunithm_mapIcon.id as mapIconId',
-      'praditnet_chunithm_mapIcon.name as mapIconName'
+      'praditnet_chunithm_mapIcon.name as mapIconName',
+      'praditnet_chunithm_frame.id as frameId',
+      'praditnet_chunithm_frame.name as frameName'
     )
 
   await knex.destroy()
@@ -67,6 +74,10 @@ export const getEquipped = async (cardId: string) => {
     mapIcon: {
       id: selectedRow.mapIconId,
       name: selectedRow.mapIconName,
+    },
+    frame: {
+      id: selectedRow.frameId,
+      name: selectedRow.frameName,
     },
     avatarFront: {
       id: selectedRow.avatarFrontId,

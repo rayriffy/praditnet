@@ -48,6 +48,17 @@ export const collectionTypes: CollectionType[] = [
     },
   },
   {
+    id: 'frame',
+    group: 2,
+    name: 'Frame',
+    // itemKind: 4,
+    aquaKeys: ['frame_id'],
+    image: {
+      width: 764,
+      height: 140,
+    },
+  },
+  {
     id: 'mapIcon',
     group: 2,
     name: 'Map icon',
@@ -60,7 +71,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarBack',
-    group: 2,
+    group: 3,
     name: 'Back',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -73,7 +84,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarFace',
-    group: 2,
+    group: 3,
     name: 'Face',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -86,7 +97,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarHead',
-    group: 2,
+    group: 3,
     name: 'Head',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -99,7 +110,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarItem',
-    group: 2,
+    group: 3,
     name: 'Item',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -112,7 +123,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarSkin',
-    group: 2,
+    group: 3,
     name: 'Skin',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -125,7 +136,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarWear',
-    group: 2,
+    group: 3,
     name: 'Wear',
     assetPath: 'avatarAccessory',
     // itemKind: 4,
@@ -138,7 +149,7 @@ export const collectionTypes: CollectionType[] = [
   },
   {
     id: 'avatarFront',
-    group: 2,
+    group: 3,
     name: 'Front',
     assetPath: 'avatarAccessory',
     // itemKind: 4,

@@ -1,26 +1,32 @@
 import { Fragment } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
+import dynamic from 'next/dynamic'
 
-import { Item } from '../../../modules/chunithm/collection/components/item'
 import { collectionTypes } from '../../../modules/chunithm/collection/constants/collectionTypes'
+import { Item } from '../../../modules/chunithm/collection/components/item'
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
-
-import { AppProps } from '../../../app/@types/AppProps'
 import { ItemTypeDisplay } from '../../../modules/chunithm/collection/components/itemTypeDisplay'
 
+import { AppProps } from '../../../app/@types/AppProps'
+import { CostumeProps } from '../../../modules/chunithm/collection/components/Costume'
+
+const Costume = dynamic<CostumeProps>(
+  () =>
+    import('../../../modules/chunithm/collection/components/Costume').then(
+      o => o.Costume
+    ),
+  {
+    ssr: false,
+  }
+)
+
 interface Props extends AppProps {
-  character: {
-    id: number
-    name: string
-  }
-  nameplate: {
-    id: number
-    name: string
-  }
-  systemVoice: {
-    id: number
-    name: string
+  equipped: {
+    [key: string]: {
+      id: number
+      name: string
+    }
   }
   collection: {
     type: string
@@ -34,7 +40,7 @@ interface Props extends AppProps {
 }
 
 const Page: NextPage<Props> = props => {
-  const { collection } = props
+  const { collection, equipped } = props
 
   return (
     <Fragment>
@@ -46,20 +52,27 @@ const Page: NextPage<Props> = props => {
             .map(collectionType => (
               <ItemTypeDisplay
                 key={`collection-${collectionType.id}`}
-                {...{ collectionType, equippedId: props[collectionType.id].id }}
+                {...{
+                  collectionType,
+                  equippedId: equipped[collectionType.id].id,
+                }}
               />
             ))}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
           {collectionTypes
             .filter(o => o.group === 2)
             .map(collectionType => (
               <ItemTypeDisplay
                 key={`collection-${collectionType.id}`}
-                {...{ collectionType, equippedId: props[collectionType.id].id }}
+                {...{
+                  collectionType,
+                  equippedId: equipped[collectionType.id].id,
+                }}
               />
             ))}
         </div>
+        <Costume {...{ equipped }} />
       </div>
       {collection !== null && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mx-auto">
@@ -123,7 +136,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       user: {
         cardId: user.card_luid,
       },
-      ...equipped,
+      equipped,
       collection,
     },
   }

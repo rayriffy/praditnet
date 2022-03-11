@@ -48,9 +48,12 @@ export const Layout: FunctionComponent<Props> = props => {
         </header>
         <main>{children}</main>
       </div>
-      <footer className="flex justify-center py-10">
-        <p className="text-gray-500 dark:text-gray-300">
-          © 2022 Pradit Amusement
+      <footer className="py-10">
+        <p className="text-center text-base text-gray-400">
+          Version <b>{process.env.buildNumber}</b>
+        </p>
+        <p className="text-center text-xs sm:text-sm text-gray-400">
+          &copy; 2022 Pradit Amusement
         </p>
       </footer>
     </Fragment>

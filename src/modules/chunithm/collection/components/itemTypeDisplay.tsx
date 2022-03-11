@@ -28,7 +28,11 @@ export const ItemTypeDisplay = memo<Props>(props => {
     <Link href={`/chunithm/collection/${collectionType.id}`}>
       <a
         className={classNames(
-          collectionType.id === 'nameplate' ? 'md:col-span-3' : 'md:col-span-2',
+          collectionType.id === 'frame'
+            ? 'md:col-span-4'
+            : collectionType.id === 'nameplate'
+            ? 'md:col-span-3'
+            : 'md:col-span-2',
           'p-6 bg-gradient-to-r from-amber-500 to-yellow-400 rounded-lg hover:cursor-pointer'
         )}
       >

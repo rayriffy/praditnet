@@ -1,9 +1,16 @@
+const dayjs = require('dayjs')
+const utc = require('dayjs/plugin/utc')
+const timezone = require('dayjs/plugin/timezone')
+
 const withPlugins = require('next-compose-plugins')
 
 const withPWA = require('next-pwa')
 const withPreact = require('next-plugin-preact')
 
 const { runtimeCaching } = require('./runtimeCaching')
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 module.exports = withPlugins(
   [
@@ -26,6 +33,7 @@ module.exports = withPlugins(
       ignoreDuringBuilds: true,
     },
     env: {
+      buildNumber: dayjs.tz(dayjs(), 'Asia/Bangkok').format('YYYYMMDD.HH'),
       RECAPCHA_SITE_KEY: process.env.RECAPCHA_SITE_KEY,
     },
     images: {
