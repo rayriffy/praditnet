@@ -51,7 +51,6 @@ export const collectionTypes: CollectionType[] = [
     id: 'mapIcon',
     group: 2,
     name: 'Map icon',
-    // assetPath: 'systemVoice/icon',
     // itemKind: 4,
     aquaKeys: ['map_icon_id'],
     image: {
