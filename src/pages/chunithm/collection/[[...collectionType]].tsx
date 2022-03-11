@@ -9,11 +9,11 @@ import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { ItemTypeDisplay } from '../../../modules/chunithm/collection/components/itemTypeDisplay'
 
 import { AppProps } from '../../../app/@types/AppProps'
-import { CostumeProps } from '../../../modules/chunithm/collection/components/Costume'
+import { CostumeProps } from '../../../modules/chunithm/collection/components/costume'
 
 const Costume = dynamic<CostumeProps>(
   () =>
-    import('../../../modules/chunithm/collection/components/Costume').then(
+    import('../../../modules/chunithm/collection/components/costume').then(
       o => o.Costume
     ),
   {
