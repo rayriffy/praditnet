@@ -57,7 +57,7 @@ export const ItemTypeDisplay = memo<Props>(props => {
                   collectionType.id === 'systemVoice'
                   ? 'w-2/3 md:w-full'
                   : 'w-full',
-                ['character', 'mapIcon'].includes(collectionType.id)
+                ['character', 'mapIcon', 'frame'].includes(collectionType.id)
                   ? 'bg-gray-100'
                   : ''
               )}
