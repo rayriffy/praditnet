@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -77,14 +77,19 @@ export const Item = memo<Props>(props => {
     </div>
   )
 
+  const isSmallLayout = useMemo(
+    () => ['character', 'mapIcon'].includes(collection.id),
+    []
+  )
+
   return (
     <div
       className={classNames(
-        collection.id !== 'character' ? 'flex-col-reverse' : '',
+        !isSmallLayout ? 'flex-col-reverse' : '',
         'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100 dark:bg-radial-at-r dark:from-sky-300 dark:to-blue-300'
       )}
     >
-      {collection.id !== 'character' && (
+      {!isSmallLayout && (
         <div className="flex justify-between items-center">
           <div className="my-auto">
             {collection.id === 'systemVoice' && (
@@ -100,18 +105,21 @@ export const Item = memo<Props>(props => {
             collection.assetPath ?? collection.id
           }/${item.id}.png`}
           className={classNames(
-            collection.id === 'character'
-              ? 'w-24 bg-gray-100 rounded overflow-hidden'
+            isSmallLayout
+              ? 'w-24 rounded overflow-hidden'
               : collection.id === 'systemVoice'
               ? 'w-52 mx-auto'
-              : 'w-full'
+              : 'w-full',
+            ['character', 'frame', 'mapIcon'].includes(collection.id)
+              ? 'bg-gray-100'
+              : ''
           )}
           {...collection.image}
         />
       </div>
       <div
         className={classNames(
-          collection.id === 'character' ? 'pl-4' : 'mb-2',
+          isSmallLayout ? 'pl-4' : 'mb-2',
           'flex flex-col justify-between w-full'
         )}
       >
@@ -123,7 +131,7 @@ export const Item = memo<Props>(props => {
             </p>
           )}
         </div>
-        {collection.id === 'character' && setButtonElement}
+        {isSmallLayout && setButtonElement}
       </div>
     </div>
   )
