@@ -38,7 +38,6 @@ exports.runtimeCaching = [
     options: {
       cacheName: 'static-image-assets',
       expiration: {
-        maxEntries: 64,
         maxAgeSeconds: 48 * 60 * 60, // 24 hours
       },
     },
@@ -49,20 +48,7 @@ exports.runtimeCaching = [
     options: {
       cacheName: 'optimized-image-assets',
       expiration: {
-        maxEntries: 64,
         maxAgeSeconds: 6 * 30 * 24 * 60 * 60, // 6 month
-      },
-    },
-  },
-  {
-    urlPattern: /\.(?:mp3|wav|ogg)$/i,
-    handler: 'CacheFirst',
-    options: {
-      rangeRequests: true,
-      cacheName: 'static-audio-assets',
-      expiration: {
-        maxEntries: 32,
-        maxAgeSeconds: 24 * 60 * 60, // 24 hours
       },
     },
   },
