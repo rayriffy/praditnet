@@ -48,6 +48,18 @@ export const collectionTypes: CollectionType[] = [
     },
   },
   {
+    id: 'mapIcon',
+    group: 2,
+    name: 'Map icon',
+    // assetPath: 'systemVoice/icon',
+    // itemKind: 4,
+    aquaKeys: ['map_icon_id'],
+    image: {
+      width: 128,
+      height: 128,
+    },
+  },
+  {
     id: 'avatarBack',
     group: 2,
     name: 'Back',

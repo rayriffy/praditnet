@@ -17,7 +17,10 @@ export const ItemTypeDisplay = memo<Props>(props => {
   const { collectionType, equippedId } = props
 
   const isSmallItem = useMemo(
-    () => ['character', 'avatar'].some(o => collectionType.id.startsWith(o)),
+    () =>
+      ['character', 'mapIcon', 'avatar'].some(o =>
+        collectionType.id.startsWith(o)
+      ),
     []
   )
 
@@ -50,7 +53,9 @@ export const ItemTypeDisplay = memo<Props>(props => {
                   collectionType.id === 'systemVoice'
                   ? 'w-2/3 md:w-full'
                   : 'w-full',
-                collectionType.id === 'character' ? 'bg-gray-100' : ''
+                ['character', 'mapIcon'].includes(collectionType.id)
+                  ? 'bg-gray-100'
+                  : ''
               )}
               src={`https://praditnet-cdn.rayriffy.com/chunithm/${
                 collectionType.assetPath ?? collectionType.id

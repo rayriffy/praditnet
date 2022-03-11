@@ -50,7 +50,7 @@ const Page: NextPage<Props> = props => {
               />
             ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
           {collectionTypes
             .filter(o => o.group === 2)
             .map(collectionType => (
