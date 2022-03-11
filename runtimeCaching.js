@@ -55,6 +55,18 @@ exports.runtimeCaching = [
     },
   },
   {
+    urlPattern: /\.(?:mp3|wav|ogg)$/i,
+    handler: 'CacheFirst',
+    options: {
+      rangeRequests: true,
+      cacheName: 'static-audio-assets',
+      expiration: {
+        maxEntries: 32,
+        maxAgeSeconds: 24 * 60 * 60, // 24 hours
+      },
+    },
+  },
+  {
     urlPattern: /\/_next\/image\?url=.+$/i,
     handler: 'StaleWhileRevalidate',
     options: {
