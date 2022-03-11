@@ -14,10 +14,10 @@ specifiers:
   '@types/passport': ^1.0.7
   '@types/passport-local': ^1.0.34
   '@types/progress': ^2.0.5
-  '@types/react': ^17.0.39
+  '@types/react': ^17.0.40
   '@types/react-dom': ^17.0.13
   '@types/react-google-recaptcha': ^2.1.5
-  axios: ^0.26.0
+  axios: ^0.26.1
   cookie: ^0.4.2
   dayjs: ^1.10.8
   husky: ^7.0.4
@@ -54,7 +54,7 @@ dependencies:
   '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.23
   '@types/lodash': 4.14.179
-  axios: 0.26.0
+  axios: 0.26.1
   cookie: 0.4.2
   dayjs: 1.10.8
   knex: 1.0.3_mysql@2.18.1
@@ -88,7 +88,7 @@ devDependencies:
   '@types/passport': 1.0.7
   '@types/passport-local': 1.0.34
   '@types/progress': 2.0.5
-  '@types/react': 17.0.39
+  '@types/react': 17.0.40
   '@types/react-dom': 17.0.13
   '@types/react-google-recaptcha': 2.1.5
   husky: 7.0.4
@@ -1886,21 +1886,21 @@ packages:
   /@types/react-dom/17.0.13:
     resolution: {integrity: sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==}
     dependencies:
-      '@types/react': 17.0.39
+      '@types/react': 17.0.40
     dev: true
 
   /@types/react-google-recaptcha/2.1.5:
     resolution: {integrity: sha512-iWTjmVttlNgp0teyh7eBXqNOQzVq2RWNiFROWjraOptRnb1OcHJehQnji0sjqIRAk9K0z8stjyhU+OLpPb0N6w==}
     dependencies:
-      '@types/react': 17.0.39
+      '@types/react': 17.0.40
     dev: true
 
-  /@types/react/17.0.39:
-    resolution: {integrity: sha512-UVavlfAxDd/AgAacMa60Azl7ygyQNRwC/DsHZmKgNvPmRR5p70AJ5Q9EAmL2NWOJmeV+vVUI4IAP7GZrN8h8Ug==}
+  /@types/react/17.0.40:
+    resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
     dependencies:
       '@types/prop-types': 15.7.4
       '@types/scheduler': 0.16.2
-      csstype: 3.0.10
+      csstype: 3.0.11
     dev: true
 
   /@types/resize-observer-browser/0.1.7:
@@ -2088,8 +2088,8 @@ packages:
     engines: {node: '>= 4.0.0'}
     dev: false
 
-  /axios/0.26.0:
-    resolution: {integrity: sha512-lKoGLMYtHvFrPVt3r+RBMp9nh34N0M8zEfCWqdWZx6phynIEhQqAdydpyBAAG211zlhX9Rgu08cOamy6XjE5Og==}
+  /axios/0.26.1:
+    resolution: {integrity: sha512-fPwcX4EvnSHuInCMItEhAGnaSEXRBjtzh9fOtsE6E1G6p7vl7edEeZe11QHf18+6+9gR5PbKV/sGKNaD8YaMeA==}
     dependencies:
       follow-redirects: 1.14.9
     transitivePeerDependencies:
@@ -2465,8 +2465,8 @@ packages:
     hasBin: true
     dev: false
 
-  /csstype/3.0.10:
-    resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==}
+  /csstype/3.0.11:
+    resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
     dev: true
 
   /dargs/7.0.0:
