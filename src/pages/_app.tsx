@@ -49,21 +49,21 @@ const NextApp: NextPage<AppProps> = props => {
           key="favicon-apple"
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/static/icons/apple-touch-icon.png"
+          href="/assets/icons/apple-touch-icon.png"
         />
         <link
           key="favicon-32"
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href="/static/icons/favicon-32x32.png"
+          href="/assets/icons/favicon-32x32.png"
         />
         <link
           key="favicon-16"
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href="/static/icons/favicon-16x16.png"
+          href="/assets/icons/favicon-16x16.png"
         />
         <link key="manifest-json" rel="manifest" href={`/manifest-en.json`} />
         <link
