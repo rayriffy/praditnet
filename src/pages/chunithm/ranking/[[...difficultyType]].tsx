@@ -9,6 +9,7 @@ import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { MusicListingProps } from '../../../modules/chunithm/ranking/components/MusicListing'
 
 import { Difficulty } from '../../../modules/chunithm/ranking/@types/Difficulty'
+import { AppProps } from '../../../app/@types/AppProps'
 
 const MusicListing = dynamic<MusicListingProps>(
   () =>
@@ -18,7 +19,7 @@ const MusicListing = dynamic<MusicListingProps>(
   { ssr: false }
 )
 
-interface Props {
+interface Props extends AppProps {
   difficulties: Difficulty[]
   currentDifficulty: Difficulty | null
   musics: {
@@ -99,6 +100,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     // musics is null
     return {
       props: {
+        user: {
+          cardId: user.card_luid,
+        },
         difficulties,
         currentDifficulty: null,
         musics: null,
@@ -118,6 +122,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
       return {
         props: {
+          user: {
+            cardId: user.card_luid,
+          },
           difficulties,
           currentDifficulty: difficulties.find(
             o => o.key === targetDifficultyType

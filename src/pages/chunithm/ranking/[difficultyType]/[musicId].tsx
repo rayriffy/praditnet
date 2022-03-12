@@ -5,8 +5,9 @@ import { Image } from '../../../../core/components/image'
 import { Navbar } from '../../../../modules/chunithm/home/components/navbar'
 
 import { Difficulty } from '../../../../modules/chunithm/ranking/@types/Difficulty'
+import { AppProps } from '../../../../app/@types/AppProps'
 
-interface Props {
+interface Props extends AppProps {
   music: {
     id: number
     name: string
@@ -142,6 +143,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
     return {
       props: {
+        user: {
+          cardId: user.card_luid,
+        },
         music: targetMusic,
         difficulty: targetDifficulty,
         selfScore,
