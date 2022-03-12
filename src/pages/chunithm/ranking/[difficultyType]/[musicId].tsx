@@ -50,7 +50,7 @@ const Page: NextPage<Props> = props => {
               className={classNames(
                 difficulty.color.secondary,
                 difficulty.color.border,
-                'w-full border-2 rounded-md p-1.5'
+                'w-full border-2 rounded-md p-1.5 mt-4 sm:mt-0'
               )}
             >
               <p
