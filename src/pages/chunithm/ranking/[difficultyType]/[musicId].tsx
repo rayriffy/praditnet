@@ -1,9 +1,9 @@
 import { GetServerSideProps, NextPage } from 'next'
-import { useEffect } from 'react'
 
-import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
+import { Image } from '../../../../core/components/image'
 import { Navbar } from '../../../../modules/chunithm/home/components/navbar'
+
 import { Difficulty } from '../../../../modules/chunithm/ranking/@types/Difficulty'
 
 interface Props {
@@ -28,20 +28,20 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <div className="mx-auto max-w-xl">
-        <div className="bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 p-6 rounded-md flex">
-          <div className="w-32 sm:w-48 shrink-0">
+        <div className="bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 p-6 rounded-md sm:flex">
+          <div className="w-64 sm:w-48 shrink-0 mx-auto sm:mx-0 mb-4 sm:mb-0">
             <Image
               src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
               width={300}
               height={300}
             />
           </div>
-          <div className="ml-6 flex flex-col justify-between w-full">
+          <div className="sm:ml-6 flex flex-col justify-between w-full">
             <div>
-              <h1 className="font-bold text-xl sm:text-2xl text-gray-900">
+              <h1 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white">
                 {music.name}
               </h1>
-              <h2 className="text-gray-700 text-sm sm:text-base">
+              <h2 className="text-gray-700 text-sm sm:text-base dark:text-gray-300">
                 {music.artist}
               </h2>
             </div>
@@ -62,10 +62,10 @@ const Page: NextPage<Props> = props => {
             </div>
           </div>
         </div>
-        <h1 className="text-gray-800 font-bold text-2xl sm:text-3xl mt-6 mb-2">
+        <h1 className="text-gray-800 font-bold text-2xl sm:text-3xl mt-6 mb-2 dark:text-white">
           Leaderboard
         </h1>
-        <div>
+        <div className="dark:text-white">
           {leaderboard.map(({ playerName, score }, i) => (
             <div
               key={`leaderboard-${playerName}-${i}`}
