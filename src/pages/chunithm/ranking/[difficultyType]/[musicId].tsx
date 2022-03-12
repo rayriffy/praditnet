@@ -53,7 +53,12 @@ const Page: NextPage<Props> = props => {
                 'w-full border-2 rounded-md p-1.5'
               )}
             >
-              <p className="bg-purple-500 uppercase text-xs font-extrabold text-white rounded px-2 mb-2">
+              <p
+                className={classNames(
+                  difficulty.color.primary,
+                  'uppercase text-xs font-extrabold text-white rounded px-2 mb-2'
+                )}
+              >
                 {difficulty.name}
               </p>
               <div className="bg-neutral-700 text-white rounded px-2 py-0.5 text-sm flex justify-between">
