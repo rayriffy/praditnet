@@ -1,4 +1,4 @@
-import { FormEventHandler, useRef, useState } from 'react'
+import { FormEventHandler, useEffect, useRef, useState } from 'react'
 
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -14,6 +14,9 @@ const Page: NextPage = props => {
 
   const recaptchaRef = useRef(null)
   const router = useRouter()
+  useEffect(() => {
+    recaptchaRef.current.execute()
+  }, [])
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
@@ -39,6 +42,8 @@ const Page: NextPage = props => {
       }
     } catch (error) {
       console.error('An unexpected error happened occurred:', error)
+      recaptchaRef.current.reset()
+      recaptchaRef.current.execute()
       setError(error.response.data)
       setProgress(false)
     }

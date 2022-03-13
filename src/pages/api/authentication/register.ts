@@ -9,6 +9,7 @@ import { createUser } from '../../../core/services/authentication/user/createUse
 
 import { UserAuth } from '../../../core/@types/db/UserAuth'
 import { passportLocal } from '../../../core/services/authentication/passportLocal'
+import { serverCapcha } from '../../../core/services/serverCapcha'
 
 const authenticate = (method, req, res) =>
   new Promise((resolve, reject) => {
@@ -29,6 +30,8 @@ const api = nc<NextApiRequest, NextApiResponse>()
     const { username, password } = req.body
 
     try {
+      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+
       // createUser
       await createUser(username, password)
 
