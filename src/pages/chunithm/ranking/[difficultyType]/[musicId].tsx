@@ -32,6 +32,7 @@ const Page: NextPage<Props> = props => {
         <div className="bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 p-6 rounded-md sm:flex">
           <div className="w-64 sm:w-48 shrink-0 mx-auto sm:mx-0 mb-4 sm:mb-0">
             <Image
+              className="overflow-hidden rounded-md"
               src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
               width={300}
               height={300}

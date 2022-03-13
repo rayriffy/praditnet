@@ -33,7 +33,7 @@ export const Trophy = memo<Props>(props => {
     <p
       className={classNames(
         color,
-        'text-gray-900 text-xs w-full text-center rounded-md p-[0.0625rem]'
+        'text-gray-900 text-xs w-full text-center rounded-md p-[0.0625rem] truncate'
       )}
     >
       {name}

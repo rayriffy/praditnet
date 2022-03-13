@@ -1,13 +1,10 @@
-import { memo } from 'react'
-
-import Link from 'next/link'
+import { memo, useRef } from 'react'
 
 import { Disclosure } from '@headlessui/react'
 import { MinusIcon, PlusIcon } from '@heroicons/react/solid'
 
-import { classNames } from '../../../../core/services/classNames'
-
 import { Difficulty } from '../@types/Difficulty'
+import { Music } from './Music'
 
 export interface MusicListingProps {
   genre: string
@@ -36,41 +33,11 @@ export const MusicListing = memo<MusicListingProps>(props => {
           </Disclosure.Button>
           <Disclosure.Panel className="space-y-4">
             {musics.map(music => (
-              <Link
+              <Music
                 key={`genre-${genre}-music-${music.id}`}
-                href={`/chunithm/ranking/${currentDifficulty.key}/${music.id}`}
-              >
-                <a
-                  key={`genre-${genre}-music-${music.id}`}
-                  className={classNames(
-                    currentDifficulty.color.secondary,
-                    currentDifficulty.color.border,
-                    'p-2 border-2 rounded-md flex justify-between space-x-2'
-                  )}
-                >
-                  <div className="w-full">
-                    <p
-                      className={classNames(
-                        currentDifficulty.color.primary,
-                        'uppercase text-sm font-extrabold text-white rounded px-2'
-                      )}
-                    >
-                      {currentDifficulty.name}
-                    </p>
-                    <p className="bg-neutral-800 text-white mt-1 rounded-md px-2 py-2">
-                      {music.name}
-                    </p>
-                  </div>
-                  <div className="shrink-0 border-2 border-neutral-800 rounded-md w-14 bg-white flex flex-col">
-                    <div className="uppercase text-xs bg-neutral-800 text-white py-0.5 text-center shrink-0">
-                      level
-                    </div>
-                    <div className="h-full flex justify-center items-center">
-                      {music.level}
-                    </div>
-                  </div>
-                </a>
-              </Link>
+                music={music}
+                currentDifficulty={currentDifficulty}
+              />
             ))}
           </Disclosure.Panel>
         </>

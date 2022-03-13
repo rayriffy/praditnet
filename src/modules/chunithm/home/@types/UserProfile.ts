@@ -4,6 +4,10 @@ export interface UserProfile {
     current: number
     highest: number
   }
+  level: number
+  playCount: number
+  overpower: number
+  lastPlayed: string
   equipped: {
     frame: number
     trophy: {
