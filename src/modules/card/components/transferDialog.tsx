@@ -3,21 +3,24 @@ import {
   FormEventHandler,
   Fragment,
   memo,
+  MutableRefObject,
   SetStateAction,
   useState,
 } from 'react'
 
 import axios from 'axios'
 import { Dialog, Transition } from '@headlessui/react'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export interface TransferDialogProps {
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   cardId: string | null
+  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const TransferDialog = memo<TransferDialogProps>(props => {
-  const { show, setShow, cardId } = props
+  const { show, setShow, cardId, capchaRef } = props
 
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
@@ -29,13 +32,23 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
     setError(null)
 
     try {
+      const token = await capchaRef.current!.executeAsync()
       const inputCardId = event.currentTarget.accessCode.value
-      await axios.post('/api/card/set', {
-        cardId: inputCardId.toLowerCase(),
-      })
+      await axios.post(
+        '/api/card/set',
+        {
+          cardId: inputCardId.toLowerCase(),
+        },
+        {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        }
+      )
 
       window.location.reload()
     } catch (e) {
+      capchaRef.current.reset()
       setError(e.response.data.message)
       setProgress(false)
     }

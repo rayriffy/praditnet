@@ -1,15 +1,17 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 import dynamic from 'next/dynamic'
+
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { collectionTypes } from '../../../modules/chunithm/collection/constants/collectionTypes'
 import { Item } from '../../../modules/chunithm/collection/components/item'
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { ItemTypeDisplay } from '../../../modules/chunithm/collection/components/itemTypeDisplay'
+import { CostumeProps } from '../../../modules/chunithm/collection/components/costume'
 
 import { AppProps } from '../../../app/@types/AppProps'
-import { CostumeProps } from '../../../modules/chunithm/collection/components/costume'
 
 const Costume = dynamic<CostumeProps>(
   () =>
@@ -41,6 +43,8 @@ interface Props extends AppProps {
 
 const Page: NextPage<Props> = props => {
   const { collection, equipped } = props
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   return (
     <Fragment>
@@ -81,10 +85,16 @@ const Page: NextPage<Props> = props => {
               collection={collectionTypes.find(o => o.id === collection.type)}
               item={item}
               key={`collection-item-${collection.type}-${item.id}`}
+              capchaRef={recaptchaRef}
             />
           ))}
         </div>
       )}
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={process.env.RECAPCHA_SITE_KEY}
+      />
     </Fragment>
   )
 }

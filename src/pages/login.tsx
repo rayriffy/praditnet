@@ -10,13 +10,9 @@ const Page: NextPage = props => {
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string>(null)
 
-  const [recapchaKey, setRecapchaKey] = useState<string | undefined>(undefined)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
-  const recaptchaRef = useRef(null)
   const router = useRouter()
-  useEffect(() => {
-    recaptchaRef.current.execute()
-  }, [])
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
@@ -30,9 +26,11 @@ const Page: NextPage = props => {
     }
 
     try {
+      const token = await recaptchaRef.current!.executeAsync()
+
       const res = await axios.post('/api/authentication/login', body, {
         headers: {
-          'X-PraditNET-Capcha': recapchaKey,
+          'X-PraditNET-Capcha': token,
         },
       })
       if (res.status === 200) {
@@ -43,7 +41,6 @@ const Page: NextPage = props => {
     } catch (error) {
       console.error('An unexpected error happened occurred:', error)
       recaptchaRef.current.reset()
-      recaptchaRef.current.execute()
       setError(error.response.data)
       setProgress(false)
     }
@@ -66,7 +63,6 @@ const Page: NextPage = props => {
           ref={recaptchaRef}
           size="invisible"
           sitekey={process.env.RECAPCHA_SITE_KEY}
-          onChange={value => setRecapchaKey(value)}
         />
         <div className="rounded-md shadow-sm -space-y-px">
           <div>

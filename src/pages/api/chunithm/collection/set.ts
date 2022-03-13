@@ -2,11 +2,20 @@ import { NextApiHandler } from 'next'
 import { getApiUserSession } from '../../../../core/services/authentication/api/getApiUserSession'
 
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
+import { serverCapcha } from '../../../../core/services/serverCapcha'
 import { collectionTypes } from '../../../../modules/chunithm/collection/constants/collectionTypes'
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const { type, id } = req.body
+
+    try {
+      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+    } catch (e) {
+      return res.status(400).send({
+        message: e.message,
+      })
+    }
 
     const user = await getApiUserSession(req)
     const targetAquaKeys = collectionTypes.find(o => o.id === type).aquaKeys

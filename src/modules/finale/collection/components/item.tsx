@@ -1,8 +1,9 @@
-import { memo, useCallback, useState } from 'react'
+import { memo, MutableRefObject, useCallback, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
 import axios from 'axios'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
@@ -17,10 +18,11 @@ interface Props {
     price: number
     genre: number
   }
+  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const Item = memo<Props>(props => {
-  const { type, isEquippable, item } = props
+  const { type, isEquippable, item, capchaRef } = props
 
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
@@ -31,14 +33,26 @@ export const Item = memo<Props>(props => {
     setIsProcess(true)
 
     try {
+      const token = await capchaRef.current!.executeAsync()
+
       // todo: create api to set item
-      await axios.post('/api/finale/collection/set', {
-        type,
-        id: item.id,
-      })
+      await axios.post(
+        '/api/finale/collection/set',
+        {
+          type,
+          id: item.id,
+        },
+        {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        }
+      )
       router.push('/finale/collection')
     } catch (e) {
       setError(true)
+      capchaRef.current.reset()
+
       setTimeout(() => {
         setError(false)
       }, 2000)

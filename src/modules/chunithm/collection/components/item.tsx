@@ -1,8 +1,9 @@
-import { memo, useCallback, useMemo, useState } from 'react'
+import { memo, MutableRefObject, useCallback, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
 import axios from 'axios'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Voice } from './voice'
 import { Image } from '../../../../core/components/image'
@@ -17,10 +18,11 @@ interface Props {
     name: string
     works?: string
   }
+  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const Item = memo<Props>(props => {
-  const { item, collection, isEquippable = true } = props
+  const { item, collection, isEquippable = true, capchaRef } = props
 
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
@@ -31,17 +33,26 @@ export const Item = memo<Props>(props => {
     setIsProcess(true)
 
     try {
+      const token = await capchaRef.current!.executeAsync()
+
       // todo: create api to set item
-      await axios.post('/api/chunithm/collection/set', {
-        type: collection.id,
-        id: item.id,
-      })
+      await axios.post(
+        '/api/chunithm/collection/set',
+        {
+          type: collection.id,
+          id: item.id,
+        },
+        {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        }
+      )
       router.push('/chunithm/collection')
-      // window.scrollTo({ top: 0, behavior: 'smooth' })
-      // await wait(1000)
-      // window.location.reload()
     } catch (e) {
       setError(true)
+      capchaRef.current.reset()
+
       setTimeout(() => {
         setError(false)
       }, 2000)

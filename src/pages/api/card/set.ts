@@ -2,10 +2,19 @@ import { NextApiHandler } from 'next'
 
 import { createKnexInstance } from '../../../core/services/createKnexInstance'
 import { getApiUserSession } from '../../../core/services/authentication/api/getApiUserSession'
+import { serverCapcha } from '../../../core/services/serverCapcha'
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
     const { cardId: inputCardId } = req.body
+
+    try {
+      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+    } catch (e) {
+      return res.status(400).send({
+        message: e.message,
+      })
+    }
 
     const knex = createKnexInstance()
     const user = await getApiUserSession(req)

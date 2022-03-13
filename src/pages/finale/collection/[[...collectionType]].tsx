@@ -1,13 +1,9 @@
-import { Fragment, useEffect } from 'react'
+import { Fragment, useRef } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 
-import {
-  ArrowRightIcon,
-  PencilAltIcon,
-  PencilIcon,
-} from '@heroicons/react/solid'
+import { PencilAltIcon } from '@heroicons/react/solid'
 
 import { Item } from '../../../modules/finale/collection/components/item'
 import { Image } from '../../../core/components/image'
@@ -17,6 +13,7 @@ import { collectionTypes } from '../../../modules/finale/collection/constants/co
 import { Navbar } from '../../../modules/finale/home/components/navbar'
 
 import { AppProps } from '../../../app/@types/AppProps'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Props extends AppProps {
   icon: {
@@ -51,6 +48,8 @@ interface Props extends AppProps {
 
 const Page: NextPage<Props> = props => {
   const { collection, godMode } = props
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   return (
     <Fragment>
@@ -120,10 +119,16 @@ const Page: NextPage<Props> = props => {
                 godMode || collection.equippable.some(o => o === item.id)
               }
               key={`collection-item-${collection.type}-${item.id}`}
+              capchaRef={recaptchaRef}
             />
           ))}
         </div>
       )}
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={process.env.RECAPCHA_SITE_KEY}
+      />
     </Fragment>
   )
 }
