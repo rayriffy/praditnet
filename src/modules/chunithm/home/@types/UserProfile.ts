@@ -6,7 +6,11 @@ export interface UserProfile {
   }
   equipped: {
     frame: number
-    trophy: number
+    trophy: {
+      id: number
+      name: string
+      rarity: number
+    }
     character: number
     nameplate: number
     voice: number
