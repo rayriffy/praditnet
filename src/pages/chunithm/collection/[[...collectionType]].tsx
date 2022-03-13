@@ -131,11 +131,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       ? await getCollection(user.card_luid, targetCollectionType as string)
       : null
 
-  ctx.res.setHeader(
-    'Cache-Control',
-    'private, s-maxage=10, stale-while-revalidate=59'
-  )
-
   return {
     props: {
       user: {

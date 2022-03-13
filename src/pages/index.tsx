@@ -57,11 +57,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     )
     const ongekiUserPreview = await getOngekiUserPreview(user.card_luid ?? '')
 
-    ctx.res.setHeader(
-      'Cache-Control',
-      'private, s-maxage=60, stale-while-revalidate=120'
-    )
-
     return {
       props: {
         user: {
