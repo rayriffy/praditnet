@@ -9,6 +9,7 @@ import { Voice } from './voice'
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { CollectionType } from '../constants/collectionTypes'
+import { Trophy } from '../../home/components/trophy'
 
 interface Props {
   collection: CollectionType
@@ -17,6 +18,7 @@ interface Props {
     id: number
     name: string
     works?: string
+    rarity?: number
   }
   capchaRef: MutableRefObject<ReCAPTCHA>
 }
@@ -26,6 +28,8 @@ export const Item = memo<Props>(props => {
 
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+
+  const isTrophy = useMemo(() => collection.id === 'trophy', [])
 
   const router = useRouter()
 
@@ -113,23 +117,32 @@ export const Item = memo<Props>(props => {
           {setButtonElement}
         </div>
       )}
-      <div className="shrink-0 flex items-center justify-center">
-        <Image
-          src={`https://praditnet-cdn.rayriffy.com/chunithm/${
-            collection.assetPath ?? collection.id
-          }/${item.id}.png`}
-          className={classNames(
-            isSmallLayout
-              ? 'w-24 rounded overflow-hidden'
-              : collection.id === 'systemVoice'
-              ? 'w-52 mx-auto'
-              : 'w-full',
-            ['character', 'frame', 'mapIcon'].includes(collection.id)
-              ? 'bg-gray-100'
-              : ''
-          )}
-          {...collection.image}
-        />
+      <div
+        className={classNames(
+          isTrophy ? 'my-2' : '',
+          'shrink-0 flex items-center justify-center'
+        )}
+      >
+        {isTrophy ? (
+          <Trophy {...item} />
+        ) : (
+          <Image
+            src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+              collection.assetPath ?? collection.id
+            }/${item.id}.png`}
+            className={classNames(
+              isSmallLayout
+                ? 'w-24 rounded overflow-hidden'
+                : collection.id === 'systemVoice'
+                ? 'w-52 mx-auto'
+                : 'w-full',
+              ['character', 'frame', 'mapIcon'].includes(collection.id)
+                ? 'bg-gray-100'
+                : ''
+            )}
+            {...collection.image}
+          />
+        )}
       </div>
       <div
         className={classNames(

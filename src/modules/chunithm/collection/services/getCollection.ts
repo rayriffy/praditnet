@@ -46,6 +46,7 @@ export const getCollection = async (cardId: string, itemType: string) => {
         id: item.id,
         name: item.name,
         works: item?.works ?? null,
+        rarity: item?.rarity ?? null,
       }))
       .filter(o => !o.name.startsWith('CPU0')),
   }

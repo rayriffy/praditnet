@@ -12,6 +12,7 @@ import { ItemTypeDisplay } from '../../../modules/chunithm/collection/components
 import { CostumeProps } from '../../../modules/chunithm/collection/components/costume'
 
 import { AppProps } from '../../../app/@types/AppProps'
+import { ItemList } from '../../../modules/chunithm/collection/components/itemList'
 
 const Costume = dynamic<CostumeProps>(
   () =>
@@ -28,6 +29,7 @@ interface Props extends AppProps {
     [key: string]: {
       id: number
       name: string
+      rarity?: number
     }
   }
   collection: {
@@ -37,6 +39,7 @@ interface Props extends AppProps {
       id: number
       name: string
       works?: string
+      rarity?: number
     }[]
   } | null
 }
@@ -72,6 +75,23 @@ const Page: NextPage<Props> = props => {
                 {...{
                   collectionType,
                   equippedId: equipped[collectionType.id].id,
+                  trophyData:
+                    collectionType.id === 'trophy'
+                      ? equipped[collectionType.id]
+                      : undefined,
+                }}
+              />
+            ))}
+        </div>
+        <div className="grid grid-cols-1">
+          {collectionTypes
+            .filter(o => o.group === 4)
+            .map(collectionType => (
+              <ItemTypeDisplay
+                key={`collection-${collectionType.id}`}
+                {...{
+                  collectionType,
+                  equippedId: equipped[collectionType.id].id,
                 }}
               />
             ))}
@@ -79,16 +99,11 @@ const Page: NextPage<Props> = props => {
         <Costume {...{ equipped }} />
       </div>
       {collection !== null && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mx-auto">
-          {collection.items.map(item => (
-            <Item
-              collection={collectionTypes.find(o => o.id === collection.type)}
-              item={item}
-              key={`collection-item-${collection.type}-${item.id}`}
-              capchaRef={recaptchaRef}
-            />
-          ))}
-        </div>
+        <ItemList
+          type={collectionTypes.find(o => o.id === collection.type)}
+          items={collection.items}
+          capchaRef={recaptchaRef}
+        />
       )}
       <ReCAPTCHA
         ref={recaptchaRef}

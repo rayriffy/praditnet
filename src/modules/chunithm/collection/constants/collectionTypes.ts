@@ -48,14 +48,14 @@ export const collectionTypes: CollectionType[] = [
     },
   },
   {
-    id: 'frame',
+    id: 'trophy',
     group: 2,
-    name: 'Frame',
+    name: 'Trophy',
     // itemKind: 4,
-    aquaKeys: ['frame_id'],
+    aquaKeys: ['trophy_id'],
     image: {
-      width: 764,
-      height: 140,
+      width: null,
+      height: null,
     },
   },
   {
@@ -67,6 +67,17 @@ export const collectionTypes: CollectionType[] = [
     image: {
       width: 128,
       height: 128,
+    },
+  },
+  {
+    id: 'frame',
+    group: 4,
+    name: 'Frame',
+    // itemKind: 4,
+    aquaKeys: ['frame_id'],
+    image: {
+      width: 764,
+      height: 140,
     },
   },
   {

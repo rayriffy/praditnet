@@ -42,6 +42,7 @@ specifiers:
   react-dom: npm:@preact/compat@^17.0.3
   react-google-recaptcha: ^2.1.0
   react-icons: ^4.3.1
+  react-infinite-scroll-component: ^6.1.0
   react-ssr-prepass: npm:preact-ssr-prepass@^1.2.0
   storeon: ^3.1.4
   tailwindcss: ^3.0.23
@@ -77,6 +78,7 @@ dependencies:
   react-dom: /@preact/compat/17.0.3_preact@10.6.6
   react-google-recaptcha: 2.1.0_@preact+compat@17.0.3
   react-icons: 4.3.1_@preact+compat@17.0.3
+  react-infinite-scroll-component: 6.1.0_@preact+compat@17.0.3
   react-ssr-prepass: /preact-ssr-prepass/1.2.0_preact@10.6.6
   storeon: 3.1.4_b535e7977f8540c678e92cb62c5de80c
   tailwindcss: 3.0.23
@@ -4056,6 +4058,15 @@ packages:
       react: /@preact/compat/17.0.3_preact@10.6.6
     dev: false
 
+  /react-infinite-scroll-component/6.1.0_@preact+compat@17.0.3:
+    resolution: {integrity: sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      react: /@preact/compat/17.0.3_preact@10.6.6
+      throttle-debounce: 2.3.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
@@ -4710,6 +4721,11 @@ packages:
     resolution: {integrity: sha512-wiBrwC1EhBelW12Zy26JeOUkQ5mRu+5o8rpsJk5+2t+Y5vE7e842qtZDQ2g1NpX/29HdyFeJ4nSIhI47ENSxlQ==}
     engines: {node: '>=0.10'}
     dev: true
+
+  /throttle-debounce/2.3.0:
+    resolution: {integrity: sha512-H7oLPV0P7+jgvrk+6mwwwBDmxTaxnu9HMXmloNLXwnNO0ZxZ31Orah2n8lU1eMPvsaowP2CX+USCgyovXfdOFQ==}
+    engines: {node: '>=8'}
+    dev: false
 
   /through/2.3.8:
     resolution: {integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=}
