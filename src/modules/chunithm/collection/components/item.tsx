@@ -33,6 +33,10 @@ export const Item = memo<Props>(props => {
     setIsProcess(true)
 
     try {
+      // make sure capcha is reset
+      capchaRef.current.reset()
+
+      // request for capcha token
       const token = await capchaRef.current!.executeAsync()
 
       // todo: create api to set item
@@ -51,7 +55,6 @@ export const Item = memo<Props>(props => {
       router.push('/chunithm/collection')
     } catch (e) {
       setError(true)
-      capchaRef.current.reset()
 
       setTimeout(() => {
         setError(false)
