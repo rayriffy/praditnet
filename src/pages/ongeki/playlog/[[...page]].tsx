@@ -2,10 +2,10 @@ import { GetServerSideProps, NextPage } from 'next'
 
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
 import { PlaylogRenderer } from '../../../modules/ongeki/playlog/components/playlogRenderer'
-import { Pagination } from '../../../modules/ongeki/playlog/components/pagination'
 
 import { UserPlaylog } from '../../../modules/ongeki/playlog/@types/UserPlaylog'
 import { AppProps } from '../../../app/@types/AppProps'
+import { Pagination } from '../../../core/components/pagination'
 
 interface Props extends AppProps {
   page: number
@@ -20,7 +20,7 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <PlaylogRenderer playlogs={playlogs} />
-      <Pagination current={page} max={maxPage} />
+      <Pagination urlPrefix="/ongeki/playlog" current={page} max={maxPage} />
     </div>
   )
 }

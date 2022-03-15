@@ -28,6 +28,10 @@ const navbars = [
     title: 'Decks',
   },
   {
+    id: 'card',
+    title: 'Cards',
+  },
+  {
     id: 'rival',
     title: 'Rivals',
   },

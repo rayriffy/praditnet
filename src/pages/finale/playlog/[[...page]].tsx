@@ -2,11 +2,11 @@ import { GetServerSideProps, NextPage } from 'next'
 
 import { Navbar } from '../../../modules/finale/home/components/navbar'
 import { PlaylogRenderer } from '../../../modules/finale/playlog/components/playlogRenderer'
-import { Pagination } from '../../../modules/finale/playlog/components/pagination'
 
 import { UserPlaylog } from '../../../modules/finale/home/@types/UserPlaylog'
 import { AppProps } from '../../../app/@types/AppProps'
 import { useEffect } from 'react'
+import { Pagination } from '../../../core/components/pagination'
 
 interface Props extends AppProps {
   page: number
@@ -21,7 +21,7 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <PlaylogRenderer playlogs={playlogs} />
-      <Pagination current={page} max={maxPage} />
+      <Pagination urlPrefix="/finale/playlog" current={page} max={maxPage} />
     </div>
   )
 }

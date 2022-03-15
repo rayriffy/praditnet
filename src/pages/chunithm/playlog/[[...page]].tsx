@@ -1,8 +1,8 @@
 import { GetServerSideProps, NextPage } from 'next'
 
+import { Pagination } from '../../../core/components/pagination'
 import { Navbar } from '../../../modules/chunithm/home/components/navbar'
 import { PlaylogRenderer } from '../../../modules/chunithm/playlog/components/playlogRenderer'
-import { Pagination } from '../../../modules/chunithm/playlog/components/pagination'
 
 import { UserPlaylog } from '../../../modules/chunithm/playlog/@types/UserPlaylog'
 import { AppProps } from '../../../app/@types/AppProps'
@@ -20,7 +20,7 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <PlaylogRenderer playlogs={playlogs} />
-      <Pagination current={page} max={maxPage} />
+      <Pagination urlPrefix="/chunithm/playlog" current={page} max={maxPage} />
     </div>
   )
 }

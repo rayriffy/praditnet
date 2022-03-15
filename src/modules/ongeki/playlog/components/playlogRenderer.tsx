@@ -171,9 +171,9 @@ export const PlaylogRenderer = memo<Props>(props => {
               <div key={`card-${card.id}`}>
                 <div className="flex mx-1.5 -mb-1.5 h-6">
                   <div className="w-0 h-0 border-t-[1.5rem] border-r-[1.5rem] border-t-transparent border-r-slate-50" />
-                  <div className="w-full bg-slate-50 text-sm flex items-center justify-between px-1">
+                  <div className="w-full bg-slate-50 text-xs flex items-center justify-center sm:justify-between px-1">
                     <p className="text-sky-500">
-                      Lv. {card.level.toLocaleString()}
+                      Lv.{card.level.toLocaleString()}
                     </p>
                     <p className="hidden sm:inline-block">
                       Power{' '}

@@ -19,22 +19,18 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <div className="mt-4 space-y-4 sm:space-y-6">
-        <div className="px-4 sm:px-5 py-6 bg-slate-50 rounded-md">
-          <div className="flex justify-between text-gray-900">
-            <h1 className="font-bold text-xl sm:text-2xl">Deck {deck.id}</h1>
-            <PencilAltIcon className="w-6" />
-          </div>
-          <div className="grid grid-cols-3 gap-0.5 mt-4">
-            {deck.cards.map(card => (
-              <div key={`deck-${deck.id}-card-${card.id}`}>
-                <Image
-                  src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
-                  width={384}
-                  height={526}
-                />
-              </div>
-            ))}
-          </div>
+        <h1 className="text-2xl font-bold text-gray-900">
+          Editing deck {deck.id}
+        </h1>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 space-x-4 mt-4">
+          {deck.cards.map(card => (
+            <Image
+              key={`deck-${deck.id}-card-${card.id}`}
+              src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
+              width={384}
+              height={526}
+            />
+          ))}
         </div>
       </div>
     </div>
