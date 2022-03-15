@@ -121,7 +121,7 @@ export const PlaylogRenderer = memo<Props>(props => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-1 sm:gap-4">
+          <div className="grid grid-cols-3 gap-0.5 sm:gap-4">
             {playlog.cards.map(card => (
               <Image
                 key={`card-${card.id}`}
