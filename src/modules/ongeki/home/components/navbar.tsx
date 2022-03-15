@@ -19,6 +19,10 @@ const navbars = [
     id: 'ranking',
     title: 'Ranking',
   },
+  {
+    id: 'deck',
+    title: 'Decks',
+  },
 ]
 
 export const Navbar = memo(props => {
