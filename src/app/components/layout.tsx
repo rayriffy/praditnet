@@ -48,11 +48,11 @@ export const Layout: FunctionComponent<Props> = props => {
         </header>
         <main>{children}</main>
       </div>
-      <footer className="py-10">
-        <p className="text-center text-base text-gray-400">
+      <footer className="py-10 text-gray-400 dark:text-gray-300">
+        <p className="text-center text-base">
           Version <b>{process.env.buildNumber}</b>
         </p>
-        <p className="text-center text-xs sm:text-sm text-gray-400">
+        <p className="text-center text-xs sm:text-sm">
           &copy; 2022 Pradit Amusement
         </p>
       </footer>

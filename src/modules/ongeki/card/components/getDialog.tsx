@@ -30,6 +30,9 @@ export const GetDialog = memo<GetDialogProps>(props => {
   const onSubmit = async () => {
     recaptchaRef.current.reset()
 
+    setError(null)
+    setProgress(true)
+
     let token = null
     try {
       token = await recaptchaRef.current.executeAsync()

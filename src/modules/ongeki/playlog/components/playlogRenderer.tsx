@@ -50,7 +50,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                       : playlog.difficulty === 'basic'
                       ? 'bg-emerald-500'
                       : playlog.difficulty === 'lunatic'
-                      ? 'bg-gradient-to-tr from-slate-200 to-neutral-200'
+                      ? 'bg-gradient-to-tr from-slate-50 to-neutral-50'
                       : 'bg-white',
                     'p-2 text-white text-xs uppercase rounded flex items-center'
                   )}
@@ -72,7 +72,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                         ? 'bg-orange-400'
                         : playlog.difficulty === 'basic'
                         ? 'bg-emerald-400'
-                        : 'bg-gradient-to-tr from-red-500 to-rose-700',
+                        : 'bg-gradient-to-t from-red-500 to-rose-800',
                       'text-sm mx-auto rounded text-center px-3 ml-2'
                     )}
                   >
@@ -82,8 +82,8 @@ export const PlaylogRenderer = memo<Props>(props => {
               </div>
               <div className="grid grid-cols-2 gap-2 sm:gap-4 my-2 items-start">
                 <div className="space-y-4">
-                  <div className="bg-gray-50 shadow-sm rounded-md relative">
-                    <h1 className="text-xs uppercase font-bold bg-neutral-600 rounded-t-md text-white py-1 px-2">
+                  <div className="bg-gray-50 dark:bg-neutral-600 dark:text-white shadow-sm rounded-md overflow-hidden">
+                    <h1 className="text-xs uppercase font-bold bg-neutral-600 dark:bg-neutral-100 dark:text-gray-700 text-white py-1 px-2">
                       Battle
                     </h1>
                     <div className="px-3 py-2">
@@ -119,8 +119,8 @@ export const PlaylogRenderer = memo<Props>(props => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 shadow-sm rounded-md overflow-hidden">
-                  <h1 className="text-xs uppercase font-bold bg-neutral-600 text-white py-1 px-2">
+                <div className="bg-gray-50 dark:bg-neutral-600 dark:text-white shadow-sm rounded-md overflow-hidden">
+                  <h1 className="text-xs uppercase font-bold bg-neutral-600 dark:bg-neutral-100 dark:text-gray-700 text-white py-1 px-2">
                     Technical
                   </h1>
                   <div className="px-3 py-2">

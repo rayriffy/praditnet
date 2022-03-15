@@ -35,9 +35,8 @@ export const getPaginatedCard = async (cardId: string, page: number = 1) => {
 
   const transformedCards = databaseCards.map(card => {
     const owned =
-      databaseUserCards.find(
-        o => Number(o.cardId) === Number(card.cardId) && o.cardAcquired[0] === 1
-      ) !== undefined
+      databaseUserCards.find(o => Number(o.cardId) === Number(card.cardId)) !==
+      undefined
 
     return {
       id: card.cardId,

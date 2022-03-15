@@ -38,13 +38,13 @@ const Page: NextPage<Props> = props => {
           {['n', 'r', 'sr', 'srp', 'ssr'].map(rarity => (
             <div
               key={`overview-${rarity}`}
-              className="w-20 rounded-full bg-white border-2 border-pink-500 aspect-square flex flex-col items-center justify-center mx-auto"
+              className="w-20 rounded-full bg-white dark:bg-neutral-800 border-2 border-pink-500 aspect-square flex flex-col items-center justify-center mx-auto"
             >
               <img
                 src={`/assets/ongeki/cardRarity/${rarity}.png`}
-                className="h-8 w-auto m-1"
+                className="h-7 w-auto m-1"
               />
-              <p className="font-medium text-gray-700 text-sm">
+              <p className="font-medium text-gray-700 dark:text-gray-50 text-sm">
                 {overview[rarity].owned} / {overview[rarity].total}
               </p>
             </div>

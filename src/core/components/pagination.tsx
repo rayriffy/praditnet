@@ -72,7 +72,7 @@ export const Pagination = memo<Props>(props => {
           Previous
         </Button>
       </div>
-      <p className="px-2 text-gray-700">
+      <p className="px-2 text-gray-700 dark:text-gray-100">
         Page{' '}
         <span className="font-bold">
           {current}/{max}
