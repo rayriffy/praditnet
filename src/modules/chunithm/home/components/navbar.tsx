@@ -23,7 +23,7 @@ const navbars = [
 
 export const Navbar = memo(props => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 py-4">
       {navbars.map(navbar => (
         <Link
           href={`/chunithm/${navbar.id}`}

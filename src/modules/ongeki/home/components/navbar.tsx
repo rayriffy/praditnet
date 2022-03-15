@@ -20,14 +20,22 @@ const navbars = [
     title: 'Ranking',
   },
   {
+    id: 'character',
+    title: 'Character',
+  },
+  {
     id: 'deck',
     title: 'Decks',
+  },
+  {
+    id: 'rival',
+    title: 'Rivals',
   },
 ]
 
 export const Navbar = memo(props => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 py-4">
       {navbars.map(navbar => (
         <Link
           href={`/ongeki/${navbar.id}`}
