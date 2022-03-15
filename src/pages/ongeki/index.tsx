@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import { GetServerSideProps, NextPage } from 'next'
 
 import { Image } from '../../core/components/image'
