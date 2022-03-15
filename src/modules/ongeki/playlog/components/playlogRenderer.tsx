@@ -84,37 +84,43 @@ export const PlaylogRenderer = memo<Props>(props => {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 my-2 items-start">
-                <div className="bg-gray-50 shadow-sm rounded-md relative">
-                  <h1 className="text-xs uppercase font-bold bg-neutral-600 rounded-t-md text-white py-1 px-2">
-                    Battle
-                  </h1>
-                  <div className="px-3 py-2">
-                    <div className="flex justify-center">
-                      <div>
-                        {playlog.battle.newRecord && (
-                          <span className="text-red-500 text-xs sm:text-sm">
-                            New record!!
-                          </span>
-                        )}
-                        <h2
-                          className={classNames(
-                            playlog.tech.newRecord ? '-mt-1' : '',
-                            'text-2xl sm:text-3xl font-light mb-1'
+              <div className="grid grid-cols-2 gap-2 sm:gap-4 my-2 items-start">
+                <div className="space-y-4">
+                  <div className="bg-gray-50 shadow-sm rounded-md relative">
+                    <h1 className="text-xs uppercase font-bold bg-neutral-600 rounded-t-md text-white py-1 px-2">
+                      Battle
+                    </h1>
+                    <div className="px-3 py-2">
+                      <img
+                        className="w-3/5 h-auto mx-auto mb-2"
+                        src={`/assets/ongeki/battleRank/${playlog.battle.rank}.png`}
+                      />
+                      <div className="flex justify-center">
+                        <div>
+                          {playlog.battle.newRecord && (
+                            <span className="text-red-500 text-xs sm:text-sm">
+                              New record!!
+                            </span>
                           )}
-                        >
-                          {playlog.battle.score.toLocaleString()}
-                        </h2>
+                          <h2
+                            className={classNames(
+                              playlog.tech.newRecord ? '-mt-1' : '',
+                              'text-2xl sm:text-3xl font-light mb-1'
+                            )}
+                          >
+                            {playlog.battle.score.toLocaleString()}
+                          </h2>
+                        </div>
                       </div>
+                      <table className="text-sm">
+                        <tr>
+                          <td className="pr-2.5">Damage</td>
+                          <td className="font-semibold">
+                            {(playlog.overDamage.damage / 100).toFixed(2)}%
+                          </td>
+                        </tr>
+                      </table>
                     </div>
-                    <table className="text-sm">
-                      <tr>
-                        <td className="pr-2.5">Damage</td>
-                        <td className="font-semibold">
-                          {(playlog.overDamage.damage / 100).toFixed(2)}%
-                        </td>
-                      </tr>
-                    </table>
                   </div>
                 </div>
                 <div className="bg-gray-50 shadow-sm rounded-md overflow-hidden">
@@ -122,6 +128,10 @@ export const PlaylogRenderer = memo<Props>(props => {
                     Technical
                   </h1>
                   <div className="px-3 py-2">
+                    <img
+                      className="w-full sm:w-auto h-auto sm:h-16 mx-auto mb-2"
+                      src={`/assets/ongeki/technicalRank/${playlog.tech.rank}.png`}
+                    />
                     <div className="flex justify-center">
                       <div>
                         {playlog.tech.newRecord && (
