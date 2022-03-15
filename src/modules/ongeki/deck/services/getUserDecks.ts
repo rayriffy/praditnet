@@ -2,36 +2,11 @@ import { sortBy } from 'lodash'
 
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 
-export interface Deck {
-  id: number
-  cards: Card[]
-}
+import { Card } from '../@types/Card'
+import { Deck } from '../@types/Deck'
+import { DatabaseDeck } from '../@types/DatabaseDeck'
 
-interface Card {
-  order: number
-  id: number
-  name: string
-  attribute: string
-  skill: {
-    id: number
-    name: string
-  }
-  level: {
-    current: number
-    max: number
-  }
-}
-
-interface DatabaseDeck {
-  id: number
-  deck_id: number
-  user_id: number
-  card_id1: number
-  card_id2: number
-  card_id3: number
-}
-
-export const getUserDeck = async (cardId: string): Promise<Deck[]> => {
+export const getUserDecks = async (cardId: string): Promise<Deck[]> => {
   const knex = createKnexInstance()
 
   try {
