@@ -111,7 +111,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                       ))}
                     </table>
                     {playlog.judge.damage !== 0 && (
-                      <div className="flex text-xs py-0.5 px-2 justify-between items-center bg-rose-500 text-white rounded-lg mt-2">
+                      <div className="flex text-xs py-0.5 px-2 justify-between items-center bg-rose-500 text-white rounded mt-2">
                         <h2 className="uppercase font-semibold">Damage</h2>
                         <p>{playlog.judge.damage}</p>
                       </div>
