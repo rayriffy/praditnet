@@ -22,7 +22,7 @@ export const PlaylogRenderer = memo<Props>(props => {
     <div className="grid grid-cols-1 gap-6">
       {playlogs.map(playlog => (
         <div
-          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 rounded-xl"
+          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-neutral-100 dark:from-neutral-700 dark:to-stone-700 rounded-xl"
           key={`playlog-${playlog.id}`}
         >
           <div className="sm:flex">
