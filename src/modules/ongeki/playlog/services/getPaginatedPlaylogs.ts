@@ -135,7 +135,7 @@ export const getPaginatedPlaylogs = async (
       tech: {
         score: playlog.playTechScore,
         rank: playlog.playTechRank,
-        newRecord: playlog.playTechNewRecord === 1,
+        newRecord: playlog.playTechNewRecord[0] === 1,
       },
       overDamage: {
         damage: playlog.playOverdamageDamage,

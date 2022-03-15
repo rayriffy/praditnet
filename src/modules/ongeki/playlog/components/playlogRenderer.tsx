@@ -6,6 +6,7 @@ import { classNames } from '../../../../core/services/classNames'
 import { judges } from '../constants/judges'
 
 import { UserPlaylog } from '../@types/UserPlaylog'
+import { toNamespacedPath } from 'path'
 
 // import { judges } from '../constants/judges'
 // import { ranks } from '../constants/ranks'
@@ -84,15 +85,17 @@ export const PlaylogRenderer = memo<Props>(props => {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4 my-2 items-start">
-                <div className="bg-gray-50 shadow-sm rounded-md overflow-hidden">
-                  <h1 className="text-xs uppercase font-bold bg-neutral-600 text-white py-1 px-2">
+                <div className="bg-gray-50 shadow-sm rounded-md relative">
+                  <h1 className="text-xs uppercase font-bold bg-neutral-600 rounded-t-md text-white py-1 px-2">
                     Battle
                   </h1>
                   <div className="px-3 py-2">
                     <table className="text-sm">
                       <tr>
                         <td className="pr-2.5">Score</td>
-                        <td>{playlog.battle.score.toLocaleString()}</td>
+                        <td className="font-semibold">
+                          {playlog.battle.score.toLocaleString()}
+                        </td>
                       </tr>
                     </table>
                   </div>
@@ -102,11 +105,30 @@ export const PlaylogRenderer = memo<Props>(props => {
                     Technical
                   </h1>
                   <div className="px-3 py-2">
+                    <div className="flex justify-center">
+                      <div>
+                        {playlog.tech.newRecord && (
+                          <span className="text-red-500 text-sm">
+                            New record!!
+                          </span>
+                        )}
+                        <h2
+                          className={classNames(
+                            playlog.tech.newRecord ? '-mt-1' : '',
+                            'text-3xl font-light mb-1'
+                          )}
+                        >
+                          {playlog.tech.score.toLocaleString()}
+                        </h2>
+                      </div>
+                    </div>
                     <table className="text-sm">
                       {judges.map(judge => (
                         <tr key={`playlog-${playlog.id}-judge-${judge.id}`}>
                           <td className="pr-2.5">{judge.name}</td>
-                          <td>{playlog.judge[judge.id].toLocaleString()}</td>
+                          <td className="font-semibold">
+                            {playlog.judge[judge.id].toLocaleString()}
+                          </td>
                         </tr>
                       ))}
                     </table>
@@ -121,7 +143,7 @@ export const PlaylogRenderer = memo<Props>(props => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-0.5 sm:gap-4">
+          <div className="grid grid-cols-3 gap-0 sm:gap-4">
             {playlog.cards.map(card => (
               <Image
                 key={`card-${card.id}`}

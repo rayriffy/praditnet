@@ -1,7 +1,14 @@
+import { Fragment } from 'react'
+
 export const judges = [
   {
     id: 'critical',
-    name: 'Critical Break',
+    name: (
+      <Fragment>
+        Critical
+        <span className="hidden sm:inline-block">&nbsp;Break</span>
+      </Fragment>
+    ),
   },
   {
     id: 'break',
