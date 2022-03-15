@@ -169,8 +169,8 @@ export const PlaylogRenderer = memo<Props>(props => {
           <div className="grid grid-cols-3 gap-0 sm:gap-4">
             {playlog.cards.map(card => (
               <div key={`card-${card.id}`}>
-                <div className="flex mx-1.5 -mb-1.5 h-6">
-                  <div className="w-0 h-0 border-t-[1.5rem] border-r-[1.5rem] border-t-transparent border-r-slate-50" />
+                <div className="flex mx-0 sm:mx-1.5 -mb-1.5 h-5 sm:h-6">
+                  <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-r-[1.25rem] sm:border-r-[1.5rem] border-t-transparent border-r-slate-50" />
                   <div className="w-full bg-slate-50 text-xs flex items-center justify-center sm:justify-between px-1">
                     <p className="text-sky-500">
                       Lv.{card.level.toLocaleString()}
@@ -182,7 +182,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                       </span>
                     </p>
                   </div>
-                  <div className="w-0 h-0 border-t-[1.5rem] border-l-[1.5rem] border-t-transparent border-l-slate-50" />
+                  <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-l-[1.25rem] sm:border-l-[1.5rem] border-t-transparent border-l-slate-50" />
                 </div>
                 <Image
                   src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
