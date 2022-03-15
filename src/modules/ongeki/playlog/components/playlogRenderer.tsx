@@ -6,10 +6,6 @@ import { classNames } from '../../../../core/services/classNames'
 import { judges } from '../constants/judges'
 
 import { UserPlaylog } from '../@types/UserPlaylog'
-import { toNamespacedPath } from 'path'
-
-// import { judges } from '../constants/judges'
-// import { ranks } from '../constants/ranks'
 
 interface Props {
   playlogs: UserPlaylog[]
