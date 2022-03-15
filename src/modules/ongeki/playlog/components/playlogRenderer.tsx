@@ -90,11 +90,28 @@ export const PlaylogRenderer = memo<Props>(props => {
                     Battle
                   </h1>
                   <div className="px-3 py-2">
+                    <div className="flex justify-center">
+                      <div>
+                        {playlog.battle.newRecord && (
+                          <span className="text-red-500 text-xs sm:text-sm">
+                            New record!!
+                          </span>
+                        )}
+                        <h2
+                          className={classNames(
+                            playlog.tech.newRecord ? '-mt-1' : '',
+                            'text-2xl sm:text-3xl font-light mb-1'
+                          )}
+                        >
+                          {playlog.battle.score.toLocaleString()}
+                        </h2>
+                      </div>
+                    </div>
                     <table className="text-sm">
                       <tr>
-                        <td className="pr-2.5">Score</td>
+                        <td className="pr-2.5">Damage</td>
                         <td className="font-semibold">
-                          {playlog.battle.score.toLocaleString()}
+                          {(playlog.overDamage.damage / 100).toFixed(2)}%
                         </td>
                       </tr>
                     </table>
@@ -108,14 +125,14 @@ export const PlaylogRenderer = memo<Props>(props => {
                     <div className="flex justify-center">
                       <div>
                         {playlog.tech.newRecord && (
-                          <span className="text-red-500 text-sm">
+                          <span className="text-red-500 text-xs sm:text-sm">
                             New record!!
                           </span>
                         )}
                         <h2
                           className={classNames(
                             playlog.tech.newRecord ? '-mt-1' : '',
-                            'text-3xl font-light mb-1'
+                            'text-2xl sm:text-3xl font-light mb-1'
                           )}
                         >
                           {playlog.tech.score.toLocaleString()}

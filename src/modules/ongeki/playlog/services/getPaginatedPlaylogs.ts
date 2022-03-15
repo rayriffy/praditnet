@@ -130,7 +130,7 @@ export const getPaginatedPlaylogs = async (
       battle: {
         score: playlog.playBattleScore,
         rank: playlog.playBattleRank,
-        newRecord: playlog.playBattleNewRecord === 1,
+        newRecord: playlog.playBattleNewRecord[0] === 1,
       },
       tech: {
         score: playlog.playTechScore,
@@ -139,7 +139,7 @@ export const getPaginatedPlaylogs = async (
       },
       overDamage: {
         damage: playlog.playOverdamageDamage,
-        newRecord: playlog.playOverdamageNewRecord === 1,
+        newRecord: playlog.playOverdamageNewRecord[0] === 1,
       },
       judge: {
         critical: playlog.playJudgeCritical,
@@ -149,9 +149,9 @@ export const getPaginatedPlaylogs = async (
         damage: playlog.playJudgeDamage,
       },
       achivement: {
-        allBreak: playlog.playAchivementAllBreak === 1,
-        fullBell: playlog.playAchivementFullBell === 1,
-        fullCombo: playlog.playAchivementFullCombo === 1,
+        allBreak: playlog.playAchivementAllBreak[0] === 1,
+        fullBell: playlog.playAchivementFullBell[0] === 1,
+        fullCombo: playlog.playAchivementFullCombo[0] === 1,
       },
       cards: [1, 0, 2].map(i => ({
         order: i,
