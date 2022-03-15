@@ -22,7 +22,7 @@ const Page: NextPage<Props> = props => {
       <div className="mt-4 space-y-4 sm:space-y-6">
         {decks.map(deck => (
           <Link key={`deck-${deck.id}`} href={`/ongeki/deck/edit/${deck.id}`}>
-            <a className="px-4 sm:px-5 py-6 bg-slate-50 rounded-md">
+            <div className="px-4 sm:px-5 py-6 bg-slate-50 rounded-md cursor-pointer">
               <div className="flex justify-between text-gray-900">
                 <h1 className="font-bold text-xl sm:text-2xl">
                   Deck {deck.id}
@@ -40,7 +40,7 @@ const Page: NextPage<Props> = props => {
                   </div>
                 ))}
               </div>
-            </a>
+            </div>
           </Link>
         ))}
       </div>
