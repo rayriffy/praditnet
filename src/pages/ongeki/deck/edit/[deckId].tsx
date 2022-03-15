@@ -1,7 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
 
-import { PencilAltIcon } from '@heroicons/react/solid'
-
 import { Image } from '../../../../core/components/image'
 import { Navbar } from '../../../../modules/ongeki/home/components/navbar'
 
@@ -22,14 +20,24 @@ const Page: NextPage<Props> = props => {
         <h1 className="text-2xl font-bold text-gray-900">
           Editing deck {deck.id}
         </h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 space-x-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4">
           {deck.cards.map(card => (
-            <Image
-              key={`deck-${deck.id}-card-${card.id}`}
-              src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
-              width={384}
-              height={526}
-            />
+            <div key={`deck-${deck.id}-card-${card.id}`}>
+              <div className="flex mx-0 sm:mx-1.5 -mb-1.5 h-5 sm:h-6">
+                <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-r-[1.25rem] sm:border-r-[1.5rem] border-t-transparent border-r-slate-50" />
+                <div className="w-full bg-slate-50 text-xs flex items-center justify-center px-1">
+                  <p className="text-sky-500">
+                    Lv.{card.level.current.toLocaleString()}
+                  </p>
+                </div>
+                <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-l-[1.25rem] sm:border-l-[1.5rem] border-t-transparent border-l-slate-50" />
+              </div>
+              <Image
+                src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
+                width={384}
+                height={526}
+              />
+            </div>
           ))}
         </div>
       </div>

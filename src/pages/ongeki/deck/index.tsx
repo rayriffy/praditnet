@@ -32,14 +32,14 @@ const Page: NextPage<Props> = props => {
               <div className="grid grid-cols-3 gap-0.5 mt-4">
                 {deck.cards.map(card => (
                   <div key={`deck-${deck.id}-card-${card.id}`}>
-                    <div className="flex mx-1.5 -mb-1.5 h-6">
-                      <div className="w-0 h-0 border-t-[1.5rem] border-r-[1.5rem] border-t-transparent border-white" />
+                    <div className="flex mx-0 sm:mx-1.5 -mb-1.5 h-5 sm:h-6">
+                      <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-r-[1.25rem] sm:border-r-[1.5rem] border-t-transparent border-r-white" />
                       <div className="w-full bg-white text-xs flex items-center justify-center px-1">
                         <p className="text-sky-500">
                           Lv.{card.level.current.toLocaleString()}
                         </p>
                       </div>
-                      <div className="w-0 h-0 border-t-[1.5rem] border-l-[1.5rem] border-t-transparent border-l-white" />
+                      <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-l-[1.25rem] sm:border-l-[1.5rem] border-t-transparent border-l-white" />
                     </div>
                     <Image
                       src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
