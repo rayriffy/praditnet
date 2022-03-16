@@ -102,16 +102,16 @@ const Page: NextPage<Props> = props => {
               {character.relationshipLevel.toLocaleString()}
             </p>
             <div className="px-5 w-full">
-              <h1 className="text-2xl font-semibold text-center">
+              <h1 className="text-2xl font-semibold text-center dark:text-white">
                 {character.name}
               </h1>
               <div className="border-b-[3px] border-pink-400 my-1 rounded"></div>
-              <p className="text-pink-500 font-medium text-center">
+              <p className="text-pink-500 dark:text-pink-400 font-medium text-center">
                 CV: {character.voice}
               </p>
             </div>
           </div>
-          <p className="-mt-4 text-xs text-right">
+          <p className="-mt-4 text-xs text-right text-gray-900 dark:text-gray-100">
             Birthday:{' '}
             <span className="font-semibold">{character.birthday}</span> / Blood
             type: <span className="font-semibold">{character.bloodType}</span> /
@@ -138,11 +138,11 @@ const Page: NextPage<Props> = props => {
               </span>
             </button>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg mt-4 sm:-mx-6">
-            <h2 className="text-lg text-gray-700 font-bold text-center">
+          <div className="bg-gray-100 dark:bg-neutral-700 p-4 rounded-lg mt-4 sm:-mx-6">
+            <h2 className="text-lg text-gray-700 dark:text-white font-bold text-center">
               Personality
             </h2>
-            <div className="p-4 bg-white rounded-lg mt-2.5">
+            <div className="p-4 bg-white dark:bg-neutral-600 rounded-lg mt-2.5">
               <table className="text-xs table-auto">
                 {personalities.map((personality, i) => (
                   <tr key={`personality-${personality.id}`}>
@@ -154,7 +154,12 @@ const Page: NextPage<Props> = props => {
                     >
                       {personality.name}
                     </td>
-                    <td className={classNames(i !== 0 ? 'pt-2' : '', 'pl-2')}>
+                    <td
+                      className={classNames(
+                        i !== 0 ? 'pt-2' : '',
+                        'pl-2 dark:text-white'
+                      )}
+                    >
                       {character.relationshipLevel >= personality.level ? (
                         <Fragment>
                           {character[`personalityParam${i + 1}`]}
