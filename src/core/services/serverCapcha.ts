@@ -17,10 +17,10 @@ export const serverCapcha = async (code: string | undefined) => {
       }
     )
 
-    console.log({
-      code,
-      response: googleResponse.data,
-    })
+    // console.log({
+    //   code,
+    //   response: googleResponse.data,
+    // })
 
     if (googleResponse.data.success) {
       return true
