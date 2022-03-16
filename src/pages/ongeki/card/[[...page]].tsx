@@ -44,7 +44,7 @@ const Page: NextPage<Props> = props => {
                 src={`/assets/ongeki/cardRarity/${rarity}.png`}
                 className="h-7 w-auto m-1"
               />
-              <p className="font-medium text-gray-700 dark:text-gray-50 text-sm">
+              <p className="font-medium text-gray-700 dark:text-gray-50 text-xs">
                 {overview[rarity].owned} / {overview[rarity].total}
               </p>
             </div>
