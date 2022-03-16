@@ -125,7 +125,7 @@ const Page: NextPage<Props> = props => {
                   : progress
                   ? 'cursor-wait'
                   : '',
-                'text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm'
+                'transition text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm'
               )}
               onClick={() => onNavigatorSet()}
               disabled={isNavigatorEquipped || progress}
