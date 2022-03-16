@@ -91,6 +91,24 @@ export const PlaylogRenderer = memo<Props>(props => {
                         className="w-3/5 h-auto mx-auto mb-2"
                         src={`/assets/ongeki/battleRank/${playlog.battle.rank}.png`}
                       />
+                      <div className="grid grid-cols-1 md:grid-cols-2">
+                        <img
+                          className="w-24 md:w-full h-auto mx-auto"
+                          src={`/assets/ongeki/achivement/${
+                            playlog.achivement.allBreak
+                              ? 'ab'
+                              : playlog.achivement.fullCombo
+                              ? 'fc'
+                              : 'fc-disabled'
+                          }.png`}
+                        />
+                        <img
+                          className="w-24 md:w-full h-auto mx-auto"
+                          src={`/assets/ongeki/achivement/${
+                            playlog.achivement.fullBell ? 'fb' : 'fb-disabled'
+                          }.png`}
+                        />
+                      </div>
                       <div className="flex justify-center">
                         <div>
                           {playlog.battle.newRecord && (
@@ -155,7 +173,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                         </tr>
                       ))}
                       <tr>
-                        <td className="pr-2.5">Break</td>
+                        <td className="pr-2.5">Bell</td>
                         <td className="font-semibold">
                           {playlog.bell.actual} / {playlog.bell.total}
                         </td>
