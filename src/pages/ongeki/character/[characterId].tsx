@@ -15,10 +15,11 @@ import { DetailedCharacter } from '../../../modules/ongeki/character/services/ge
 
 interface Props extends AppProps {
   character: DetailedCharacter
+  isNavigatorEquipped: boolean
 }
 
 const Page: NextPage<Props> = props => {
-  const { character } = props
+  const { character, isNavigatorEquipped } = props
 
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
@@ -67,9 +68,16 @@ const Page: NextPage<Props> = props => {
             Height: <span className="font-semibold">{character.height}</span>cm
           </p>
           <div className="my-6">
-            <button className="text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm">
+            <button
+              className="text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm"
+              disabled={isNavigatorEquipped}
+            >
               <img src="/assets/ongeki/equipped.png" className="w-8 h-auto" />
-              <span className="ml-2">Set as navigatior voice</span>
+              <span className="ml-2">
+                {isNavigatorEquipped
+                  ? 'Already been set as navigator voice'
+                  : 'Set as navigatior voice'}
+              </span>
             </button>
           </div>
           <div className="bg-gray-100 p-4 rounded-lg mt-4 sm:-mx-6">
@@ -122,6 +130,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getUserCharacter } = await import(
     '../../../modules/ongeki/character/services/getUserCharacter'
   )
+  const { getEquippedCharacter } = await import(
+    '../../../modules/ongeki/character/services/getEquippedCharacter'
+  )
 
   // check for user session
   const user = await getApiUserSession(ctx.req)
@@ -136,10 +147,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   }
 
   try {
-    const character = await getUserCharacter(
-      user.card_luid,
-      Number(ctx.params.characterId)
-    )
+    const [character, equipped] = await Promise.all([
+      getUserCharacter(user.card_luid, Number(ctx.params.characterId)),
+      getEquippedCharacter(user.card_luid),
+    ])
 
     return {
       props: {
@@ -147,6 +158,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
           cardId: user.card_luid,
         },
         character,
+        isNavigatorEquipped: equipped.equipped.character === character.id,
       },
     }
   } catch (e) {
