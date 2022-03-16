@@ -1,7 +1,9 @@
-import { Fragment, useRef } from 'react'
+import { Fragment, useRef, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
+import axios from 'axios'
+import NProgress from 'nprogress'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Image } from '../../../core/components/image'
@@ -22,6 +24,54 @@ const Page: NextPage<Props> = props => {
   const { character, isNavigatorEquipped } = props
 
   const recaptchaRef = useRef<ReCAPTCHA>(null)
+
+  const [error, setError] = useState<string>(null)
+  const [progress, setProgress] = useState<boolean>(false)
+  const onNavigatorSet = async () => {
+    recaptchaRef.current.reset()
+
+    setError(null)
+    setProgress(true)
+
+    let token = null
+    try {
+      token = await recaptchaRef.current.executeAsync()
+    } catch (e) {
+      setError('ReCAPTCHA verification failed!')
+      setProgress(false)
+      return
+    }
+
+    if (token !== null) {
+      try {
+        const body = {
+          id: character.id,
+        }
+
+        const res = await axios.post('/api/ongeki/navigator/set', body, {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        })
+
+        if (res.status === 200) {
+          NProgress.configure({ minimum: 0.3 })
+          NProgress.start()
+          window.location.reload()
+        } else {
+          throw new Error(await res.data())
+        }
+      } catch (error) {
+        console.error('An unexpected error happened occurred:', error)
+        recaptchaRef.current.reset()
+        setError(error.response.data)
+        setProgress(false)
+      }
+    } else {
+      setError('ReCAPTCHA verification failed!')
+      setProgress(false)
+    }
+  }
 
   return (
     <Fragment>
@@ -69,8 +119,16 @@ const Page: NextPage<Props> = props => {
           </p>
           <div className="my-6">
             <button
-              className="text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm"
-              disabled={isNavigatorEquipped}
+              className={classNames(
+                isNavigatorEquipped
+                  ? 'cursor-not-allowed'
+                  : progress
+                  ? 'cursor-wait'
+                  : '',
+                'text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm'
+              )}
+              onClick={() => onNavigatorSet()}
+              disabled={isNavigatorEquipped || progress}
             >
               <img src="/assets/ongeki/equipped.png" className="w-8 h-auto" />
               <span className="ml-2">
