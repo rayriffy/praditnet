@@ -98,7 +98,11 @@ export const getPaginatedPlaylogs = async (
         'ongeki_user_playlog.card_attack2 as playCard2Attack',
         'ongeki_user_playlog.card_id3 as playCard3Id',
         'ongeki_user_playlog.card_level3 as playCard3Level',
-        'ongeki_user_playlog.card_attack3 as playCard3Attack'
+        'ongeki_user_playlog.card_attack3 as playCard3Attack',
+
+        // bell
+        'ongeki_user_playlog.bell_count as bellCount',
+        'ongeki_user_playlog.total_bell_count as bellTotalCount'
       )
       .limit(paginationItems)
       .offset((page - 1) * paginationItems),
@@ -159,6 +163,10 @@ export const getPaginatedPlaylogs = async (
         level: playlog[`playCard${i + 1}Level`],
         attack: playlog[`playCard${i + 1}Attack`],
       })),
+      bell: {
+        actual: playlog.bellCount,
+        total: playlog.bellTotalCount,
+      },
     }
   })
 

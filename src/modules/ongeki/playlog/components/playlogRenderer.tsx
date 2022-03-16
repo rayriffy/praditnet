@@ -154,6 +154,12 @@ export const PlaylogRenderer = memo<Props>(props => {
                           </td>
                         </tr>
                       ))}
+                      <tr>
+                        <td className="pr-2.5">Break</td>
+                        <td className="font-semibold">
+                          {playlog.bell.actual} / {playlog.bell.total}
+                        </td>
+                      </tr>
                     </table>
                     {playlog.judge.damage !== 0 && (
                       <div className="flex text-xs py-0.5 px-2 justify-between items-center bg-rose-500 text-white rounded mt-2">

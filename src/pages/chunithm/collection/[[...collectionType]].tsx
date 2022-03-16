@@ -98,12 +98,24 @@ const Page: NextPage<Props> = props => {
         </div>
         <Costume {...{ equipped }} />
       </div>
-      {collection !== null && (
+      {/* {collection !== null && (
         <ItemList
           type={collectionTypes.find(o => o.id === collection.type)}
           items={collection.items}
           capchaRef={recaptchaRef}
         />
+      )} */}
+      {collection !== null && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 mx-auto">
+          {collection.items.map(item => (
+            <Item
+              collection={collectionTypes.find(o => o.id === collection.type)}
+              item={item}
+              key={`collection-item-${collection.type}-${item.id}`}
+              capchaRef={recaptchaRef}
+            />
+          ))}
+        </div>
       )}
       <ReCAPTCHA
         ref={recaptchaRef}

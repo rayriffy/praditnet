@@ -29,6 +29,10 @@ export interface UserPlaylog {
     miss: number
     damage: number
   }
+  bell: {
+    actual: number
+    total: number
+  }
   achivement: {
     allBreak: boolean
     fullBell: boolean

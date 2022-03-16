@@ -44,7 +44,16 @@ const Page: NextPage<Props> = props => {
                           {Math.floor(character.relationshipLevel / 1000)}
                         </span>
                       )}
-                      <span>{character.relationshipLevel % 1000}</span>
+                      <span>
+                        {(character.relationshipLevel % 1000)
+                          .toString()
+                          .padStart(
+                            Math.floor(character.relationshipLevel / 1000) !== 0
+                              ? 3
+                              : 0,
+                            '0'
+                          )}
+                      </span>
                     </p>
                   </div>
                 </div>
