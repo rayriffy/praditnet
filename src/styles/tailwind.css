@@ -37,3 +37,13 @@ h6 {
 .text-shadow-pink-lg {
   text-shadow: 0 0 0.5rem #be185d;
 }
+
+.navi-button {
+  background: linear-gradient(to bottom right, #fffff7 25%, #fffee2 25%, #fffee2 50%, #fffff7 50%, #fffff7 75%, #fffee2 75%, #fffee2);
+  background-size: 20px 20px;
+}
+
+.navi-button:disabled {
+  background: linear-gradient(to bottom right, #fafafa 25%, #f5f5f5 25%, #f5f5f5 50%, #fafafa 50%, #fafafa 75%, #f5f5f5 75%, #f5f5f5);
+  background-size: 20px 20px;
+}

@@ -1,14 +1,17 @@
-import { Fragment } from 'react'
+import { Fragment, useRef } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
+
+import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Image } from '../../../core/components/image'
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
 
+import { personalities } from '../../../modules/ongeki/character/constants/personalities'
+import { classNames } from '../../../core/services/classNames'
+
 import { AppProps } from '../../../app/@types/AppProps'
 import { DetailedCharacter } from '../../../modules/ongeki/character/services/getUserCharacter'
-import { classNames } from '../../../core/services/classNames'
-import { personalities } from '../../../modules/ongeki/character/constants/personalities'
 
 interface Props extends AppProps {
   character: DetailedCharacter
@@ -16,6 +19,8 @@ interface Props extends AppProps {
 
 const Page: NextPage<Props> = props => {
   const { character } = props
+
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   return (
     <Fragment>
@@ -61,6 +66,12 @@ const Page: NextPage<Props> = props => {
             type: <span className="font-semibold">{character.bloodType}</span> /
             Height: <span className="font-semibold">{character.height}</span>cm
           </p>
+          <div className="my-6">
+            <button className="text-center navi-button px-5 inline-flex justify-center items-center w-full h-10 border shadow-md rounded text-sm">
+              <img src="/assets/ongeki/equipped.png" className="w-8 h-auto" />
+              <span className="ml-2">Set as navigatior voice</span>
+            </button>
+          </div>
           <div className="bg-gray-100 p-4 rounded-lg mt-4 sm:-mx-6">
             <h2 className="text-lg text-gray-700 font-bold text-center">
               Personality
@@ -95,6 +106,11 @@ const Page: NextPage<Props> = props => {
           </div>
         </div>
       </div>
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        size="invisible"
+        sitekey={process.env.RECAPCHA_SITE_KEY}
+      />
     </Fragment>
   )
 }
@@ -124,8 +140,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       user.card_luid,
       Number(ctx.params.characterId)
     )
-
-    console.log(character)
 
     return {
       props: {
