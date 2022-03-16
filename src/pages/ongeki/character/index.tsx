@@ -32,24 +32,24 @@ const Page: NextPage<Props> = props => {
                 {character.id === equipped && (
                   <img
                     src="/assets/ongeki/equipped.png"
-                    className="w-10 h-auto absolute top-5 left-3"
+                    className="w-12 md:w-10 h-auto absolute top-5 left-3"
                   />
                 )}
                 <div className="absolute bottom-8 left-2">
                   <div className="relative">
                     <img src="/assets/ongeki/gage.png" className="w-16" />
                     <p className="text-shadow-pink text-white font-bold absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
-                      {Math.floor(character.relationshipLevel / 1000) !== 0 && (
+                      {Math.floor(character.relationshipLevel / 100) !== 0 && (
                         <span className="-mt-2.5 text-sm -ml-0.5 mr-0.5">
-                          {Math.floor(character.relationshipLevel / 1000)}
+                          {Math.floor(character.relationshipLevel / 100)}
                         </span>
                       )}
                       <span>
-                        {(character.relationshipLevel % 1000)
+                        {(character.relationshipLevel % 100)
                           .toString()
                           .padStart(
-                            Math.floor(character.relationshipLevel / 1000) !== 0
-                              ? 3
+                            Math.floor(character.relationshipLevel / 100) !== 0
+                              ? 2
                               : 0,
                             '0'
                           )}
