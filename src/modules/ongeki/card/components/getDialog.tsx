@@ -7,6 +7,7 @@ import {
   useState,
 } from 'react'
 
+import NProgress from 'nprogress'
 import { Dialog, Transition } from '@headlessui/react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import axios from 'axios'
@@ -56,6 +57,8 @@ export const GetDialog = memo<GetDialogProps>(props => {
 
         if (res.status === 200) {
           console.log('Successfully got card!')
+          NProgress.configure({ minimum: 0.3 })
+          NProgress.start()
           window.location.reload()
         } else {
           throw new Error(await res.data())

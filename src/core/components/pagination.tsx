@@ -17,30 +17,47 @@ interface Props {
   firstLast?: boolean
 }
 
-const DisabledButton: FunctionComponent = props => (
+const DisabledButton: FunctionComponent<{ showWhen?: 'small' | 'large' }> = ({
+  showWhen,
+  ...props
+}) => (
   <div
-    className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-600 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-700 dark:hover:text-white transition cursor-not-allowed"
+    className={classNames(
+      showWhen === 'large'
+        ? 'hidden sm:inline-flex'
+        : showWhen === 'small'
+        ? 'inline-flex sm:hidden'
+        : 'inline-flex',
+      'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-600 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-700 dark:hover:text-white transition cursor-not-allowed'
+    )}
     {...props}
   />
 )
 
-const LinkedButton: FunctionComponent<{ href: string }> = ({
-  href,
-  ...props
-}) => (
+const LinkedButton: FunctionComponent<{
+  href: string
+  showWhen?: 'small' | 'large'
+}> = ({ href, showWhen, ...props }) => (
   <Link href={href}>
     <a
-      className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-700 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-600 dark:hover:text-white transition"
+      className={classNames(
+        showWhen === 'large'
+          ? 'hidden sm:inline-flex'
+          : showWhen === 'small'
+          ? 'inline-flex sm:hidden'
+          : 'inline-flex',
+        'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-700 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-600 dark:hover:text-white transition'
+      )}
       {...props}
     />
   </Link>
 )
 
-const Button: FunctionComponent<{ disabled: boolean; href: string }> = ({
-  disabled,
-  href,
-  ...props
-}) =>
+const Button: FunctionComponent<{
+  disabled: boolean
+  showWhen?: 'small' | 'large'
+  href: string
+}> = ({ disabled, href, ...props }) =>
   disabled ? (
     <DisabledButton {...props} />
   ) : (
@@ -59,7 +76,7 @@ export const Pagination = memo<Props>(props => {
     >
       <div className="flex space-x-2">
         {firstLast && (
-          <Button disabled={current === 1} href={urlPrefix}>
+          <Button disabled={current === 1} showWhen="large" href={urlPrefix}>
             <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />
             First
           </Button>
@@ -71,6 +88,16 @@ export const Pagination = memo<Props>(props => {
           <ArrowLeftIcon className="mr-2 w-5 h-5" />
           Previous
         </Button>
+        {firstLast && (
+          <Button
+            disabled={current === max}
+            showWhen="small"
+            href={`${urlPrefix}/${current + 1}`}
+          >
+            Next
+            <ArrowRightIcon className="ml-2 w-5 h-5" />
+          </Button>
+        )}
       </div>
       <p className="px-2 text-gray-700 dark:text-gray-100">
         Page{' '}
@@ -79,7 +106,17 @@ export const Pagination = memo<Props>(props => {
         </span>
       </p>
       <div className="flex space-x-2">
-        <Button disabled={current === max} href={`${urlPrefix}/${current + 1}`}>
+        {firstLast && (
+          <Button disabled={current === 1} showWhen="small" href={urlPrefix}>
+            <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />
+            First
+          </Button>
+        )}
+        <Button
+          disabled={current === max}
+          showWhen={firstLast ? 'large' : undefined}
+          href={`${urlPrefix}/${current + 1}`}
+        >
           Next
           <ArrowRightIcon className="ml-2 w-5 h-5" />
         </Button>
