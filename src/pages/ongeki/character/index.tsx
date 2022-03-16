@@ -12,10 +12,11 @@ import Link from 'next/link'
 
 interface Props extends AppProps {
   characters: UserCharacter[]
+  equipped: number
 }
 
 const Page: NextPage<Props> = props => {
-  const { characters } = props
+  const { characters, equipped } = props
 
   return (
     <Fragment>
@@ -28,6 +29,12 @@ const Page: NextPage<Props> = props => {
               href={`/ongeki/character/${character.id}`}
             >
               <a className="relative">
+                {character.id === equipped && (
+                  <img
+                    src="/assets/ongeki/equipped.png"
+                    className="w-10 h-auto absolute top-5 left-3"
+                  />
+                )}
                 <div className="absolute bottom-8 left-2">
                   <div className="relative">
                     <img src="/assets/ongeki/gage.png" className="w-16" />
@@ -61,6 +68,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getUserCharacters } = await import(
     '../../../modules/ongeki/character/services/getUserCharacters'
   )
+  const { getEquippedCharacter } = await import(
+    '../../../modules/ongeki/character/services/getEquippedCharacter'
+  )
 
   // check for user session
   const user = await getApiUserSession(ctx.req)
@@ -74,7 +84,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const characters = await getUserCharacters(user.card_luid)
+  const [characters, equipped] = await Promise.all([
+    getUserCharacters(user.card_luid),
+    getEquippedCharacter(user.card_luid),
+  ])
 
   return {
     props: {
@@ -82,6 +95,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         cardId: user.card_luid,
       },
       characters,
+      equipped: equipped.equipped.character,
     },
   }
 }
