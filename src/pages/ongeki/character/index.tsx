@@ -27,7 +27,20 @@ const Page: NextPage<Props> = props => {
               key={`character-${character.id}`}
               href={`/ongeki/character/${character.id}`}
             >
-              <a>
+              <a className="relative">
+                <div className="absolute bottom-8 left-2">
+                  <div className="relative">
+                    <img src="/assets/ongeki/gage.png" className="w-16" />
+                    <p className="text-shadow-pink text-white font-bold absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center">
+                      {Math.floor(character.relationshipLevel / 1000) !== 0 && (
+                        <span className="-mt-2.5 text-sm -ml-0.5 mr-0.5">
+                          {Math.floor(character.relationshipLevel / 1000)}
+                        </span>
+                      )}
+                      <span>{character.relationshipLevel % 1000}</span>
+                    </p>
+                  </div>
+                </div>
                 <img
                   src={`/assets/ongeki/characterBanner/${character.id}.png`}
                   className="w-full h-auto"
