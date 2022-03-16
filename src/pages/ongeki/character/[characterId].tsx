@@ -133,7 +133,7 @@ const Page: NextPage<Props> = props => {
               <img src="/assets/ongeki/equipped.png" className="w-8 h-auto" />
               <span className="ml-2">
                 {isNavigatorEquipped
-                  ? 'Already been set as navigator voice'
+                  ? 'Already set as navigator voice'
                   : 'Set as navigatior voice'}
               </span>
             </button>
