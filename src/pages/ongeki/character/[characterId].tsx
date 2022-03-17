@@ -78,13 +78,13 @@ const Page: NextPage<Props> = props => {
       <div className="mt-4">
         <Navbar />
         <div
-          className="max-w-xl mx-auto my-4 relative h-[28rem] rounded-lg"
+          className="max-w-xl mx-auto my-6 relative h-[28rem] rounded-lg -rotate-3 overflow-hidden"
           style={{
             background: 'url(/assets/ongeki/characterBackground.png)',
             backgroundPosition: 'center',
           }}
         >
-          <div className="absolute h-[28rem] bottom-0 left-0 right-0 overflow-hidden flex justify-center">
+          <div className="absolute h-[28rem] bottom-0 left-0 right-0 flex justify-center rotate-3">
             <div className="shrink-0">
               <Image
                 className=""
@@ -96,7 +96,7 @@ const Page: NextPage<Props> = props => {
             </div>
           </div>
         </div>
-        <div className="max-w-sm mx-auto">
+        <div className="max-w-sm mx-auto mt-8">
           <div className="flex items-center my-6">
             <p className="text-shadow-pink-lg text-white text-3xl font-bold shrink-0">
               {character.relationshipLevel.toLocaleString()}
