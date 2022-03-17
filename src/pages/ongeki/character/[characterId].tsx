@@ -84,7 +84,7 @@ const Page: NextPage<Props> = props => {
             backgroundPosition: 'center',
           }}
         >
-          <div className="absolute h-[28rem] bottom-0 left-0 right-0 overflow-hidden flex justify-center sm:justify-start">
+          <div className="absolute h-[28rem] bottom-0 left-0 right-0 overflow-hidden flex justify-center">
             <div className="shrink-0">
               <Image
                 className=""
