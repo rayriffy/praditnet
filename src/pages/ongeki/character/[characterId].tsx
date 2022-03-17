@@ -78,13 +78,13 @@ const Page: NextPage<Props> = props => {
       <div className="mt-4">
         <Navbar />
         <div
-          className="max-w-xl mx-auto my-6 relative h-[28rem] rounded-lg -rotate-3 overflow-hidden"
+          className="max-w-xl mx-auto my-6 relative h-[28rem] rounded-lg -rotate-1 overflow-hidden"
           style={{
             background: 'url(/assets/ongeki/characterBackground.png)',
             backgroundPosition: 'center',
           }}
         >
-          <div className="absolute h-[28rem] bottom-0 left-0 right-0 flex justify-center rotate-3">
+          <div className="absolute h-[28rem] bottom-0 left-0 right-0 flex justify-center rotate-1">
             <div className="shrink-0">
               <Image
                 className=""

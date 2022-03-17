@@ -13,6 +13,7 @@ import { DeleteRivalProps } from './deleteRival'
 
 interface Props {
   rival: Rival | undefined
+  mode: 'add' | 'remove'
   recaptchaRef: MutableRefObject<ReCAPTCHA>
 }
 
@@ -24,7 +25,7 @@ const DeleteRival = dynamic<DeleteRivalProps>(
 )
 
 export const RivalCard = memo<Props>(props => {
-  const { rival, recaptchaRef } = props
+  const { rival, recaptchaRef, mode = 'remove' } = props
 
   const [deleteDialog, setDeleteDialog] = useState(false)
 
@@ -55,9 +56,11 @@ export const RivalCard = memo<Props>(props => {
           </p>
         </div>
         <div className="flex items-center">
-          <button onClick={() => setDeleteDialog(o => !o)}>
-            <TrashIcon className="w-8 h-8 text-gray-700" />
-          </button>
+          {mode === 'remove' && (
+            <button onClick={() => setDeleteDialog(o => !o)}>
+              <TrashIcon className="w-8 h-8 text-gray-700" />
+            </button>
+          )}
         </div>
       </div>
       <DeleteRival
