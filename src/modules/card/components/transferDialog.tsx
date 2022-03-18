@@ -5,6 +5,7 @@ import {
   memo,
   MutableRefObject,
   SetStateAction,
+  useRef,
   useState,
 } from 'react'
 
@@ -25,6 +26,7 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
+  const inputRef = useRef<HTMLInputElement>(null)
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
 
@@ -33,7 +35,7 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
 
     try {
       const token = await capchaRef.current!.executeAsync()
-      const inputCardId = event.currentTarget.accessCode.value
+      const inputCardId = inputRef.current.value
       await axios.post(
         '/api/card/set',
         {
@@ -119,6 +121,7 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
                   <div className="my-4">
                     <input
                       type="text"
+                      ref={inputRef}
                       name="accessCode"
                       inputMode="numeric"
                       pattern="^[\dabcdefABCDEF]{20}$"
