@@ -28,6 +28,7 @@ const Page: NextPage<Props> = props => {
               key={`rival-${i}-${rivals[i]?.id ?? 'none'}`}
               rival={rivals[i]}
               recaptchaRef={recaptchaRef}
+              mode="remove"
             />
           ))}
         </div>
