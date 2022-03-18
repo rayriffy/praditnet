@@ -89,7 +89,7 @@ const api: NextApiHandler = async (req, res) => {
         is_acquired: 1,
         is_new: 0,
         kaika_date: '0000-00-00 00:00:00.0',
-        level: 0,
+        level: 1,
         max_level: 10,
         print_count: 0,
         skill_id: targetCard[0].skillId,
