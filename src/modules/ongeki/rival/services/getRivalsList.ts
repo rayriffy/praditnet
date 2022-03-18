@@ -30,6 +30,7 @@ export const getRivalsList = async (cardId: string) => {
     // list all players
     const ongekiUsers = await knex('ongeki_user_data')
       .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
+      .orderBy('ongeki_user_data.user_name', 'asc')
       .select(
         'ongeki_user_data.id as rivalId',
         'ongeki_user_data.user_name as rivalName',
