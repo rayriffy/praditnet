@@ -4,12 +4,14 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
 import ReCAPTCHA from 'react-google-recaptcha'
-import { TrashIcon } from '@heroicons/react/outline'
+// import { PlusIcon } from '@heroicons/react/solid'
+import { PlusIcon, TrashIcon } from '@heroicons/react/outline'
 
+import { AddRivalProps } from './addRival'
+import { DeleteRivalProps } from './deleteRival'
 import { Image } from '../../../../core/components/image'
 
 import { Rival } from '../@types/Rival'
-import { DeleteRivalProps } from './deleteRival'
 
 interface Props {
   rival: Rival | undefined
@@ -23,17 +25,21 @@ const DeleteRival = dynamic<DeleteRivalProps>(
     ssr: false,
   }
 )
+const AddRival = dynamic<AddRivalProps>(
+  () => import('./addRival').then(o => o.AddRival),
+  {
+    ssr: false,
+  }
+)
 
 export const RivalCard = memo<Props>(props => {
   const { rival, recaptchaRef, mode = 'remove' } = props
 
   const [deleteDialog, setDeleteDialog] = useState(false)
+  const [addDialog, setAddDialog] = useState(false)
 
   return rival ? (
-    <div
-      // key={`rival-${i}-${targetRival.id}`}
-      className="bg-gray-100 px-5 py-4 rounded-lg flex"
-    >
+    <div className="bg-gray-100 px-5 py-4 rounded-lg flex">
       <div className="shrink-0 flex items-center">
         <div className="bg-gray-50 border-2 border-gray-700 rounded-md overflow-hidden shadow aspect-square h-20">
           <Image
@@ -56,19 +62,32 @@ export const RivalCard = memo<Props>(props => {
           </p>
         </div>
         <div className="flex items-center">
-          {mode === 'remove' && (
+          {mode === 'remove' ? (
             <button onClick={() => setDeleteDialog(o => !o)}>
               <TrashIcon className="w-8 h-8 text-gray-700" />
+            </button>
+          ) : (
+            <button onClick={() => setAddDialog(o => !o)}>
+              <PlusIcon className="w-8 h-8 text-gray-700" />
             </button>
           )}
         </div>
       </div>
-      <DeleteRival
-        rival={rival}
-        show={deleteDialog}
-        setShow={setDeleteDialog}
-        recaptchaRef={recaptchaRef}
-      />
+      {mode === 'remove' ? (
+        <DeleteRival
+          rival={rival}
+          show={deleteDialog}
+          setShow={setDeleteDialog}
+          recaptchaRef={recaptchaRef}
+        />
+      ) : (
+        <AddRival
+          rival={rival}
+          show={addDialog}
+          setShow={setAddDialog}
+          recaptchaRef={recaptchaRef}
+        />
+      )}
     </div>
   ) : (
     <div className="h-24 border-2 border-dashed rounded-lg flex justify-center items-center">
