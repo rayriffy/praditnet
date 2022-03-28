@@ -1,9 +1,11 @@
 import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
+import { AppProps } from '../../../app/@types/AppProps'
 import { Image } from '../../../core/components/image'
 import { classNames } from '../../../core/services/classNames'
 
-interface Props {
+interface Props extends AppProps {
   event: {
     id: string
     name: string
@@ -41,19 +43,18 @@ const Page: NextPage<Props> = props => {
           You're not registered for competition yet!
         </h1>
         <div className="flex justify-center">
-          <button
-            type="button"
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Apply now
-          </button>
+          <Link href={`/event/${event.id}/apply`}>
+            <a className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Apply now
+            </a>
+          </Link>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {Object.entries(musics).map(([game, musics]) => (
           <div
             key={`music-grid-${game}`}
-            className="bg-gray-100 rounded-md mt-14 px-4 pb-4"
+            className="bg-gray-100 rounded-md mt-14 px-6 pb-4"
           >
             <img
               src={`/assets/logo/${game}.png`}
@@ -62,7 +63,7 @@ const Page: NextPage<Props> = props => {
                 'h-auto mx-auto -mt-12'
               )}
             />
-            <h1 className="font-bold text-lg my-2">Qualifying songs</h1>
+            <h1 className="font-bold text-xl my-2">Qualifying songs</h1>
             <div className="my-2 grid grid-cols-2 items-start gap-6">
               {musics.map(music => (
                 <div
@@ -116,7 +117,12 @@ const Page: NextPage<Props> = props => {
                           'text-sm mx-auto rounded text-center px-3 ml-2'
                         )}
                       >
-                        {music.difficulty}
+                        {Math.floor(music.difficulty)}
+                        {Number(
+                          music.difficulty.toFixed(1).split('.').reverse()[0]
+                        ) >= 7
+                          ? '+'
+                          : ''}
                       </p>
                     </div>
                   </div>
@@ -134,8 +140,21 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { createKnexInstance } = await import(
     '../../../core/services/createKnexInstance'
   )
+  const { getApiUserSession } = await import(
+    '../../../core/services/authentication/api/getApiUserSession'
+  )
 
   const eventId = ctx.params.eventId as string
+
+  const user = await getApiUserSession(ctx.req)
+  if (user === null || user === undefined) {
+    return {
+      redirect: {
+        statusCode: 302,
+        destination: '/login',
+      },
+    }
+  }
 
   const knex = createKnexInstance('praditnet')
 
@@ -199,6 +218,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        cardId: user.card_luid,
+      },
       event: {
         id: targetEvent.uid,
         name: targetEvent.name,
