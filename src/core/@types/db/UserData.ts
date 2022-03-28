@@ -3,4 +3,5 @@ export interface UserData {
   uid: string
   card_luid?: string | null
   god_mode: number
+  // role: 'default' | 'staff'
 }
