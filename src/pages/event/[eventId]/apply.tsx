@@ -1,8 +1,9 @@
 import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
 
-import { AppProps } from '../../../app/@types/AppProps'
 import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
+
+import { AppProps } from '../../../app/@types/AppProps'
 
 interface Props extends AppProps {
   event: {
@@ -27,8 +28,14 @@ interface Props extends AppProps {
   } | null
 }
 
-const Page: NextPage = props => {
-  return <>OK</>
+const Page: NextPage<Props> = props => {
+  const { musics } = props
+
+  return (
+    <div>
+      <h1 className="font-bold text-3xl my-4">Applying for an event</h1>
+    </div>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
