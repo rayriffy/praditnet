@@ -1,9 +1,10 @@
-import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
+
+import dayjs from 'dayjs'
+
 import { Image } from '../../../core/components/image'
 import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
-import { classNames } from '../../../core/services/classNames'
+import { Preview } from '../../../modules/event/home/components/preview'
 
 interface Props {
   event: {
@@ -21,15 +22,17 @@ interface Props {
       difficulty: number
     }[]
   }
+  isStaff: boolean
   entry: {
     game: 'maimai' | 'chunithm'
+    inGameName: string
     remainingAttempts: number
-    attemptLog: {}
+    attemptLog: [number, number][] // [musicId, score]
   } | null
 }
 
 const Page: NextPage<Props> = props => {
-  const { event, musics } = props
+  const { event, musics, entry } = props
 
   return (
     <div className="space-y-4">
@@ -44,100 +47,51 @@ const Page: NextPage<Props> = props => {
           </div>
         </div>
       </div>
-      <div className="border-4 border-dashed p-6 rounded-lg">
-        <h1 className="text-center font-bold text-lg text-gray-900 mb-2">
-          You're not registered for competition yet!
-        </h1>
-        <div className="flex justify-center">
-          <Link href={`/event/${event.id}/apply`}>
-            <a className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Apply now
-            </a>
-          </Link>
-        </div>
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {Object.entries(musics).map(([game, musics]) => (
-          <div
-            key={`music-grid-${game}`}
-            className="bg-gray-100 rounded-md mt-14 px-6 pb-4"
-          >
-            <img
-              src={`/assets/logo/${game}.png`}
-              className={classNames(
-                game === 'maimai' ? 'w-56' : 'w-64',
-                'h-auto mx-auto -mt-12'
-              )}
-            />
-            <h1 className="font-bold text-xl my-2">Qualifying songs</h1>
-            <div className="my-2 grid grid-cols-2 items-start gap-6">
-              {musics.map(music => (
-                <div
-                  key={`music-${game}-${music.id}`}
-                  className="flex flex-col justify-center items-center"
-                >
-                  <div className="rounded overflow-hidden flex">
-                    <Image
-                      src={`https://praditnet-cdn.rayriffy.com/${game}/jacket/${music.id}.png`}
-                      width={200}
-                      height={200}
-                    />
-                  </div>
-                  <p className="text-gray-900 text-sm font-bold text-center mt-2">
-                    {music.name}
-                  </p>
-                  <div className="flex mt-2">
-                    <div
-                      className={classNames(
-                        music.level === 'remaster'
-                          ? 'bg-purple-200'
-                          : music.level === 'master'
-                          ? 'bg-purple-500'
-                          : music.level === 'expert'
-                          ? 'bg-red-500'
-                          : music.level === 'advanced'
-                          ? 'bg-orange-500'
-                          : music.level === 'basic'
-                          ? 'bg-emerald-500'
-                          : 'bg-pink-500',
-                        music.level === 'remaster'
-                          ? 'text-purple-700'
-                          : 'text-white',
-                        'px-2 py-1 text-xs uppercase rounded flex items-center'
-                      )}
-                    >
-                      <p>{music.level}</p>
-                      <p
-                        className={classNames(
-                          music.level === 'remaster'
-                            ? 'bg-purple-500 text-white'
-                            : music.level === 'master'
-                            ? 'bg-purple-400'
-                            : music.level === 'expert'
-                            ? 'bg-red-400'
-                            : music.level === 'advanced'
-                            ? 'bg-orange-400'
-                            : music.level === 'basic'
-                            ? 'bg-emerald-400'
-                            : 'bg-gradient-to-tr from-red-500 to-gray-700',
-                          'text-sm mx-auto rounded text-center px-3 ml-2'
-                        )}
-                      >
-                        {Math.floor(music.difficulty)}
-                        {Number(
-                          music.difficulty.toFixed(1).split('.').reverse()[0]
-                        ) >= 7
-                          ? '+'
-                          : ''}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+      {entry === null ? (
+        <Preview eventId={event.id} musics={musics} />
+      ) : (
+        <div>
+          <div className="bg-gray-100 rounded-md px-5 py-4 block sm:flex sm:justify-between">
+            <div className="flex justify-between sm:justify-start space-x-0 sm:space-x-4">
+              <img src={`/assets/logo/${entry.game}.png`} className="w-40" />
+              <div className="flex items-center">
+                <p className="py-1 px-6 font-semibold text-lg bg-white rounded-md">
+                  {entry.inGameName}
+                </p>
+              </div>
+            </div>
+            <div>
+              <p>Remaining attempts</p>
+              <p>{entry.remainingAttempts}</p>
             </div>
           </div>
-        ))}
-      </div>
+          <h1 className="text-2xl font-bold text-gray-900 mt-4 mb-3">
+            Qualification progress
+          </h1>
+          <div className="grid grid-cols-1 gap-4">
+            {musics[entry.game].map(music => (
+              <div
+                key={`music-${entry.game}-${music.id}`}
+                className="flex bg-gray-50 p-4 rounded-md"
+              >
+                <div className="flex rounded-md overflow-hidden aspect-square w-40">
+                  <Image
+                    src={`https://praditnet-cdn.rayriffy.com/${entry.game}/jacket/${music.id}.png`}
+                    width={200}
+                    height={200}
+                  />
+                </div>
+                <div className="ml-4">
+                  <h2 className="text-xl font-bold">{music.name}</h2>
+                  <p className="mt-3 text-3xl font-light">
+                    {entry.attemptLog.find(o => o[0] === music.id)?.[1] ?? 0}%
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
@@ -153,14 +107,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const eventId = ctx.params.eventId as string
 
   const user = await getApiUserSession(ctx.req)
-  if (user === null || user === undefined) {
-    return {
-      redirect: {
-        statusCode: 302,
-        destination: '/login',
-      },
-    }
-  }
 
   const knex = createKnexInstance('praditnet')
 
@@ -218,9 +164,43 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     })
   )
 
-  await knex.destroy()
+  let entry: Props['entry'] = null
 
-  const entry = null
+  if (user !== null && user !== undefined) {
+    // get user entry if exist
+    const targetEntry = await knex('EventAuditionRegister')
+      .where({
+        eventId,
+        userId: user.uid,
+      })
+      .first()
+
+    if (targetEntry !== undefined) {
+      // get attempt logs
+      const attemptLogs = await knex('EventAuditionUser').where({
+        eventId,
+        userId: user.uid,
+        gameId: targetEntry.selectedGameId,
+      })
+
+      entry = {
+        game: targetEntry.selectedGameId,
+        inGameName: targetEntry.inGameName,
+        remainingAttempts: targetEntry.remainingAttempts,
+        attemptLog: attemptLogs.map(item => [item.musicId, item.score]),
+      }
+    }
+  }
+
+  const eventStaff = await knex('EventStaff')
+    .where({
+      eventId,
+      userId: user.uid,
+    })
+    .first()
+  const isStaff = eventStaff !== undefined
+
+  await knex.destroy()
 
   return {
     props: {
@@ -231,6 +211,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         endAt: dayjs(targetEvent.startAt).format('DD MMM YYYY'),
       },
       musics: Object.fromEntries(fetchedMusics),
+      isStaff,
       entry,
     },
   }

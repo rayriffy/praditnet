@@ -29,7 +29,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { musics } = props
+  const { event, musics } = props
 
   return (
     <div>
@@ -57,7 +57,7 @@ const Page: NextPage<Props> = props => {
         </div>
       </div>
       <h2 className="text-2xl font-semibold my-4">Application form</h2>
-      <Form musics={musics} />
+      <Form eventId={event.id} musics={musics} />
     </div>
   )
 }
@@ -96,6 +96,24 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
     return {
       notFound: true,
+    }
+  }
+
+  // redirect to event if already applied
+  const existingRegistration = await knex('EventAuditionRegister')
+    .where({
+      eventId: eventId,
+      userId: user.uid,
+    })
+    .first()
+
+  if (existingRegistration !== undefined) {
+    await knex.destroy()
+    return {
+      redirect: {
+        statusCode: 302,
+        destination: `/event/${eventId}`,
+      },
     }
   }
 

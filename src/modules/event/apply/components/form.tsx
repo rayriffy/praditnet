@@ -1,9 +1,12 @@
-import { Fragment, memo, useRef, useState } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import { FormEventHandler, Fragment, memo, useRef, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Image } from '../../../../core/components/image'
 
 interface Props {
+  eventId: string
   musics: {
     [key: string]: {
       id: number
@@ -16,7 +19,10 @@ interface Props {
 }
 
 export const Form = memo<Props>(props => {
-  const { musics } = props
+  const { eventId, musics } = props
+
+  const [progress, setProgress] = useState<boolean>(false)
+  const [error, setError] = useState<string | null>(null)
 
   const recaptchaRef = useRef<ReCAPTCHA>(null)
 
@@ -25,9 +31,83 @@ export const Form = memo<Props>(props => {
   const ratingRef = useRef<HTMLInputElement>(null)
   const [participatedGame, setParticipatedGame] = useState<string | null>(null)
 
+  const router = useRouter()
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
+    event.preventDefault()
+
+    setError(null)
+    setProgress(true)
+
+    // validate
+    if (/^[\u0E00-\u0E7F\s]+$/.exec(realNameRef.current.value) === null) {
+      setError('Please write your name in Thai')
+      setProgress(false)
+      return
+    } else if (/^\d*\.?\d*$/.exec(ratingRef.current.value) === null) {
+      setError('Rating is not a valid number')
+      setProgress(false)
+      return
+    } else if (Number(ratingRef.current.value) < 0) {
+      setError('Rating must be greater than 0')
+      setProgress(false)
+      return
+    } else if (
+      Number(ratingRef.current.value) % 1 !== 0 &&
+      participatedGame === 'maimai'
+    ) {
+      setError('Rating does not have a valid format')
+      setProgress(false)
+      return
+    } else if (
+      Number(ratingRef.current.value) >= 18 &&
+      participatedGame === 'chunithm'
+    ) {
+      setError('Rating does not have a valid format')
+      setProgress(false)
+      return
+    }
+
+    // get recapcha token
+    let token = null
+    try {
+      token = await recaptchaRef.current.executeAsync()
+    } catch (e) {
+      setError('ReCAPTCHA verification failed!')
+      setProgress(false)
+      return
+    }
+
+    // send payload
+    try {
+      await axios.post(
+        '/api/event/register',
+        {
+          event: eventId,
+          realName: realNameRef.current.value,
+          inGameName: inGameNameRef.current.value,
+          rating: Number(ratingRef.current.value),
+          participatedGame,
+        },
+        {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        }
+      )
+
+      router.push(`/event/${eventId}`)
+      setProgress(false)
+    } catch (e) {
+      recaptchaRef.current.reset()
+      setError(e.response.data.message)
+      setProgress(false)
+    }
+  }
+
   return (
     <Fragment>
-      <div className="space-y-8 divide-y divide-gray-200">
+      <form className="space-y-8 divide-y divide-gray-200" onSubmit={onSubmit}>
         <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
           <div className="space-y-6 sm:space-y-5">
             <div className="space-y-6 sm:space-y-5">
@@ -44,8 +124,14 @@ export const Form = memo<Props>(props => {
                     name="real-name"
                     id="real-name"
                     ref={realNameRef}
+                    disabled={progress}
+                    required
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
+                  <p className="text-sm text-gray-500 mt-3">
+                    Please write your name in Thai, and without intitials (e.g.
+                    นาย ด.ช.)
+                  </p>
                 </div>
               </div>
 
@@ -61,9 +147,32 @@ export const Form = memo<Props>(props => {
                     type="text"
                     name="in-game-name"
                     id="last-name"
+                    maxLength={10}
                     ref={inGameNameRef}
+                    disabled={progress}
+                    required
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
+                  <p className="text-sm text-gray-500 mt-3">
+                    You can copy in-game name from{' '}
+                    <a
+                      href="https://maimaidx-eng.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 font-medium"
+                    >
+                      maimaiNET
+                    </a>
+                    , or{' '}
+                    <a
+                      href="https://chunithm-net-eng.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 font-medium"
+                    >
+                      CHUNITHM-NET
+                    </a>
+                  </p>
                 </div>
               </div>
 
@@ -79,7 +188,10 @@ export const Form = memo<Props>(props => {
                     type="text"
                     name="rating"
                     id="rating"
+                    // inputMode="decimal"
                     ref={ratingRef}
+                    disabled={progress}
+                    required
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -109,6 +221,8 @@ export const Form = memo<Props>(props => {
                                   ? setParticipatedGame('maimai')
                                   : null
                               }}
+                              disabled={progress}
+                              required
                               className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                             />
                             <label
@@ -142,6 +256,7 @@ export const Form = memo<Props>(props => {
                                   ? setParticipatedGame('chunithm')
                                   : null
                               }}
+                              disabled={progress}
                               className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
                             />
                             <label
@@ -176,22 +291,29 @@ export const Form = memo<Props>(props => {
         </div>
 
         <div className="pt-5">
+          {error !== null && (
+            <p className="bg-red-100 rounded-md mb-6 text-sm px-4 py-3 text-red-800">
+              {error}
+            </p>
+          )}
           <div className="flex justify-end">
             <button
               type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              disabled={progress}
+              className="transition bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:bg-gray-100 disabled:hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Cancel
             </button>
             <button
-              type="button"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              type="submit"
+              disabled={progress}
+              className="transition ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 disabled:hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Apply
             </button>
           </div>
         </div>
-      </div>
+      </form>
       <ReCAPTCHA
         ref={recaptchaRef}
         size="invisible"
