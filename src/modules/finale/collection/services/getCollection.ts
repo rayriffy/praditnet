@@ -1,3 +1,4 @@
+import { capitalizeFirstCharacter } from '../../../../core/services/capitalizeFirstCharacter'
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 import { collectionTypes } from '../constants/collectionTypes'
 
@@ -19,9 +20,7 @@ export const getCollection = async (cardId: string, itemType: string) => {
         item_kind: collectionTypes.find(o => o.id === itemType).itemKind,
       })
       .select('maimai_user_item.item_id as itemId'),
-    knex(
-      `praditnet.Finale${itemType.charAt(0).toUpperCase()}${itemType.slice(1)}`
-    ),
+    knex(`praditnet.Finale${capitalizeFirstCharacter(itemType)}`),
   ])
 
   await knex.destroy()

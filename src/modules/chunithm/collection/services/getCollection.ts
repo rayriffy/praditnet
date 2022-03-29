@@ -1,3 +1,4 @@
+import { capitalizeFirstCharacter } from '../../../../core/services/capitalizeFirstCharacter'
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
 import { collectionTypes } from '../constants/collectionTypes'
 
@@ -28,7 +29,7 @@ export const getCollection = async (cardId: string, itemType: string) => {
       `praditnet.Chunithm${
         itemType.startsWith('avatar')
           ? 'AvatarAccessory'
-          : `${itemType.charAt(0).toUpperCase()}${itemType.slice(1)}`
+          : `${capitalizeFirstCharacter(itemType)}`
       }`
     ).where(
       itemType.startsWith('avatar')
