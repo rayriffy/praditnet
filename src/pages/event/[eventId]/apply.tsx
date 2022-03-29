@@ -53,7 +53,7 @@ const Page: NextPage<Props> = props => {
         <div className="bg-gray-50 rounded-xl p-4">
           <h3 className="text-lg font-bold">8 Contestants</h3>
           <p className="text-sm text-gray-700">
-            8 contestants will be qualified to the grand final day
+            Only 8 contestants will be qualified to the grand final day
           </p>
         </div>
       </div>

@@ -36,7 +36,13 @@ const Page: NextPage<Props> = props => {
     <div className="space-y-4">
       <div className="flex justify-center items-center">
         <div className="bg-gradient-to-tr from-zinc-700 to-stone-800 p-4 rounded-xl">
-          <img src={`/assets/event/${event.id}.png`} className="w-60 h-auto" />
+          <div className="flex w-60">
+            <Image
+              src={`https://praditnet-cdn.rayriffy.com/event/${event.id}.png`}
+              width={745}
+              height={623}
+            />
+          </div>
         </div>
       </div>
       <div className="border-4 border-dashed p-6 rounded-lg">

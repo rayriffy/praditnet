@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { games } from '../modules/home/constants/games'
 import { PreviewCard } from '../modules/home/components/previewCard'
+import { Image } from '../core/components/image'
 
 import { UserPreview } from '../modules/home/@types/UserPreview'
 import { AppProps } from '../app/@types/AppProps'
@@ -29,10 +30,13 @@ const Page: NextPage<Props> = props => {
         {props.events.map(event => (
           // <Link key={`event-${event.id}`} href={`/event/${event.id}`}>
           <div className="w-full bg-gradient-to-tr from-zinc-700 to-stone-800 transition duration-[400ms] shadow-none hover:shadow-lg hover:shadow-stone-600 hover:scale-105 rounded-xl py-4 flex justify-center relative text-white hover:cursor-not-allowed grayscale">
-            <img
-              src={`/assets/event/${event.id}.png`}
-              className="w-40 h-auto"
-            />
+            <div className="w-40 flex">
+              <Image
+                src={`https://praditnet-cdn.rayriffy.com/event/${event.id}.png`}
+                width={745}
+                height={623}
+              />
+            </div>
             <div className="absolute right-1 bottom-4 text-sm">
               <p>Coming soon...</p>
             </div>
