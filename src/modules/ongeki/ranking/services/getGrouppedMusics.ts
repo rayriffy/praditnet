@@ -19,7 +19,7 @@ export const getGrouppedMusics = async (inputDifficulty: Difficulty['key']) => {
     level_master: number
     level_lunatic: number
     genre: number
-  }>('praditnet_ongeki_music')
+  }>('praditnet.OngekiMusic')
     // filter out lunatic
     .whereNot('level_basic', 0)
 

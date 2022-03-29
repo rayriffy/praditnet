@@ -66,7 +66,7 @@ const api: NextApiHandler = async (req, res) => {
         .where('sega_card.luid', '=', user.card_luid)
         .select('ongeki_user_data.id as userId')
         .first()
-      const targetCard = await knex('praditnet_ongeki_card')
+      const targetCard = await knex('praditnet.OngekiCard')
         .where({
           id,
         })

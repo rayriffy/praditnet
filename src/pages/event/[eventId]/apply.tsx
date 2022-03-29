@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
 
 import { AppProps } from '../../../app/@types/AppProps'
+import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
 
 interface Props extends AppProps {
   event: {
@@ -71,26 +72,26 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const availableGames = targetEvent.availableGames.split(',')
   const fetchedMusics = await Promise.all(
     availableGames.map(async game => {
-      const musics = await knex('EventMusicAudition')
+      const musics = await knex('EventAuditionMusic')
         .where({
           eventId,
           gameId: game,
         })
         .join(
-          `aqua.praditnet_${game}_music`,
-          'EventMusicAudition.musicId',
-          `aqua.praditnet_${game}_music.id`
+          `${capitalizeFirstCharacter(game)}Music`,
+          'EventAuditionMusic.musicId',
+          `${capitalizeFirstCharacter(game)}Music.id`
         )
         .select(
-          `aqua.praditnet_${game}_music.id as id`,
-          `aqua.praditnet_${game}_music.${
+          `${capitalizeFirstCharacter(game)}Music.id as id`,
+          `${capitalizeFirstCharacter(game)}Music.${
             game === 'chunithm' ? 'title' : 'name'
           } as name`,
-          `EventMusicAudition.level as targetDifficulty`,
-          `aqua.praditnet_${game}_music.level_expert`,
-          `aqua.praditnet_${game}_music.level_master`,
+          `EventAuditionMusic.level as targetDifficulty`,
+          `${capitalizeFirstCharacter(game)}Music.level_expert`,
+          `${capitalizeFirstCharacter(game)}Music.level_master`,
           ...(game === 'maimai'
-            ? [`aqua.praditnet_${game}_music.level_remaster`]
+            ? [`${capitalizeFirstCharacter(game)}Music.level_remaster`]
             : [])
         )
 

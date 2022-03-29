@@ -23,14 +23,14 @@ export const getUserCharacters = async (
     .where('ongeki_user_character.character_id', '>=', 1000)
     .where('ongeki_user_character.character_id', '<', 2000)
     .join(
-      'praditnet_ongeki_character',
+      'praditnet.OngekiCharacter',
       'ongeki_user_character.character_id',
-      'praditnet_ongeki_character.id'
+      'praditnet.OngekiCharacter.id'
     )
     .select(
-      'praditnet_ongeki_character.id as characterId',
-      'praditnet_ongeki_character.name as characterName',
-      'praditnet_ongeki_character.cardId as characterCardId',
+      'praditnet.OngekiCharacter.id as characterId',
+      'praditnet.OngekiCharacter.name as characterName',
+      'praditnet.OngekiCharacter.cardId as characterCardId',
       'ongeki_user_character.intimate_level as relationshipLevel'
     )
     .orderBy('ongeki_user_character.character_id', 'asc')

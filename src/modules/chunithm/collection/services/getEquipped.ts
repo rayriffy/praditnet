@@ -9,43 +9,43 @@ export const getEquipped = async (cardId: string) => {
       luid: cardId,
     })
     .join(
-      'praditnet_chunithm_character',
+      'praditnet.ChunithmCharacter',
       'chunew_user_data.character_id',
-      'praditnet_chunithm_character.id'
+      'praditnet.ChunithmCharacter.id'
     )
     .join(
-      'praditnet_chunithm_nameplate',
+      'praditnet.ChunithmNameplate',
       'chunew_user_data.nameplate_id',
-      'praditnet_chunithm_nameplate.id'
+      'praditnet.ChunithmNameplate.id'
     )
     .join(
-      'praditnet_chunithm_systemVoice',
+      'praditnet.ChunithmSystemVoice',
       'chunew_user_data.voice_id',
-      'praditnet_chunithm_systemVoice.id'
+      'praditnet.ChunithmSystemVoice.id'
     )
     .join(
-      'praditnet_chunithm_mapIcon',
+      'praditnet.ChunithmMapIcon',
       'chunew_user_data.map_icon_id',
-      'praditnet_chunithm_mapIcon.id'
+      'praditnet.ChunithmMapIcon.id'
     )
     .join(
-      'praditnet_chunithm_frame',
+      'praditnet.ChunithmFrame',
       'chunew_user_data.frame_id',
-      'praditnet_chunithm_frame.id'
+      'praditnet.ChunithmFrame.id'
     )
     .join(
-      'praditnet_chunithm_trophy',
+      'praditnet.ChunithmTrophy',
       'chunew_user_data.trophy_id',
-      'praditnet_chunithm_trophy.id'
+      'praditnet.ChunithmTrophy.id'
     )
     .select(
-      'praditnet_chunithm_character.id as characterId',
-      'praditnet_chunithm_character.name as characterName',
-      'praditnet_chunithm_character.works as characterWorks',
-      'praditnet_chunithm_nameplate.id as nameplateId',
-      'praditnet_chunithm_nameplate.name as nameplateName',
-      'praditnet_chunithm_systemVoice.id as systemVoiceId',
-      'praditnet_chunithm_systemVoice.name as systemVoiceName',
+      'praditnet.ChunithmCharacter.id as characterId',
+      'praditnet.ChunithmCharacter.name as characterName',
+      'praditnet.ChunithmCharacter.works as characterWorks',
+      'praditnet.ChunithmNameplate.id as nameplateId',
+      'praditnet.ChunithmNameplate.name as nameplateName',
+      'praditnet.ChunithmSystemVoice.id as systemVoiceId',
+      'praditnet.ChunithmSystemVoice.name as systemVoiceName',
       'chunew_user_data.avatar_front as avatarFrontId',
       'chunew_user_data.avatar_head as avatarHeadId',
       'chunew_user_data.avatar_back as avatarBackId',
@@ -53,13 +53,13 @@ export const getEquipped = async (cardId: string) => {
       'chunew_user_data.avatar_item as avatarItemId',
       'chunew_user_data.avatar_skin as avatarSkinId',
       'chunew_user_data.avatar_wear as avatarWearId',
-      'praditnet_chunithm_mapIcon.id as mapIconId',
-      'praditnet_chunithm_mapIcon.name as mapIconName',
-      'praditnet_chunithm_frame.id as frameId',
-      'praditnet_chunithm_frame.name as frameName',
-      'praditnet_chunithm_trophy.id as trophyId',
-      'praditnet_chunithm_trophy.name as trophyName',
-      'praditnet_chunithm_trophy.rarity as trophyRarity'
+      'praditnet.ChunithmMapIcon.id as mapIconId',
+      'praditnet.ChunithmMapIcon.name as mapIconName',
+      'praditnet.ChunithmFrame.id as frameId',
+      'praditnet.ChunithmFrame.name as frameName',
+      'praditnet.ChunithmTrophy.id as trophyId',
+      'praditnet.ChunithmTrophy.name as trophyName',
+      'praditnet.ChunithmTrophy.rarity as trophyRarity'
     )
 
   await knex.destroy()

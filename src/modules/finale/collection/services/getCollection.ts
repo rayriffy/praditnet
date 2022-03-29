@@ -19,7 +19,9 @@ export const getCollection = async (cardId: string, itemType: string) => {
         item_kind: collectionTypes.find(o => o.id === itemType).itemKind,
       })
       .select('maimai_user_item.item_id as itemId'),
-    knex(`praditnet_finale_${itemType}`),
+    knex(
+      `praditnet.Finale${itemType.charAt(0).toUpperCase()}${itemType.slice(1)}`
+    ),
   ])
 
   await knex.destroy()

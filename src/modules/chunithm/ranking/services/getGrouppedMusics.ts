@@ -19,7 +19,7 @@ export const getGrouppedMusics = async (inputDifficulty: Difficulty['key']) => {
     level_master: number
     level_ultima: number
     genre: number
-  }>('praditnet_chunithm_music')
+  }>('praditnet.ChunithmMusic')
     // filter out world's end
     .whereNot('level_basic', 0)
 

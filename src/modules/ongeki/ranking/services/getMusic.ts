@@ -15,7 +15,7 @@ export const getMusic = async (
 ): Promise<GetMusicReturn | null> => {
   const knex = createKnexInstance()
 
-  const musics = await knex('praditnet_ongeki_music').where({
+  const musics = await knex('praditnet.OngekiMusic').where({
     id: musicId,
   })
 

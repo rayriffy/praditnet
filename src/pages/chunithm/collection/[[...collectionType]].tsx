@@ -12,7 +12,6 @@ import { ItemTypeDisplay } from '../../../modules/chunithm/collection/components
 import { CostumeProps } from '../../../modules/chunithm/collection/components/costume'
 
 import { AppProps } from '../../../app/@types/AppProps'
-import { ItemList } from '../../../modules/chunithm/collection/components/itemList'
 
 const Costume = dynamic<CostumeProps>(
   () =>

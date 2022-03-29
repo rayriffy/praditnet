@@ -42,19 +42,19 @@ export const getPaginatedPlaylogs = async (
         'maimai_user_playlog.user_id'
       )
       .join(
-        'praditnet_finale_music',
+        'praditnet.FinaleMusic',
         'maimai_user_playlog.music_id',
-        'praditnet_finale_music.id'
+        'praditnet.FinaleMusic.id'
       )
-      .join('praditnet_finale_score', {
-        'praditnet_finale_score.music': 'maimai_user_playlog.music_id',
-        'praditnet_finale_score.difficulty': 'maimai_user_playlog.level',
+      .join('praditnet.FinaleScore', {
+        'praditnet.FinaleScore.music': 'maimai_user_playlog.music_id',
+        'praditnet.FinaleScore.difficulty': 'maimai_user_playlog.level',
       })
       .orderBy('maimai_user_playlog.user_play_date', 'desc')
       .select(
-        'praditnet_finale_music.id as musicId',
-        'praditnet_finale_music.title as musicTitle',
-        'praditnet_finale_music.artist as musicArtist',
+        'praditnet.FinaleMusic.id as musicId',
+        'praditnet.FinaleMusic.title as musicTitle',
+        'praditnet.FinaleMusic.artist as musicArtist',
         'maimai_user_playlog.id as playId',
         'maimai_user_playlog.track as playTrack',
         'maimai_user_playlog.achievement as playAchievement',
@@ -64,7 +64,7 @@ export const getPaginatedPlaylogs = async (
         'maimai_user_playlog.full_combo as playIsFullCombo',
         'maimai_user_playlog.user_play_date as playDate',
         'maimai_user_playlog.level as scoreDifficulty',
-        'praditnet_finale_score.level as scoreLevel'
+        'praditnet.FinaleScore.level as scoreLevel'
       )
       .limit(paginationItems)
       .offset((page - 1) * paginationItems),

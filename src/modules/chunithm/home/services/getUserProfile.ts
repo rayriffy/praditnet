@@ -8,9 +8,9 @@ export const getUserProfile = async (cardId: string): Promise<UserProfile> => {
   const userProfile = await knex('chunew_user_data')
     .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
     .join(
-      'praditnet_chunithm_trophy',
+      'praditnet.ChunithmTrophy',
       'chunew_user_data.trophy_id',
-      'praditnet_chunithm_trophy.id'
+      'praditnet.ChunithmTrophy.id'
     )
     .select(
       'chunew_user_data.user_name as username',
@@ -25,8 +25,8 @@ export const getUserProfile = async (cardId: string): Promise<UserProfile> => {
       'chunew_user_data.character_id as characterId',
       'chunew_user_data.nameplate_id as nameplateId',
       'chunew_user_data.voice_id as voiceId',
-      'praditnet_chunithm_trophy.name as trophyName',
-      'praditnet_chunithm_trophy.rarity as trophyRarity'
+      'praditnet.ChunithmTrophy.name as trophyName',
+      'praditnet.ChunithmTrophy.rarity as trophyRarity'
     )
     .where({
       luid: cardId,

@@ -42,23 +42,23 @@ export const getUserDecks = async (cardId: string): Promise<Deck[]> => {
                 card_id: targetCardId,
               })
               .join(
-                'praditnet_ongeki_card',
+                'praditnet.OngekiCard',
                 'ongeki_user_card.card_id',
-                'praditnet_ongeki_card.id'
+                'praditnet.OngekiCard.id'
               )
               .join(
-                'praditnet_ongeki_skill',
+                'praditnet.OngekiSkill',
                 'ongeki_user_card.skill_id',
-                'praditnet_ongeki_skill.id'
+                'praditnet.OngekiSkill.id'
               )
               .select(
-                'praditnet_ongeki_card.id as cardId',
-                'praditnet_ongeki_card.name as cardName',
+                'praditnet.OngekiCard.id as cardId',
+                'praditnet.OngekiCard.name as cardName',
                 'ongeki_user_card.level as cardLevel',
-                'praditnet_ongeki_card.attribute as cardAttribute',
+                'praditnet.OngekiCard.attribute as cardAttribute',
                 'ongeki_user_card.max_level as cardMaxLevel',
-                'praditnet_ongeki_skill.id as skillId',
-                'praditnet_ongeki_skill.name as skillName'
+                'praditnet.OngekiSkill.id as skillId',
+                'praditnet.OngekiSkill.name as skillName'
               )
               .first()
 

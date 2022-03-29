@@ -10,9 +10,9 @@ export const getUserProfile = async (cardId: string): Promise<UserProfile> => {
   const userProfile = await knex('ongeki_user_data')
     .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
     .join(
-      'praditnet_ongeki_trophy',
+      'praditnet.OngekiTrophy',
       'ongeki_user_data.trophy_id',
-      'praditnet_ongeki_trophy.id'
+      'praditnet.OngekiTrophy.id'
     )
     .select(
       'ongeki_user_data.user_name as username',
@@ -22,9 +22,9 @@ export const getUserProfile = async (cardId: string): Promise<UserProfile> => {
       'ongeki_user_data.play_count as playCount',
       'ongeki_user_data.last_play_date as lastPlayed',
       'ongeki_user_data.card_id as cardId',
-      'praditnet_ongeki_trophy.id as trophyId',
-      'praditnet_ongeki_trophy.name as trophyName',
-      'praditnet_ongeki_trophy.rarity as trophyRarity'
+      'praditnet.OngekiTrophy.id as trophyId',
+      'praditnet.OngekiTrophy.name as trophyName',
+      'praditnet.OngekiTrophy.rarity as trophyRarity'
     )
     .where({
       luid: cardId,

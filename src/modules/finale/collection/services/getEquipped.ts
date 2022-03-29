@@ -9,34 +9,34 @@ export const getEquipped = async (cardId: string) => {
       luid: cardId,
     })
     .join(
-      'praditnet_finale_icon',
+      'praditnet.FinaleIcon',
       'maimai_user_data.icon_id',
-      'praditnet_finale_icon.id'
+      'praditnet.FinaleIcon.id'
     )
     .join(
-      'praditnet_finale_frame',
+      'praditnet.FinaleFrame',
       'maimai_user_data.frame_id',
-      'praditnet_finale_frame.id'
+      'praditnet.FinaleFrame.id'
     )
     .join(
-      'praditnet_finale_nameplate',
+      'praditnet.FinaleNameplate',
       'maimai_user_data.nameplate_id',
-      'praditnet_finale_nameplate.id'
+      'praditnet.FinaleNameplate.id'
     )
     .join(
-      'praditnet_finale_title',
+      'praditnet.FinaleTitle',
       'maimai_user_data.trophy_id',
-      'praditnet_finale_title.id'
+      'praditnet.FinaleTitle.id'
     )
     .select(
-      'praditnet_finale_icon.id as iconId',
-      'praditnet_finale_icon.name as iconName',
-      'praditnet_finale_frame.id as frameId',
-      'praditnet_finale_frame.name as frameName',
-      'praditnet_finale_nameplate.id as nameplateId',
-      'praditnet_finale_nameplate.name as nameplateName',
-      'praditnet_finale_title.id as titleId',
-      'praditnet_finale_title.name as titleName'
+      'praditnet.FinaleIcon.id as iconId',
+      'praditnet.FinaleIcon.name as iconName',
+      'praditnet.FinaleFrame.id as frameId',
+      'praditnet.FinaleFrame.name as frameName',
+      'praditnet.FinaleNameplate.id as nameplateId',
+      'praditnet.FinaleNameplate.name as nameplateName',
+      'praditnet.FinaleTitle.id as titleId',
+      'praditnet.FinaleTitle.name as titleName'
     )
 
   await knex.destroy()

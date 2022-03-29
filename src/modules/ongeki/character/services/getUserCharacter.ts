@@ -44,12 +44,12 @@ export const getUserCharacter = async (
     .where('sega_card.luid', '=', cardId)
     .where('ongeki_user_character.character_id', '=', characterId)
     .join(
-      'praditnet_ongeki_character',
+      'praditnet.OngekiCharacter',
       'ongeki_user_character.character_id',
-      'praditnet_ongeki_character.id'
+      'praditnet.OngekiCharacter.id'
     )
     .select(
-      'praditnet_ongeki_character.*',
+      'praditnet.OngekiCharacter.*',
       'ongeki_user_character.intimate_level as relationshipLevel'
     )
     .orderBy('ongeki_user_character.character_id', 'asc')

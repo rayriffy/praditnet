@@ -22,13 +22,13 @@ export const getPaginatedCard = async (cardId: string, page: number = 1) => {
         'ongeki_user_card.card_id as cardId',
         'ongeki_user_card.is_acquired as cardAcquired'
       ),
-    knex('praditnet_ongeki_card')
-      .where('praditnet_ongeki_card.id', '>', 3)
+    knex('praditnet.OngekiCard')
+      .where('praditnet.OngekiCard.id', '>', 3)
       .select('id as cardId', 'cardNumber as cardNumber', 'name as cardName')
-      .orderBy('praditnet_ongeki_card.id', 'asc')
+      .orderBy('praditnet.OngekiCard.id', 'asc')
       .limit(paginationItems)
       .offset((page - 1) * paginationItems),
-    knex('praditnet_ongeki_card').count(),
+    knex('praditnet.OngekiCard').count(),
   ])
 
   await knex.destroy()

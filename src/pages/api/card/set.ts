@@ -41,7 +41,7 @@ const api: NextApiHandler = async (req, res) => {
     }
 
     // make sure that card does not used by anyone else yet
-    const userDatas = await knex('praditnet_user_data')
+    const userDatas = await knex('praditnet.UserData')
       .where({
         card_luid: inputCardId,
       })
@@ -55,7 +55,7 @@ const api: NextApiHandler = async (req, res) => {
 
     // all clear!, make changes to db
     await Promise.all([
-      knex('praditnet_user_data')
+      knex('praditnet.UserData')
         .update({
           card_luid: inputCardId,
         })

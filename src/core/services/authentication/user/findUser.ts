@@ -6,7 +6,7 @@ export const findUser = async (username: string) => {
   const knex = createKnexInstance()
 
   try {
-    const users = await knex<UserAuth>('praditnet_user_auth').where({
+    const users = await knex<UserAuth>('praditnet.UserAuth').where({
       username,
     })
 

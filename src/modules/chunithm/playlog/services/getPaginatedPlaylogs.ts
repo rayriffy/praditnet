@@ -42,20 +42,20 @@ export const getPaginatedPlaylogs = async (
         'chunew_user_playlog.user_id'
       )
       .join(
-        'praditnet_chunithm_music',
+        'praditnet.ChunithmMusic',
         'chunew_user_playlog.music_id',
-        'praditnet_chunithm_music.id'
+        'praditnet.ChunithmMusic.id'
       )
       .orderBy('chunew_user_playlog.user_play_date', 'desc')
       .select(
-        'praditnet_chunithm_music.id as musicId',
-        'praditnet_chunithm_music.title as musicTitle',
-        // 'praditnet_chunithm_music.artist as musicArtist',
-        'praditnet_chunithm_music.level_basic as musicLevel_basic',
-        'praditnet_chunithm_music.level_advanced as musicLevel_advanced',
-        'praditnet_chunithm_music.level_expert as musicLevel_expert',
-        'praditnet_chunithm_music.level_master as musicLevel_master',
-        'praditnet_chunithm_music.level_ultima as musicLevel_ultima',
+        'praditnet.ChunithmMusic.id as musicId',
+        'praditnet.ChunithmMusic.title as musicTitle',
+        // 'praditnet.ChunithmMusic.artist as musicArtist',
+        'praditnet.ChunithmMusic.level_basic as musicLevel_basic',
+        'praditnet.ChunithmMusic.level_advanced as musicLevel_advanced',
+        'praditnet.ChunithmMusic.level_expert as musicLevel_expert',
+        'praditnet.ChunithmMusic.level_master as musicLevel_master',
+        'praditnet.ChunithmMusic.level_ultima as musicLevel_ultima',
         'chunew_user_playlog.id as playId',
         'chunew_user_playlog.score as playScore',
         'chunew_user_playlog.track as playTrack',

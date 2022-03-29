@@ -42,21 +42,21 @@ export const getPaginatedPlaylogs = async (
         'ongeki_user_playlog.user_id'
       )
       .join(
-        'praditnet_ongeki_music',
+        'praditnet.OngekiMusic',
         'ongeki_user_playlog.music_id',
-        'praditnet_ongeki_music.id'
+        'praditnet.OngekiMusic.id'
       )
       .orderBy('ongeki_user_playlog.user_play_date', 'desc')
       .select(
         // music
-        'praditnet_ongeki_music.id as musicId',
-        'praditnet_ongeki_music.name as musicTitle',
-        // 'praditnet_chunithm_music.artist as musicArtist',
-        'praditnet_ongeki_music.level_basic as musicLevel_basic',
-        'praditnet_ongeki_music.level_advanced as musicLevel_advanced',
-        'praditnet_ongeki_music.level_expert as musicLevel_expert',
-        'praditnet_ongeki_music.level_master as musicLevel_master',
-        'praditnet_ongeki_music.level_lunatic as musicLevel_lunatic',
+        'praditnet.OngekiMusic.id as musicId',
+        'praditnet.OngekiMusic.name as musicTitle',
+        // 'praditnet.ChunithmMusic.artist as musicArtist',
+        'praditnet.OngekiMusic.level_basic as musicLevel_basic',
+        'praditnet.OngekiMusic.level_advanced as musicLevel_advanced',
+        'praditnet.OngekiMusic.level_expert as musicLevel_expert',
+        'praditnet.OngekiMusic.level_master as musicLevel_master',
+        'praditnet.OngekiMusic.level_lunatic as musicLevel_lunatic',
 
         // playlog
         'ongeki_user_playlog.id as playId',

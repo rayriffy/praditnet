@@ -22,8 +22,8 @@ export const createUser = async (username: string, password: string) => {
   const knex = createKnexInstance()
 
   try {
-    await knex<UserAuth>('praditnet_user_auth').insert(payload)
-    await knex('praditnet_user_data').insert({
+    await knex<UserAuth>('praditnet.UserAuth').insert(payload)
+    await knex('praditnet.UserData').insert({
       uid: payload.uid,
     })
 

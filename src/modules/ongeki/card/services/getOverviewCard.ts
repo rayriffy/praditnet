@@ -34,7 +34,7 @@ export const getOverviewCard = async (
   const overviews: [keyof RarityOverview, Overview][] = await Promise.all(
     dicts.map(async ([key, databaseKey]) => {
       const [cardRarityCount, ownedCount] = await Promise.all([
-        await knex('praditnet_ongeki_card')
+        await knex('praditnet.OngekiCard')
           .where({
             rarity: databaseKey,
           })
@@ -48,11 +48,11 @@ export const getOverviewCard = async (
           .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
           .where('sega_card.luid', '=', cardId)
           .join(
-            'praditnet_ongeki_card',
+            'praditnet.OngekiCard',
             'ongeki_user_card.card_id',
-            'praditnet_ongeki_card.id'
+            'praditnet.OngekiCard.id'
           )
-          .where('praditnet_ongeki_card.rarity', '=', databaseKey)
+          .where('praditnet.OngekiCard.rarity', '=', databaseKey)
           .count(),
       ])
 

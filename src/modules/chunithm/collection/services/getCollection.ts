@@ -25,8 +25,10 @@ export const getCollection = async (cardId: string, itemType: string) => {
     //   })
     //   .select('maimai_user_item.item_id as itemId'),
     knex(
-      `praditnet_chunithm_${
-        itemType.startsWith('avatar') ? 'avatarAccessory' : itemType
+      `praditnet.Chunithm${
+        itemType.startsWith('avatar')
+          ? 'AvatarAccessory'
+          : `${itemType.charAt(0).toUpperCase()}${itemType.slice(1)}`
       }`
     ).where(
       itemType.startsWith('avatar')

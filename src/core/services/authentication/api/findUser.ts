@@ -11,15 +11,15 @@ export const findUser = async (username: string): Promise<UserWithData> => {
   const knex = createKnexInstance()
 
   try {
-    const users = await knex<UserAuth>('praditnet_user_auth')
+    const users = await knex<UserAuth>('praditnet.UserAuth')
       .where({
         username,
       })
       .join(
-        'praditnet_user_data',
-        'praditnet_user_auth.uid',
+        'praditnet.UserData',
+        'praditnet.UserAuth.uid',
         '=',
-        'praditnet_user_data.uid'
+        'praditnet.UserData.uid'
       )
 
     return users.find(user => user.username === username)
