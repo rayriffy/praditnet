@@ -3,10 +3,9 @@ import { GetServerSideProps, NextPage } from 'next'
 
 import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
 
-import { AppProps } from '../../../app/@types/AppProps'
 import { Form } from '../../../modules/event/apply/components/form'
 
-interface Props extends AppProps {
+interface Props {
   event: {
     id: string
     name: string
@@ -145,9 +144,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
-      user: {
-        cardId: user.card_luid,
-      },
       event: {
         id: targetEvent.uid,
         name: targetEvent.name,

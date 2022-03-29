@@ -1,12 +1,11 @@
 import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
-import { AppProps } from '../../../app/@types/AppProps'
 import { Image } from '../../../core/components/image'
 import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
 import { classNames } from '../../../core/services/classNames'
 
-interface Props extends AppProps {
+interface Props {
   event: {
     id: string
     name: string
@@ -225,9 +224,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
-      user: {
-        cardId: user.card_luid,
-      },
       event: {
         id: targetEvent.uid,
         name: targetEvent.name,
