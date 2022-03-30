@@ -81,16 +81,20 @@ const Page: NextPage<Props> = props => {
                 key={`music-${entry.game}-${music.id}`}
                 className="flex bg-gray-50 p-4 rounded-md"
               >
-                <div className="flex rounded-md overflow-hidden aspect-square w-40">
-                  <Image
-                    src={`https://praditnet-cdn.rayriffy.com/${entry.game}/jacket/${music.id}.png`}
-                    width={200}
-                    height={200}
-                  />
+                <div className="flex shrink-0 items-start">
+                  <div className="flex rounded-md overflow-hidden w-28 sm:w-40">
+                    <Image
+                      src={`https://praditnet-cdn.rayriffy.com/${entry.game}/jacket/${music.id}.png`}
+                      width={200}
+                      height={200}
+                    />
+                  </div>
                 </div>
                 <div className="ml-4">
-                  <h2 className="text-xl font-bold">{music.name}</h2>
-                  <p className="mt-3 text-3xl font-light">
+                  <h2 className="text-lg sm:text-2xl font-bold">
+                    {music.name}
+                  </h2>
+                  <p className="mt-1 sm:mt-3 text-3xl sm:text-4xl font-light">
                     {entry.attemptLog.find(o => o[0] === music.id)?.[1] ?? 0}
                     {entry.game === 'maimai' && '%'}
                   </p>
