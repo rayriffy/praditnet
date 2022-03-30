@@ -1,11 +1,7 @@
 import { createKnexInstance } from '../../createKnexInstance'
 
 import { UserAuth } from '../../../@types/db/UserAuth'
-
-interface UserWithData extends UserAuth {
-  card_luid: string | null
-  god_mode: number
-}
+import { UserWithData } from '../../../@types/UserWithData'
 
 export const findUser = async (username: string): Promise<UserWithData> => {
   const knex = createKnexInstance()

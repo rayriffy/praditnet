@@ -1,7 +1,4 @@
-import dayjs from 'dayjs'
 import { GetServerSideProps, NextPage } from 'next'
-
-import { capitalizeFirstCharacter } from '../../../core/services/capitalizeFirstCharacter'
 
 import { Form } from '../../../modules/event/apply/components/form'
 
@@ -21,11 +18,6 @@ interface Props {
       difficulty: number
     }[]
   }
-  entry: {
-    game: 'maimai' | 'chunithm'
-    remainingAttempts: number
-    attemptLog: {}
-  } | null
 }
 
 const Page: NextPage<Props> = props => {
@@ -63,11 +55,15 @@ const Page: NextPage<Props> = props => {
 }
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
+  const { default: dayjs } = await import('dayjs')
   const { createKnexInstance } = await import(
     '../../../core/services/createKnexInstance'
   )
   const { getApiUserSession } = await import(
     '../../../core/services/authentication/api/getApiUserSession'
+  )
+  const { getEventMusics } = await import(
+    '../../../modules/event/home/services/getEventMusics'
   )
 
   const eventId = ctx.params.eventId as string
@@ -118,48 +114,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   }
 
   // get musics information
-  const availableGames = targetEvent.availableGames.split(',')
-  const fetchedMusics = await Promise.all(
-    availableGames.map(async game => {
-      const musics = await knex('EventAuditionMusic')
-        .where({
-          eventId,
-          gameId: game,
-        })
-        .join(
-          `${capitalizeFirstCharacter(game)}Music`,
-          'EventAuditionMusic.musicId',
-          `${capitalizeFirstCharacter(game)}Music.id`
-        )
-        .select(
-          `${capitalizeFirstCharacter(game)}Music.id as id`,
-          `${capitalizeFirstCharacter(game)}Music.${
-            game === 'chunithm' ? 'title' : 'name'
-          } as name`,
-          `EventAuditionMusic.level as targetDifficulty`,
-          `${capitalizeFirstCharacter(game)}Music.level_expert`,
-          `${capitalizeFirstCharacter(game)}Music.level_master`,
-          ...(game === 'maimai'
-            ? [`${capitalizeFirstCharacter(game)}Music.level_remaster`]
-            : [])
-        )
-
-      return [
-        game,
-        musics.map(music => ({
-          id: music.id,
-          name: music.name,
-          level: music.targetDifficulty,
-          difficulty: music[`level_${music.targetDifficulty}`],
-        })),
-      ]
-    })
+  const fetchedMusics = await getEventMusics(
+    eventId,
+    knex,
+    targetEvent.availableGames.split(',')
   )
 
   await knex.destroy()
-
-  const entry = null
-
   return {
     props: {
       event: {
@@ -169,7 +130,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         endAt: dayjs(targetEvent.startAt).format('DD MMM YYYY'),
       },
       musics: Object.fromEntries(fetchedMusics),
-      entry,
     },
   }
 }
