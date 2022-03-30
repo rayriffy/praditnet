@@ -17,6 +17,7 @@ specifiers:
   '@types/react': ^17.0.40
   '@types/react-dom': ^17.0.13
   '@types/react-google-recaptcha': ^2.1.5
+  '@types/react-qr-reader': ^2.1.4
   axios: ^0.26.1
   cookie: ^0.4.2
   dayjs: ^1.10.8
@@ -43,6 +44,7 @@ specifiers:
   react-google-recaptcha: ^2.1.0
   react-icons: ^4.3.1
   react-infinite-scroll-component: ^6.1.0
+  react-qr-reader: 2.2.1
   react-ssr-prepass: npm:preact-ssr-prepass@^1.2.0
   storeon: ^3.1.4
   tailwindcss: ^3.0.23
@@ -79,6 +81,7 @@ dependencies:
   react-google-recaptcha: 2.1.0_@preact+compat@17.0.3
   react-icons: 4.3.1_@preact+compat@17.0.3
   react-infinite-scroll-component: 6.1.0_@preact+compat@17.0.3
+  react-qr-reader: 2.2.1_9bfab5d69556db861da30525f2351767
   react-ssr-prepass: /preact-ssr-prepass/1.2.0_preact@10.6.6
   storeon: 3.1.4_b535e7977f8540c678e92cb62c5de80c
   tailwindcss: 3.0.23
@@ -95,6 +98,7 @@ devDependencies:
   '@types/react': 17.0.40
   '@types/react-dom': 17.0.13
   '@types/react-google-recaptcha': 2.1.5
+  '@types/react-qr-reader': 2.1.4
   husky: 7.0.4
   lint-staged: 12.3.5
   prettier: 2.5.1
@@ -1899,6 +1903,12 @@ packages:
       '@types/react': 17.0.40
     dev: true
 
+  /@types/react-qr-reader/2.1.4:
+    resolution: {integrity: sha512-2Hq+UNfsO2TVqxbFlOE0gGhQr/+C4wdgNDaaLV8K93mK/Z7Vw2D3YbMlnJAaSzM45fUtYJs0vc48wV04+OEkiA==}
+    dependencies:
+      '@types/react': 17.0.40
+    dev: true
+
   /@types/react/17.0.40:
     resolution: {integrity: sha512-UrXhD/JyLH+W70nNSufXqMZNuUD2cXHu6UjCllC6pmOQgBX4SGXOH8fjRka0O0Ee0HrFxapDD8Bwn81Kmiz6jQ==}
     dependencies:
@@ -3282,6 +3292,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
+  /jsqr/1.4.0:
+    resolution: {integrity: sha512-dxLob7q65Xg2DvstYkRpkYtmKm2sPJ9oFhrhmudT1dZvNFFTlroai3AWSpLey/w5vMcLBXRgOJsbXpdN9HzU/A==}
+    dev: false
+
   /kind-of/6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
@@ -4071,6 +4085,19 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
+  /react-qr-reader/2.2.1_9bfab5d69556db861da30525f2351767:
+    resolution: {integrity: sha512-EL5JEj53u2yAOgtpAKAVBzD/SiKWn0Bl7AZy6ZrSf1lub7xHwtaXe6XSx36Wbhl1VMGmvmrwYMRwO1aSCT2fwA==}
+    peerDependencies:
+      react: ~16
+      react-dom: ~16
+    dependencies:
+      jsqr: 1.4.0
+      prop-types: 15.8.1
+      react: /@preact/compat/17.0.3_preact@10.6.6
+      react-dom: /@preact/compat/17.0.3_preact@10.6.6
+      webrtc-adapter: 7.7.1
+    dev: false
+
   /read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
     engines: {node: '>=8'}
@@ -4267,6 +4294,13 @@ packages:
       fsevents: 2.3.2
     dev: false
 
+  /rtcpeerconnection-shim/1.2.15:
+    resolution: {integrity: sha512-C6DxhXt7bssQ1nHb154lqeL0SXz5Dx4RczXZu2Aa/L1NJFnEVDxFwCBo3fqtuljhHIGceg5JKBV4XJ0gW5JKyw==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      sdp: 2.12.0
+    dev: false
+
   /run-parallel/1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
@@ -4302,6 +4336,10 @@ packages:
       '@types/json-schema': 7.0.9
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
+    dev: false
+
+  /sdp/2.12.0:
+    resolution: {integrity: sha512-jhXqQAQVM+8Xj5EjJGVweuEzgtGWb3tmEEpl3CLP3cStInSbVHSg0QWOGQzNq8pSID4JkpeV2mPqlMDLrm0/Vw==}
     dev: false
 
   /semver/5.7.1:
@@ -4931,6 +4969,14 @@ packages:
     dependencies:
       source-list-map: 2.0.1
       source-map: 0.6.1
+    dev: false
+
+  /webrtc-adapter/7.7.1:
+    resolution: {integrity: sha512-TbrbBmiQBL9n0/5bvDdORc6ZfRY/Z7JnEj+EYOD1ghseZdpJ+nF2yx14k3LgQKc7JZnG7HAcL+zHnY25So9d7A==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      rtcpeerconnection-shim: 1.2.15
+      sdp: 2.12.0
     dev: false
 
   /whatwg-url/7.1.0:

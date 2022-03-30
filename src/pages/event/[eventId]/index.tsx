@@ -127,7 +127,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const [fetchedMusics, entry, isStaff] = await Promise.all([
     getEventMusics(eventId, knex, targetEvent.availableGames.split(',')),
     getEventEntry(eventId, knex, user),
-    getIsEventStaff(eventId, knex, user.uid),
+    getIsEventStaff(eventId, knex, user?.uid ?? 'undefined mock user id'),
   ])
 
   await knex.destroy()
