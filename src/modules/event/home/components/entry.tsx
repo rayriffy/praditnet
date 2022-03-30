@@ -8,7 +8,7 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics'>>(props => {
 
   return (
     <div>
-      <div className="bg-gray-50 rounded-md px-5 py-4 block sm:flex sm:justify-between">
+      <div className="bg-gray-100 rounded-md px-5 py-4 block sm:flex sm:justify-between">
         <div className="flex justify-between sm:justify-start space-x-0 sm:space-x-4">
           <img src={`/assets/logo/${entry.game}.png`} className="w-40 h-auto" />
           <div className="flex items-center">

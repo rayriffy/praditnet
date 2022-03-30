@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
+import Link from 'next/link'
 
 import { Image } from '../../../core/components/image'
 import { Preview } from '../../../modules/event/home/components/preview'
@@ -32,7 +33,7 @@ export interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { event, musics, entry } = props
+  const { event, musics, entry, isStaff } = props
 
   useEffect(() => {
     console.log(props)
@@ -51,6 +52,30 @@ const Page: NextPage<Props> = props => {
           </div>
         </div>
       </div>
+      {isStaff ? (
+        <div className="border-[3px] border-red-200 rounded-md relative">
+          <span className="ml-3 bg-red-200 px-2 py-1 text-sm uppercase leading-none rounded-b font-bold text-gray-700">
+            Staff Mode
+          </span>
+          <div className="p-2 flex flex-wrap">
+            <Link href={`/event/${event.id}/staff/qualify/submission`}>
+              <a className="m-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Qualify submission
+              </a>
+            </Link>
+            <Link href={`/event/${event.id}/staff/qualify/leaderboard`}>
+              <a className="m-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Qualify leaderboard
+              </a>
+            </Link>
+            <Link href={`/event/${event.id}/staff/randomizer`}>
+              <a className="m-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Randomizer
+              </a>
+            </Link>
+          </div>
+        </div>
+      ) : null}
       {entry === null ? (
         <Preview eventId={event.id} musics={musics} />
       ) : (
