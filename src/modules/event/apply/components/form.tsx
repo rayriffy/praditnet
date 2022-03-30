@@ -28,6 +28,7 @@ export const Form = memo<Props>(props => {
 
   const realNameRef = useRef<HTMLInputElement>(null)
   const inGameNameRef = useRef<HTMLInputElement>(null)
+  const facebookRef = useRef<HTMLInputElement>(null)
   const ratingRef = useRef<HTMLInputElement>(null)
   const [participatedGame, setParticipatedGame] = useState<string | null>(null)
 
@@ -86,6 +87,7 @@ export const Form = memo<Props>(props => {
           event: eventId,
           realName: realNameRef.current.value,
           inGameName: inGameNameRef.current.value,
+          facebook: facebookRef.current.value,
           rating: Number(ratingRef.current.value),
           participatedGame,
         },
@@ -194,6 +196,30 @@ export const Form = memo<Props>(props => {
                     required
                     className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                   />
+                </div>
+              </div>
+
+              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+                <label
+                  htmlFor="facebook"
+                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                >
+                  Link to Facebook
+                </label>
+                <div className="mt-1 sm:mt-0 sm:col-span-2">
+                  <input
+                    type="text"
+                    name="facebook"
+                    id="facebook"
+                    ref={facebookRef}
+                    disabled={progress}
+                    required
+                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  />
+                  <p className="text-sm text-gray-500 mt-3">
+                    We will contact you in case you has been qualified for the
+                    grand final day
+                  </p>
                 </div>
               </div>
 
