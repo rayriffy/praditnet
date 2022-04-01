@@ -1,6 +1,5 @@
 import { memo, MutableRefObject, useEffect, useState } from 'react'
 
-import ReCAPTCHA from 'react-google-recaptcha'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { CollectionType } from '../constants/collectionTypes'
@@ -14,11 +13,10 @@ interface Props {
     works?: string
     rarity?: number
   }[]
-  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const ItemList = memo<Props>(props => {
-  const { items, type, capchaRef } = props
+  const { items, type } = props
 
   const [count, setCount] = useState({
     prev: 0,
@@ -73,7 +71,6 @@ export const ItemList = memo<Props>(props => {
             collection={type}
             item={item}
             key={`collection-item-${type.id}-${item.id}`}
-            capchaRef={capchaRef}
           />
         ))}
     </InfiniteScroll>

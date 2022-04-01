@@ -1,16 +1,9 @@
-import {
-  Dispatch,
-  Fragment,
-  memo,
-  MutableRefObject,
-  SetStateAction,
-  useState,
-} from 'react'
+import { Dispatch, Fragment, memo, SetStateAction, useState } from 'react'
 
 import NProgress from 'nprogress'
 import { Dialog, Transition } from '@headlessui/react'
-import ReCAPTCHA from 'react-google-recaptcha'
 import axios from 'axios'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export interface GetDialogProps {
   id: number
@@ -18,30 +11,21 @@ export interface GetDialogProps {
 
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
-
-  recaptchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const GetDialog = memo<GetDialogProps>(props => {
-  const { show, setShow, id, name, recaptchaRef } = props
+  const { show, setShow, id, name } = props
 
   const [progress, setProgress] = useState(false)
   const [error, setError] = useState<string>(null)
 
-  const onSubmit = async () => {
-    recaptchaRef.current.reset()
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
+  const onSubmit = async () => {
     setError(null)
     setProgress(true)
 
-    let token = null
-    try {
-      token = await recaptchaRef.current.executeAsync()
-    } catch (e) {
-      setError('ReCAPTCHA verification failed!')
-      setProgress(false)
-      return
-    }
+    const token = await executeRecaptcha('ongeki/card/get')
 
     if (token !== null) {
       try {
@@ -65,7 +49,6 @@ export const GetDialog = memo<GetDialogProps>(props => {
         }
       } catch (error) {
         console.error('An unexpected error happened occurred:', error)
-        recaptchaRef.current.reset()
         setError(error.response.data)
         setProgress(false)
       }

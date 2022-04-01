@@ -8,7 +8,6 @@ import { E } from '../core/components/e'
 import { BiTransfer } from 'react-icons/bi'
 import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
 import { TransferDialogProps } from '../modules/card/components/transferDialog'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 const TransferDialog = dynamic<TransferDialogProps>(
   () =>
@@ -35,8 +34,6 @@ const Page: NextPage<Props> = props => {
   const { createdAt } = props.card
 
   const [open, setOpen] = useState(false)
-
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   return (
     <div>
@@ -78,18 +75,7 @@ const Page: NextPage<Props> = props => {
           </Link>
         </div>
       </div>
-      <TransferDialog
-        show={open}
-        setShow={setOpen}
-        cardId={cardId}
-        capchaRef={recaptchaRef}
-      />
-
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
+      <TransferDialog show={open} setShow={setOpen} cardId={cardId} />
     </div>
   )
 }

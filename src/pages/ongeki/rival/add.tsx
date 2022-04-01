@@ -7,7 +7,6 @@ import { RivalCard } from '../../../modules/ongeki/rival/components/rivalCard'
 
 import { AppProps } from '../../../app/@types/AppProps'
 import { Rival } from '../../../modules/ongeki/rival/@types/Rival'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Props extends AppProps {
   isSlotFull: boolean
@@ -17,28 +16,16 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { isSlotFull, availableRivals } = props
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-
   return (
     <Fragment>
       <div className="mt-4">
         <Navbar />
         <div className="space-y-4 max-w-xl mx-auto">
           {availableRivals.map(rival => (
-            <RivalCard
-              key={`rival-${rival.id}`}
-              rival={rival}
-              recaptchaRef={recaptchaRef}
-              mode="add"
-            />
+            <RivalCard key={`rival-${rival.id}`} rival={rival} mode="add" />
           ))}
         </div>
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
     </Fragment>
   )
 }

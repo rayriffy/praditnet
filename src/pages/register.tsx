@@ -4,15 +4,14 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import axios from 'axios'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 const Page: NextPage = props => {
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string>(null)
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-
   const router = useRouter()
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
@@ -32,7 +31,7 @@ const Page: NextPage = props => {
     }
 
     try {
-      const token = await recaptchaRef.current!.executeAsync()
+      const token = await executeRecaptcha('system/register')
       const res = await axios.post('/api/authentication/register', payload, {
         headers: {
           'X-PraditNET-Capcha': token,
@@ -46,7 +45,6 @@ const Page: NextPage = props => {
       }
     } catch (error) {
       console.error('An unexpected error happened occurred:', error)
-      recaptchaRef.current.reset()
       setError(error.response.data)
       setProgress(false)
     }
@@ -65,11 +63,6 @@ const Page: NextPage = props => {
       )}
 
       <form className="mt-8 space-y-6" onSubmit={onSubmit}>
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          size="invisible"
-          sitekey={process.env.RECAPCHA_SITE_KEY}
-        />
         <div className="rounded-md shadow-sm -space-y-px">
           <div>
             <label htmlFor="username" className="sr-only">

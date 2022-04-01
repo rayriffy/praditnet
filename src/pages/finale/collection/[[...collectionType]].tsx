@@ -13,7 +13,6 @@ import { collectionTypes } from '../../../modules/finale/collection/constants/co
 import { Navbar } from '../../../modules/finale/home/components/navbar'
 
 import { AppProps } from '../../../app/@types/AppProps'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Props extends AppProps {
   icon: {
@@ -48,8 +47,6 @@ interface Props extends AppProps {
 
 const Page: NextPage<Props> = props => {
   const { collection, godMode } = props
-
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   return (
     <Fragment>
@@ -119,16 +116,10 @@ const Page: NextPage<Props> = props => {
                 godMode || collection.equippable.some(o => o === item.id)
               }
               key={`collection-item-${collection.type}-${item.id}`}
-              capchaRef={recaptchaRef}
             />
           ))}
         </div>
       )}
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
     </Fragment>
   )
 }

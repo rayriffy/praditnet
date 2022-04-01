@@ -2,8 +2,6 @@ import { Fragment, useRef } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
-import ReCAPTCHA from 'react-google-recaptcha'
-
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
 import { Pagination } from '../../../core/components/pagination'
 import { Card } from '../../../modules/ongeki/card/components/card'
@@ -28,8 +26,6 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { cards, page, overview } = props
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-
   return (
     <Fragment>
       <div className="mt-4">
@@ -52,11 +48,7 @@ const Page: NextPage<Props> = props => {
         </div>
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {cards.map(card => (
-            <Card
-              key={`card-${card.id}`}
-              card={card}
-              recaptchaRef={recaptchaRef}
-            />
+            <Card key={`card-${card.id}`} card={card} />
           ))}
         </div>
         <Pagination
@@ -66,11 +58,6 @@ const Page: NextPage<Props> = props => {
           max={page.max}
         />
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
     </Fragment>
   )
 }

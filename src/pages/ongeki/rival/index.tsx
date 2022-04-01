@@ -1,5 +1,3 @@
-import { Fragment, useRef } from 'react'
-
 import { GetServerSideProps, NextPage } from 'next'
 
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
@@ -7,7 +5,6 @@ import { RivalCard } from '../../../modules/ongeki/rival/components/rivalCard'
 
 import { AppProps } from '../../../app/@types/AppProps'
 import { Rival } from '../../../modules/ongeki/rival/@types/Rival'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 interface Props extends AppProps {
   rivals: Rival[]
@@ -16,29 +13,19 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { rivals } = props
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-
   return (
-    <Fragment>
-      <div className="mt-4">
-        <Navbar />
-        <div className="space-y-4 max-w-xl mx-auto">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <RivalCard
-              key={`rival-${i}-${rivals[i]?.id ?? 'none'}`}
-              rival={rivals[i]}
-              recaptchaRef={recaptchaRef}
-              mode="remove"
-            />
-          ))}
-        </div>
+    <div className="mt-4">
+      <Navbar />
+      <div className="space-y-4 max-w-xl mx-auto">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <RivalCard
+            key={`rival-${i}-${rivals[i]?.id ?? 'none'}`}
+            rival={rivals[i]}
+            mode="remove"
+          />
+        ))}
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
-    </Fragment>
+    </div>
   )
 }
 

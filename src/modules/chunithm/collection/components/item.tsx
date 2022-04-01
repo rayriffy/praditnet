@@ -1,15 +1,15 @@
-import { memo, MutableRefObject, useCallback, useMemo, useState } from 'react'
+import { memo, useCallback, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
 import axios from 'axios'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Voice } from './voice'
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { CollectionType } from '../constants/collectionTypes'
 import { Trophy } from '../../home/components/trophy'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 interface Props {
   collection: CollectionType
@@ -20,11 +20,10 @@ interface Props {
     works?: string
     rarity?: number
   }
-  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const Item = memo<Props>(props => {
-  const { item, collection, isEquippable = true, capchaRef } = props
+  const { item, collection, isEquippable = true } = props
 
   const [isProcess, setIsProcess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
@@ -32,16 +31,14 @@ export const Item = memo<Props>(props => {
   const isTrophy = useMemo(() => collection.id === 'trophy', [])
 
   const router = useRouter()
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const onSet = useCallback(async () => {
     setIsProcess(true)
 
     try {
-      // make sure capcha is reset
-      capchaRef.current.reset()
-
       // request for capcha token
-      const token = await capchaRef.current!.executeAsync()
+      const token = await executeRecaptcha('chunithm/item')
 
       // todo: create api to set item
       await axios.post(

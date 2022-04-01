@@ -4,7 +4,6 @@ import { GetServerSideProps, NextPage } from 'next'
 
 import axios from 'axios'
 import NProgress from 'nprogress'
-import ReCAPTCHA from 'react-google-recaptcha'
 
 import { Image } from '../../../core/components/image'
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
@@ -14,6 +13,7 @@ import { classNames } from '../../../core/services/classNames'
 
 import { AppProps } from '../../../app/@types/AppProps'
 import { DetailedCharacter } from '../../../modules/ongeki/character/services/getUserCharacter'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 interface Props extends AppProps {
   character: DetailedCharacter
@@ -23,24 +23,15 @@ interface Props extends AppProps {
 const Page: NextPage<Props> = props => {
   const { character, isNavigatorEquipped } = props
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const [error, setError] = useState<string>(null)
   const [progress, setProgress] = useState<boolean>(false)
   const onNavigatorSet = async () => {
-    recaptchaRef.current.reset()
-
     setError(null)
     setProgress(true)
 
-    let token = null
-    try {
-      token = await recaptchaRef.current.executeAsync()
-    } catch (e) {
-      setError('ReCAPTCHA verification failed!')
-      setProgress(false)
-      return
-    }
+    const token = await executeRecaptcha('ongeki/navigator')
 
     if (token !== null) {
       try {
@@ -63,7 +54,6 @@ const Page: NextPage<Props> = props => {
         }
       } catch (error) {
         console.error('An unexpected error happened occurred:', error)
-        recaptchaRef.current.reset()
         setError(error.response.data)
         setProgress(false)
       }
@@ -177,11 +167,6 @@ const Page: NextPage<Props> = props => {
           </div>
         </div>
       </div>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
     </Fragment>
   )
 }

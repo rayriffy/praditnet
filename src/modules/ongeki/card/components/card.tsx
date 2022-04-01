@@ -2,8 +2,6 @@ import { Fragment, memo, MutableRefObject, useState } from 'react'
 
 import dynamic from 'next/dynamic'
 
-import ReCAPTCHA from 'react-google-recaptcha'
-
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { GetDialogProps } from './getDialog'
@@ -22,11 +20,10 @@ interface Props {
     serial: string
     owned: boolean
   }
-  recaptchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const Card = memo<Props>(props => {
-  const { card, recaptchaRef } = props
+  const { card } = props
 
   const [showGet, setShowGet] = useState(false)
 
@@ -62,7 +59,6 @@ export const Card = memo<Props>(props => {
         name={card.name}
         show={showGet}
         setShow={setShowGet}
-        recaptchaRef={recaptchaRef}
       />
     </button>
   )

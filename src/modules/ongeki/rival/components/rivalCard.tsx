@@ -3,8 +3,6 @@ import { memo, MutableRefObject, useState } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-import ReCAPTCHA from 'react-google-recaptcha'
-// import { PlusIcon } from '@heroicons/react/solid'
 import { PlusIcon, TrashIcon } from '@heroicons/react/outline'
 
 import { AddRivalProps } from './addRival'
@@ -16,7 +14,6 @@ import { Rival } from '../@types/Rival'
 interface Props {
   rival: Rival | undefined
   mode: 'add' | 'remove'
-  recaptchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 const DeleteRival = dynamic<DeleteRivalProps>(
@@ -33,7 +30,7 @@ const AddRival = dynamic<AddRivalProps>(
 )
 
 export const RivalCard = memo<Props>(props => {
-  const { rival, recaptchaRef, mode = 'remove' } = props
+  const { rival, mode = 'remove' } = props
 
   const [deleteDialog, setDeleteDialog] = useState(false)
   const [addDialog, setAddDialog] = useState(false)
@@ -78,15 +75,9 @@ export const RivalCard = memo<Props>(props => {
           rival={rival}
           show={deleteDialog}
           setShow={setDeleteDialog}
-          recaptchaRef={recaptchaRef}
         />
       ) : (
-        <AddRival
-          rival={rival}
-          show={addDialog}
-          setShow={setAddDialog}
-          recaptchaRef={recaptchaRef}
-        />
+        <AddRival rival={rival} show={addDialog} setShow={setAddDialog} />
       )}
     </div>
   ) : (

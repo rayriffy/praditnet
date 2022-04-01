@@ -3,7 +3,6 @@ import {
   FormEventHandler,
   Fragment,
   memo,
-  MutableRefObject,
   SetStateAction,
   useRef,
   useState,
@@ -11,20 +10,21 @@ import {
 
 import axios from 'axios'
 import { Dialog, Transition } from '@headlessui/react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export interface TransferDialogProps {
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   cardId: string | null
-  capchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const TransferDialog = memo<TransferDialogProps>(props => {
-  const { show, setShow, cardId, capchaRef } = props
+  const { show, setShow, cardId } = props
 
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const inputRef = useRef<HTMLInputElement>(null)
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
@@ -34,7 +34,7 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
     setError(null)
 
     try {
-      const token = await capchaRef.current!.executeAsync()
+      const token = await executeRecaptcha('system/card')
       const inputCardId = inputRef.current.value
       await axios.post(
         '/api/card/set',
@@ -50,7 +50,6 @@ export const TransferDialog = memo<TransferDialogProps>(props => {
 
       window.location.reload()
     } catch (e) {
-      capchaRef.current.reset()
       setError(e.response.data.message)
       setProgress(false)
     }

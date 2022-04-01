@@ -4,7 +4,7 @@ import { stringify } from 'querystring'
 
 export const serverCapcha = async (code: string | undefined) => {
   if (code === undefined || code === 'undefined') {
-    throw new Error('Invalid ReCAPCHA V2 token!')
+    throw new Error('Invalid ReCAPCHA V3 token!')
   } else {
     const googleResponse = await axios.post(
       'https://www.google.com/recaptcha/api/siteverify',
@@ -16,11 +16,6 @@ export const serverCapcha = async (code: string | undefined) => {
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
       }
     )
-
-    // console.log({
-    //   code,
-    //   response: googleResponse.data,
-    // })
 
     if (googleResponse.data.success) {
       return true

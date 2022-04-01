@@ -9,41 +9,31 @@ import {
 
 import NProgress from 'nprogress'
 import { Dialog, Transition } from '@headlessui/react'
-import ReCAPTCHA from 'react-google-recaptcha'
 import axios from 'axios'
 
 import { Rival } from '../@types/Rival'
 import Router from 'next/router'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export interface AddRivalProps {
   rival: Rival
 
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
-
-  recaptchaRef: MutableRefObject<ReCAPTCHA>
 }
 
 export const AddRival = memo<AddRivalProps>(props => {
-  const { rival, show, setShow, recaptchaRef } = props
+  const { rival, show, setShow } = props
 
   const [progress, setProgress] = useState(false)
   const [error, setError] = useState<string>(null)
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const onSubmit = async () => {
-    recaptchaRef.current.reset()
-
     setError(null)
     setProgress(true)
 
-    let token = null
-    try {
-      token = await recaptchaRef.current.executeAsync()
-    } catch (e) {
-      setError('ReCAPTCHA verification failed!')
-      setProgress(false)
-      return
-    }
+    const token = await executeRecaptcha('ongeki/rival/add')
 
     if (token !== null) {
       try {
@@ -66,7 +56,6 @@ export const AddRival = memo<AddRivalProps>(props => {
         }
       } catch (error) {
         console.error('An unexpected error happened occurred:', error)
-        recaptchaRef.current.reset()
         setError(error.response.data)
         setProgress(false)
       }

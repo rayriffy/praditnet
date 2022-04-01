@@ -1,7 +1,9 @@
-import axios from 'axios'
+import { FormEventHandler, memo, useRef, useState } from 'react'
+
 import { useRouter } from 'next/router'
-import { FormEventHandler, Fragment, memo, useRef, useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+
+import axios from 'axios'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Image } from '../../../../core/components/image'
 
@@ -24,8 +26,6 @@ export const Form = memo<Props>(props => {
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
-  const recaptchaRef = useRef<ReCAPTCHA>(null)
-
   const realNameRef = useRef<HTMLInputElement>(null)
   const inGameNameRef = useRef<HTMLInputElement>(null)
   const facebookRef = useRef<HTMLInputElement>(null)
@@ -33,6 +33,7 @@ export const Form = memo<Props>(props => {
   const [participatedGame, setParticipatedGame] = useState<string | null>(null)
 
   const router = useRouter()
+  const { executeRecaptcha } = useGoogleReCaptcha()
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()
@@ -70,14 +71,7 @@ export const Form = memo<Props>(props => {
     }
 
     // get recapcha token
-    let token = null
-    try {
-      token = await recaptchaRef.current.executeAsync()
-    } catch (e) {
-      setError('ReCAPTCHA verification failed!')
-      setProgress(false)
-      return
-    }
+    let token = await executeRecaptcha('event/apply')
 
     // send payload
     try {
@@ -101,211 +95,208 @@ export const Form = memo<Props>(props => {
       router.push(`/event/${eventId}`)
       setProgress(false)
     } catch (e) {
-      recaptchaRef.current.reset()
       setError(e.response.data.message)
       setProgress(false)
     }
   }
 
   return (
-    <Fragment>
-      <form className="space-y-8 divide-y divide-gray-200" onSubmit={onSubmit}>
-        <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+    <form className="space-y-8 divide-y divide-gray-200" onSubmit={onSubmit}>
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <div className="space-y-6 sm:space-y-5">
           <div className="space-y-6 sm:space-y-5">
-            <div className="space-y-6 sm:space-y-5">
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
-                <label
-                  htmlFor="real-name"
-                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                  Real name
-                </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
-                    type="text"
-                    name="real-name"
-                    id="real-name"
-                    ref={realNameRef}
-                    disabled={progress}
-                    required
-                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                  />
-                  <p className="text-sm text-gray-500 mt-3">
-                    Please write your name in Thai, and without intitials (e.g.
-                    นาย ด.ช.)
-                  </p>
-                </div>
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
+              <label
+                htmlFor="real-name"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              >
+                Real name
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="real-name"
+                  id="real-name"
+                  ref={realNameRef}
+                  disabled={progress}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                />
+                <p className="text-sm text-gray-500 mt-3">
+                  Please write your name in Thai, and without intitials (e.g.
+                  นาย ด.ช.)
+                </p>
               </div>
+            </div>
 
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label
-                  htmlFor="in-game-name"
-                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                  In-game name
-                </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
-                    type="text"
-                    name="in-game-name"
-                    id="last-name"
-                    maxLength={10}
-                    ref={inGameNameRef}
-                    disabled={progress}
-                    required
-                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                  />
-                  <p className="text-sm text-gray-500 mt-3">
-                    You can copy in-game name from{' '}
-                    <a
-                      href="https://maimaidx-eng.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 font-medium"
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="in-game-name"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              >
+                In-game name
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="in-game-name"
+                  id="last-name"
+                  maxLength={10}
+                  ref={inGameNameRef}
+                  disabled={progress}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                />
+                <p className="text-sm text-gray-500 mt-3">
+                  You can copy in-game name from{' '}
+                  <a
+                    href="https://maimaidx-eng.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 font-medium"
+                  >
+                    maimaiNET
+                  </a>
+                  , or{' '}
+                  <a
+                    href="https://chunithm-net-eng.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 font-medium"
+                  >
+                    CHUNITHM-NET
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="rating"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              >
+                Rating
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="rating"
+                  id="rating"
+                  // inputMode="decimal"
+                  ref={ratingRef}
+                  disabled={progress}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="facebook"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+              >
+                Link to Facebook
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <input
+                  type="text"
+                  name="facebook"
+                  id="facebook"
+                  ref={facebookRef}
+                  disabled={progress}
+                  required
+                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                />
+                <p className="text-sm text-gray-500 mt-3">
+                  We will contact you in case you has been qualified for the
+                  grand final day
+                </p>
+              </div>
+            </div>
+
+            <div className="sm:border-t sm:border-gray-200 sm:pt-5">
+              <div role="group" aria-labelledby="label-participated-game">
+                <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
+                  <div>
+                    <div
+                      className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
+                      id="label-participated-game"
                     >
-                      maimaiNET
-                    </a>
-                    , or{' '}
-                    <a
-                      href="https://chunithm-net-eng.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 font-medium"
-                    >
-                      CHUNITHM-NET
-                    </a>
-                  </p>
-                </div>
-              </div>
-
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label
-                  htmlFor="rating"
-                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                  Rating
-                </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
-                    type="text"
-                    name="rating"
-                    id="rating"
-                    // inputMode="decimal"
-                    ref={ratingRef}
-                    disabled={progress}
-                    required
-                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                  />
-                </div>
-              </div>
-
-              <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-                <label
-                  htmlFor="facebook"
-                  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-                >
-                  Link to Facebook
-                </label>
-                <div className="mt-1 sm:mt-0 sm:col-span-2">
-                  <input
-                    type="text"
-                    name="facebook"
-                    id="facebook"
-                    ref={facebookRef}
-                    disabled={progress}
-                    required
-                    className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                  />
-                  <p className="text-sm text-gray-500 mt-3">
-                    We will contact you in case you has been qualified for the
-                    grand final day
-                  </p>
-                </div>
-              </div>
-
-              <div className="sm:border-t sm:border-gray-200 sm:pt-5">
-                <div role="group" aria-labelledby="label-participated-game">
-                  <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
-                    <div>
-                      <div
-                        className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
-                        id="label-participated-game"
-                      >
-                        Participated game
-                      </div>
+                      Participated game
                     </div>
-                    <div className="sm:col-span-2">
-                      <div className="max-w-lg">
-                        <div className="mt-4 space-y-4">
-                          <div className="flex items-start">
-                            <input
-                              id="la-participated-game"
-                              name="participated-game"
-                              type="radio"
-                              onChange={e => {
-                                e.target.checked
-                                  ? setParticipatedGame('maimai')
-                                  : null
-                              }}
-                              disabled={progress}
-                              required
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            />
-                            <label
-                              htmlFor="la-participated-game"
-                              className="ml-3 block text-sm font-medium text-gray-700"
-                            >
-                              <span>maimai DX</span>
-                              <div className="mt-1 flex space-x-2">
-                                {musics.maimai.map(music => (
-                                  <div
-                                    className="flex w-24 rounded overflow-hidden"
-                                    key={`music-maimai-${music.id}`}
-                                  >
-                                    <Image
-                                      src={`https://praditnet-cdn.rayriffy.com/maimai/jacket/${music.id}.png`}
-                                      width={96}
-                                      height={96}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            </label>
-                          </div>
-                          <div className="flex items-start">
-                            <input
-                              id="la-participated-game"
-                              name="participated-game"
-                              type="radio"
-                              onChange={e => {
-                                e.target.checked
-                                  ? setParticipatedGame('chunithm')
-                                  : null
-                              }}
-                              disabled={progress}
-                              className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-                            />
-                            <label
-                              htmlFor="push-email"
-                              className="ml-3 block text-sm font-medium text-gray-700"
-                            >
-                              <span>CHUNITHM NEW!!</span>
-                              <div className="mt-1 flex space-x-2">
-                                {musics.chunithm.map(music => (
-                                  <div
-                                    className="flex w-24 rounded overflow-hidden"
-                                    key={`music-chunithm-${music.id}`}
-                                  >
-                                    <Image
-                                      src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
-                                      width={96}
-                                      height={96}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            </label>
-                          </div>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <div className="max-w-lg">
+                      <div className="mt-4 space-y-4">
+                        <div className="flex items-start">
+                          <input
+                            id="la-participated-game"
+                            name="participated-game"
+                            type="radio"
+                            onChange={e => {
+                              e.target.checked
+                                ? setParticipatedGame('maimai')
+                                : null
+                            }}
+                            disabled={progress}
+                            required
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                          />
+                          <label
+                            htmlFor="la-participated-game"
+                            className="ml-3 block text-sm font-medium text-gray-700"
+                          >
+                            <span>maimai DX</span>
+                            <div className="mt-1 flex space-x-2">
+                              {musics.maimai.map(music => (
+                                <div
+                                  className="flex w-24 rounded overflow-hidden"
+                                  key={`music-maimai-${music.id}`}
+                                >
+                                  <Image
+                                    src={`https://praditnet-cdn.rayriffy.com/maimai/jacket/${music.id}.png`}
+                                    width={96}
+                                    height={96}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </label>
+                        </div>
+                        <div className="flex items-start">
+                          <input
+                            id="la-participated-game"
+                            name="participated-game"
+                            type="radio"
+                            onChange={e => {
+                              e.target.checked
+                                ? setParticipatedGame('chunithm')
+                                : null
+                            }}
+                            disabled={progress}
+                            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                          />
+                          <label
+                            htmlFor="push-email"
+                            className="ml-3 block text-sm font-medium text-gray-700"
+                          >
+                            <span>CHUNITHM NEW!!</span>
+                            <div className="mt-1 flex space-x-2">
+                              {musics.chunithm.map(music => (
+                                <div
+                                  className="flex w-24 rounded overflow-hidden"
+                                  key={`music-chunithm-${music.id}`}
+                                >
+                                  <Image
+                                    src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
+                                    width={96}
+                                    height={96}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                          </label>
                         </div>
                       </div>
                     </div>
@@ -315,36 +306,34 @@ export const Form = memo<Props>(props => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="pt-5">
-          {error !== null && (
-            <p className="bg-red-100 rounded-md mb-6 text-sm px-4 py-3 text-red-800">
-              {error}
-            </p>
-          )}
-          <div className="flex justify-end">
-            <button
-              type="button"
-              disabled={progress}
-              className="transition bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:bg-gray-100 disabled:hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              disabled={progress}
-              className="transition ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 disabled:hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Apply
-            </button>
-          </div>
+      <div className="pt-5">
+        {error !== null && (
+          <p className="bg-red-100 rounded-md mb-6 text-sm px-4 py-3 text-red-800">
+            {error}
+          </p>
+        )}
+        <div className="flex justify-end">
+          <button
+            type="button"
+            disabled={progress}
+            className="transition bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:bg-gray-100 disabled:hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={progress}
+            className="transition ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 disabled:hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Apply
+          </button>
         </div>
-      </form>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        size="invisible"
-        sitekey={process.env.RECAPCHA_SITE_KEY}
-      />
-    </Fragment>
+      </div>
+    </form>
   )
 })
+function executeRecaptcha(arg0: string) {
+  throw new Error('Function not implemented.')
+}
