@@ -6,6 +6,7 @@ import { Image } from '../../../../core/components/image'
 import { ranks } from '../../../finale/playlog/constants/ranks'
 
 import { UserPlaylog } from '../../home/@types/UserPlaylog'
+import { judges } from '../constants/judges'
 
 interface Props {
   playlogs: UserPlaylog[]
@@ -98,6 +99,25 @@ export const PlaylogRenderer = memo<Props>(props => {
                 }.png`}
                 loading="lazy"
               />
+            </div>
+
+            <div className="pt-4 flex flex-col">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {judges.map(judge => (
+                  <div
+                    key={`playlog-${playlog.id}-${judge.id}`}
+                    className={classNames(
+                      judge.color,
+                      'text-white p-1.5 text-center rounded-lg'
+                    )}
+                  >
+                    <p className={classNames(judge.subColor, 'rounded p-1')}>
+                      {playlog.judge[judge.id]}
+                    </p>
+                    <span className="px-2 text-sm">{judge.name}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -19,4 +19,10 @@ export interface UserPlaylog {
     | 'utage'
   scoreLevel: number
   track: number
+  judge: {
+    perfect: number
+    great: number
+    good: number
+    miss: number
+  }
 }

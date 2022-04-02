@@ -64,7 +64,31 @@ export const getPaginatedPlaylogs = async (
         'maimai_user_playlog.full_combo as playIsFullCombo',
         'maimai_user_playlog.user_play_date as playDate',
         'maimai_user_playlog.level as scoreDifficulty',
-        'praditnet.FinaleScore.level as scoreLevel'
+        'praditnet.FinaleScore.level as scoreLevel',
+
+        // judge: perfect
+        'maimai_user_playlog.tap_perfect as judgeTapPerfect',
+        'maimai_user_playlog.hold_perfect as judgeHoldPerfect',
+        'maimai_user_playlog.slide_perfect as judgeSlidePerfect',
+        'maimai_user_playlog.break_perfect as judgeBreakPerfect',
+
+        // judge: great
+        'maimai_user_playlog.tap_great as judgeTapGreat',
+        'maimai_user_playlog.hold_great as judgeHoldGreat',
+        'maimai_user_playlog.slide_great as judgeSlideGreat',
+        'maimai_user_playlog.break_great as judgeBreakGreat',
+
+        // judge: good
+        'maimai_user_playlog.tap_good as judgeTapGood',
+        'maimai_user_playlog.hold_good as judgeHoldGood',
+        'maimai_user_playlog.slide_good as judgeSlideGood',
+        'maimai_user_playlog.break_good as judgeBreakGood',
+
+        // judge: miss
+        'maimai_user_playlog.tap_bad as judgeTapMiss',
+        'maimai_user_playlog.hold_bad as judgeHoldMiss',
+        'maimai_user_playlog.slide_bad as judgeSlideMiss',
+        'maimai_user_playlog.break_bad as judgeBreakMiss'
       )
       .limit(paginationItems)
       .offset((page - 1) * paginationItems),
@@ -88,6 +112,14 @@ export const getPaginatedPlaylogs = async (
         ? 'basic'
         : 'utage'
 
+    const sumJudge = (key: string) =>
+      [
+        `judgeTap${key}`,
+        `judgeHold${key}`,
+        `judgeSlide${key}`,
+        `judgeBreak${key}`,
+      ].reduce((acc, cur) => acc + (playlog[cur] ?? 0), 0)
+
     return {
       id: playlog.playId,
       musicId: playlog.musicId,
@@ -103,6 +135,12 @@ export const getPaginatedPlaylogs = async (
       scoreDifficulty: difficulty,
       track: playlog.playTrack,
       scnum: playlog.scoreDifficulty,
+      judge: {
+        perfect: sumJudge('Perfect'),
+        great: sumJudge('Great'),
+        good: sumJudge('Good'),
+        miss: sumJudge('Miss'),
+      },
     }
   })
 
