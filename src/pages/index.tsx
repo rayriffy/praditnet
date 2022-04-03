@@ -85,17 +85,18 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       },
     }
   } else {
-    const finaleUserPreview = await getFinaleUserPreview(user.card_luid ?? '')
+    const finaleUserPreview = await getFinaleUserPreview(user.aimeCard ?? '')
     const chunithmUserPreview = await getChunithmUserPreview(
-      user.card_luid ?? ''
+      user.aimeCard ?? ''
     )
-    const ongekiUserPreview = await getOngekiUserPreview(user.card_luid ?? '')
+    const ongekiUserPreview = await getOngekiUserPreview(user.aimeCard ?? '')
     const events = await getActiveEvents()
 
     return {
       props: {
         user: {
-          cardId: user.card_luid,
+          aime: user.aimeCard,
+          eamuse: user.eamuseCard,
         },
         events: events.map(event => ({
           ...event,

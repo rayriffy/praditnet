@@ -77,12 +77,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const [userDecks] = await Promise.all([getUserDecks(user.card_luid)])
+  const [userDecks] = await Promise.all([getUserDecks(user.aimeCard)])
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       decks: userDecks,
     },

@@ -1,7 +1,7 @@
 export interface UserData {
   id?: number
   uid: string
-  card_luid?: string | null
+  aimeCard?: string | null
   god_mode: number
   // role: 'default' | 'staff'
 }

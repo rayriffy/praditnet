@@ -25,13 +25,13 @@ const api: NextApiHandler = async (req, res) => {
       })
       .count()
 
-    if (user.card_luid !== null && segaCard[0]['count(*)'] !== 0) {
+    if (user.aimeCard !== null && segaCard[0]['count(*)'] !== 0) {
       // if user have card already, make sure card does not registered in db yet
       await knex.destroy()
       return res.status(400).send({
         message: 'You cannot add card that already existed in the system!',
       })
-    } else if (user.card_luid === null && segaCard[0]['count(*)'] === 0) {
+    } else if (user.aimeCard === null && segaCard[0]['count(*)'] === 0) {
       // new user, make sure card is in the system
       await knex.destroy()
       return res.status(400).send({
@@ -43,7 +43,7 @@ const api: NextApiHandler = async (req, res) => {
     // make sure that card does not used by anyone else yet
     const userDatas = await knex('praditnet.UserData')
       .where({
-        card_luid: inputCardId,
+        aimeCard: inputCardId,
       })
       .count()
     if (userDatas[0]['count(*)'] !== 0) {
@@ -57,7 +57,7 @@ const api: NextApiHandler = async (req, res) => {
     await Promise.all([
       knex('praditnet.UserData')
         .update({
-          card_luid: inputCardId,
+          aimeCard: inputCardId,
         })
         .where({
           uid: user.uid,
@@ -67,7 +67,7 @@ const api: NextApiHandler = async (req, res) => {
           luid: inputCardId,
         })
         .where({
-          luid: user.card_luid,
+          luid: user.aimeCard,
         }),
     ])
 

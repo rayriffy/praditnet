@@ -9,8 +9,8 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 dayjs.extend(localizedFormat)
 
-export const getCardData = async (card_luid: string | null) => {
-  if (card_luid === null) {
+export const getCardData = async (aimeCard: string | null) => {
+  if (aimeCard === null) {
     return {
       luid: null,
       createdAt: null,
@@ -19,7 +19,7 @@ export const getCardData = async (card_luid: string | null) => {
 
   const knex = createKnexInstance()
   const segaCard = await knex('sega_card').where({
-    luid: card_luid,
+    luid: aimeCard,
   })
 
   const payload = {

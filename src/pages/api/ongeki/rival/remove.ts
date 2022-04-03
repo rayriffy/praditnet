@@ -26,7 +26,7 @@ const api: NextApiHandler = async (req, res) => {
         'ongeki_user_data.id'
       )
       .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
-      .where('sega_card.luid', '=', user.card_luid)
+      .where('sega_card.luid', '=', user.aimeCard)
       .where('ongeki_user_rival.rival_user_id', '=', id)
       .delete()
     await knex.destroy()

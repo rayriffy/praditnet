@@ -49,14 +49,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const paginatedPage = Number(page[0])
 
   const paginatedPlaylogs = await getPaginatedPlaylogs(
-    user.card_luid,
+    user.aimeCard,
     paginatedPage
   )
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       page: paginatedPlaylogs.page,
       maxPage: paginatedPlaylogs.maxPage,

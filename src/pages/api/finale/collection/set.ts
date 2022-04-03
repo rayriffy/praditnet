@@ -28,7 +28,7 @@ const api: NextApiHandler = async (req, res) => {
         await knex('maimai_user_data')
           .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
           .where({
-            luid: user.card_luid,
+            luid: user.aimeCard,
           })
           .join(
             'maimai_user_item',
@@ -51,7 +51,7 @@ const api: NextApiHandler = async (req, res) => {
         await knex('maimai_user_data')
           .join('sega_card', 'maimai_user_data.aime_card_id', 'sega_card.id')
           .where({
-            luid: user.card_luid,
+            luid: user.aimeCard,
           })
           .update(targetAquaKey, id)
 

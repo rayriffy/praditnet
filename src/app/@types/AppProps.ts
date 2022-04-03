@@ -1,7 +1,8 @@
 export interface AppProps {
   user:
     | {
-        cardId: string | null
+        aime: string | null
+        eamuse: string | null
       }
     | undefined
 }

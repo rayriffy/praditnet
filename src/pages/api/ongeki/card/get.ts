@@ -29,7 +29,7 @@ const api: NextApiHandler = async (req, res) => {
           'ongeki_user_data.id'
         )
         .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
-        .where('sega_card.luid', '=', user.card_luid)
+        .where('sega_card.luid', '=', user.aimeCard)
         .where('ongeki_user_card.card_id', '=', id)
         .select(
           'ongeki_user_card.id as itemId',
@@ -63,7 +63,7 @@ const api: NextApiHandler = async (req, res) => {
       // step 2, add card with params
       const ongekiProfileId = await knex('ongeki_user_data')
         .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
-        .where('sega_card.luid', '=', user.card_luid)
+        .where('sega_card.luid', '=', user.aimeCard)
         .select('ongeki_user_data.id as userId')
         .first()
       const targetCard = await knex('praditnet.OngekiCard')

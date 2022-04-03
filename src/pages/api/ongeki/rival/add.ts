@@ -25,7 +25,7 @@ const api: NextApiHandler = async (req, res) => {
     const [userProfile, targetUserCount] = await Promise.all([
       knex('ongeki_user_data')
         .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
-        .where('sega_card.luid', '=', user.card_luid)
+        .where('sega_card.luid', '=', user.aimeCard)
         .select('ongeki_user_data.id as userId')
         .first(),
       knex('ongeki_user_data').where('id', '=', Number(id)).count(),

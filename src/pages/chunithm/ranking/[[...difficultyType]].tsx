@@ -101,7 +101,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     return {
       props: {
         user: {
-          cardId: user.card_luid,
+          aime: user.aimeCard,
+          eamuse: user.eamuseCard,
         },
         difficulties,
         currentDifficulty: null,
@@ -123,7 +124,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       return {
         props: {
           user: {
-            cardId: user.card_luid,
+            aime: user.aimeCard,
+            eamuse: user.eamuseCard,
           },
           difficulties,
           currentDifficulty: difficulties.find(

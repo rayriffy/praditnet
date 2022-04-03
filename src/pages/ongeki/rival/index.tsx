@@ -49,12 +49,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const rivals = await getUserRivals(user.card_luid)
+  const rivals = await getUserRivals(user.aimeCard)
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       rivals,
     },

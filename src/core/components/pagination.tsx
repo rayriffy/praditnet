@@ -1,4 +1,4 @@
-import { Fragment, FunctionComponent, memo, useMemo } from 'react'
+import { FunctionComponent, memo } from 'react'
 
 import Link from 'next/link'
 
@@ -76,9 +76,12 @@ export const Pagination = memo<Props>(props => {
     >
       <div className="flex space-x-2">
         {firstLast && (
-          <Button disabled={current === 1} showWhen="large" href={urlPrefix}>
-            <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />
-            First
+          <Button
+            disabled={current - 5 < 1}
+            showWhen="large"
+            href={`${urlPrefix}${current - 5 === 1 ? '/' : `/${current - 5}`}`}
+          >
+            <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />5 Pages
           </Button>
         )}
         <Button
@@ -107,9 +110,12 @@ export const Pagination = memo<Props>(props => {
       </p>
       <div className="flex space-x-2">
         {firstLast && (
-          <Button disabled={current === 1} showWhen="small" href={urlPrefix}>
-            <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />
-            First
+          <Button
+            disabled={current - 5 < 1}
+            showWhen="small"
+            href={`${urlPrefix}${current - 5 === 1 ? '/' : `/${current - 5}`}`}
+          >
+            <ChevronDoubleLeftIcon className="mr-2 w-5 h-5" />5 Pages
           </Button>
         )}
         <Button
@@ -122,10 +128,10 @@ export const Pagination = memo<Props>(props => {
         </Button>
         {firstLast && (
           <Button
-            disabled={current === max}
-            href={`${urlPrefix}${max === 1 ? '' : `/${max}`}`}
+            disabled={current + 5 > max}
+            href={`${urlPrefix}/${current + 5}`}
           >
-            Last
+            5 Pages
             <ChevronDoubleRightIcon className="ml-2 w-5 h-5" />
           </Button>
         )}

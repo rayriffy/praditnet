@@ -89,14 +89,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const paginatedPage = Number(page[0])
 
   const [cards, overview] = await Promise.all([
-    getPaginatedCard(user.card_luid, paginatedPage),
-    getOverviewCard(user.card_luid),
+    getPaginatedCard(user.aimeCard, paginatedPage),
+    getOverviewCard(user.aimeCard),
   ])
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       page: cards.page,
       cards: cards.card,

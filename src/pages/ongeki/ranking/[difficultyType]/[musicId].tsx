@@ -140,7 +140,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     // get user's playscore, and ranking
     const [selfScore, rankings] = await Promise.all([
       getUserPlayscore(
-        user.card_luid,
+        user.aimeCard,
         Number(ctx.params.musicId),
         targetDifficulty.id
       ),
@@ -150,7 +150,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     return {
       props: {
         user: {
-          cardId: user.card_luid,
+          aime: user.aimeCard,
+          eamuse: user.eamuseCard,
         },
         music: targetMusic,
         difficulty: targetDifficulty,

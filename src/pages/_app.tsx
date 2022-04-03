@@ -47,8 +47,9 @@ const NextApp: NextPage<AppProps> = props => {
         <title>PraditNET</title>
       </Head>
       <Layout
-        cardId={
-          pageProps.user === undefined ? undefined : pageProps.user.cardId
+        aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
+        eamuse={
+          pageProps.user === undefined ? undefined : pageProps.user.eamuse
         }
       >
         <Component {...pageProps} />

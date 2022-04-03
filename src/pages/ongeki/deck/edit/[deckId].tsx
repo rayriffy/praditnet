@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const userDeck = await getUserDeck(user.card_luid, Number(ctx.params.deckId))
+  const userDeck = await getUserDeck(user.aimeCard, Number(ctx.params.deckId))
 
   if (userDeck === null) {
     return {
@@ -75,7 +75,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     return {
       props: {
         user: {
-          cardId: user.card_luid,
+          aime: user.aimeCard,
+          eamuse: user.eamuseCard,
         },
         deck: userDeck,
       },

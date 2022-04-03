@@ -82,14 +82,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   }
 
   const [characters, equipped] = await Promise.all([
-    getUserCharacters(user.card_luid),
-    getEquippedCharacter(user.card_luid),
+    getUserCharacters(user.aimeCard),
+    getEquippedCharacter(user.aimeCard),
   ])
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       characters,
       equipped: equipped.equipped.character,

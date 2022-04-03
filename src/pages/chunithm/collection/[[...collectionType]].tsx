@@ -151,16 +151,17 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const equipped = await getEquipped(user.card_luid)
+  const equipped = await getEquipped(user.aimeCard)
   const collection =
     targetCollectionType !== undefined
-      ? await getCollection(user.card_luid, targetCollectionType as string)
+      ? await getCollection(user.aimeCard, targetCollectionType as string)
       : null
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       equipped,
       collection,

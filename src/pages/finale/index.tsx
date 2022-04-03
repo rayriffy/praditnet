@@ -40,12 +40,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const userProfile = await getUserProfile(user.card_luid)
+  const userProfile = await getUserProfile(user.aimeCard)
 
   return {
     props: {
       user: {
-        cardId: user.card_luid,
+        aime: user.aimeCard,
+        eamuse: user.eamuseCard,
       },
       profile: userProfile,
     },

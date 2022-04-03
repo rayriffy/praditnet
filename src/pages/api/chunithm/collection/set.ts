@@ -28,7 +28,7 @@ const api: NextApiHandler = async (req, res) => {
           knex('chunew_user_data')
             .join('sega_card', 'chunew_user_data.card_id', 'sega_card.id')
             .where({
-              luid: user.card_luid,
+              luid: user.aimeCard,
             })
             .update(targetAquaKey, id)
         )

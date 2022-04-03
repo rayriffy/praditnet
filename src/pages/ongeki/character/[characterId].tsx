@@ -196,14 +196,15 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   try {
     const [character, equipped] = await Promise.all([
-      getUserCharacter(user.card_luid, Number(ctx.params.characterId)),
-      getEquippedCharacter(user.card_luid),
+      getUserCharacter(user.aimeCard, Number(ctx.params.characterId)),
+      getEquippedCharacter(user.aimeCard),
     ])
 
     return {
       props: {
         user: {
-          cardId: user.card_luid,
+          aime: user.aimeCard,
+          eamuse: user.eamuseCard,
         },
         character,
         isNavigatorEquipped: equipped.equipped.character === character.id,

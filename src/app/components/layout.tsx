@@ -8,11 +8,12 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import { PAmuse } from './pamuse'
 
 interface Props {
-  cardId?: string | null
+  aime?: string | null
+  eamuse?: string | null
 }
 
 export const Layout: FunctionComponent<Props> = props => {
-  const { children, cardId } = props
+  const { children, aime, eamuse } = props
 
   return (
     <GoogleReCaptchaProvider
@@ -29,9 +30,9 @@ export const Layout: FunctionComponent<Props> = props => {
               <PAmuse />
             </a>
           </Link>
-          {cardId !== undefined && (
+          {(aime !== undefined || eamuse !== undefined) && (
             <div className="flex items-center">
-              {cardId === null && (
+              {aime === null && eamuse === null && (
                 <div className="hidden md:flex md:items-center">
                   <p className="text-gray-700">
                     Click here to add your card into account
@@ -42,10 +43,10 @@ export const Layout: FunctionComponent<Props> = props => {
               <Link href="/card">
                 <a className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-neutral-700">
                   <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">
-                    {cardId === null ? (
+                    {aime === null && eamuse === null ? (
                       <span className="text-sm">Not set up</span>
                     ) : (
-                      cardId.substring(cardId.length - 4)
+                      (aime ?? eamuse).substring((aime ?? eamuse).length - 4)
                     )}
                   </p>
                   <CreditCardIcon className="w-6 h-6 text-gray-700 dark:text-gray-100" />
