@@ -8,6 +8,9 @@ import { Preview } from '../../../modules/event/home/components/preview'
 import { Entry } from '../../../modules/event/home/components/entry'
 
 export interface Props {
+  user: {
+    id: string
+  }
   event: {
     id: string
     name: string
@@ -33,7 +36,7 @@ export interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { event, musics, entry, isStaff } = props
+  const { user, event, musics, entry, isStaff } = props
 
   useEffect(() => {
     console.log(props)
@@ -79,7 +82,7 @@ const Page: NextPage<Props> = props => {
       {entry === null ? (
         <Preview eventId={event.id} musics={musics} />
       ) : (
-        <Entry {...{ entry, musics }} />
+        <Entry {...{ user, entry, musics }} />
       )}
     </div>
   )
@@ -134,6 +137,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   return {
     props: {
+      user: {
+        id: user?.uid ?? '',
+      },
       event: {
         id: targetEvent.uid,
         name: targetEvent.name,
