@@ -1,6 +1,8 @@
 import { NextPage } from 'next'
 import { Html, Head, Main, NextScript } from 'next/document'
 
+import { Partytown } from '@builder.io/partytown/react'
+
 const Document: NextPage = () => {
   return (
     <Html>
@@ -48,6 +50,26 @@ const Document: NextPage = () => {
           content="#ffffff"
         />
         <meta key="manifest-theme" name="theme-color" content="#ffffff" />
+
+        <Partytown debug={true} forward={['dataLayer.push']} />
+
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-D4SJ07XWZS"
+          type="text/partytown"
+        ></script>
+        <script
+          type="text/partytown"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+    
+              gtag('config', 'G-D4SJ07XWZS');
+            `,
+          }}
+        />
       </Head>
       <body>
         <Main />
