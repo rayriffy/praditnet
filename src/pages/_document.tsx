@@ -51,7 +51,7 @@ const Document: NextPage = () => {
         />
         <meta key="manifest-theme" name="theme-color" content="#ffffff" />
 
-        <Partytown debug={true} forward={['dataLayer.push']} />
+        <Partytown forward={['dataLayer.push']} />
 
         <script
           async
