@@ -78,7 +78,7 @@ const Page: NextPage<Props> = props => {
             <div className="shrink-0">
               <Image
                 className=""
-                src={`https://praditnet-cdn.rayriffy.com/ongeki/card/deka/${character.cardId}.png`}
+                src={`https://cdn.pradit.net/ongeki/card/deka/${character.cardId}.png`}
                 // layout='responsive'
                 width={768 / 2.3}
                 height={1052 / 2.3}

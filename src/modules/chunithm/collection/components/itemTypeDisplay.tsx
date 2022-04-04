@@ -72,7 +72,7 @@ export const ItemTypeDisplay = memo<Props>(props => {
                     ? 'bg-gray-100'
                     : ''
                 )}
-                src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+                src={`https://cdn.pradit.net/chunithm/${
                   collectionType.assetPath ?? collectionType.id
                 }/${equippedId}.png`}
                 {...collectionType.image}

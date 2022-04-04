@@ -24,7 +24,7 @@ export const PlaylogRenderer = memo<Props>(props => {
           <div className="sm:flex">
             <div className="mx-auto mb-4 sm:m-0 w-60 md:w-48 shrink-0 flex items-start">
               <Image
-                src={`https://praditnet-cdn.rayriffy.com/ongeki/jacket/${playlog.music.id}.png`}
+                src={`https://cdn.pradit.net/ongeki/jacket/${playlog.music.id}.png`}
                 width={300}
                 height={300}
                 className="w-full h-auto rounded"
@@ -209,7 +209,7 @@ export const PlaylogRenderer = memo<Props>(props => {
                   <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-l-[1.25rem] sm:border-l-[1.5rem] border-t-transparent border-l-slate-50" />
                 </div>
                 <Image
-                  src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
+                  src={`https://cdn.pradit.net/ongeki/card/full/${card.id}.png`}
                   width={384}
                   height={526}
                 />

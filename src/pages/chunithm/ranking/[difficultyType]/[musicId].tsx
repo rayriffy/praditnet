@@ -33,7 +33,7 @@ const Page: NextPage<Props> = props => {
           <div className="w-64 sm:w-48 shrink-0 mx-auto sm:mx-0 mb-4 sm:mb-0">
             <Image
               className="overflow-hidden rounded-md"
-              src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
+              src={`https://cdn.pradit.net/chunithm/jacket/${music.id}.png`}
               width={300}
               height={300}
             />

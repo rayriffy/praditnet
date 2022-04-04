@@ -80,7 +80,7 @@ const Page: NextPage<Props> = props => {
                         ? 'w-1/2 md:w-full'
                         : 'w-full'
                     )}
-                    src={`https://praditnet-cdn.rayriffy.com/finale/${
+                    src={`https://cdn.pradit.net/finale/${
                       collectionType.id === 'frame'
                         ? 'frameMini'
                         : collectionType.id

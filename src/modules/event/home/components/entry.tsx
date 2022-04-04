@@ -43,7 +43,7 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
             <div className="flex shrink-0 justify-center sm:justify-start items-start">
               <div className="flex rounded-md overflow-hidden w-48 sm:w-40">
                 <Image
-                  src={`https://praditnet-cdn.rayriffy.com/${entry.game}/jacket/${music.id}.png`}
+                  src={`https://cdn.pradit.net/${entry.game}/jacket/${music.id}.png`}
                   width={256}
                   height={256}
                 />

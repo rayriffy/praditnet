@@ -29,7 +29,7 @@ export const Voice = memo<Props>(props => {
       </button>
       <audio
         ref={audioRef}
-        src={`https://praditnet-cdn.rayriffy.com/chunithm/systemVoice/sample/${systemVoiceId}.mp3`}
+        src={`https://cdn.pradit.net/chunithm/systemVoice/sample/${systemVoiceId}.mp3`}
       />
     </Fragment>
   )

@@ -57,7 +57,7 @@ export const Preview = memo<Props>(props => {
                 >
                   <div className="rounded overflow-hidden flex">
                     <Image
-                      src={`https://praditnet-cdn.rayriffy.com/${game}/jacket/${music.id}.png`}
+                      src={`https://cdn.pradit.net/${game}/jacket/${music.id}.png`}
                       width={200}
                       height={200}
                     />

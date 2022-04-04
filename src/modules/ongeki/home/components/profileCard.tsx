@@ -21,7 +21,7 @@ export const ProfileCard = memo<Props>(props => {
             <div className="bg-gray-50 border-2 border-gray-700 rounded-md overflow-hidden shadow aspect-square">
               <Image
                 className="h-24 w-auto"
-                src={`https://praditnet-cdn.rayriffy.com/ongeki/card/icon/${equipped.card}.png`}
+                src={`https://cdn.pradit.net/ongeki/card/icon/${equipped.card}.png`}
                 width={96}
                 height={96}
               />

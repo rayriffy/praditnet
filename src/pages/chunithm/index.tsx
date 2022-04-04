@@ -22,7 +22,7 @@ const Page: NextPage<Props> = props => {
       <Navbar />
       <div className="mt-4 flex justify-center">
         <Image
-          src={`https://praditnet-cdn.rayriffy.com/chunithm/character/deka/${profile.equipped.character}.png`}
+          src={`https://cdn.pradit.net/chunithm/character/deka/${profile.equipped.character}.png`}
           width={500}
           height={500}
         />

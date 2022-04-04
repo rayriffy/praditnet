@@ -98,7 +98,7 @@ export const Item = memo<Props>(props => {
       {type !== 'icon' && setButtonElement}
       <div className="shrink-0 flex items-center">
         <Image
-          src={`https://praditnet-cdn.rayriffy.com/finale/${
+          src={`https://cdn.pradit.net/finale/${
             type === 'frame' ? 'frameMini' : type
           }/${item.id}.png`}
           className={classNames(type === 'icon' ? 'w-24' : 'w-full')}

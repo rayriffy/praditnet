@@ -40,7 +40,7 @@ export const RivalCard = memo<Props>(props => {
       <div className="shrink-0 flex items-center">
         <div className="bg-gray-50 border-2 border-gray-700 rounded-md overflow-hidden shadow aspect-square h-20">
           <Image
-            src={`https://praditnet-cdn.rayriffy.com/ongeki/card/icon/${rival.cardId}.png`}
+            src={`https://cdn.pradit.net/ongeki/card/icon/${rival.cardId}.png`}
             width={96}
             height={96}
           />

@@ -255,7 +255,7 @@ export const Form = memo<Props>(props => {
                                   key={`music-maimai-${music.id}`}
                                 >
                                   <Image
-                                    src={`https://praditnet-cdn.rayriffy.com/maimai/jacket/${music.id}.png`}
+                                    src={`https://cdn.pradit.net/maimai/jacket/${music.id}.png`}
                                     width={96}
                                     height={96}
                                   />
@@ -289,7 +289,7 @@ export const Form = memo<Props>(props => {
                                   key={`music-chunithm-${music.id}`}
                                 >
                                   <Image
-                                    src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${music.id}.png`}
+                                    src={`https://cdn.pradit.net/chunithm/jacket/${music.id}.png`}
                                     width={96}
                                     height={96}
                                   />

@@ -23,7 +23,7 @@ export const PlaylogRenderer = memo<Props>(props => {
         >
           <div className="mx-auto mb-4 sm:m-0 w-60 md:w-48 shrink-0 flex items-start">
             <Image
-              src={`https://praditnet-cdn.rayriffy.com/chunithm/jacket/${playlog.musicId}.png`}
+              src={`https://cdn.pradit.net/chunithm/jacket/${playlog.musicId}.png`}
               width={300}
               height={300}
               className="w-full h-auto rounded"

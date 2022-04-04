@@ -6,7 +6,7 @@ import { encode, stringify } from 'querystring'
 export const Image = memo<React.ComponentProps<typeof NextImage>>(props => (
   <NextImage
     loader={({ src, width, quality }) =>
-      `https://praditnet-optimizer.rayriffy.com/_ipx/w_${width},q_${
+      `https://cdn-optimizer.pradit.net/_ipx/w_${width},q_${
         quality ?? 75
       }/${encodeURIComponent(src)}?${stringify({
         url: src,

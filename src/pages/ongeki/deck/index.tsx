@@ -42,7 +42,7 @@ const Page: NextPage<Props> = props => {
                       <div className="w-0 h-0 border-t-[1.25rem] sm:border-t-[1.5rem] border-l-[1.25rem] sm:border-l-[1.5rem] border-t-transparent border-l-white" />
                     </div>
                     <Image
-                      src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
+                      src={`https://cdn.pradit.net/ongeki/card/full/${card.id}.png`}
                       width={384}
                       height={526}
                     />

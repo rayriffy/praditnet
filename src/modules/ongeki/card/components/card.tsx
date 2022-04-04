@@ -46,7 +46,7 @@ export const Card = memo<Props>(props => {
         )}
         <Image
           className={classNames(card.owned ? '' : 'grayscale')}
-          src={`https://praditnet-cdn.rayriffy.com/ongeki/card/full/${card.id}.png`}
+          src={`https://cdn.pradit.net/ongeki/card/full/${card.id}.png`}
           width={384}
           height={526}
         />

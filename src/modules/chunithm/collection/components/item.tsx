@@ -124,7 +124,7 @@ export const Item = memo<Props>(props => {
           <Trophy {...item} />
         ) : (
           <Image
-            src={`https://praditnet-cdn.rayriffy.com/chunithm/${
+            src={`https://cdn.pradit.net/chunithm/${
               collection.assetPath ?? collection.id
             }/${item.id}.png`}
             className={classNames(

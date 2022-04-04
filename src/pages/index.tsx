@@ -32,7 +32,7 @@ const Page: NextPage<Props> = props => {
           <div className="w-full bg-gradient-to-tr from-zinc-700 to-stone-800 transition duration-[400ms] shadow-none hover:shadow-lg hover:shadow-stone-600 hover:scale-105 rounded-xl py-4 flex justify-center relative text-white grayscale hover:cursor-not-allowed">
             <div className="w-40 flex">
               <Image
-                src={`https://praditnet-cdn.rayriffy.com/event/${event.id}.png`}
+                src={`https://cdn.pradit.net/event/${event.id}.png`}
                 width={745}
                 height={623}
               />

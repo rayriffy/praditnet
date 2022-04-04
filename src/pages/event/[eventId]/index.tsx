@@ -48,7 +48,7 @@ const Page: NextPage<Props> = props => {
         <div className="bg-gradient-to-tr from-zinc-700 to-stone-800 p-4 rounded-xl">
           <div className="flex w-60">
             <Image
-              src={`https://praditnet-cdn.rayriffy.com/event/${event.id}.png`}
+              src={`https://cdn.pradit.net/event/${event.id}.png`}
               width={745}
               height={623}
             />

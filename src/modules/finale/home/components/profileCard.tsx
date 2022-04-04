@@ -17,7 +17,7 @@ export const ProfileCard = memo<Props>(props => {
         <div className="flex bg-gradient-to-r from-purple-100 to-fuchsia-100 p-4 rounded-lg max-w-lg w-full">
           <Image
             className="h-24 w-full"
-            src={`https://praditnet-cdn.rayriffy.com/finale/icon/${equipped.icon}.png`}
+            src={`https://cdn.pradit.net/finale/icon/${equipped.icon}.png`}
             width={96}
             height={96}
           />
@@ -34,7 +34,7 @@ export const ProfileCard = memo<Props>(props => {
               <Image
                 className="h-full w-auto"
                 layout="responsive"
-                src={`https://praditnet-cdn.rayriffy.com/finale/nameplate/${equipped.nameplate}.png`}
+                src={`https://cdn.pradit.net/finale/nameplate/${equipped.nameplate}.png`}
                 width={284}
                 height={96}
               />
