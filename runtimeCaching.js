@@ -43,7 +43,7 @@ exports.runtimeCaching = [
     },
   },
   {
-    urlPattern: /^https:\/\/praditnet-optimizer\.rayriffy\.com/i,
+    urlPattern: /^https:\/\/cdn-optimizer\.pradit\.net/i,
     handler: 'StaleWhileRevalidate',
     options: {
       cacheName: 'optimized-image-assets',
