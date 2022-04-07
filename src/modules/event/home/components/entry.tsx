@@ -35,7 +35,7 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
           {user.id}
         </span>
       </div>
-      <div className="grid grid-cols-1 gap-4 mx-auto max-w-xl">
+      <div className="grid grid-cols-1 gap-4 mx-auto max-w-2xl">
         {musics[entry.game].map(music => (
           <AttemptLog
             key={`music-${entry.game}-${music.id}`}
