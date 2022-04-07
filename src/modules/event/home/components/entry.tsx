@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
-import { Image } from '../../../../core/components/image'
 import { Props } from '../../../../pages/event/[eventId]'
+import { AttemptLog } from './attemptLog'
 
 export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
   const { user, entry, musics } = props
@@ -30,35 +30,19 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
         Qualification progress
       </h1>
       <div className="flex">
-        <h2 className="font-mono text-sm text-gray-700 mb-4 bg-gray-700 rounded transition hover:text-white px-2 py-0.5">
+        <span className="text-sm mr-2">Submission ID: </span>
+        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5">
           {user.id}
-        </h2>
+        </span>
       </div>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-4 mx-auto max-w-xl">
         {musics[entry.game].map(music => (
-          <div
+          <AttemptLog
             key={`music-${entry.game}-${music.id}`}
-            className="flex flex-col sm:flex-row bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 px-5 py-6 rounded-md"
-          >
-            <div className="flex shrink-0 justify-center sm:justify-start items-start">
-              <div className="flex rounded-md overflow-hidden w-48 sm:w-40">
-                <Image
-                  src={`https://cdn.pradit.net/${entry.game}/jacket/${music.id}.png`}
-                  width={256}
-                  height={256}
-                />
-              </div>
-            </div>
-            <div className="ml-4 mt-4 sm:mt-0">
-              <h2 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white">
-                {music.name}
-              </h2>
-              <p className="text-4xl font-light dark:text-white">
-                {entry.attemptLog.find(o => o[0] === music.id)?.[1] ?? 0}
-                {entry.game === 'maimai' && '%'}
-              </p>
-            </div>
-          </div>
+            game={entry.game}
+            music={music}
+            targetAttemptLog={entry.attemptLog.find(o => o[0] === music.id)}
+          />
         ))}
       </div>
     </div>

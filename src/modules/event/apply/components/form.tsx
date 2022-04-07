@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Image } from '../../../../core/components/image'
+import { classNames } from '../../../../core/services/classNames'
 
 interface Props {
   eventId: string
@@ -24,12 +25,12 @@ export const Form = memo<Props>(props => {
   const { eventId, musics } = props
 
   const [progress, setProgress] = useState<boolean>(false)
+  const [failedAt, setFailedAt] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const realNameRef = useRef<HTMLInputElement>(null)
   const inGameNameRef = useRef<HTMLInputElement>(null)
   const facebookRef = useRef<HTMLInputElement>(null)
-  const ratingRef = useRef<HTMLInputElement>(null)
   const [participatedGame, setParticipatedGame] = useState<string | null>(null)
 
   const router = useRouter()
@@ -39,33 +40,22 @@ export const Form = memo<Props>(props => {
     event.preventDefault()
 
     setError(null)
+    setFailedAt(null)
     setProgress(true)
 
     // validate
     if (/^[\u0E00-\u0E7F\s]+$/.exec(realNameRef.current.value) === null) {
       setError('Please write your name in Thai')
-      setProgress(false)
-      return
-    } else if (/^\d*\.?\d*$/.exec(ratingRef.current.value) === null) {
-      setError('Rating is not a valid number')
-      setProgress(false)
-      return
-    } else if (Number(ratingRef.current.value) < 0) {
-      setError('Rating must be greater than 0')
+      setFailedAt('realName')
       setProgress(false)
       return
     } else if (
-      Number(ratingRef.current.value) % 1 !== 0 &&
-      participatedGame === 'maimai'
+      /http(s?)(:\/\/)((www.)?)(([^.]+)\.)?facebook.com(\/[^\s]*)?/.exec(
+        facebookRef.current.value
+      ) === null
     ) {
-      setError('Rating does not have a valid format')
-      setProgress(false)
-      return
-    } else if (
-      Number(ratingRef.current.value) >= 18 &&
-      participatedGame === 'chunithm'
-    ) {
-      setError('Rating does not have a valid format')
+      setError('Facebook URL has invalid format')
+      setFailedAt('facebook')
       setProgress(false)
       return
     }
@@ -82,7 +72,6 @@ export const Form = memo<Props>(props => {
           realName: realNameRef.current.value,
           inGameName: inGameNameRef.current.value,
           facebook: facebookRef.current.value,
-          rating: Number(ratingRef.current.value),
           participatedGame,
         },
         {
@@ -120,7 +109,10 @@ export const Form = memo<Props>(props => {
                   ref={realNameRef}
                   disabled={progress}
                   required
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  className={classNames(
+                    failedAt === 'realName' ? 'border-2 border-red-500' : '',
+                    'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                  )}
                 />
                 <p className="text-sm text-gray-500 mt-3">
                   Please write your name in Thai, and without intitials (e.g.
@@ -167,27 +159,10 @@ export const Form = memo<Props>(props => {
                     CHUNITHM-NET
                   </a>
                 </p>
-              </div>
-            </div>
-
-            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-              <label
-                htmlFor="rating"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
-              >
-                Rating
-              </label>
-              <div className="mt-1 sm:mt-0 sm:col-span-2">
-                <input
-                  type="text"
-                  name="rating"
-                  id="rating"
-                  // inputMode="decimal"
-                  ref={ratingRef}
-                  disabled={progress}
-                  required
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
-                />
+                <p className="text-sm text-red-500 mt-0">
+                  Please do not change in-game name until qualification is
+                  finished
+                </p>
               </div>
             </div>
 
@@ -206,7 +181,11 @@ export const Form = memo<Props>(props => {
                   ref={facebookRef}
                   disabled={progress}
                   required
-                  className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
+                  placeholder="https://facebook.com/rayriffy"
+                  className={classNames(
+                    failedAt === 'realName' ? 'border-2 border-red-500' : '',
+                    'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
+                  )}
                 />
                 <p className="text-sm text-gray-500 mt-3">
                   We will contact you in case you has been qualified for the

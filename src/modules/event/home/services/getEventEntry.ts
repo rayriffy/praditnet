@@ -30,7 +30,11 @@ export const getEventEntry = async (
         game: targetEntry.selectedGameId,
         inGameName: targetEntry.inGameName,
         remainingAttempts: targetEntry.remainingAttempts,
-        attemptLog: attemptLogs.map(item => [item.musicId, item.score]),
+        attemptLog: attemptLogs.map(item => [
+          item.musicId,
+          item.score,
+          item.metadata,
+        ]),
       }
     }
   }

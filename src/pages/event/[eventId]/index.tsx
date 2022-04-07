@@ -31,7 +31,7 @@ export interface Props {
     game: 'maimai' | 'chunithm'
     inGameName: string
     remainingAttempts: number
-    attemptLog: [number, number][] // [musicId, score]
+    attemptLog: [number, number, string][] // [musicId, score, metadata]
   } | null
 }
 
