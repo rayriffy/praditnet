@@ -28,20 +28,22 @@ const Page: NextPage<Props> = props => {
     <Fragment>
       <div className="space-y-4">
         {props.events.map(event => (
-          // <Link key={`event-${event.id}`} href={`/event/${event.id}`}>
-          <div className="w-full bg-gradient-to-tr from-zinc-700 to-stone-800 transition duration-[400ms] shadow-none hover:shadow-lg hover:shadow-stone-600 hover:scale-105 rounded-xl py-4 flex justify-center relative text-white grayscale hover:cursor-not-allowed">
-            <div className="w-40 flex">
-              <Image
-                src={`https://cdn.pradit.net/event/${event.id}.png`}
-                width={745}
-                height={623}
-              />
-            </div>
-            <div className="absolute right-1 bottom-4 text-sm">
-              <p>Coming soon...</p>
-            </div>
-          </div>
-          // </Link>
+          <Link key={`event-${event.id}`} href={`/event/${event.id}`}>
+            <a className="w-full bg-gradient-to-tr from-zinc-700 to-stone-800 transition duration-[400ms] shadow-none hover:shadow-lg hover:shadow-stone-600 hover:scale-105 rounded-xl py-4 flex justify-center relative text-white">
+              <div className="w-40 flex">
+                <Image
+                  src={`https://cdn.pradit.net/event/${event.id}.png`}
+                  width={745}
+                  height={623}
+                />
+              </div>
+              <div className="absolute right-1 bottom-4 text-sm">
+                <p>
+                  {event.startAt} - {event.endAt}
+                </p>
+              </div>
+            </a>
+          </Link>
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mt-14">
