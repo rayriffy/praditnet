@@ -97,7 +97,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
               <label
                 htmlFor="real-name"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
               >
                 Real name
               </label>
@@ -114,7 +114,7 @@ export const Form = memo<Props>(props => {
                     'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   )}
                 />
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
                   Please write your name in Thai, and without intitials (e.g.
                   นาย ด.ช.)
                 </p>
@@ -124,7 +124,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="in-game-name"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
               >
                 In-game name
               </label>
@@ -139,7 +139,7 @@ export const Form = memo<Props>(props => {
                   required
                   className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
                   You can copy in-game name from{' '}
                   <a
                     href="https://maimaidx-eng.com/"
@@ -169,7 +169,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="facebook"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
               >
                 Link to Facebook
               </label>
@@ -187,7 +187,7 @@ export const Form = memo<Props>(props => {
                     'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   )}
                 />
-                <p className="text-sm text-gray-500 mt-3">
+                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
                   We will contact you in case you has been qualified for the
                   grand final day
                 </p>
@@ -199,7 +199,7 @@ export const Form = memo<Props>(props => {
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                   <div>
                     <div
-                      className="text-base font-medium text-gray-900 sm:text-sm sm:text-gray-700"
+                      className="text-base font-medium sm:text-sm text-gray-700 dark:text-white"
                       id="label-participated-game"
                     >
                       Participated game
@@ -224,7 +224,7 @@ export const Form = memo<Props>(props => {
                           />
                           <label
                             htmlFor="la-participated-game"
-                            className="ml-3 block text-sm font-medium text-gray-700"
+                            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
                           >
                             <span>maimai DX</span>
                             <div className="mt-1 flex space-x-2">
@@ -258,7 +258,7 @@ export const Form = memo<Props>(props => {
                           />
                           <label
                             htmlFor="push-email"
-                            className="ml-3 block text-sm font-medium text-gray-700"
+                            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
                           >
                             <span>CHUNITHM NEW!!</span>
                             <div className="mt-1 flex space-x-2">

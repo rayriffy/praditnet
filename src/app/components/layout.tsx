@@ -57,7 +57,7 @@ export const Layout: FunctionComponent<Props> = props => {
         </header>
         <main>{children}</main>
       </div>
-      <footer className="py-10 text-gray-400 dark:text-gray-300">
+      <footer className="py-10 text-gray-400 dark:text-gray-100">
         <p className="text-center text-base">
           Version <b>{process.env.buildNumber}</b>
         </p>

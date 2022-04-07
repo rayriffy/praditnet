@@ -12,26 +12,26 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
         <div className="flex justify-between sm:justify-start space-x-0 sm:space-x-4">
           <img src={`/assets/logo/${entry.game}.png`} className="w-40 h-auto" />
           <div className="flex items-center">
-            <p className="py-1 px-6 font-semibold text-lg bg-gray-700 text-white rounded-md">
+            <p className="py-1 px-6 font-semibold text-lg bg-gray-700 text-white rounded-md dark:bg-gray-100 dark:text-gray-900">
               {entry.inGameName}
             </p>
           </div>
         </div>
         <div className="flex items-center flex-row-reverse mt-2 justify-end sm:block">
           <div className="ml-2 sm:ml-0 flex sm:mt-2 justify-start sm:justify-center">
-            <p className="bg-gray-700 text-white font-semibold text-lg rounded px-4 py-1">
+            <p className="bg-gray-700 text-white font-semibold text-lg rounded px-4 py-1 dark:bg-gray-100 dark:text-gray-900">
               {entry.remainingAttempts}
             </p>
           </div>
-          <p>Remaining attempts</p>
+          <p className="dark:text-white">Remaining attempts</p>
         </div>
       </div>
-      <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-0.5">
+      <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-0.5 dark:text-white">
         Qualification progress
       </h1>
       <div className="flex">
-        <span className="text-sm mr-2">Submission ID: </span>
-        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5">
+        <span className="text-sm mr-2 dark:text-white">Submission ID: </span>
+        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5 dark:bg-gray-100 dark:text-gray-900">
           {user.id}
         </span>
       </div>
