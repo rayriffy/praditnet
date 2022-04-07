@@ -183,7 +183,7 @@ export const Form = memo<Props>(props => {
                   required
                   placeholder="https://facebook.com/rayriffy"
                   className={classNames(
-                    failedAt === 'realName' ? 'border-2 border-red-500' : '',
+                    failedAt === 'facebook' ? 'border-2 border-red-500' : '',
                     'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   )}
                 />
