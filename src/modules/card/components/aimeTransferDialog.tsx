@@ -12,13 +12,13 @@ import axios from 'axios'
 import { Dialog, Transition } from '@headlessui/react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-export interface TransferDialogProps {
+export interface AimeTransferDialogProps {
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
   cardId: string | null
 }
 
-export const TransferDialog = memo<TransferDialogProps>(props => {
+export const TransferDialog = memo<AimeTransferDialogProps>(props => {
   const { show, setShow, cardId } = props
 
   const [progress, setProgress] = useState<boolean>(false)
