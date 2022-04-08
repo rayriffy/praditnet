@@ -11,7 +11,7 @@ export const getEventEntry = async (
   let entry: Props['entry'] = null
   if (user !== null && user !== undefined) {
     // get user entry if exist
-    const targetEntry = await knex('EventAuditionRegister')
+    const targetEntry = await knex('EventAuditionRecord')
       .where({
         eventId,
         userId: user.uid,

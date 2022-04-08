@@ -102,7 +102,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   }
 
   // redirect to event if already applied
-  const existingRegistration = await knex('EventAuditionRegister')
+  const existingRegistration = await knex('EventAuditionRecord')
     .where({
       eventId: eventId,
       userId: user.uid,

@@ -20,7 +20,7 @@ const api: NextApiHandler = async (req, res) => {
     const knex = createKnexInstance('praditnet')
 
     // make sure user not registered yet
-    const existingRegistration = await knex('EventAuditionRegister')
+    const existingRegistration = await knex('EventAuditionRecord')
       .where({
         eventId: event,
         userId: user.uid,
@@ -35,7 +35,7 @@ const api: NextApiHandler = async (req, res) => {
     }
 
     // add user to competition
-    await knex('EventAuditionRegister').insert({
+    await knex('EventAuditionRecord').insert({
       eventId: event,
       userId: user.uid,
       realName,
