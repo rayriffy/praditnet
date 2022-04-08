@@ -17,7 +17,9 @@ export const serverCapcha = async (code: string | undefined) => {
       }
     )
 
-    if (googleResponse.data.success) {
+    console.log(`Score: ${googleResponse.data.score}`)
+
+    if (googleResponse.data.success && googleResponse.data.score > 0.5) {
       return true
     } else {
       throw new Error("Server thinks you're a robot")
