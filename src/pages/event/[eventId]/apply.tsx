@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next'
+import { useTitle } from '../../../core/services/useTitle'
 
 import { Form } from '../../../modules/event/apply/components/form'
 
@@ -22,6 +23,8 @@ interface Props {
 
 const Page: NextPage<Props> = props => {
   const { event, musics } = props
+
+  useTitle('Apply')
 
   return (
     <div>

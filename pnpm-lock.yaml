@@ -40,8 +40,8 @@ specifiers:
   preact: ^10.7.1
   preact-render-to-string: ^5.1.20
   prettier: ^2.6.2
-  react: npm:@preact/compat@^17.0.3
-  react-dom: npm:@preact/compat@^17.0.3
+  react: ^18.0.0
+  react-dom: ^18.0.0
   react-google-recaptcha-v3: ^1.9.7
   react-icons: ^4.3.1
   react-infinite-scroll-component: ^6.1.0
@@ -55,8 +55,8 @@ specifiers:
 dependencies:
   '@builder.io/partytown': 0.5.2
   '@hapi/iron': 6.0.0
-  '@headlessui/react': 1.5.0_9bfab5d69556db861da30525f2351767
-  '@heroicons/react': 1.0.6_@preact+compat@17.0.3
+  '@headlessui/react': 1.5.0_react-dom@18.0.0+react@18.0.0
+  '@heroicons/react': 1.0.6_react@18.0.0
   '@tailwindcss/forms': 0.5.0_tailwindcss@3.0.23
   '@tailwindcss/typography': 0.5.2_tailwindcss@3.0.23
   '@types/lodash': 4.14.181
@@ -67,7 +67,7 @@ dependencies:
   lodash: 4.17.21
   mysql: 2.18.1
   nanoid: 3.3.2
-  next: 12.1.4_9bfab5d69556db861da30525f2351767
+  next: 12.1.4_react-dom@18.0.0+react@18.0.0
   next-compose-plugins: 2.2.1
   next-connect: 0.12.2
   next-plugin-preact: 3.0.6_feb4f0358dab6d45aec47de3523a30c9
@@ -78,16 +78,16 @@ dependencies:
   postcss: 8.4.12
   preact: 10.7.1
   preact-render-to-string: 5.1.20_preact@10.7.1
-  react: /@preact/compat/17.0.3_preact@10.7.1
-  react-dom: /@preact/compat/17.0.3_preact@10.7.1
-  react-google-recaptcha-v3: 1.9.7_9bfab5d69556db861da30525f2351767
-  react-icons: 4.3.1_@preact+compat@17.0.3
-  react-infinite-scroll-component: 6.1.0_@preact+compat@17.0.3
-  react-qr-reader: 2.2.1_9bfab5d69556db861da30525f2351767
+  react: 18.0.0
+  react-dom: 18.0.0_react@18.0.0
+  react-google-recaptcha-v3: 1.9.7_react-dom@18.0.0+react@18.0.0
+  react-icons: 4.3.1_react@18.0.0
+  react-infinite-scroll-component: 6.1.0_react@18.0.0
+  react-qr-reader: 2.2.1_react-dom@18.0.0+react@18.0.0
   react-ssr-prepass: /preact-ssr-prepass/1.2.0_preact@10.7.1
-  storeon: 3.1.5_8ec6b26ecbfb9fe0cfa34756d4995b66
+  storeon: 3.1.5_preact@10.7.1+react@18.0.0
   tailwindcss: 3.0.23
-  web-api-hooks: 3.0.2_@preact+compat@17.0.3
+  web-api-hooks: 3.0.2_react@18.0.0
 
 devDependencies:
   '@commitlint/cli': 16.2.3
@@ -1454,23 +1454,23 @@ packages:
       '@hapi/hoek': 9.2.1
     dev: false
 
-  /@headlessui/react/1.5.0_9bfab5d69556db861da30525f2351767:
+  /@headlessui/react/1.5.0_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-aaRnYxBb3MU2FNJf3Ut9RMTUqqU3as0aI1lQhgo2n9Fa67wRu14iOGqx93xB+uMNVfNwZ5B3y/Ndm7qZGuFeMQ==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
-      react: /@preact/compat/17.0.3_preact@10.7.1
-      react-dom: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
-  /@heroicons/react/1.0.6_@preact+compat@17.0.3:
+  /@heroicons/react/1.0.6_react@18.0.0:
     resolution: {integrity: sha512-JJCXydOFWMDpCP4q13iEplA503MQO3xLoZiKum+955ZCtHINWnx26CUxVxxFQu/uLb4LW3ge15ZpzIkXKkJ8oQ==}
     peerDependencies:
       react: '>= 16'
     dependencies:
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
     dev: false
 
   /@jridgewell/resolve-uri/3.0.5:
@@ -1622,14 +1622,6 @@ packages:
       fastq: 1.13.0
     dev: false
 
-  /@preact/compat/17.0.3_preact@10.7.1:
-    resolution: {integrity: sha512-lzkui97aQ00hxzUwfRfZm7jUXE1bjWyOXiqm8DeWYhkD+G9ZaY1wso/itqyg60wGnP9DRlM4PDn2blIOnh1yeg==}
-    peerDependencies:
-      preact: '*'
-    dependencies:
-      preact: 10.7.1
-    dev: false
-
   /@prefresh/babel-plugin/0.4.3:
     resolution: {integrity: sha512-fYAWbU1WDSLn108kKY4eDaaeUcnszFqXjgaGKYXNZ5NLulpRTpsrY+Sbfo9q8LDpWrBpqIgzjrwNnvglWI1xNQ==}
     dev: false
@@ -1653,7 +1645,7 @@ packages:
       '@prefresh/core': 1.3.4_preact@10.7.1
       '@prefresh/utils': 1.1.3
       '@prefresh/webpack': 3.3.3_23a3b62ed8bc4e0eaeff24403346e76a
-      next: 12.1.4_9bfab5d69556db861da30525f2351767
+      next: 12.1.4_react-dom@18.0.0+react@18.0.0
       preact: 10.7.1
     dev: false
 
@@ -2937,10 +2929,10 @@ packages:
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
-    dev: false
 
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
+    dev: true
 
   /hard-rejection/2.1.0:
     resolution: {integrity: sha512-VIZB+ibDhx7ObhAe7OVtoEbuP4h/MuOTHJ+J8h/eBXotJYl0fBgR72xDFCKgIh22OJZIOVNxBMWuhAr10r8HdA==}
@@ -3297,7 +3289,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.9
+      graceful-fs: 4.2.10
 
   /jsonparse/1.3.1:
     resolution: {integrity: sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=}
@@ -3647,7 +3639,7 @@ packages:
       babel-loader: 8.2.4
       clean-webpack-plugin: 4.0.0
       globby: 11.1.0
-      next: 12.1.4_9bfab5d69556db861da30525f2351767
+      next: 12.1.4_react-dom@18.0.0+react@18.0.0
       terser-webpack-plugin: 5.3.1
       workbox-webpack-plugin: 6.5.2
       workbox-window: 6.5.2
@@ -3661,7 +3653,7 @@ packages:
       - webpack
     dev: false
 
-  /next/12.1.4_9bfab5d69556db861da30525f2351767:
+  /next/12.1.4_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-DA4g97BM4Z0nKtDvCTm58RxdvoQyYzeg0AeVbh0N4Y/D8ELrNu47lQeEgRGF8hV4eQ+Sal90zxrJQQG/mPQ8CQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
@@ -3682,9 +3674,9 @@ packages:
       '@next/env': 12.1.4
       caniuse-lite: 1.0.30001323
       postcss: 8.4.5
-      react: /@preact/compat/17.0.3_preact@10.7.1
-      react-dom: /@preact/compat/17.0.3_preact@10.7.1
-      styled-jsx: 5.0.1_@preact+compat@17.0.3
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+      styled-jsx: 5.0.1_react@18.0.0
     optionalDependencies:
       '@next/swc-android-arm-eabi': 12.1.4
       '@next/swc-android-arm64': 12.1.4
@@ -4075,31 +4067,41 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /react-google-recaptcha-v3/1.9.7_9bfab5d69556db861da30525f2351767:
+  /react-dom/18.0.0_react@18.0.0:
+    resolution: {integrity: sha512-XqX7uzmFo0pUceWFCt7Gff6IyIMzFUn7QMZrbrQfGxtaxXZIcGQzoNpRLE3fQLnS4XzLLPMZX2T9TRcSrasicw==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      loose-envify: 1.4.0
+      react: 18.0.0
+      scheduler: 0.21.0
+    dev: false
+
+  /react-google-recaptcha-v3/1.9.7_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-LgHTuPUE86jGOtmMYMUWEYux8n7M2ZNj5GHct//DlXWZGyLIgFfLbvxA3UlgrG+tSu2pgw2mqXtYdPxaldqhWQ==}
     peerDependencies:
       react: ^17.0
       react-dom: ^17.0
     dependencies:
       hoist-non-react-statics: 3.3.2
-      react: /@preact/compat/17.0.3_preact@10.7.1
-      react-dom: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
     dev: false
 
-  /react-icons/4.3.1_@preact+compat@17.0.3:
+  /react-icons/4.3.1_react@18.0.0:
     resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
     peerDependencies:
       react: '*'
     dependencies:
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
     dev: false
 
-  /react-infinite-scroll-component/6.1.0_@preact+compat@17.0.3:
+  /react-infinite-scroll-component/6.1.0_react@18.0.0:
     resolution: {integrity: sha512-SQu5nCqy8DxQWpnUVLx7V7b7LcA37aM7tvoWjTLZp1dk6EJibM5/4EJKzOnl07/BsM1Y40sKLuqjCwwH/xV0TQ==}
     peerDependencies:
       react: '>=16.0.0'
     dependencies:
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
       throttle-debounce: 2.3.0
     dev: false
 
@@ -4107,7 +4109,7 @@ packages:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: false
 
-  /react-qr-reader/2.2.1_9bfab5d69556db861da30525f2351767:
+  /react-qr-reader/2.2.1_react-dom@18.0.0+react@18.0.0:
     resolution: {integrity: sha512-EL5JEj53u2yAOgtpAKAVBzD/SiKWn0Bl7AZy6ZrSf1lub7xHwtaXe6XSx36Wbhl1VMGmvmrwYMRwO1aSCT2fwA==}
     peerDependencies:
       react: ~16
@@ -4115,9 +4117,16 @@ packages:
     dependencies:
       jsqr: 1.4.0
       prop-types: 15.8.1
-      react: /@preact/compat/17.0.3_preact@10.7.1
-      react-dom: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
       webrtc-adapter: 7.7.1
+    dev: false
+
+  /react/18.0.0:
+    resolution: {integrity: sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
     dev: false
 
   /read-pkg-up/7.0.1:
@@ -4342,6 +4351,12 @@ packages:
   /safe-buffer/5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
 
+  /scheduler/0.21.0:
+    resolution: {integrity: sha512-1r87x5fz9MXqswA2ERLo0EbOAU74DpIUO090gIasYTqlVoJeMcl+Z1Rg7WHz+qtPujhS/hGIt9kxZOYBV3faRQ==}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: false
+
   /schema-utils/2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
     engines: {node: '>= 8.9.0'}
@@ -4529,7 +4544,7 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /storeon/3.1.5_8ec6b26ecbfb9fe0cfa34756d4995b66:
+  /storeon/3.1.5_preact@10.7.1+react@18.0.0:
     resolution: {integrity: sha512-VuW4GQr3LGQr+gqscqsOz2c9asK9N+B+8+sWs7Pj4OqU7bngYIqsPF3IYpkbmccKNWjs7wwxUAlR+gtL9cEMEg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -4542,7 +4557,7 @@ packages:
         optional: true
     dependencies:
       preact: 10.7.1
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
     dev: false
 
   /string-argv/0.3.1:
@@ -4647,7 +4662,7 @@ packages:
       min-indent: 1.0.1
     dev: true
 
-  /styled-jsx/5.0.1_@preact+compat@17.0.3:
+  /styled-jsx/5.0.1_react@18.0.0:
     resolution: {integrity: sha512-+PIZ/6Uk40mphiQJJI1202b+/dYeTVd9ZnMPR80pgiWbjIwvN2zIp4r9et0BgqBuShh48I0gttPlAXA7WVvBxw==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
@@ -4660,7 +4675,7 @@ packages:
       babel-plugin-macros:
         optional: true
     dependencies:
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
     dev: false
 
   /supports-color/5.5.0:
@@ -4964,13 +4979,13 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /web-api-hooks/3.0.2_@preact+compat@17.0.3:
+  /web-api-hooks/3.0.2_react@18.0.0:
     resolution: {integrity: sha512-EQEGcHo1+FVINg5spKw05lBiN1/LhRK/K2xKnUmuLsLzz4sQK8Bk8qhj4RUgsh4LA7XXZqgJ43aQI+nvtMmIqA==}
     peerDependencies:
       react: '>=16.8'
     dependencies:
       '@types/resize-observer-browser': 0.1.7
-      react: /@preact/compat/17.0.3_preact@10.7.1
+      react: 18.0.0
     dev: false
 
   /webidl-conversions/4.0.2:

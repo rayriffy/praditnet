@@ -1,13 +1,14 @@
-import { Fragment, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
-import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import NProgress from 'nprogress'
 
+import { HeadTitle } from '../core/components/headTitle'
 import { Layout } from '../app/components/layout'
+import { Context } from '../context/storeon'
 
 import '../styles/nprogress.css'
 import '../styles/tailwind.css'
@@ -42,10 +43,8 @@ const NextApp: NextPage<AppProps> = props => {
   }, [])
 
   return (
-    <Fragment>
-      <Head>
-        <title>PraditNET</title>
-      </Head>
+    <Context>
+      <HeadTitle />
       <Layout
         aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
         eamuse={
@@ -54,7 +53,7 @@ const NextApp: NextPage<AppProps> = props => {
       >
         <Component {...pageProps} />
       </Layout>
-    </Fragment>
+    </Context>
   )
 }
 

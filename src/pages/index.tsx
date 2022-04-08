@@ -1,15 +1,17 @@
-import { GetServerSideProps, NextPage } from 'next'
+import { Fragment } from 'react'
 
+import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
+
+import dayjs from 'dayjs'
 
 import { games } from '../modules/home/constants/games'
 import { PreviewCard } from '../modules/home/components/previewCard'
 import { Image } from '../core/components/image'
+import { useTitle } from '../core/services/useTitle'
 
 import { UserPreview } from '../modules/home/@types/UserPreview'
 import { AppProps } from '../app/@types/AppProps'
-import { Fragment } from 'react'
-import dayjs from 'dayjs'
 
 interface Props extends AppProps {
   events: {
@@ -24,6 +26,8 @@ interface Props extends AppProps {
 }
 
 const Page: NextPage<Props> = props => {
+  useTitle('')
+
   return (
     <Fragment>
       <div className="space-y-4">

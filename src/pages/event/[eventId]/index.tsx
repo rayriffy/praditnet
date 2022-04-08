@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Image } from '../../../core/components/image'
 import { Preview } from '../../../modules/event/home/components/preview'
 import { Entry } from '../../../modules/event/home/components/entry'
+import { useTitle } from '../../../core/services/useTitle'
 
 export interface Props {
   user: {
@@ -41,6 +42,8 @@ const Page: NextPage<Props> = props => {
   useEffect(() => {
     console.log(props)
   }, [])
+
+  useTitle(event.name)
 
   return (
     <div className="space-y-4">

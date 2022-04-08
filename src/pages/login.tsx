@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { useTitle } from '../core/services/useTitle'
 
 const Page: NextPage = props => {
   const [progress, setProgress] = useState<boolean>(false)
@@ -12,6 +13,8 @@ const Page: NextPage = props => {
 
   const router = useRouter()
   const { executeRecaptcha } = useGoogleReCaptcha()
+
+  useTitle('Login')
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault()

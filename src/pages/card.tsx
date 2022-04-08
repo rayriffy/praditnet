@@ -9,6 +9,7 @@ import { BiTransfer } from 'react-icons/bi'
 import { LogoutIcon, PlusIcon } from '@heroicons/react/solid'
 import { AimeTransferDialogProps } from '../modules/card/components/aimeTransferDialog'
 import { CardTabsProps } from '../modules/card/components/cardTabs'
+import { useTitle } from '../core/services/useTitle'
 
 const TransferDialog = dynamic<AimeTransferDialogProps>(
   () =>
@@ -46,6 +47,8 @@ const Page: NextPage<Props> = props => {
   const { username } = props.userData
 
   const [open, setOpen] = useState(false)
+
+  useTitle('Card')
 
   return (
     <div>
