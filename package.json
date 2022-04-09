@@ -14,7 +14,7 @@
     "build": "partytown copylib public/~partytown && next build",
     "start": "next start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "partytown": "partytown copylib public/~partytown"
+    "partytown": "partytown copylib --no-debug public/~partytown"
   },
   "repository": {
     "type": "git",
