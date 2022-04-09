@@ -1,11 +1,12 @@
-import { memo } from 'react'
+import { memo, SVGProps } from 'react'
 
-export const Spinner = memo(() => (
+export const Spinner = memo<SVGProps<SVGSVGElement>>(props => (
   <svg
     className="animate-spin h-6 w-6 text-gray-900"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
+    {...props}
   >
     <circle
       className="opacity-25"

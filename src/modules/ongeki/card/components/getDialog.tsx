@@ -9,12 +9,14 @@ export interface GetDialogProps {
   id: number
   name: string
 
+  refetch: () => void
+
   show: boolean
   setShow: Dispatch<SetStateAction<boolean>>
 }
 
 export const GetDialog = memo<GetDialogProps>(props => {
-  const { show, setShow, id, name } = props
+  const { show, setShow, id, name, refetch } = props
 
   const [progress, setProgress] = useState(false)
   const [error, setError] = useState<string>(null)
@@ -40,10 +42,8 @@ export const GetDialog = memo<GetDialogProps>(props => {
         })
 
         if (res.status === 200) {
-          console.log('Successfully got card!')
-          NProgress.configure({ minimum: 0.3 })
-          NProgress.start()
-          window.location.reload()
+          refetch()
+          setShow(false)
         } else {
           throw new Error(await res.data())
         }

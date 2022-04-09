@@ -20,10 +20,11 @@ interface Props {
     serial: string
     owned: boolean
   }
+  refetch: () => void
 }
 
 export const Card = memo<Props>(props => {
-  const { card } = props
+  const { card, refetch } = props
 
   const [showGet, setShowGet] = useState(false)
 
@@ -59,6 +60,7 @@ export const Card = memo<Props>(props => {
         name={card.name}
         show={showGet}
         setShow={setShowGet}
+        refetch={refetch}
       />
     </button>
   )
