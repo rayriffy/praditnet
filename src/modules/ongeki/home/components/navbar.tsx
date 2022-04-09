@@ -28,7 +28,7 @@ const navbars = [
     title: 'Decks',
   },
   {
-    id: 'card',
+    id: 'cards',
     title: 'Cards',
   },
   {

@@ -2,23 +2,22 @@ import { Fragment, useRef, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
-import { Navbar } from '../../../modules/ongeki/home/components/navbar'
+import { Navbar } from '../../modules/ongeki/home/components/navbar'
 
-import { AppProps } from '../../../app/@types/AppProps'
-import { RarityOverview } from '../../../modules/ongeki/card/services/getOverviewCard'
+import { AppProps } from '../../app/@types/AppProps'
+import { RarityOverview } from '../../modules/ongeki/card/services/getOverviewCard'
 
-import { useCardSearch } from '../../../modules/ongeki/card/services/useCardSearch'
+import { useCardSearch } from '../../modules/ongeki/card/services/useCardSearch'
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   SearchCircleIcon,
 } from '@heroicons/react/solid'
-import { Spinner } from '../../../core/components/spinner'
-import { Card } from '../../../modules/ongeki/card/components/card'
-import { CardPagination } from '../../../modules/ongeki/card/components/cardPagination'
-import { paginationItems } from '../../../core/constants/paginationItems'
-import { CardSkeleton } from '../../../modules/ongeki/card/components/cardSkeleton'
-import { classNames } from '../../../core/services/classNames'
+import { Card } from '../../modules/ongeki/card/components/card'
+import { CardPagination } from '../../modules/ongeki/card/components/cardPagination'
+import { paginationItems } from '../../core/constants/paginationItems'
+import { CardSkeleton } from '../../modules/ongeki/card/components/cardSkeleton'
+import { classNames } from '../../core/services/classNames'
 
 interface Props extends AppProps {
   overview: RarityOverview
@@ -214,10 +213,10 @@ const Page: NextPage<Props> = props => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getApiUserSession } = await import(
-    '../../../core/services/authentication/api/getApiUserSession'
+    '../../core/services/authentication/api/getApiUserSession'
   )
   const { getOverviewCard } = await import(
-    '../../../modules/ongeki/card/services/getOverviewCard'
+    '../../modules/ongeki/card/services/getOverviewCard'
   )
 
   // check for user session
