@@ -109,7 +109,7 @@ const api: NextApiHandler = async (req, res) => {
       }
     })
 
-    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate=5')
+    res.setHeader('Cache-Control', 'max-age=2')
 
     return res.status(200).send({
       page: {
