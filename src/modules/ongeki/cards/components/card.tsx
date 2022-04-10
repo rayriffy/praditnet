@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { GetDialogProps } from './getDialog'
+import Link from 'next/link'
 
 const GetDialog = dynamic<GetDialogProps>(
   () => import('./getDialog').then(o => o.GetDialog),
@@ -23,19 +24,10 @@ interface Props {
   refetch: () => void
 }
 
-export const Card = memo<Props>(props => {
-  const { card, refetch } = props
-
-  const [showGet, setShowGet] = useState(false)
-
+const CardContent = memo<Pick<Props, 'card'>>(props => {
+  const { card } = props
   return (
-    <button
-      disabled={card.owned}
-      onClick={() => {
-        setShowGet(true)
-      }}
-      className="bg-slate-50 dark:bg-neutral-700 dark:border-gray-500 border rounded-md px-2 py-1"
-    >
+    <Fragment>
       <div className="relative">
         {!card.owned && (
           <Fragment>
@@ -55,13 +47,43 @@ export const Card = memo<Props>(props => {
       <p className="text-xs text-center font-medium pb-1 text-gray-900 dark:text-white">
         {card.serial}
       </p>
-      <GetDialog
-        id={card.id}
-        name={card.name}
-        show={showGet}
-        setShow={setShowGet}
-        refetch={refetch}
-      />
-    </button>
+    </Fragment>
+  )
+})
+
+export const Card = memo<Props>(props => {
+  const { card, refetch } = props
+
+  const [showGet, setShowGet] = useState(false)
+
+  return (
+    <Fragment>
+      {card.owned ? (
+        <Link href={`/ongeki/card/${card.id}`}>
+          <a>
+            <div className="bg-slate-50 dark:bg-neutral-700 dark:border-gray-500 border rounded-md px-2 py-1">
+              <CardContent card={card} />
+            </div>
+          </a>
+        </Link>
+      ) : (
+        <button
+          disabled={card.owned}
+          onClick={() => {
+            setShowGet(true)
+          }}
+          className="bg-slate-50 dark:bg-neutral-700 dark:border-gray-500 border rounded-md px-2 py-1"
+        >
+          <CardContent card={card} />
+          <GetDialog
+            id={card.id}
+            name={card.name}
+            show={showGet}
+            setShow={setShowGet}
+            refetch={refetch}
+          />
+        </button>
+      )}
+    </Fragment>
   )
 })

@@ -5,18 +5,18 @@ import { GetServerSideProps, NextPage } from 'next'
 import { Navbar } from '../../modules/ongeki/home/components/navbar'
 
 import { AppProps } from '../../app/@types/AppProps'
-import { RarityOverview } from '../../modules/ongeki/card/services/getOverviewCard'
+import { RarityOverview } from '../../modules/ongeki/cards/services/getOverviewCard'
 
-import { useCardSearch } from '../../modules/ongeki/card/services/useCardSearch'
+import { useCardSearch } from '../../modules/ongeki/cards/services/useCardSearch'
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   SearchCircleIcon,
 } from '@heroicons/react/solid'
-import { Card } from '../../modules/ongeki/card/components/card'
-import { CardPagination } from '../../modules/ongeki/card/components/cardPagination'
+import { Card } from '../../modules/ongeki/cards/components/card'
+import { CardPagination } from '../../modules/ongeki/cards/components/cardPagination'
 import { paginationItems } from '../../core/constants/paginationItems'
-import { CardSkeleton } from '../../modules/ongeki/card/components/cardSkeleton'
+import { CardSkeleton } from '../../modules/ongeki/cards/components/cardSkeleton'
 import { classNames } from '../../core/services/classNames'
 
 interface Props extends AppProps {
@@ -220,7 +220,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     '../../core/services/authentication/api/getApiUserSession'
   )
   const { getOverviewCard } = await import(
-    '../../modules/ongeki/card/services/getOverviewCard'
+    '../../modules/ongeki/cards/services/getOverviewCard'
   )
 
   // check for user session

@@ -5,7 +5,7 @@ import { chunk } from 'lodash'
 import { paginationItems } from '../../../../core/constants/paginationItems'
 import { getApiUserSession } from '../../../../core/services/authentication/api/getApiUserSession'
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
-import { CardSearchQuery } from '../../../../modules/ongeki/card/services/useCardSearch'
+import { CardSearchQuery } from '../../../../modules/ongeki/cards/services/useCardSearch'
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method === 'GET') {
