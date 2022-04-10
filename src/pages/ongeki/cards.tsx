@@ -20,11 +20,12 @@ import { CardSkeleton } from '../../modules/ongeki/card/components/cardSkeleton'
 import { classNames } from '../../core/services/classNames'
 
 interface Props extends AppProps {
+  userId: string
   overview: RarityOverview
 }
 
 const Page: NextPage<Props> = props => {
-  const { overview } = props
+  const { overview, userId } = props
 
   const [rarityToggle, setRarityToggle] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -35,16 +36,19 @@ const Page: NextPage<Props> = props => {
   const raritySRPCheckboxRef = useRef<HTMLInputElement>(null)
   const raritySSRCheckboxRef = useRef<HTMLInputElement>(null)
 
-  const { loading, cards, pagination, refetch, onPaginate } = useCardSearch({
-    text: inputRef.current?.value ?? '',
-    rarity: {
-      n: rarityNCheckboxRef.current?.checked ?? true,
-      r: rarityRCheckboxRef.current?.checked ?? true,
-      sr: raritySRCheckboxRef.current?.checked ?? true,
-      srp: raritySRPCheckboxRef.current?.checked ?? true,
-      ssr: raritySSRCheckboxRef.current?.checked ?? true,
-    },
-  })
+  const { loading, cards, pagination, refetch, onPaginate } = useCardSearch(
+    userId,
+    {
+      text: inputRef.current?.value ?? '',
+      rarity: {
+        n: rarityNCheckboxRef.current?.checked ?? true,
+        r: rarityRCheckboxRef.current?.checked ?? true,
+        sr: raritySRCheckboxRef.current?.checked ?? true,
+        srp: raritySRPCheckboxRef.current?.checked ?? true,
+        ssr: raritySSRCheckboxRef.current?.checked ?? true,
+      },
+    }
+  )
 
   return (
     <Fragment>
@@ -239,6 +243,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         aime: user.aimeCard,
         eamuse: user.eamuseCard,
       },
+      userId: user.uid,
       overview,
     },
   }

@@ -8,11 +8,20 @@ import { createKnexInstance } from '../../../../core/services/createKnexInstance
 import { CardSearchQuery } from '../../../../modules/ongeki/card/services/useCardSearch'
 
 const api: NextApiHandler = async (req, res) => {
-  if (req.method === 'POST') {
-    const { page, query } = req.body
+  if (req.method === 'GET') {
+    const inputUserId = req.query.user
+    const page = Number(req.query.page)
+    const query = JSON.parse(req.query.query as string) as CardSearchQuery
+
     const { text, rarity } = query as CardSearchQuery
 
     const user = await getApiUserSession(req)
+
+    if (inputUserId !== user.uid) {
+      return res.status(403).send({
+        message: 'mismatched user',
+      })
+    }
 
     const rarityDicts: [string, string][] = [
       ['n', 'N'],
@@ -99,6 +108,8 @@ const api: NextApiHandler = async (req, res) => {
         owned,
       }
     })
+
+    res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate=5')
 
     return res.status(200).send({
       page: {

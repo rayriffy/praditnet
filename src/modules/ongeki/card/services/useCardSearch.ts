@@ -17,7 +17,7 @@ export interface CardSearchQuery {
   }
 }
 
-export const useCardSearch = (query: CardSearchQuery) => {
+export const useCardSearch = (userId: string, query: CardSearchQuery) => {
   const debouncedQuery = useDebounce(query, 600)
 
   const [loading, setLoading] = useState<boolean>(true)
@@ -34,9 +34,12 @@ export const useCardSearch = (query: CardSearchQuery) => {
     console.log('fetch')
     // query
     axios
-      .post(`/api/ongeki/card/search`, {
-        query,
-        page: pagination.current,
+      .get(`/api/ongeki/card/search`, {
+        params: {
+          user: userId,
+          query,
+          page: pagination.current,
+        },
       })
       .then(({ data }) => {
         setCards(data.cards)
