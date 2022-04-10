@@ -51,6 +51,9 @@ const Document: NextPage = () => {
         />
         <meta key="manifest-theme" name="theme-color" content="#ffffff" />
 
+        <link rel="dns-prefetch" href="https://cdn-optimizer.pradit.net" />
+        <link rel="preconnect" href="https://cdn-optimizer.pradit.net" />
+
         <Partytown forward={['dataLayer.push']} />
 
         <script
