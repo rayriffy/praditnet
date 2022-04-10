@@ -22,6 +22,7 @@ module.exports = withPlugins(
           register: true,
           skipWaiting: true,
           runtimeCaching,
+          publicExcludes: ['!assets/**/*.png'],
         },
       },
     ],
