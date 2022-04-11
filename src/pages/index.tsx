@@ -51,13 +51,17 @@ const Page: NextPage<Props> = props => {
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mt-14">
-        {games.map(game => (
-          <PreviewCard
-            key={`preview-${game.id}`}
-            game={game}
-            userPreview={props[game.id]}
-          />
-        ))}
+        {games
+          .filter(
+            game => props[game.id] !== null && props[game.id] !== undefined
+          )
+          .map(game => (
+            <PreviewCard
+              key={`preview-${game.id}`}
+              game={game}
+              userPreview={props[game.id]}
+            />
+          ))}
       </div>
     </Fragment>
   )
