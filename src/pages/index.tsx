@@ -53,7 +53,9 @@ const Page: NextPage<Props> = props => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 mt-14">
         {games
           .filter(
-            game => props[game.id] !== null && props[game.id] !== undefined
+            game =>
+              (props[game.id] !== null && props[game.id] !== undefined) ||
+              game.id === 'finale'
           )
           .map(game => (
             <PreviewCard
