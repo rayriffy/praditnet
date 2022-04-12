@@ -31,7 +31,7 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
       </h1>
       <div className="flex">
         <span className="text-sm mr-2 dark:text-white">Submission ID: </span>
-        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5 dark:bg-gray-100 dark:text-gray-900">
+        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5 dark:bg-gray-100 dark:text-gray-900 select-all">
           {user.id}
         </span>
       </div>
