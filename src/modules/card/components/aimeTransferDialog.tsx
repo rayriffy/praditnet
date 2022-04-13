@@ -11,6 +11,7 @@ import {
 import axios from 'axios'
 import { Dialog, Transition } from '@headlessui/react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import NProgress from 'nprogress'
 
 export interface AimeTransferDialogProps {
   show: boolean
@@ -47,6 +48,9 @@ export const TransferDialog = memo<AimeTransferDialogProps>(props => {
           },
         }
       )
+
+      NProgress.configure({ minimum: 0.3 })
+      NProgress.start()
 
       window.location.reload()
     } catch (e) {

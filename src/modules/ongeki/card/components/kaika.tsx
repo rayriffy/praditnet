@@ -2,6 +2,7 @@ import { memo, useState } from 'react'
 
 import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import NProgress from 'nprogress'
 
 import { classNames } from '../../../../core/services/classNames'
 
@@ -34,6 +35,10 @@ export const Kaika = memo<Props>(props => {
       )
 
       setProgress(false)
+
+      NProgress.configure({ minimum: 0.3 })
+      NProgress.start()
+
       window.location.reload()
     } catch (e) {
       setProgress(false)
