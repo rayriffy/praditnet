@@ -37,13 +37,15 @@ const Page: NextPage<Props> = props => {
         </div>
         <div className="col-span-1 sm:col-span-2">
           <div className="flex flex-col">
-            <h2 className="text-gray-900 font-bold text-2xl">{card.name}</h2>
+            <h2 className="text-gray-900 font-bold text-2xl dark:text-white">
+              {card.name}
+            </h2>
             {card.nickname.length !== 0 && (
               <div className="border-b-2 my-2 border-dotted" />
             )}
-            <h3 className="ml-2">{card.nickname}</h3>
+            <h3 className="ml-2 dark:text-white">{card.nickname}</h3>
           </div>
-          <div className="bg-gray-50 rounded-lg px-2 sm:px-5 py-4 mt-2 flex items-start sm:items-center flex-col sm:flex-row">
+          <div className="bg-gray-50 dark:bg-neutral-700 rounded-lg px-2 sm:px-5 py-4 mt-2 flex items-start sm:items-center flex-col sm:flex-row">
             <div className="shrink-0 rounded-md overflow-hidden ml-3 sm:ml-0 mb-3 sm:mb-0">
               <img
                 src={`/assets/ongeki/skillType/${skill.category.toLowerCase()}.png`}
@@ -51,12 +53,14 @@ const Page: NextPage<Props> = props => {
               />
             </div>
             <div className="pl-4">
-              <h2 className="font-semibold">{skill.name}</h2>
-              <p className="text-gray-700 text-xs mt-1">{skill.description}</p>
+              <h2 className="font-semibold dark:text-white">{skill.name}</h2>
+              <p className="text-gray-700 text-xs mt-1 dark:text-white">
+                {skill.description}
+              </p>
             </div>
           </div>
           <div className="flex mt-3">
-            <div className="flex bg-gray-50 px-4 py-3 rounded-lg">
+            <div className="flex bg-gray-50 dark:bg-neutral-700 dark:text-white px-4 py-3 rounded-lg">
               <span className="font-bold">Level</span>
               <span className="ml-2">
                 {level.current} / {level.max}
