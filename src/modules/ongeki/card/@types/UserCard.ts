@@ -19,8 +19,8 @@ export interface UserCard {
       max: number
     }
     upgrade: {
-      kaika: string
-      chokaika: string
+      kaika: boolean
+      chokaika: boolean
     }
   }
 }

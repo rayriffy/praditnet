@@ -71,8 +71,8 @@ export const getUserCard = async (
           max: targetUserCard.levelMax,
         },
         upgrade: {
-          kaika: targetUserCard.upgradeKaika,
-          chokaika: targetUserCard.upgradeChokaika,
+          kaika: targetUserCard.upgradeKaika !== '0000-00-00 00:00:00.0',
+          chokaika: targetUserCard.upgradeChokaika !== '0000-00-00 00:00:00.0',
         },
       },
     }

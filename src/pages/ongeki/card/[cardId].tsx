@@ -6,6 +6,7 @@ import { Image } from '../../../core/components/image'
 import { Navbar } from '../../../modules/ongeki/home/components/navbar'
 
 import { UserCard } from '../../../modules/ongeki/card/@types/UserCard'
+import { Kaika } from '../../../modules/ongeki/card/components/kaika'
 
 interface Props {
   userCard: UserCard
@@ -14,7 +15,7 @@ interface Props {
 const Page: NextPage<Props> = props => {
   const {
     card,
-    metadata: { skill, level },
+    metadata: { skill, level, upgrade },
   } = props.userCard
 
   useEffect(() => {
@@ -62,18 +63,13 @@ const Page: NextPage<Props> = props => {
               </span>
             </div>
             <div className="block my-auto ml-3 sm:ml-4 space-x-2 sm:space-x-4">
-              <button
+              <Kaika cardId={card.id} isKaika={upgrade.kaika} />
+              {/* <button
                 type="button"
-                className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Kaika
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={"inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"}
               >
                 Cho-Kaika
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
