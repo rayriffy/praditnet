@@ -6,6 +6,7 @@ import { ArrowRightIcon, CreditCardIcon } from '@heroicons/react/solid'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { PAmuse } from './pamuse'
+import { R } from '../../core/components/r'
 
 interface Props {
   aime?: string | null
@@ -25,11 +26,21 @@ export const Layout: FunctionComponent<Props> = props => {
     >
       <div className="mx-auto max-w-3xl mt-12 px-6">
         <header className="flex justify-between items-center mb-8">
-          <Link href="/">
-            <a className="mr-4">
-              <PAmuse />
+          <div className="flex shrink-0 items-center">
+            <Link href="/">
+              <a>
+                <PAmuse className="h-7 w-auto fill-gray-700 dark:fill-white" />
+              </a>
+            </Link>
+            <div className="mx-4 h-6 sm:h-8 border-l-2 border-gray-300" />
+            <a
+              href="https://rayriffy.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <R className="h-8 w-auto fill-gray-700 dark:fill-white" />
             </a>
-          </Link>
+          </div>
           {(aime !== undefined || eamuse !== undefined) && (
             <div className="flex items-center">
               {aime === null && eamuse === null && (
