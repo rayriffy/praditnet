@@ -29,12 +29,25 @@ const api: NextApiHandler = async (req, res) => {
           'ongeki_user_data.id'
         )
         .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
+        .join(
+          'praditnet.OngekiCard',
+          'praditnet.OngekiCard.id',
+          'ongeki_user_card.card_id'
+        )
         .where({
           luid: user.aimeCard,
           'ongeki_user_data.card_id': Number(id),
           is_acquired: 1,
         })
-        .select('kaika_date', 'max_level')
+        .select(
+          'kaika_date',
+          'max_level',
+          'pradit.OngekiCard.rarity',
+          'level',
+          'cho_kaika_date',
+          'print_count',
+          'pradit.OngekiCard.chokaikaSkillId'
+        )
         .first()
 
       if (targetCard === undefined) {
@@ -44,30 +57,45 @@ const api: NextApiHandler = async (req, res) => {
         })
       }
 
-      // if (targetCard.kaika_date !== '0000-00-00 00:00:00.0') {
-      //   await knex.destroy()
-      //   return res.status(400).send({
-      //     message: 'This card has already been sparked to kaika'
-      //   })
-      // }
+      if (
+        targetCard.kaika_date === '0000-00-00 00:00:00.0' ||
+        // if card rarity is N, expected max level is 100
+        (targetCard.rarity === 'N' &&
+          (targetCard.max_level !== 100 || targetCard.level !== 100)) ||
+        // otherwise, expected max level is 70
+        (targetCard.rarity !== 'N' &&
+          (targetCard.max_level !== 70 || targetCard.level !== 70))
+      ) {
+        await knex.destroy()
+        return res.status(400).send({
+          message: 'Requirements has not been met',
+        })
+      } else if (targetCard.cho_kaika_date !== '0000-00-00 00:00:00.0') {
+        await knex.destroy()
+        return res.status(400).send({
+          message: 'This card has already been sparked to cho-kaika',
+        })
+      }
 
-      // await knex('ongeki_user_card')
-      //   .join(
-      //     'ongeki_user_data',
-      //     'ongeki_user_card.user_id',
-      //     'ongeki_user_data.id'
-      //   )
-      //   .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
-      //   .where({
-      //     luid: user.aimeCard,
-      //     card_id: Number(id),
-      //     is_acquired: 1,
-      //   })
-      //   .update({
-      //     max_level: targetCard.max_level + 40,
-      //     kaika_date: dayjs().format('YYYY-MM-DD HH:MM:ss.0'),
-      //   })
+      await knex('ongeki_user_card')
+        .join(
+          'ongeki_user_data',
+          'ongeki_user_card.user_id',
+          'ongeki_user_data.id'
+        )
+        .join('sega_card', 'ongeki_user_data.aime_card_id', 'sega_card.id')
+        .where({
+          luid: user.aimeCard,
+          card_id: Number(id),
+          is_acquired: 1,
+        })
+        .update({
+          print_count: targetCard.print_count + 1,
+          skill_id: targetCard.chokaikaSkillId,
+          cho_kaika_date: dayjs().format('YYYY-MM-DD HH:MM:ss.0'),
+        })
 
+      await knex.destroy()
       return res.status(200).send({
         message: 'Done!',
       })
