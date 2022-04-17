@@ -32,7 +32,7 @@ export const Layout: FunctionComponent<Props> = props => {
                 <PAmuse className="h-7 w-auto fill-gray-700 dark:fill-white" />
               </a>
             </Link>
-            <div className="mx-4 h-6 sm:h-8 border-l-2 border-gray-300" />
+            <div className="mx-4 h-6 border-l-2 border-gray-300" />
             <a
               href="https://rayriffy.com"
               target="_blank"

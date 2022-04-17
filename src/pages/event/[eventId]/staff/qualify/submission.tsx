@@ -1,12 +1,71 @@
-import { Fragment } from 'react'
+import { Fragment, useRef, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
+import { XCircleIcon } from '@heroicons/react/solid'
 
-const Page: NextPage = props => {
+import { Spinner } from '../../../../../core/components/spinner'
+import axios from 'axios'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { getEventMusics } from '../../../../../modules/event/home/services/getEventMusics'
+import { Submission } from '../../../../../modules/event/submission/@types/Submission'
+import { SubmissionForm } from '../../../../../modules/event/submission/components/submissionForm'
+
+interface Props {
+  event: {
+    id: string
+  }
+  musics: {
+    [key: string]: {
+      id: number
+      name: string
+      artist: string
+      level: string
+      difficulty: number
+    }[]
+  }
+}
+
+const Page: NextPage<Props> = props => {
+  const { event, musics } = props
+
+  const [progress, setProgress] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const [submission, setSubmission] = useState<Submission | null>(undefined)
+
+  const { executeRecaptcha } = useGoogleReCaptcha()
+
+  const onRequestSubmission = async () => {
+    setProgress(true)
+    setSubmission(undefined)
+
+    try {
+      const token = await executeRecaptcha('event/getSubmission')
+      const { data } = await axios.post(
+        '/api/event/getSubmission',
+        {
+          eventId: event.id,
+          submissionId: inputRef.current?.value,
+        },
+        {
+          headers: {
+            'X-PraditNET-Capcha': token,
+          },
+        }
+      )
+
+      setSubmission(data.notFound === true ? null : data)
+    } catch (e) {
+      setSubmission(null)
+    } finally {
+      setProgress(false)
+    }
+  }
+
   return (
     <Fragment>
       <div className="flex -mt-6">
-        <p className="uppercase bg-red-500 text-white px-2 py-0.5 text-sm rounded">
+        <p className="uppercase bg-red-500 text-white px-2 py-0.5 text-xs rounded">
           Staff mode
         </p>
       </div>
@@ -31,22 +90,74 @@ const Page: NextPage = props => {
                   name="user-uid"
                   id="user-uid"
                   maxLength={21}
-                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md font-mono"
+                  ref={inputRef}
+                  disabled={progress}
+                  className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md font-mono disabled:bg-gray-100 disabled:cursor-wait"
                   placeholder="zkER7fjeqx6hC5Q238nHi"
                 />
               </div>
-              <button className="mt-3 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+              <button
+                disabled={progress}
+                onClick={() => onRequestSubmission()}
+                className="mt-3 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-indigo-600 disabled:bg-indigo-400 hover:bg-indigo-700 disabled:hover:bg-indigo-500 disabled:cursor-wait focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              >
                 Submit
               </button>
             </div>
           </div>
         </div>
+
+        {progress ? (
+          <div className="flex justify-center py-8">
+            <Spinner />
+          </div>
+        ) : (
+          <Fragment>
+            {submission === undefined ? (
+              <Fragment />
+            ) : submission === null ? (
+              <div className="rounded-md bg-red-50 p-4">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <XCircleIcon
+                      className="h-5 w-5 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <h3 className="text-sm font-medium text-red-800">
+                      There was a problem with the ID that you requested
+                    </h3>
+                    <div className="mt-2 text-sm text-red-700">
+                      Submission ID you're looking for was not found
+                      <ul role="list" className="list-disc pl-5 space-y-1 mt-1">
+                        <li>
+                          Please double-check the spellig of target submission
+                          ID again that is was correct
+                        </li>
+                        <li>
+                          You're looking for submission ID for another event
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <SubmissionForm
+                eventId={event.id}
+                submission={submission}
+                musics={musics}
+              />
+            )}
+          </Fragment>
+        )}
       </div>
     </Fragment>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
+export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { createKnexInstance } = await import(
     '../../../../../core/services/createKnexInstance'
   )
@@ -97,10 +208,21 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     }
   }
 
+  const fetchedMusics = await getEventMusics(
+    eventId,
+    knex,
+    targetEvent.availableGames.split(',')
+  )
+
   await knex.destroy()
   // permit to page
   return {
-    props: {},
+    props: {
+      event: {
+        id: targetEvent.uid,
+      },
+      musics: Object.fromEntries(fetchedMusics),
+    },
   }
 }
 
