@@ -72,7 +72,7 @@ const Page: NextPage<Props> = props => {
       <div className="mt-6 space-y-4">
         <h1 className="text-2xl font-bold">Qualification submission</h1>
 
-        <div className="bg-white shadow sm:rounded-lg border">
+        <div className="bg-white shadow rounded-lg border">
           <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Identify

@@ -112,7 +112,7 @@ export const SubmissionForm = memo<Props>(props => {
   return (
     <Fragment>
       {conclusion === 'success' ? (
-        <div className="bg-white shadow sm:rounded-lg border px-4 py-5 sm:p-6 flex">
+        <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex">
           <CheckCircleIcon className="w-8 h-8 text-green-500 shrink-0" />
           <div className="pl-4">
             <h1 className="text-xl font-bold">Score submitted</h1>
@@ -120,7 +120,7 @@ export const SubmissionForm = memo<Props>(props => {
           </div>
         </div>
       ) : conclusion === 'fail' ? (
-        <div className="bg-white shadow sm:rounded-lg border px-4 py-5 sm:p-6 flex">
+        <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex">
           <XCircleIcon className="w-8 h-8 text-red-500 shrink-0" />
           <div className="pl-4">
             <h1 className="text-xl font-bold">Score submitted</h1>
@@ -153,7 +153,7 @@ export const SubmissionForm = memo<Props>(props => {
           <div className="space-y-6 max-w-2xl mx-auto">
             {musics[submission.selectedGameId].map(music => (
               <div
-                className="bg-white shadow sm:rounded-lg border px-4 py-5 sm:p-6 flex flex-col sm:flex-row"
+                className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex flex-col sm:flex-row"
                 key={`music-${submission.selectedGameId}-${music.id}`}
               >
                 <div className="flex rounded-lg overflow-hidden shrink-0 mx-auto">
