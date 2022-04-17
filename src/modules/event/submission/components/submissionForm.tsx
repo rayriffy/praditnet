@@ -112,19 +112,27 @@ export const SubmissionForm = memo<Props>(props => {
   return (
     <Fragment>
       {conclusion === 'success' ? (
-        <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex">
+        <div className="bg-white dark:bg-neutral-700 shadow rounded-lg border px-4 py-5 sm:p-6 flex">
           <CheckCircleIcon className="w-8 h-8 text-green-500 shrink-0" />
           <div className="pl-4">
-            <h1 className="text-xl font-bold">Score submitted</h1>
-            <p className="text-gray-700">Player score has been recorded</p>
+            <h1 className="text-xl font-bold dark:text-white">
+              Score submitted
+            </h1>
+            <p className="text-gray-700 dark:text-white">
+              Player score has been recorded
+            </p>
           </div>
         </div>
       ) : conclusion === 'fail' ? (
-        <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex">
+        <div className="bg-white dark:bg-neutral-700 shadow rounded-lg border px-4 py-5 sm:p-6 flex">
           <XCircleIcon className="w-8 h-8 text-red-500 shrink-0" />
           <div className="pl-4">
-            <h1 className="text-xl font-bold">Score submitted</h1>
-            <p className="text-gray-700">Server said: {error}</p>
+            <h1 className="text-xl font-bold dark:text-white">
+              There's a problem
+            </h1>
+            <p className="text-gray-700 dark:text-white">
+              Server said: {error}
+            </p>
           </div>
         </div>
       ) : (
@@ -153,7 +161,7 @@ export const SubmissionForm = memo<Props>(props => {
           <div className="space-y-6 max-w-2xl mx-auto">
             {musics[submission.selectedGameId].map(music => (
               <div
-                className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 flex flex-col sm:flex-row"
+                className="bg-white dark:bg-neutral-700 shadow rounded-lg border px-4 py-5 sm:p-6 flex flex-col sm:flex-row"
                 key={`music-${submission.selectedGameId}-${music.id}`}
               >
                 <div className="flex rounded-lg overflow-hidden shrink-0 mx-auto">
@@ -164,13 +172,13 @@ export const SubmissionForm = memo<Props>(props => {
                   />
                 </div>
                 <div className="pl-0 pt-4 sm:pt-0 sm:pl-4 w-full">
-                  <h1 className="font-bold text-xl sm:text-2xl">
+                  <h1 className="font-bold text-xl sm:text-2xl dark:text-white">
                     {music.name}
                   </h1>
                   <div className="mt-0 sm:mt-2 w-full sm:w-3/5">
                     <label
                       htmlFor={`music-${music.id}-score`}
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700 dark:text-white"
                     >
                       Score
                     </label>
@@ -229,7 +237,7 @@ export const SubmissionForm = memo<Props>(props => {
               <div className="ml-3 text-sm">
                 <label
                   htmlFor="confirm-check"
-                  className="font-medium text-gray-700"
+                  className="font-medium text-gray-700 dark:text-white"
                 >
                   I confirm that I've double-checked before submitting score
                 </label>
