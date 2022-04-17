@@ -35,12 +35,6 @@ export const ItemList = memo<Props>(props => {
   }, [items])
 
   const getMoreData = () => {
-    console.log('more data!!')
-    console.log({
-      hasMore,
-      current: current.length,
-      items: items.length,
-    })
     if (current.length === items.length) {
       setHasMore(false)
       return

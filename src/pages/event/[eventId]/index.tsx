@@ -39,10 +39,6 @@ export interface Props {
 const Page: NextPage<Props> = props => {
   const { user, event, musics, entry, isStaff } = props
 
-  useEffect(() => {
-    console.log(props)
-  }, [])
-
   useTitle(event.name)
 
   return (

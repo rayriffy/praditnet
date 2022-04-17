@@ -18,10 +18,6 @@ const Page: NextPage<Props> = props => {
     metadata: { skill, level, upgrade },
   } = props.userCard
 
-  useEffect(() => {
-    console.log(props.userCard)
-  }, [])
-
   return (
     <div className="mt-4">
       <Navbar />
