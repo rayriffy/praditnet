@@ -80,7 +80,9 @@ export const AttemptLog = memo<Props>(props => {
             {music.name}
           </h2>
           <p className="text-4xl font-light dark:text-white">
-            {(targetAttemptLog?.[1] ?? 0).toLocaleString()}
+            {game === 'maimai'
+              ? (targetAttemptLog?.[1] ?? 0).toFixed(4)
+              : (targetAttemptLog?.[1] ?? 0).toLocaleString()}
             {game === 'maimai' && '%'}
           </p>
         </div>
