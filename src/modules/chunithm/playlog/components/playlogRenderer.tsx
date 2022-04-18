@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { DifficultyBlock } from '../../../../core/components/difficultyBlock'
 import { Image } from '../../../../core/components/image'
 
 import { classNames } from '../../../../core/services/classNames'
@@ -35,42 +36,10 @@ export const PlaylogRenderer = memo<Props>(props => {
                 {playlog.musicTitle}
               </h1>
 
-              <div
-                className={classNames(
-                  playlog.difficulty === 'master'
-                    ? 'bg-purple-500'
-                    : playlog.difficulty === 'expert'
-                    ? 'bg-red-500'
-                    : playlog.difficulty === 'advanced'
-                    ? 'bg-orange-500'
-                    : playlog.difficulty === 'basic'
-                    ? 'bg-emerald-500'
-                    : playlog.difficulty === 'ultima'
-                    ? 'bg-gradient-to-tr from-red-600 to-gray-900'
-                    : 'bg-gradient-to-r from-sky-500 via-rose-500 to-lime-500',
-                  'p-2 text-white text-xs uppercase rounded flex items-center'
-                )}
-              >
-                <p>{playlog.difficulty}</p>
-                {playlog.difficulty !== "world's end" && (
-                  <p
-                    className={classNames(
-                      playlog.difficulty === 'master'
-                        ? 'bg-purple-400'
-                        : playlog.difficulty === 'expert'
-                        ? 'bg-red-400'
-                        : playlog.difficulty === 'advanced'
-                        ? 'bg-orange-400'
-                        : playlog.difficulty === 'basic'
-                        ? 'bg-emerald-400'
-                        : 'bg-gradient-to-tr from-red-500 to-gray-700',
-                      'text-sm mx-auto rounded text-center px-3 ml-2'
-                    )}
-                  >
-                    {playlog.level}
-                  </p>
-                )}
-              </div>
+              <DifficultyBlock
+                difficulty={playlog.level}
+                level={playlog.difficulty}
+              />
             </div>
             <div className="flex justify-between items-center">
               <div>

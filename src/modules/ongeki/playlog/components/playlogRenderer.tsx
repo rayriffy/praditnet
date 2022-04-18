@@ -6,6 +6,7 @@ import { classNames } from '../../../../core/services/classNames'
 import { judges } from '../constants/judges'
 
 import { UserPlaylog } from '../@types/UserPlaylog'
+import { DifficultyBlock } from '../../../../core/components/difficultyBlock'
 
 interface Props {
   playlogs: UserPlaylog[]
@@ -39,46 +40,10 @@ export const PlaylogRenderer = memo<Props>(props => {
                   <p className="text-gray-700 text-sm">{playlog.playDate}</p>
                 </div>
 
-                <div
-                  className={classNames(
-                    playlog.difficulty === 'master'
-                      ? 'bg-purple-500'
-                      : playlog.difficulty === 'expert'
-                      ? 'bg-red-500'
-                      : playlog.difficulty === 'advanced'
-                      ? 'bg-orange-500'
-                      : playlog.difficulty === 'basic'
-                      ? 'bg-emerald-500'
-                      : playlog.difficulty === 'lunatic'
-                      ? 'bg-gradient-to-tr from-slate-50 to-neutral-50'
-                      : 'bg-white',
-                    'p-2 text-white text-xs uppercase rounded flex items-center'
-                  )}
-                >
-                  <p
-                    className={classNames(
-                      playlog.difficulty === 'lunatic' ? 'text-gray-900' : ''
-                    )}
-                  >
-                    {playlog.difficulty}
-                  </p>
-                  <p
-                    className={classNames(
-                      playlog.difficulty === 'master'
-                        ? 'bg-purple-400'
-                        : playlog.difficulty === 'expert'
-                        ? 'bg-red-400'
-                        : playlog.difficulty === 'advanced'
-                        ? 'bg-orange-400'
-                        : playlog.difficulty === 'basic'
-                        ? 'bg-emerald-400'
-                        : 'bg-gradient-to-t from-red-500 to-rose-800',
-                      'text-sm mx-auto rounded text-center px-3 ml-2'
-                    )}
-                  >
-                    {playlog.level}
-                  </p>
-                </div>
+                <DifficultyBlock
+                  difficulty={playlog.level}
+                  level={playlog.difficulty}
+                />
               </div>
               <div className="grid grid-cols-2 gap-2 sm:gap-4 my-2 items-start">
                 <div className="space-y-4">

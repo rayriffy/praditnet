@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
+import { DifficultyBlock } from '../../../../core/components/difficultyBlock'
 
 interface Props {
   eventId: string
@@ -68,50 +69,10 @@ export const Preview = memo<Props>(props => {
                     {music.name}
                   </p>
                   <div className="flex mt-2">
-                    <div
-                      className={classNames(
-                        music.level === 'remaster'
-                          ? 'bg-purple-200'
-                          : music.level === 'master'
-                          ? 'bg-purple-500'
-                          : music.level === 'expert'
-                          ? 'bg-red-500'
-                          : music.level === 'advanced'
-                          ? 'bg-orange-500'
-                          : music.level === 'basic'
-                          ? 'bg-emerald-500'
-                          : 'bg-pink-500',
-                        music.level === 'remaster'
-                          ? 'text-purple-700'
-                          : 'text-white',
-                        'px-2 py-1 text-xs uppercase rounded flex items-center'
-                      )}
-                    >
-                      <p>{music.level}</p>
-                      <p
-                        className={classNames(
-                          music.level === 'remaster'
-                            ? 'bg-purple-500 text-white'
-                            : music.level === 'master'
-                            ? 'bg-purple-400'
-                            : music.level === 'expert'
-                            ? 'bg-red-400'
-                            : music.level === 'advanced'
-                            ? 'bg-orange-400'
-                            : music.level === 'basic'
-                            ? 'bg-emerald-400'
-                            : 'bg-gradient-to-tr from-red-500 to-gray-700',
-                          'text-sm mx-auto rounded text-center px-3 ml-2'
-                        )}
-                      >
-                        {Math.floor(music.difficulty)}
-                        {Number(
-                          music.difficulty.toFixed(1).split('.').reverse()[0]
-                        ) >= 7
-                          ? '+'
-                          : ''}
-                      </p>
-                    </div>
+                    <DifficultyBlock
+                      level={music.level}
+                      difficulty={music.difficulty}
+                    />
                   </div>
                 </div>
               ))}
