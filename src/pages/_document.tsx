@@ -37,12 +37,12 @@ const Document: NextPage = () => {
         <meta
           key="manifest-apple-title"
           name="apple-mobile-web-app-title"
-          content="Mirai"
+          content="PraditNET"
         />
         <meta
           key="manifest-apple-name"
           name="application-name"
-          content="Mirai"
+          content="PraditNET"
         />
         <meta
           key="manifest-ms-tile"
