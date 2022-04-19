@@ -22,7 +22,7 @@ const Page: NextPage<Props> = props => {
       </div>
       <div className="mt-6 space-y-4">
         <h1 className="text-2xl font-bold dark:text-white">Randomizer</h1>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {event.games.map(game => (
             <Link
               href={`/event/${event.id}/staff/randomizer/${game}`}
