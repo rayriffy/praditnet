@@ -76,6 +76,7 @@ export const Input = memo<Props>(props => {
               inputMode="numeric"
               name="input-amount"
               id="input-amount"
+              defaultValue={5}
               disabled={disabled}
               className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md disabled:bg-gray-100 disabled:cursor-wait"
               placeholder="5"
