@@ -10,6 +10,7 @@ import { Image } from '../../../../../core/components/image'
 import { Input } from '../../../../../modules/event/randomizer/components/input'
 import { SearchResult } from '../../../../../modules/event/randomizer/@types/SearchResult'
 import { DifficultyBlock } from '../../../../../core/components/difficultyBlock'
+import { RenderedMusic } from '../../../../../modules/event/randomizer/components/renderedMusic'
 
 interface Props {
   event: {
@@ -72,30 +73,11 @@ const Page: NextPage<Props> = props => {
       {result !== null && (
         <div className="mt-6 sm:p-4 lg:-mx-32 xl:-mx-40 2xl:-mx-48 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 items-center">
           {result.musics.map(music => (
-            <div
-              className="bg-white shadow border px-4 py-5 rounded-lg"
+            <RenderedMusic
+              event={event}
+              music={music}
               key={`randomized-${event.game}-${music.id}`}
-            >
-              <div className="flex justify-center">
-                <div className="flex rounded-md overflow-hidden">
-                  <Image
-                    src={`https://cdn.pradit.net/${event.game}/jacket/${music.id}.png`}
-                    width={250}
-                    height={250}
-                  />
-                </div>
-              </div>
-              <div className="flex mt-4 md:mt-3">
-                <DifficultyBlock
-                  difficulty={music.level}
-                  level={music.difficulty}
-                />
-              </div>
-              <h1 className="font-semibold text-xl mt-2 leading-none">
-                {music.name}
-              </h1>
-              <p className="text-gray-700 mt-0.5 text-sm">{music.artist}</p>
-            </div>
+            />
           ))}
         </div>
       )}

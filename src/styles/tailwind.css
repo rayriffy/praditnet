@@ -65,3 +65,41 @@ h6 {
   );
   background-size: 20px 20px;
 }
+
+.Flipper {
+  margin: 0 auto 0;
+  position: relative;
+  /* background: #090807; */
+  /* width: 100vw; */
+  height: 100vw;
+  /* max-width: 440px; */
+  max-height: 400px;
+  perspective: 880px;
+  user-select: none;
+}
+.Flipperのrotor,
+.Flipperのfront,
+.Flipperのback {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+}
+.Flipperのrotor {
+  transform-style: preserve-3d;
+}
+.Flipper.is-flipped .Flipperのfront {
+  pointer-events: none;
+}
+.Flipper:not(.is-flipped) .Flipperのback {
+  pointer-events: none;
+}
+.Flipperのfront {
+  transform: rotateY(0deg);
+}
+.Flipperのback {
+  transform: rotateY(180deg);
+}
+.Flipperのfront,
+.Flipperのback {
+  backface-visibility: hidden;
+  transform-style: flat;
+}
