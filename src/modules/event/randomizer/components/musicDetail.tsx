@@ -1,5 +1,6 @@
-import { Fragment, memo } from 'react'
+import { Fragment, forwardRef } from 'react'
 
+import { Image } from '../../../../core/components/image'
 import { DifficultyBlock } from '../../../../core/components/difficultyBlock'
 
 interface Props {
@@ -15,16 +16,21 @@ interface Props {
   }
 }
 
-export const MusicDetail = memo<Props>(props => {
+export const MusicDetail = forwardRef<HTMLDivElement, Props>((props, ref) => {
   const { event, music } = props
 
   return (
-    <div className="bg-neutral-700 shadow border px-4 py-5 rounded-lg h-[386px] md:h-[382px] xl:h-[360px] pointer-events-none">
+    <div
+      className="bg-neutral-700 shadow border px-4 py-5 rounded-lg pointer-events-none"
+      ref={ref}
+    >
       <div className="flex justify-center">
         <div className="flex rounded-md overflow-hidden">
-          <img
+          <Image
             src={`https://cdn.pradit.net/${event.game}/jacket/${music.id}.png`}
-            className="w-full h-auto"
+            width={256}
+            height={256}
+            priority={true}
           />
         </div>
       </div>

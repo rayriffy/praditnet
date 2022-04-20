@@ -1,6 +1,7 @@
-import { memo, useState } from 'react'
-import { BackCard } from './backCard'
+import { memo, useRef, useState } from 'react'
+import { useSize } from 'web-api-hooks'
 
+import { BackCard } from './backCard'
 import { Flipper } from './flipper'
 import { MusicDetail } from './musicDetail'
 
@@ -21,10 +22,14 @@ interface Props {
 export const RenderedMusic = memo<Props>(props => {
   const [flipped, setFlipped] = useState<boolean>(false)
 
+  const ref = useRef<HTMLDivElement>(null)
+  const [, height] = useSize(ref)
+
   return (
     <Flipper
-      front={<BackCard event={{ id: props.event.id }} />}
-      back={<MusicDetail {...props} />}
+      height={height}
+      front={<BackCard height={height + 42} event={{ id: props.event.id }} />}
+      back={<MusicDetail ref={ref} {...props} />}
       flipped={flipped}
       onFlip={flipped => setFlipped(flipped)}
     />

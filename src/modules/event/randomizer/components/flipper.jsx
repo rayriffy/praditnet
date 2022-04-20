@@ -55,7 +55,12 @@ export class Flipper extends React.Component {
         onPointerUp={this.onPointerUp}
         onPointerCancel={this.onPointerCancel}
       >
-        <div className={'Flipper' + (this.props.flipped ? ' is-flipped' : '')}>
+        <div
+          className={'Flipper' + (this.props.flipped ? ' is-flipped' : '')}
+          style={{
+            maxHeight: this.props.height,
+          }}
+        >
           <div
             className="Flipperのrotor"
             ref={el => {

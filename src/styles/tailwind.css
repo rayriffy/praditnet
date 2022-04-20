@@ -73,7 +73,7 @@ h6 {
   /* width: 100vw; */
   height: 100vw;
   /* max-width: 440px; */
-  max-height: 400px;
+  /* max-height: 400px; */
   perspective: 880px;
   user-select: none;
 }
