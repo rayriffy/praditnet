@@ -71,7 +71,7 @@ const Page: NextPage<Props> = props => {
         <Input pools={pools} disabled={progress} onRequest={onSearch} />
       </div>
       {result !== null && (
-        <div className="mt-6 mb-8 sm:p-4 lg:-mx-32 xl:-mx-40 2xl:-mx-48 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-16 sm:gap-y-16 items-center">
+        <div className="mt-6 mb-8 sm:p-4 lg:-mx-32 xl:-mx-40 2xl:-mx-48 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-16 items-center">
           {result.musics.map((music, i) => (
             <RenderedMusic
               event={event}
