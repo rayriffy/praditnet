@@ -28,8 +28,16 @@ export const RenderedMusic = memo<Props>(props => {
   return (
     <Flipper
       height={height}
-      front={<BackCard height={height + 42} event={{ id: props.event.id }} />}
-      back={<MusicDetail ref={ref} {...props} />}
+      front={
+        <BackCard
+          onFlip={() => setFlipped(true)}
+          height={height + 42}
+          event={{ id: props.event.id }}
+        />
+      }
+      back={
+        <MusicDetail onFlip={() => setFlipped(false)} ref={ref} {...props} />
+      }
       flipped={flipped}
       onFlip={flipped => setFlipped(flipped)}
     />
