@@ -54,7 +54,11 @@ const api: NextApiHandler = async (req, res) => {
         `${targetMusicTable}.id as id`,
         `${targetMusicTable}.artist as artist`,
         `${targetMusicTable}.${gameId === 'maimai' ? 'name' : 'title'} as name`,
-        `${targetMusicTable}.level_master as level`
+        `EventMusic.difficulty as difficulty`,
+        `${targetMusicTable}.level_master as level_master`,
+        ...(gameId === 'maimai'
+          ? [`${targetMusicTable}.level_remaster as level_remaster`]
+          : [])
       )
 
     const searchResult: SearchResult = {
@@ -63,8 +67,8 @@ const api: NextApiHandler = async (req, res) => {
           id: music.id,
           name: music.name,
           artist: music.artist,
-          level: music.level,
-          difficulty: 'master',
+          level: music[`level_${music.difficulty}`],
+          difficulty: music.difficulty,
         })),
         ['level', 'id']
       ),
