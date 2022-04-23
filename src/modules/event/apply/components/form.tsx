@@ -191,7 +191,7 @@ export const Form = memo<Props>(props => {
                 />
                 <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
                   We will contact you in case you has been qualified for the
-                  grand final day
+                  main event day
                 </p>
               </div>
             </div>
