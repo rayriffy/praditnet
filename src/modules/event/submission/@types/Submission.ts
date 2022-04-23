@@ -3,4 +3,5 @@ export interface Submission {
   inGameName: string
   selectedGameId: string
   remainingAttempts: number
+  shirtSize: string | null
 }

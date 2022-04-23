@@ -54,6 +54,7 @@ const api: NextApiHandler = async (req, res) => {
         inGameName: targetSubmission.inGameName,
         selectedGameId: targetSubmission.selectedGameId,
         remainingAttempts: targetSubmission.remainingAttempts,
+        shirtSize: targetSubmission.shirtSize ?? null,
       })
     }
   } else {

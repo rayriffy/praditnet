@@ -6,7 +6,7 @@ import { getApiUserSession } from '../../../core/services/authentication/api/get
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
-    const { eventId, submissionId, scores } = req.body
+    const { eventId, submissionId, scores, shirtSize } = req.body
 
     try {
       await serverCapcha(req.headers['x-praditnet-capcha'] as string)
@@ -76,6 +76,16 @@ const api: NextApiHandler = async (req, res) => {
         eventId: eventId,
         userId: submissionId,
       })
+    if (shirtSize !== null) {
+      await knex('EventAuditionRecord')
+        .update({
+          shirtSize,
+        })
+        .where({
+          eventId: eventId,
+          userId: submissionId,
+        })
+    }
     await knex.destroy()
 
     return res.status(200).send({
