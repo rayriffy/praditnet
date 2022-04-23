@@ -81,7 +81,7 @@ const Page: NextPage<Props> = props => {
       {entry === null ? (
         <Preview eventId={event.id} musics={musics} />
       ) : (
-        <Entry {...{ user, entry, musics }} />
+        <Entry {...{ user, entry, musics, event }} />
       )}
     </div>
   )
