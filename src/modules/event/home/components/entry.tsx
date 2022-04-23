@@ -26,14 +26,40 @@ export const Entry = memo<Pick<Props, 'entry' | 'musics' | 'user'>>(props => {
           <p className="dark:text-white">Remaining attempts</p>
         </div>
       </div>
-      <h1 className="text-3xl font-bold text-gray-900 mt-6 mb-0.5 dark:text-white">
-        Qualification progress
-      </h1>
-      <div className="flex">
-        <span className="text-sm mr-2 dark:text-white">Submission ID: </span>
-        <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5 dark:bg-gray-100 dark:text-gray-900 select-all">
-          {user.id}
-        </span>
+      <div className="flex mt-6 justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-0.5 dark:text-white">
+            Qualification progress
+          </h1>
+          <div className="flex">
+            <span className="text-sm mr-2 dark:text-white">
+              Submission ID:{' '}
+            </span>
+            <span className="font-mono text-xs mb-4 bg-gray-700 rounded transition text-white px-2 py-0.5 dark:bg-gray-100 dark:text-gray-900 select-all">
+              {user.id}
+            </span>
+          </div>
+        </div>
+        <div className="shrink-0 hidden sm:block">
+          <div className="h-16">
+            <img
+              src={`/api/qr?${new URLSearchParams({
+                size: 100,
+                data: user.id,
+              } as any).toString()}`}
+              className="h-full w-auto"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="h-16 block sm:hidden mb-4">
+        <img
+          src={`/api/qr?${new URLSearchParams({
+            size: 100,
+            data: user.id,
+          } as any).toString()}`}
+          className="h-full w-auto"
+        />
       </div>
       <div className="grid grid-cols-1 gap-4 mx-auto max-w-2xl">
         {musics[entry.game].map(music => (
