@@ -105,12 +105,12 @@ export const SubmissionForm = memo<Props>(props => {
         }
       )
 
+      setProgress(false)
       setConclusion('success')
     } catch (e) {
       setError(e.reponse.data.message)
-      setConclusion('fail')
-    } finally {
       setProgress(false)
+      setConclusion('fail')
     }
   }
 
