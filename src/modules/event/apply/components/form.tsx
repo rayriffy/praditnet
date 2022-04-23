@@ -31,6 +31,7 @@ export const Form = memo<Props>(props => {
   const realNameRef = useRef<HTMLInputElement>(null)
   const inGameNameRef = useRef<HTMLInputElement>(null)
   const facebookRef = useRef<HTMLInputElement>(null)
+  const shirtSizeRef = useRef<HTMLSelectElement>(null)
   const [participatedGame, setParticipatedGame] = useState<string | null>(null)
 
   const router = useRouter()
@@ -72,6 +73,7 @@ export const Form = memo<Props>(props => {
           realName: realNameRef.current.value,
           inGameName: inGameNameRef.current.value,
           facebook: facebookRef.current.value,
+          shirtSize: shirtSizeRef.current.value,
           participatedGame,
         },
         {
@@ -190,6 +192,37 @@ export const Form = memo<Props>(props => {
                 <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
                   We will contact you in case you has been qualified for the
                   grand final day
+                </p>
+              </div>
+            </div>
+
+            <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+              <label
+                htmlFor="shirtSize"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
+              >
+                Shirt size
+              </label>
+              <div className="mt-1 sm:mt-0 sm:col-span-2">
+                <select
+                  id="shirtSize"
+                  name="shirtSize"
+                  className="max-w-lg sm:max-w-xs block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                  defaultValue="M"
+                  ref={shirtSizeRef}
+                  required
+                >
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="2XL">2XL</option>
+                  <option value="3XL">3XL</option>
+                </select>
+                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
+                  If you're qualified, you will get a shirt for finalists as
+                  well.
                 </p>
               </div>
             </div>

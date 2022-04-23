@@ -6,7 +6,14 @@ import { serverCapcha } from '../../../core/services/serverCapcha'
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method === 'POST') {
-    const { event, realName, inGameName, participatedGame, facebook } = req.body
+    const {
+      event,
+      realName,
+      inGameName,
+      participatedGame,
+      facebook,
+      shirtSize,
+    } = req.body
 
     try {
       await serverCapcha(req.headers['x-praditnet-capcha'] as string)
@@ -41,6 +48,7 @@ const api: NextApiHandler = async (req, res) => {
       realName,
       inGameName,
       facebook,
+      shirtSize,
       selectedGameId: participatedGame,
       remainingAttempts: 2,
     })
