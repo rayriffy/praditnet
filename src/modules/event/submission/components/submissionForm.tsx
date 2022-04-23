@@ -222,14 +222,14 @@ export const SubmissionForm = memo<Props>(props => {
             ))}
 
             {submission.shirtSize === null && (
-              <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6">
+              <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6 dark:bg-neutral-700">
                 <h1 className="font-bold text-xl sm:text-2xl dark:text-white">
                   Shirt size
                 </h1>
                 <div className="mt-0 sm:mt-2 w-full sm:w-3/5">
                   <label
                     htmlFor="shirtSize"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 dark:text-white"
                   >
                     Size
                   </label>
