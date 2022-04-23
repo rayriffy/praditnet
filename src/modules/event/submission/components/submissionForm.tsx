@@ -221,36 +221,38 @@ export const SubmissionForm = memo<Props>(props => {
               </div>
             ))}
 
-            <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6">
-              <h1 className="font-bold text-xl sm:text-2xl dark:text-white">
-                Shirt size
-              </h1>
-              <div className="mt-0 sm:mt-2 w-full sm:w-3/5">
-                <label
-                  htmlFor="shirtSize"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Size
-                </label>
-                <select
-                  id="shirtSize"
-                  name="shirtSize"
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                  defaultValue={
-                    submission.shirtSize === null ? 'M' : submission.shirtSize
-                  }
-                  required
-                >
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                  <option value="2XL">2XL</option>
-                  <option value="3XL">3XL</option>
-                </select>
+            {submission.shirtSize === null && (
+              <div className="bg-white shadow rounded-lg border px-4 py-5 sm:p-6">
+                <h1 className="font-bold text-xl sm:text-2xl dark:text-white">
+                  Shirt size
+                </h1>
+                <div className="mt-0 sm:mt-2 w-full sm:w-3/5">
+                  <label
+                    htmlFor="shirtSize"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Size
+                  </label>
+                  <select
+                    id="shirtSize"
+                    name="shirtSize"
+                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    defaultValue={
+                      submission.shirtSize === null ? 'M' : submission.shirtSize
+                    }
+                    required
+                  >
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="2XL">2XL</option>
+                    <option value="3XL">3XL</option>
+                  </select>
+                </div>
               </div>
-            </div>
+            )}
           </div>
           <div className="space-y-4 pt-2">
             <div className="flex justify-center">
