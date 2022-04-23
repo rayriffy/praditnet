@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent, memo, PropsWithChildren } from 'react'
 
 import {
   ArrowLeftIcon,
@@ -52,12 +52,14 @@ const TriggerableButton: FunctionComponent<{
   />
 )
 
-const Button: FunctionComponent<{
-  disabled: boolean
-  showWhen?: 'small' | 'large'
-  onPaginate: (leapSize: number) => void
-  leapSize: number
-}> = ({ disabled, ...props }) =>
+const Button: FunctionComponent<
+  PropsWithChildren<{
+    disabled: boolean
+    showWhen?: 'small' | 'large'
+    onPaginate: (leapSize: number) => void
+    leapSize: number
+  }>
+> = ({ disabled, ...props }) =>
   disabled ? <DisabledButton {...props} /> : <TriggerableButton {...props} />
 
 export const CardPagination = memo<Props>(props => {

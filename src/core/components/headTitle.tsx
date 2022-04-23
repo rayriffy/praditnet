@@ -1,10 +1,10 @@
-import { FunctionComponent, useMemo } from 'react'
+import { FunctionComponent, PropsWithChildren, useMemo } from 'react'
 
 import Head from 'next/head'
 
 import { useStoreon } from '../../context/storeon'
 
-interface Props {
+interface Props extends PropsWithChildren<{}> {
   title?: string
   description?: string
 }

@@ -1,4 +1,4 @@
-import { FunctionComponent, createContext } from 'react'
+import { FunctionComponent, createContext, PropsWithChildren } from 'react'
 
 import { createStoreon } from 'storeon'
 import { customContext } from 'storeon/react'
@@ -11,7 +11,7 @@ const StoreonContext = createContext(store)
 
 export const useStoreon = customContext(StoreonContext)
 
-export const Context: FunctionComponent = props => {
+export const Context: FunctionComponent<PropsWithChildren<{}>> = props => {
   const { children } = props
 
   return (

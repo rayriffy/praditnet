@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { FunctionComponent, PropsWithChildren } from 'react'
 
 import Link from 'next/link'
 import { ArrowRightIcon, CreditCardIcon } from '@heroicons/react/solid'
@@ -8,7 +8,7 @@ import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 import { PAmuse } from './pamuse'
 import { R } from '../../core/components/r'
 
-interface Props {
+interface Props extends PropsWithChildren<{}> {
   aime?: string | null
   eamuse?: string | null
 }

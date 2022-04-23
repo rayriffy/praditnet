@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from 'react'
+import { FunctionComponent, memo, PropsWithChildren } from 'react'
 
 import Link from 'next/link'
 
@@ -53,11 +53,13 @@ const LinkedButton: FunctionComponent<{
   </Link>
 )
 
-const Button: FunctionComponent<{
-  disabled: boolean
-  showWhen?: 'small' | 'large'
-  href: string
-}> = ({ disabled, href, ...props }) =>
+const Button: FunctionComponent<
+  PropsWithChildren<{
+    disabled: boolean
+    showWhen?: 'small' | 'large'
+    href: string
+  }>
+> = ({ disabled, href, ...props }) =>
   disabled ? (
     <DisabledButton {...props} />
   ) : (
