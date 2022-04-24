@@ -28,6 +28,7 @@ export interface Props {
     }[]
   }
   isStaff: boolean
+  ranking: string
   entry: {
     game: 'maimai' | 'chunithm'
     inGameName: string
@@ -37,7 +38,7 @@ export interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { user, event, musics, entry, isStaff } = props
+  const { user, event, musics, entry, isStaff, ranking } = props
 
   useTitle(event.name)
 
@@ -81,7 +82,7 @@ const Page: NextPage<Props> = props => {
       {entry === null ? (
         <Preview eventId={event.id} musics={musics} />
       ) : (
-        <Entry {...{ user, entry, musics, event }} />
+        <Entry {...{ user, entry, musics, event, ranking }} />
       )}
     </div>
   )
@@ -103,6 +104,9 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   )
   const { getEventMusics } = await import(
     '../../../modules/event/home/services/getEventMusics'
+  )
+  const { getEventRanking } = await import(
+    '../../../modules/event/home/services/getEventRanking'
   )
 
   const eventId = ctx.params.eventId as string
@@ -126,10 +130,11 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     }
   }
 
-  const [fetchedMusics, entry, isStaff] = await Promise.all([
+  const [fetchedMusics, entry, isStaff, ranking] = await Promise.all([
     getEventMusics(eventId, knex, targetEvent.availableGames.split(',')),
     getEventEntry(eventId, knex, user),
     getIsEventStaff(eventId, knex, user?.uid ?? 'undefined mock user id'),
+    getEventRanking(eventId, knex, user?.uid ?? 'undefined mock user id'),
   ])
 
   await knex.destroy()
@@ -139,6 +144,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       user: {
         id: user?.uid ?? '',
       },
+      ranking,
       event: {
         id: targetEvent.uid,
         name: targetEvent.name,
