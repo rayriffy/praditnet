@@ -22,5 +22,6 @@ export const games = [
     name: 'maimai UNiVERSE',
     background:
       'from-sky-500 to-blue-400 hover:shadow-lg hover:shadow-blue-500',
+    rating: (input: number) => input.toLocaleString(),
   },
 ]

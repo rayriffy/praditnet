@@ -1,13 +1,9 @@
-import { createKnexInstance } from '../../../core/services/createKnexInstance'
+import { Knex } from 'knex'
 
-export const getActiveEvents = async () => {
-  const knex = await createKnexInstance('praditnet')
-
-  const activeEvents = await knex('Event').where({
+export const getActiveEvents = async (knex: Knex) => {
+  const activeEvents = await knex('praditnet.Event').where({
     isOpen: true,
   })
-
-  await knex.destroy()
 
   return activeEvents.map(event => ({
     id: event.uid,

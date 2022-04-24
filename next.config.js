@@ -50,7 +50,7 @@ module.exports = withPlugins(
           headers: [
             {
               key: 'cache-control',
-              value: 'public, max-age=2592000',
+              value: 'public, max-age=2592000', // 1 month
             },
           ],
         },

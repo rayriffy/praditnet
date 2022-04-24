@@ -79,11 +79,18 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   const { getOngekiUserPreview } = await import(
     '../modules/home/services/getOngekiUserPreview'
   )
+  const { getMaimaiUserPreview } = await import(
+    '../modules/home/services/getMaimaiUserPreview'
+  )
   const { getApiUserSession } = await import(
     '../core/services/authentication/api/getApiUserSession'
   )
   const { getActiveEvents } = await import(
     '../modules/home/services/getActiveEvents'
+  )
+
+  const { createKnexInstance } = await import(
+    '../core/services/createKnexInstance'
   )
 
   // check for user session
@@ -97,12 +104,21 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
       },
     }
   } else {
-    const finaleUserPreview = await getFinaleUserPreview(user.aimeCard ?? '')
-    const chunithmUserPreview = await getChunithmUserPreview(
-      user.aimeCard ?? ''
-    )
-    const ongekiUserPreview = await getOngekiUserPreview(user.aimeCard ?? '')
-    const events = await getActiveEvents()
+    const knex = createKnexInstance()
+    const [
+      finaleUserPreview,
+      chunithmUserPreview,
+      ongekiUserPreview,
+      maimaiUserPreview,
+      events,
+    ] = await Promise.all([
+      getFinaleUserPreview(user.aimeCard ?? '', knex),
+      getChunithmUserPreview(user.aimeCard ?? '', knex),
+      getOngekiUserPreview(user.aimeCard ?? '', knex),
+      getMaimaiUserPreview(user.aimeCard ?? '', knex),
+      getActiveEvents(knex),
+    ])
+    await knex.destroy()
 
     return {
       props: {
@@ -118,6 +134,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         finale: finaleUserPreview,
         chunithm: chunithmUserPreview,
         ongeki: ongekiUserPreview,
+        maimai: maimaiUserPreview,
       },
     }
   }

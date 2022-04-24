@@ -11,18 +11,22 @@ interface Props {
     id: string
     name: string
     background: string
+    rating?(input: number): string
   }
   userPreview: UserPreview | undefined
 }
 
 export const PreviewCard = memo<Props>(props => {
-  const { game, userPreview } = props
+  const {
+    game: { id, background, rating = input => input.toFixed(2) },
+    userPreview,
+  } = props
 
   const cardContent = useMemo(
     () => (
       <Fragment>
         <img
-          src={`/assets/logo/${game.id}.png`}
+          src={`/assets/logo/${id}.png`}
           className="h-24 w-auto mx-auto absolute -top-10 left-0 right-0"
         />
         <div
@@ -43,9 +47,7 @@ export const PreviewCard = memo<Props>(props => {
                 <p className="text-lg font-semibold">{userPreview.name}</p>
                 <p className="text-sm">
                   Rating:{' '}
-                  <b className="font-semibold">
-                    {userPreview.rating.toFixed(2)}
-                  </b>
+                  <b className="font-semibold">{rating(userPreview.rating)}</b>
                 </p>
               </div>
               <ArrowRightIcon className="w-6 h-6" />
@@ -65,20 +67,20 @@ export const PreviewCard = memo<Props>(props => {
             userPreview === null || userPreview === undefined
               ? 'hover:cursor-not-allowed grayscale'
               : 'hover:cursor-pointer',
-            game.background,
+            background,
             'bg-gradient-to-r px-5 py-4 rounded-2xl relative text-white pt-14 transition duration-300 hover:scale-105'
           )}
         >
           {cardContent}
         </div>
       ) : (
-        <Link href={`/${game.id}`}>
+        <Link href={`/${id}`}>
           <a
             className={classNames(
               userPreview === null || userPreview === undefined
                 ? 'hover:cursor-not-allowed grayscale'
                 : 'hover:cursor-pointer',
-              game.background,
+              background,
               'bg-gradient-to-r px-5 py-4 rounded-2xl relative text-white pt-14 transition duration-300 hover:scale-105'
             )}
           >
