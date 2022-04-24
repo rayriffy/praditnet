@@ -14,6 +14,7 @@ import axios from 'axios'
 import { Rival } from '../@types/Rival'
 import Router from 'next/router'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 export interface AddRivalProps {
   rival: Rival
@@ -33,34 +34,26 @@ export const AddRival = memo<AddRivalProps>(props => {
     setError(null)
     setProgress(true)
 
-    const token = await executeRecaptcha('ongeki/rival/add')
-
-    if (token !== null) {
-      try {
-        const body = {
-          id: rival?.id,
-        }
-
-        const res = await axios.post('/api/ongeki/rival/add', body, {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        })
-
-        if (res.status === 200) {
-          NProgress.configure({ minimum: 0.3 })
-          NProgress.start()
-          Router.push('/ongeki/rival')
-        } else {
-          throw new Error(await res.data())
-        }
-      } catch (error) {
-        console.error('An unexpected error happened occurred:', error)
-        setError(error.response.data)
-        setProgress(false)
+    try {
+      const body = {
+        id: rival?.id,
       }
-    } else {
-      setError('ReCAPTCHA verification failed!')
+
+      const axios = await createApiInstance(
+        executeRecaptcha('ongeki/rival/add')
+      )
+      const res = await axios.post('ongeki/rival/add', body)
+
+      if (res.status === 200) {
+        NProgress.configure({ minimum: 0.3 })
+        NProgress.start()
+        Router.push('/ongeki/rival')
+      } else {
+        throw new Error(await res.data())
+      }
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error)
+      setError(error.response.data)
       setProgress(false)
     }
   }

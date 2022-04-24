@@ -2,14 +2,14 @@ import { memo, useCallback, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import axios from 'axios'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Voice } from './voice'
-import { Image } from '../../../../core/components/image'
-import { classNames } from '../../../../core/services/classNames'
 import { CollectionType } from '../constants/collectionTypes'
 import { Trophy } from '../../home/components/trophy'
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { Image } from '../../../../core/components/image'
+import { classNames } from '../../../../core/services/classNames'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 interface Props {
   collection: CollectionType
@@ -38,21 +38,13 @@ export const Item = memo<Props>(props => {
 
     try {
       // request for capcha token
-      const token = await executeRecaptcha('chunithm/item')
+      const axios = await createApiInstance(executeRecaptcha('chunithm/item'))
 
       // todo: create api to set item
-      await axios.post(
-        '/api/chunithm/collection/set',
-        {
-          type: collection.id,
-          id: item.id,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      await axios.post('chunithm/collection/set', {
+        type: collection.id,
+        id: item.id,
+      })
       router.push('/chunithm/collection')
     } catch (e) {
       setError(true)

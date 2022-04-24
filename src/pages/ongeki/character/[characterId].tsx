@@ -2,7 +2,6 @@ import { Fragment, useRef, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
-import axios from 'axios'
 import NProgress from 'nprogress'
 
 import { Image } from '../../../core/components/image'
@@ -14,6 +13,7 @@ import { classNames } from '../../../core/services/classNames'
 import { AppProps } from '../../../app/@types/AppProps'
 import { DetailedCharacter } from '../../../modules/ongeki/character/services/getUserCharacter'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { createApiInstance } from '../../../core/services/createApiInstance'
 
 interface Props extends AppProps {
   character: DetailedCharacter
@@ -31,34 +31,25 @@ const Page: NextPage<Props> = props => {
     setError(null)
     setProgress(true)
 
-    const token = await executeRecaptcha('ongeki/navigator')
+    const axios = await createApiInstance(executeRecaptcha('ongeki/navigator'))
 
-    if (token !== null) {
-      try {
-        const body = {
-          id: character.id,
-        }
-
-        const res = await axios.post('/api/ongeki/navigator/set', body, {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        })
-
-        if (res.status === 200) {
-          NProgress.configure({ minimum: 0.3 })
-          NProgress.start()
-          window.location.reload()
-        } else {
-          throw new Error(await res.data())
-        }
-      } catch (error) {
-        console.error('An unexpected error happened occurred:', error)
-        setError(error.response.data)
-        setProgress(false)
+    try {
+      const body = {
+        id: character.id,
       }
-    } else {
-      setError('ReCAPTCHA verification failed!')
+
+      const res = await axios.post('ongeki/navigator/set', body)
+
+      if (res.status === 200) {
+        NProgress.configure({ minimum: 0.3 })
+        NProgress.start()
+        window.location.reload()
+      } else {
+        throw new Error(await res.data())
+      }
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error)
+      setError(error.response.data)
       setProgress(false)
     }
   }

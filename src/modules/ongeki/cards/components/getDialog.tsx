@@ -1,9 +1,8 @@
 import { Dispatch, Fragment, memo, SetStateAction, useState } from 'react'
 
-import NProgress from 'nprogress'
 import { Dialog, Transition } from '@headlessui/react'
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 export interface GetDialogProps {
   id: number
@@ -27,33 +26,23 @@ export const GetDialog = memo<GetDialogProps>(props => {
     setError(null)
     setProgress(true)
 
-    const token = await executeRecaptcha('ongeki/card/get')
-
-    if (token !== null) {
-      try {
-        const body = {
-          id: id,
-        }
-
-        const res = await axios.post('/api/ongeki/card/get', body, {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        })
-
-        if (res.status === 200) {
-          refetch()
-          setShow(false)
-        } else {
-          throw new Error(await res.data())
-        }
-      } catch (error) {
-        console.error('An unexpected error happened occurred:', error)
-        setError(error.response.data)
-        setProgress(false)
+    try {
+      const body = {
+        id: id,
       }
-    } else {
-      setError('ReCAPTCHA verification failed!')
+
+      const axios = await createApiInstance(executeRecaptcha('ongeki/card/get'))
+      const res = await axios.post('ongeki/card/get', body)
+
+      if (res.status === 200) {
+        refetch()
+        setShow(false)
+      } else {
+        throw new Error(await res.data())
+      }
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error)
+      setError(error.response.data)
       setProgress(false)
     }
   }

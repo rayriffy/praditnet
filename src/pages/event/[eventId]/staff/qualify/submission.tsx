@@ -3,12 +3,13 @@ import { Fragment, useRef, useState } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 import { XCircleIcon } from '@heroicons/react/solid'
 
-import { Spinner } from '../../../../../core/components/spinner'
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+
+import { Spinner } from '../../../../../core/components/spinner'
 import { getEventMusics } from '../../../../../modules/event/home/services/getEventMusics'
 import { Submission } from '../../../../../modules/event/submission/@types/Submission'
 import { SubmissionForm } from '../../../../../modules/event/submission/components/submissionForm'
+import { createApiInstance } from '../../../../../core/services/createApiInstance'
 
 interface Props {
   event: {
@@ -40,19 +41,13 @@ const Page: NextPage<Props> = props => {
     setSubmission(undefined)
 
     try {
-      const token = await executeRecaptcha('event/getSubmission')
-      const { data } = await axios.post(
-        '/api/event/getSubmission',
-        {
-          eventId: event.id,
-          submissionId: inputRef.current?.value,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
+      const axios = await createApiInstance(
+        executeRecaptcha('event/getSubmission')
       )
+      const { data } = await axios.post('event/getSubmission', {
+        eventId: event.id,
+        submissionId: inputRef.current?.value,
+      })
 
       setSubmission(data.notFound === true ? null : data)
     } catch (e) {

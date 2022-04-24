@@ -1,18 +1,11 @@
-import {
-  Dispatch,
-  memo,
-  MutableRefObject,
-  SetStateAction,
-  Fragment,
-  useState,
-} from 'react'
+import { Dispatch, memo, SetStateAction, Fragment, useState } from 'react'
 
 import NProgress from 'nprogress'
 import { Dialog, Transition } from '@headlessui/react'
-import axios from 'axios'
 
 import { Rival } from '../@types/Rival'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 export interface DeleteRivalProps {
   rival: Rival
@@ -32,34 +25,26 @@ export const DeleteRival = memo<DeleteRivalProps>(props => {
     setError(null)
     setProgress(true)
 
-    let token = await executeRecaptcha('ongeki/rival/remove')
-
-    if (token !== null) {
-      try {
-        const body = {
-          id: rival?.id,
-        }
-
-        const res = await axios.post('/api/ongeki/rival/remove', body, {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        })
-
-        if (res.status === 200) {
-          NProgress.configure({ minimum: 0.3 })
-          NProgress.start()
-          window.location.reload()
-        } else {
-          throw new Error(await res.data())
-        }
-      } catch (error) {
-        console.error('An unexpected error happened occurred:', error)
-        setError(error.response.data)
-        setProgress(false)
+    try {
+      const body = {
+        id: rival?.id,
       }
-    } else {
-      setError('ReCAPTCHA verification failed!')
+
+      const axios = await createApiInstance(
+        executeRecaptcha('ongeki/rival/remove')
+      )
+      const res = await axios.post('ongeki/rival/remove', body)
+
+      if (res.status === 200) {
+        NProgress.configure({ minimum: 0.3 })
+        NProgress.start()
+        window.location.reload()
+      } else {
+        throw new Error(await res.data())
+      }
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error)
+      setError(error.response.data)
       setProgress(false)
     }
   }

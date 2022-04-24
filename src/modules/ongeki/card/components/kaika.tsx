@@ -1,10 +1,10 @@
 import { memo, useState } from 'react'
 
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import NProgress from 'nprogress'
 
 import { classNames } from '../../../../core/services/classNames'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 interface Props {
   cardId: number
@@ -19,20 +19,12 @@ export const Kaika = memo<Props>(props => {
 
   const onClick = async () => {
     setProgress(true)
-    const token = await executeRecaptcha('ongeki/card/kaika')
+    const axios = await createApiInstance(executeRecaptcha('ongeki/card/kaika'))
 
     try {
-      await axios.post(
-        '/api/ongeki/card/kaika',
-        {
-          id: cardId,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      await axios.post('ongeki/card/kaika', {
+        id: cardId,
+      })
 
       setProgress(false)
 

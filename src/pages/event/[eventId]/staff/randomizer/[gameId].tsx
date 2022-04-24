@@ -1,16 +1,13 @@
 import { Fragment, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
-import Link from 'next/link'
 
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
-import { Image } from '../../../../../core/components/image'
 import { Input } from '../../../../../modules/event/randomizer/components/input'
 import { SearchResult } from '../../../../../modules/event/randomizer/@types/SearchResult'
-import { DifficultyBlock } from '../../../../../core/components/difficultyBlock'
 import { RenderedMusic } from '../../../../../modules/event/randomizer/components/renderedMusic'
+import { createApiInstance } from '../../../../../core/services/createApiInstance'
 
 interface Props {
   event: {
@@ -35,22 +32,14 @@ const Page: NextPage<Props> = props => {
     setProgress(true)
     setResult(null)
 
-    const token = await executeRecaptcha('event/random')
+    const axios = await createApiInstance(executeRecaptcha('event/random'))
 
     try {
-      const { data: searchResult } = await axios.post(
-        '/api/event/random',
-        {
-          eventId: event.id,
-          gameId: event.game,
-          ...options,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      const { data: searchResult } = await axios.post('event/random', {
+        eventId: event.id,
+        gameId: event.game,
+        ...options,
+      })
       setResult(searchResult.data)
     } catch (e) {
     } finally {

@@ -8,10 +8,10 @@ import {
   useState,
 } from 'react'
 
-import axios from 'axios'
 import { Dialog, Transition } from '@headlessui/react'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 import NProgress from 'nprogress'
+import { createApiInstance } from '../../../core/services/createApiInstance'
 
 export interface AimeTransferDialogProps {
   show: boolean
@@ -35,19 +35,11 @@ export const TransferDialog = memo<AimeTransferDialogProps>(props => {
     setError(null)
 
     try {
-      const token = await executeRecaptcha('system/card')
+      const axios = await createApiInstance(executeRecaptcha('system/card'))
       const inputCardId = inputRef.current.value
-      await axios.post(
-        '/api/card/set',
-        {
-          cardId: inputCardId.toLowerCase(),
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      await axios.post('card/set', {
+        cardId: inputCardId.toLowerCase(),
+      })
 
       NProgress.configure({ minimum: 0.3 })
       NProgress.start()

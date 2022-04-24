@@ -3,9 +3,10 @@ import { FormEventHandler, useState } from 'react'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+
 import { useTitle } from '../core/services/useTitle'
+import { createApiInstance } from '../core/services/createApiInstance'
 
 const Page: NextPage = props => {
   const [progress, setProgress] = useState<boolean>(false)
@@ -28,13 +29,9 @@ const Page: NextPage = props => {
     }
 
     try {
-      const token = await executeRecaptcha('system/login')
+      const axios = await createApiInstance(executeRecaptcha('system/login'))
 
-      const res = await axios.post('/api/authentication/login', body, {
-        headers: {
-          'X-PraditNET-Capcha': token,
-        },
-      })
+      const res = await axios.post('authentication/login', body)
       if (res.status === 200) {
         router.push('/')
       } else {

@@ -2,11 +2,11 @@ import { FormEventHandler, memo, useRef, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 interface Props {
   eventId: string
@@ -62,26 +62,18 @@ export const Form = memo<Props>(props => {
     }
 
     // get recapcha token
-    let token = await executeRecaptcha('event/apply')
+    let axios = await createApiInstance(executeRecaptcha('event/apply'))
 
     // send payload
     try {
-      await axios.post(
-        '/api/event/register',
-        {
-          event: eventId,
-          realName: realNameRef.current.value,
-          inGameName: inGameNameRef.current.value,
-          facebook: facebookRef.current.value,
-          shirtSize: shirtSizeRef.current.value,
-          participatedGame,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      await axios.post('event/register', {
+        event: eventId,
+        realName: realNameRef.current.value,
+        inGameName: inGameNameRef.current.value,
+        facebook: facebookRef.current.value,
+        shirtSize: shirtSizeRef.current.value,
+        participatedGame,
+      })
 
       router.push(`/event/${eventId}`)
       setProgress(false)

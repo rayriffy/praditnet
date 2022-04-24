@@ -1,6 +1,5 @@
 import { FormEventHandler, Fragment, memo, useMemo, useState } from 'react'
 
-import axios from 'axios'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Metadata } from './metadata'
@@ -8,6 +7,7 @@ import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { maimaiMetadata } from '../constants/maimaiMetadata'
 import { chunithmMetadata } from '../constants/chunithmMetadata'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 import { Submission } from '../@types/Submission'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
@@ -88,22 +88,16 @@ export const SubmissionForm = memo<Props>(props => {
       const shirtSize =
         shirtSizeElement !== null ? shirtSizeElement.value : null
 
-      const token = await executeRecaptcha('event/submitScore')
-
-      await axios.post(
-        '/api/event/submitScore',
-        {
-          eventId,
-          submissionId: submission.userId,
-          scores,
-          shirtSize,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
+      const axios = await createApiInstance(
+        executeRecaptcha('event/submitScore')
       )
+
+      await axios.post('event/submitScore', {
+        eventId,
+        submissionId: submission.userId,
+        scores,
+        shirtSize,
+      })
 
       setProgress(false)
       setConclusion('success')

@@ -1,12 +1,11 @@
-import { memo, MutableRefObject, useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 
 import { useRouter } from 'next/router'
-
-import axios from 'axios'
 
 import { Image } from '../../../../core/components/image'
 import { classNames } from '../../../../core/services/classNames'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
+import { createApiInstance } from '../../../../core/services/createApiInstance'
 
 interface Props {
   type: string
@@ -34,21 +33,13 @@ export const Item = memo<Props>(props => {
 
     try {
       // request for capcha token
-      const token = await executeRecaptcha('finale/item')
+      const axios = await createApiInstance(executeRecaptcha('finale/item'))
 
       // todo: create api to set item
-      await axios.post(
-        '/api/finale/collection/set',
-        {
-          type,
-          id: item.id,
-        },
-        {
-          headers: {
-            'X-PraditNET-Capcha': token,
-          },
-        }
-      )
+      await axios.post('finale/collection/set', {
+        type,
+        id: item.id,
+      })
       router.push('/finale/collection')
     } catch (e) {
       setError(true)
