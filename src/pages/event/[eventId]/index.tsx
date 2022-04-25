@@ -63,12 +63,12 @@ const Page: NextPage<Props> = props => {
           <div className="p-2 flex flex-wrap">
             <Link href={`/event/${event.id}/staff/qualify/submission`}>
               <a className="m-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                Qualify submission
+                Submission
               </a>
             </Link>
             <Link href={`/event/${event.id}/staff/qualify/leaderboard`}>
               <a className="m-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                Qualify leaderboard
+                Leaderboard
               </a>
             </Link>
             <Link href={`/event/${event.id}/staff/randomizer`}>
