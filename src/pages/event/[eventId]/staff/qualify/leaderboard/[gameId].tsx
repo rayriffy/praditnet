@@ -3,7 +3,6 @@ import { Fragment } from 'react'
 import { GetServerSideProps, NextPage } from 'next'
 
 interface Props {
-  game: string
   ranks: {
     order: string
     id: string
@@ -14,7 +13,7 @@ interface Props {
 }
 
 const Page: NextPage<Props> = props => {
-  const { ranks, game } = props
+  const { ranks } = props
 
   return (
     <Fragment>
@@ -25,9 +24,6 @@ const Page: NextPage<Props> = props => {
       </div>
       <div className="mt-6 space-y-4">
         <h1 className="text-2xl font-bold dark:text-white">Leaderboard</h1>
-        {/* <p className="my-4 p-4 bg-red-100 text-red-800 rounded-lg leading-tight text-sm">
-          {JSON.stringify(props)}
-        </p> */}
       </div>
 
       <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
@@ -147,13 +143,12 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
   // permit to page
   return {
     props: {
-      game: gameId,
       ranks: ranks.map((rank, i) => ({
         ...rank,
         order: `${i + 1}${stringifyOrder(i + 1)}`,
         score:
           gameId === 'maimai'
-            ? rank.score.toFixed(4)
+            ? `${rank.score.toFixed(4)}%`
             : rank.score.toLocaleString(),
       })),
     },
