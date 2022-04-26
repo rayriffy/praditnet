@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
-import { useStoreon } from '../../context/storeon'
+import { useContext, useEffect } from 'react'
+
+import { TitleContext } from '../../app/components/titleProvider'
 
 export const useTitle = (title: string) => {
-  const { dispatch } = useStoreon('title')
+  const [, setTitle] = useContext(TitleContext)
 
-  useEffect(() => dispatch('title/set', title), [title])
+  useEffect(() => setTitle(title), [title])
 }

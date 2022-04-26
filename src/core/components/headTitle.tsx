@@ -1,8 +1,13 @@
-import { FunctionComponent, PropsWithChildren, useMemo } from 'react'
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  useContext,
+  useMemo,
+} from 'react'
 
 import Head from 'next/head'
 
-import { useStoreon } from '../../context/storeon'
+import { TitleContext } from '../../app/components/titleProvider'
 
 interface Props extends PropsWithChildren<{}> {
   title?: string
@@ -15,7 +20,7 @@ export const HeadTitle: FunctionComponent<Props> = props => {
     children,
   } = props
 
-  const { title } = useStoreon('title')
+  const [title] = useContext(TitleContext)
 
   const transformedTitle = useMemo(
     () => (title ? `${title} · PraditNET` : 'PraditNET'),

@@ -5,6 +5,7 @@ const timezone = require('dayjs/plugin/timezone')
 const withPlugins = require('next-compose-plugins')
 
 const withPWA = require('next-pwa')
+const withPreact = require('next-plugin-preact')
 
 const { runtimeCaching } = require('./runtimeCaching')
 
@@ -13,6 +14,7 @@ dayjs.extend(timezone)
 
 module.exports = withPlugins(
   [
+    [withPreact],
     [
       withPWA,
       {
@@ -29,7 +31,6 @@ module.exports = withPlugins(
   ],
   {
     experimental: {
-      reactRoot: 'concurrent',
       polyfillsOptimization: true,
       scrollRestoration: true,
     },

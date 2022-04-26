@@ -8,7 +8,7 @@ import NProgress from 'nprogress'
 
 import { HeadTitle } from '../core/components/headTitle'
 import { Layout } from '../app/components/layout'
-import { Context } from '../context/storeon'
+import { TitleProvider } from '../app/components/titleProvider'
 
 import '../styles/nprogress.css'
 import '../styles/tailwind.css'
@@ -43,7 +43,7 @@ const NextApp: NextPage<AppProps> = props => {
   }, [])
 
   return (
-    <Context>
+    <TitleProvider>
       <HeadTitle />
       <Layout
         aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
@@ -53,7 +53,7 @@ const NextApp: NextPage<AppProps> = props => {
       >
         <Component {...pageProps} />
       </Layout>
-    </Context>
+    </TitleProvider>
   )
 }
 
