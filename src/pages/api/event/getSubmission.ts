@@ -40,7 +40,13 @@ const api: NextApiHandler = async (req, res) => {
         eventId: eventId,
         userId: submissionId,
       })
-      .select('userId', 'inGameName', 'selectedGameId', 'remainingAttempts')
+      .select(
+        'userId',
+        'inGameName',
+        'selectedGameId',
+        'remainingAttempts',
+        'shirtSize'
+      )
       .first()
     await knex.destroy()
 
