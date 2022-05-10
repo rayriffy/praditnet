@@ -9,6 +9,7 @@ interface Props {
     name: string
     score: string
     attemptedAt: string
+    shirt: string
   }[]
 }
 
@@ -48,6 +49,12 @@ const Page: NextPage<Props> = props => {
               >
                 Score
               </th>
+              <th
+                scope="col"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Shirt
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white">
@@ -64,6 +71,9 @@ const Page: NextPage<Props> = props => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {rank.score}
+                </td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  {rank.shirt}
                 </td>
               </tr>
             ))}
