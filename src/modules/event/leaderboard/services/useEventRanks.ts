@@ -11,7 +11,7 @@ interface Rank {
 export const useEventRanks = (eventId: string, gameId: string) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [data, setData] = useState<{
-    updatedAt: string
+    updatedAt: Date
     columns: string[]
     ranks: {
       id: string
@@ -23,7 +23,7 @@ export const useEventRanks = (eventId: string, gameId: string) => {
       sums: string
     }[]
   }>({
-    updatedAt: '22 June 2000',
+    updatedAt: new Date(),
     columns: [],
     ranks: [],
   })
@@ -37,7 +37,12 @@ export const useEventRanks = (eventId: string, gameId: string) => {
           gameId,
         },
       })
-      .then(({ data }) => setData(data))
+      .then(({ data }) =>
+        setData({
+          ...data,
+          updatedAt: new Date(data.updatedAt),
+        })
+      )
       .catch(e => setError(true))
       .finally(() => setLoading(false))
   }, [])

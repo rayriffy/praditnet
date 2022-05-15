@@ -1,4 +1,5 @@
 import { XCircleIcon } from '@heroicons/react/outline'
+import dayjs from 'dayjs'
 import { memo, Fragment } from 'react'
 import { useEventRanks } from '../services/useEventRanks'
 
@@ -32,7 +33,8 @@ export const Leaderboard = memo<Props>(props => {
         <Fragment>
           {!loading && (
             <p className="py-0.5">
-              <b>Updated at:</b> {updatedAt}
+              <b>Updated at:</b>{' '}
+              {dayjs(updatedAt).format('DD MMM YYYY HH:mm:ss')}
             </p>
           )}
           <div className="overflow-x-scroll shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
