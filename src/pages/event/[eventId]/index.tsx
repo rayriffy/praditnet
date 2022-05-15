@@ -17,6 +17,7 @@ export interface Props {
     name: string
     startAt: string
     endAt: string
+    url: string
   }
   musics: {
     [key: string]: {
@@ -79,6 +80,21 @@ const Page: NextPage<Props> = props => {
           </div>
         </div>
       ) : null}
+      <div className="space-x-4 flex justify-center">
+        <a
+          href={event.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Event details
+        </a>
+        <Link href={`/event/${event.id}/leaderboard`}>
+          <a className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Leaderboard
+          </a>
+        </Link>
+      </div>
       {entry === null ? (
         <Preview eventId={event.id} musics={musics} />
       ) : (
@@ -150,6 +166,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
         name: targetEvent.name,
         startAt: dayjs(targetEvent.startAt).format('DD MMM YYYY'),
         endAt: dayjs(targetEvent.startAt).format('DD MMM YYYY'),
+        url: targetEvent.eventInfoUrl,
       },
       musics: Object.fromEntries(fetchedMusics),
       isStaff,

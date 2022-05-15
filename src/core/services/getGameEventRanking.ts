@@ -54,6 +54,7 @@ export const getGameEventRanking = async (
                 return {
                   sum: val.reduce((acc, val) => acc + val.score, 0),
                   name: val[0].inGameName,
+                  attempt: val[0].attempt,
                   attemptedAt: val[0].createdAt,
                   shirt: val[0].shirtSize,
                 }
@@ -64,6 +65,7 @@ export const getGameEventRanking = async (
         ) ?? {
           sum: 0,
           name: '',
+          attempt: 0,
           attemptedAt: new Date('1990-01-01'),
           shirt: '',
         }
@@ -72,6 +74,7 @@ export const getGameEventRanking = async (
           id: userId,
           name: grouppedAttmpts.name,
           score: grouppedAttmpts.sum,
+          attempt: grouppedAttmpts.attempt,
           attemptedAt: (grouppedAttmpts.attemptedAt as Date).toISOString(),
           shirt: grouppedAttmpts.shirt,
         }
