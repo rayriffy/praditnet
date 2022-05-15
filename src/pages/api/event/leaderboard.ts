@@ -23,10 +23,7 @@ const api: NextApiHandler = async (req, res) => {
       const stringifyOrder = (order: number) =>
         ['st', 'nd', 'rd'][((((order + 90) % 100) - 10) % 10) - 1] || 'th'
 
-      res.setHeader(
-        'Cache-Control',
-        'shared, max-age=3600, stale-while-revalidate=86400'
-      )
+      res.setHeader('Cache-Control', 'max-age=600')
 
       return res.status(200).send({
         message: 'done',
