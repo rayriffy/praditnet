@@ -12,7 +12,7 @@ export const Leaderboard = memo<Props>(props => {
 
   const {
     loading,
-    data: { ranks, updatedAt },
+    data: { ranks, columns, updatedAt },
     error,
   } = useEventRanks(eventId, gameId)
 
@@ -51,11 +51,21 @@ export const Leaderboard = memo<Props>(props => {
                   >
                     Name
                   </th>
+                  {!loading &&
+                    columns.map(column => (
+                      <th
+                        key={`table-header-${column}`}
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                      >
+                        {column}
+                      </th>
+                    ))}
                   <th
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Score
+                    Total
                   </th>
                 </tr>
               </thead>
@@ -91,8 +101,17 @@ export const Leaderboard = memo<Props>(props => {
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                           {rank.name}
                         </td>
+                        {!loading &&
+                          columns.map(column => (
+                            <td
+                              key={`table-body-${column}`}
+                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                            >
+                              {rank.score[column]}
+                            </td>
+                          ))}
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {rank.score}
+                          {rank.sums}
                         </td>
                       </tr>
                     ))}
