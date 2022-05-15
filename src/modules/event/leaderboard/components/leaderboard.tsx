@@ -35,7 +35,7 @@ export const Leaderboard = memo<Props>(props => {
               <b>Updated at:</b> {updatedAt}
             </p>
           )}
-          <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
+          <div className="overflow-x-scroll shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50">
                 <tr>
@@ -56,7 +56,7 @@ export const Leaderboard = memo<Props>(props => {
                       <th
                         key={`table-header-${column}`}
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 truncate"
                       >
                         {column}
                       </th>
@@ -110,7 +110,7 @@ export const Leaderboard = memo<Props>(props => {
                               {rank.score[column]}
                             </td>
                           ))}
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-700">
                           {rank.sums}
                         </td>
                       </tr>

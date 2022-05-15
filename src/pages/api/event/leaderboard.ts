@@ -27,7 +27,7 @@ const api: NextApiHandler = async (req, res) => {
         gameId === 'maimai' ? `${score.toFixed(4)}%` : score.toLocaleString()
 
       const processedRanks = await Promise.all(
-        ranks.slice(0, 16).map(async (rank, i) => {
+        ranks.map(async (rank, i) => {
           const scores = await knex('EventAuditionUser')
             .where({
               eventId: eventId,
@@ -71,8 +71,6 @@ const api: NextApiHandler = async (req, res) => {
       })
     } catch (e) {
       await knex.destroy()
-
-      console.log(e)
 
       return res.status(500).send({
         message: 'unexpected query error',
