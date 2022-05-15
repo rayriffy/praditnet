@@ -60,6 +60,8 @@ const api: NextApiHandler = async (req, res) => {
       )
       await knex.destroy()
 
+      res.setHeader('Cache-Control', 'max-age=600')
+
       return res.status(200).send({
         message: 'done',
         updatedAt: dayjs().tz('Asia/Bangkok').format('DD MMM YYYY HH:mm:ss'),
