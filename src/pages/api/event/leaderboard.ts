@@ -64,7 +64,7 @@ const api: NextApiHandler = async (req, res) => {
 
       return res.status(200).send({
         message: 'done',
-        updatedAt: dayjs().tz('Asia/Bangkok').format('DD MMM YYYY HH:mm:ss'),
+        updatedAt: dayjs().toISOString(),
         columns: Object.keys(processedRanks[0].score),
         ranks: sortBy(processedRanks, ['order']).map((rank, i) => ({
           ...rank,
