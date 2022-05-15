@@ -30,9 +30,11 @@ export const Leaderboard = memo<Props>(props => {
         </div>
       ) : (
         <Fragment>
-          <p className="py-0.5">
-            <b>Updated at:</b> {updatedAt}
-          </p>
+          {!loading && (
+            <p className="py-0.5">
+              <b>Updated at:</b> {updatedAt}
+            </p>
+          )}
           <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
             <table className="min-w-full divide-y divide-gray-300">
               <thead className="bg-gray-50">
