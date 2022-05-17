@@ -21,11 +21,11 @@ const Page: NextPage<Props> = props => {
         </p>
       </div>
       <div className="mt-6 space-y-4">
-        <h1 className="text-2xl font-bold dark:text-white">Leaderboard</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Contestants</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {event.games.map(game => (
             <Link
-              href={`/event/${event.id}/staff/qualify/leaderboard/${game}`}
+              href={`/event/${event.id}/staff/qualify/contestants/${game}`}
               key={`randomizer-${game}`}
             >
               <a className="bg-white rounded-lg shadow border p-4">

@@ -9,6 +9,7 @@ interface Props {
     name: string
     score: string
     attemptedAt: string
+    facebook: string
     shirt: string
   }[]
 }
@@ -24,7 +25,7 @@ const Page: NextPage<Props> = props => {
         </p>
       </div>
       <div className="mt-6 space-y-4">
-        <h1 className="text-2xl font-bold dark:text-white">Leaderboard</h1>
+        <h1 className="text-2xl font-bold dark:text-white">Contestants</h1>
       </div>
 
       <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
@@ -55,6 +56,12 @@ const Page: NextPage<Props> = props => {
               >
                 Shirt
               </th>
+              <th
+                scope="col"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              >
+                Facebook
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white">
@@ -74,6 +81,16 @@ const Page: NextPage<Props> = props => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                   {rank.shirt}
+                </td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                  <a
+                    href={rank.facebook}
+                    className="text-blue-500 font-medium"
+                    target="_blank"
+                    rel="noopener noreferer"
+                  >
+                    Link
+                  </a>
                 </td>
               </tr>
             ))}

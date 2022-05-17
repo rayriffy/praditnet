@@ -40,7 +40,8 @@ export const getGameEventRanking = async (
       'EventAuditionUser.recordedBy',
       'EventAuditionUser.createdAt',
       'EventAuditionRecord.inGameName',
-      'EventAuditionRecord.shirtSize'
+      'EventAuditionRecord.shirtSize',
+      'EventAuditionRecord.facebook'
     )
 
   const groupedRecords = groupBy(records, 'userId')
@@ -57,6 +58,7 @@ export const getGameEventRanking = async (
                   attempt: val[0].attempt,
                   attemptedAt: val[0].createdAt,
                   shirt: val[0].shirtSize,
+                  facebook: val[0].facebook,
                 }
               }
             ),
@@ -66,6 +68,7 @@ export const getGameEventRanking = async (
           sum: 0,
           name: '',
           attempt: 0,
+          facebook: '',
           attemptedAt: new Date('1990-01-01'),
           shirt: '',
         }
@@ -75,6 +78,7 @@ export const getGameEventRanking = async (
           name: grouppedAttmpts.name,
           score: grouppedAttmpts.sum,
           attempt: grouppedAttmpts.attempt,
+          facebook: grouppedAttmpts.facebook,
           attemptedAt: (grouppedAttmpts.attemptedAt as Date).toISOString(),
           shirt: grouppedAttmpts.shirt,
         }
