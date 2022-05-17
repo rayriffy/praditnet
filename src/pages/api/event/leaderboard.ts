@@ -68,7 +68,7 @@ const api: NextApiHandler = async (req, res) => {
         columns: Object.keys(processedRanks[0].score),
         ranks: sortBy(processedRanks, ['order']).map((rank, i) => ({
           ...rank,
-          order: `${i + 1}${stringifyOrder(i)}`,
+          order: `${i + 1}${stringifyOrder(i + 1)}`,
         })),
       })
     } catch (e) {
