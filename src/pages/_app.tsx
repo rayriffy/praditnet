@@ -19,7 +19,7 @@ const NextApp: NextPage<AppProps> = props => {
     pageProps: { session, ...pageProps },
   } = props
 
-  const { events } = useRouter()
+  const { events, pathname } = useRouter()
 
   const routeChangeStart = () => {
     NProgress.configure({ minimum: 0.3 })
@@ -45,14 +45,18 @@ const NextApp: NextPage<AppProps> = props => {
   return (
     <TitleProvider>
       <HeadTitle />
-      <Layout
-        aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
-        eamuse={
-          pageProps.user === undefined ? undefined : pageProps.user.eamuse
-        }
-      >
+      {['/event/[eventId]/internal/bingo/[gameId]'].includes(pathname) ? (
         <Component {...pageProps} />
-      </Layout>
+      ) : (
+        <Layout
+          aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
+          eamuse={
+            pageProps.user === undefined ? undefined : pageProps.user.eamuse
+          }
+        >
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </TitleProvider>
   )
 }
