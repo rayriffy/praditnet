@@ -60,7 +60,7 @@ const api: NextApiHandler = async (req, res) => {
       )
       await knex.destroy()
 
-      res.setHeader('Cache-Control', 'max-age=1800')
+      res.setHeader('Cache-Control', 's-maxage=1800')
 
       return res.status(200).send({
         message: 'done',
