@@ -111,16 +111,20 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 
   const { eventId, gameId } = ctx.params
 
+  if (process.env.NODE_ENV !== 'development') {
+    return {
+      notFound: true,
+    }
+  }
+
   const knex = createKnexInstance('praditnet')
   const musics = await knex('EventMusic')
     .join('EventPool', 'EventPool.uid', 'EventMusic.poolId')
-    // .join(`${gameId}Music`, `${gameId}Music.id`, 'EventMusic.musicId')
     .orderByRaw('RAND()')
     .limit(24)
     .where('EventPool.eventId', eventId)
     .where('EventMusic.gameId', gameId)
-    .where('EventPool.order', '>=', 1)
-    .where('EventPool.order', '<=', 3)
+    .where('EventPool.order', '=', 2)
     .select('EventMusic.musicId')
   await knex.destroy()
 
