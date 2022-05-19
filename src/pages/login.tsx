@@ -1,14 +1,33 @@
 import { FormEventHandler, useState } from 'react'
 
-import { NextPage } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { useTitle } from '../core/services/useTitle'
 import { createApiInstance } from '../core/services/createApiInstance'
+import {
+  DatabaseIcon,
+  ExclamationIcon,
+  LinkIcon,
+} from '@heroicons/react/outline'
 
-const Page: NextPage = props => {
+interface Props {
+  error?: string
+}
+
+const Page: NextPage<Props> = props => {
+  if (props.error !== undefined) {
+    return (
+      <div className="mt-20 mb-4 flex justify-center items-center space-x-2">
+        <ExclamationIcon className="w-10 h-10 text-gray-700 dark:text-white" />
+        <LinkIcon className="w-6 h-6 text-gray-700 dark:text-white" />
+        <DatabaseIcon className="w-10 h-10 text-gray-700 dark:text-white" />
+      </div>
+    )
+  }
+
   const [progress, setProgress] = useState<boolean>(false)
   const [error, setError] = useState<string>(null)
 
@@ -129,6 +148,31 @@ const Page: NextPage = props => {
       </form>
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  // attempts to connect to db
+  const { createKnexInstance } = await import(
+    '../core/services/createKnexInstance'
+  )
+
+  // perform simple query to check is server working
+  try {
+    const knex = createKnexInstance('praditnet')
+    await knex('UserAuth').select('username').first()
+    await knex.destroy()
+
+    return {
+      props: {},
+    }
+  } catch (e) {
+    ctx.res.statusCode = 500
+    return {
+      props: {
+        error: 'db-disconnected',
+      },
+    }
+  }
 }
 
 export default Page
