@@ -1,7 +1,7 @@
 import { NextApiHandler } from 'next'
 
 import { createKnexInstance } from '../../../core/services/createKnexInstance'
-import { serverCapcha } from '../../../core/services/serverCapcha'
+import { serverCaptcha } from '../../../core/services/serverCaptcha'
 import { getApiUserSession } from '../../../core/services/authentication/api/getApiUserSession'
 
 const api: NextApiHandler = async (req, res) => {
@@ -9,7 +9,7 @@ const api: NextApiHandler = async (req, res) => {
     const { eventId, submissionId } = req.body
 
     try {
-      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+      await serverCaptcha(req.headers['x-praditnet-capcha'] as string)
     } catch (e) {
       return res.status(400).send({
         message: e.message,

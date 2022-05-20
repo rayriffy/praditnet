@@ -2,14 +2,14 @@ import dayjs from 'dayjs'
 import { NextApiHandler } from 'next'
 import { getApiUserSession } from '../../../../core/services/authentication/api/getApiUserSession'
 import { createKnexInstance } from '../../../../core/services/createKnexInstance'
-import { serverCapcha } from '../../../../core/services/serverCapcha'
+import { serverCaptcha } from '../../../../core/services/serverCaptcha'
 
 const api: NextApiHandler = async (req, res) => {
   if (req.method.toLowerCase() === 'post') {
     const { id } = req.body
 
     try {
-      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+      await serverCaptcha(req.headers['x-praditnet-capcha'] as string)
     } catch (e) {
       return res.status(400).send({
         message: e.message,

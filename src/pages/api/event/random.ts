@@ -4,7 +4,7 @@ import { sortBy } from 'lodash'
 import { getApiUserSession } from '../../../core/services/authentication/api/getApiUserSession'
 
 import { createKnexInstance } from '../../../core/services/createKnexInstance'
-import { serverCapcha } from '../../../core/services/serverCapcha'
+import { serverCaptcha } from '../../../core/services/serverCaptcha'
 import { SearchResult } from '../../../modules/event/randomizer/@types/SearchResult'
 
 const api: NextApiHandler = async (req, res) => {
@@ -12,7 +12,7 @@ const api: NextApiHandler = async (req, res) => {
     const { eventId, gameId, pools, amount } = req.body
 
     try {
-      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+      await serverCaptcha(req.headers['x-praditnet-capcha'] as string)
     } catch (e) {
       return res.status(400).send({
         message: e.message,

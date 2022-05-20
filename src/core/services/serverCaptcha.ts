@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { stringify } from 'querystring'
 
-export const serverCapcha = async (code: string | undefined) => {
+export const serverCaptcha = async (code: string | undefined) => {
   if (code === undefined || code === 'undefined') {
     throw new Error('Invalid ReCAPCHA V3 token!')
   } else {

@@ -6,7 +6,7 @@ import passport from 'passport'
 import { setLoginSession } from '../../../core/services/authentication/session/setLoginSession'
 
 import { passportLocal } from '../../../core/services/authentication/passportLocal'
-import { serverCapcha } from '../../../core/services/serverCapcha'
+import { serverCaptcha } from '../../../core/services/serverCaptcha'
 
 import { UserAuth } from '../../../core/@types/db/UserAuth'
 
@@ -27,7 +27,7 @@ const api = nc<NextApiRequest, NextApiResponse>()
   .use(passport.initialize())
   .post(async (req, res) => {
     try {
-      await serverCapcha(req.headers['x-praditnet-capcha'] as string)
+      await serverCaptcha(req.headers['x-praditnet-capcha'] as string)
 
       const user = (await authenticate('local', req, res)) as UserAuth
       // session is the payload to save in the token, it may contain basic info about the user
