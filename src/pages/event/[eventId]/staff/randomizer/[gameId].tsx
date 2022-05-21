@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 
 import { GetServerSideProps, NextPage } from 'next'
 
@@ -47,27 +47,36 @@ const Page: NextPage<Props> = props => {
     }
   }
 
+  useEffect(() => {
+    if (
+      result !== null &&
+      document.querySelector('.grecaptcha-badge') !== null
+    ) {
+      document.querySelector('.grecaptcha-badge').remove()
+    }
+  }, [result])
+
   return (
     <Fragment>
-      <div className="flex -mt-6">
-        <p className="uppercase bg-red-500 text-white px-2 py-0.5 text-xs rounded">
-          Staff mode
-        </p>
-      </div>
-      <div className="mt-6 space-y-4">
-        <h1 className="text-2xl font-bold dark:text-white">Randomizer</h1>
-        {/* <p className="my-4 p-4 bg-red-100 text-red-800 rounded-lg leading-tight text-sm">{JSON.stringify(props)}</p> */}
-        <Input pools={pools} disabled={progress} onRequest={onSearch} />
-      </div>
-      {result !== null && (
-        <div className="mt-6 mb-8 sm:p-4 lg:-mx-32 xl:-mx-40 2xl:-mx-48 grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-16 items-center">
+      {result !== null ? (
+        <div className="sm:p-12 flex flex-wrap items-center w-full mx-auto justify-center h-screen overflow-hidden">
           {result.musics.map((music, i) => (
-            <RenderedMusic
-              event={event}
-              music={music}
-              key={`randomized-${event.game}-${i}-${music.id}`}
-            />
+            <div className="mx-4 w-64 my-12">
+              <RenderedMusic
+                event={event}
+                music={music}
+                key={`randomized-${event.game}-${i}-${music.id}`}
+              />
+            </div>
           ))}
+        </div>
+      ) : (
+        <div className="max-w-3xl mx-auto">
+          <div className="mt-6 space-y-4">
+            <h1 className="text-2xl font-bold dark:text-white">Randomizer</h1>
+            {/* <p className="my-4 p-4 bg-red-100 text-red-800 rounded-lg leading-tight text-sm">{JSON.stringify(props)}</p> */}
+            <Input pools={pools} disabled={progress} onRequest={onSearch} />
+          </div>
         </div>
       )}
     </Fragment>

@@ -5,6 +5,7 @@ import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import NProgress from 'nprogress'
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { HeadTitle } from '../core/components/headTitle'
 import { Layout } from '../app/components/layout'
@@ -43,21 +44,34 @@ const NextApp: NextPage<AppProps> = props => {
   }, [])
 
   return (
-    <TitleProvider>
-      <HeadTitle />
-      {['/event/[eventId]/internal/bingo/[gameId]'].includes(pathname) ? (
-        <Component {...pageProps} />
-      ) : (
-        <Layout
-          aime={pageProps.user === undefined ? undefined : pageProps.user.aime}
-          eamuse={
-            pageProps.user === undefined ? undefined : pageProps.user.eamuse
-          }
-        >
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.RECAPCHA_SITE_KEY}
+      scriptProps={{
+        async: true,
+        appendTo: 'body',
+      }}
+    >
+      <TitleProvider>
+        <HeadTitle />
+        {[
+          '/event/[eventId]/staff/randomizer/[gameId]',
+          '/event/[eventId]/internal/bingo/[gameId]',
+        ].includes(pathname) ? (
           <Component {...pageProps} />
-        </Layout>
-      )}
-    </TitleProvider>
+        ) : (
+          <Layout
+            aime={
+              pageProps.user === undefined ? undefined : pageProps.user.aime
+            }
+            eamuse={
+              pageProps.user === undefined ? undefined : pageProps.user.eamuse
+            }
+          >
+            <Component {...pageProps} />
+          </Layout>
+        )}
+      </TitleProvider>
+    </GoogleReCaptchaProvider>
   )
 }
 

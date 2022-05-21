@@ -4,11 +4,11 @@
 
 @import 'tailwindcss/utilities';
 
-html,
+/* html,
 body,
 #__next {
   height: 100%;
-}
+} */
 
 html {
   @apply dark:bg-neutral-800;

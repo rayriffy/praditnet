@@ -1,9 +1,7 @@
-import { FunctionComponent, PropsWithChildren } from 'react'
+import { FunctionComponent, PropsWithChildren, Fragment } from 'react'
 
 import Link from 'next/link'
 import { ArrowRightIcon, CreditCardIcon } from '@heroicons/react/solid'
-
-import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 import { PAmuse } from './pamuse'
 import { R } from '../../core/components/r'
@@ -17,13 +15,7 @@ export const Layout: FunctionComponent<Props> = props => {
   const { children, aime, eamuse } = props
 
   return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.RECAPCHA_SITE_KEY}
-      scriptProps={{
-        async: true,
-        appendTo: 'body',
-      }}
-    >
+    <Fragment>
       <div className="mx-auto max-w-3xl mt-12 px-6">
         <header className="flex justify-between items-center mb-8">
           <div className="flex shrink-0 items-center">
@@ -76,6 +68,6 @@ export const Layout: FunctionComponent<Props> = props => {
           &copy; 2022 Pradit Amusement
         </p>
       </footer>
-    </GoogleReCaptchaProvider>
+    </Fragment>
   )
 }

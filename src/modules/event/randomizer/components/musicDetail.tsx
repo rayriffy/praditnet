@@ -22,7 +22,7 @@ export const MusicDetail = forwardRef<HTMLDivElement, Props>((props, ref) => {
 
   return (
     <div
-      className="bg-neutral-700 shadow border px-4 py-5 rounded-lg"
+      className="bg-neutral-700 shadow px-4 py-5 rounded-lg border-8 border-t-neutral-600 border-r-neutral-600 border-l-neutral-500 border-b-neutral-500"
       ref={ref}
       onClick={onFlip}
     >
