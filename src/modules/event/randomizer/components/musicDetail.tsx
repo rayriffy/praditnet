@@ -12,7 +12,7 @@ interface Props {
     name: string
     artist: string
     level: number
-    difficulty: 'master' | 'remaster'
+    difficulty: 'expert' | 'master' | 'remaster'
   }
   onFlip(): void
 }

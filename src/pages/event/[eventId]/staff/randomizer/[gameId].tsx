@@ -5,9 +5,10 @@ import { GetServerSideProps, NextPage } from 'next'
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 import { Input } from '../../../../../modules/event/randomizer/components/input'
-import { SearchResult } from '../../../../../modules/event/randomizer/@types/SearchResult'
-import { RenderedMusic } from '../../../../../modules/event/randomizer/components/renderedMusic'
 import { createApiInstance } from '../../../../../core/services/createApiInstance'
+import { MusicList } from '../../../../../modules/event/randomizer/components/musicList'
+
+import { SearchResult } from '../../../../../modules/event/randomizer/@types/SearchResult'
 
 interface Props {
   event: {
@@ -59,17 +60,7 @@ const Page: NextPage<Props> = props => {
   return (
     <Fragment>
       {result !== null ? (
-        <div className="sm:p-12 flex flex-wrap items-center w-full mx-auto justify-center h-screen xl:overflow-hidden">
-          {result.musics.map((music, i) => (
-            <div className="mx-4 w-64 my-12">
-              <RenderedMusic
-                event={event}
-                music={music}
-                key={`randomized-${event.game}-${i}-${music.id}`}
-              />
-            </div>
-          ))}
-        </div>
+        <MusicList event={event} musics={result.musics} />
       ) : (
         <div className="max-w-3xl mx-auto">
           <div className="mt-6 space-y-4">
@@ -77,6 +68,13 @@ const Page: NextPage<Props> = props => {
             {/* <p className="my-4 p-4 bg-red-100 text-red-800 rounded-lg leading-tight text-sm">{JSON.stringify(props)}</p> */}
             <Input pools={pools} disabled={progress} onRequest={onSearch} />
           </div>
+          <p className="mt-2 text-gray-600 text-sm">
+            Cards overflow from viewport? Press{' '}
+            <span className="font-mono text-xs p-1 bg-gray-100 border-2 rounded">
+              Space
+            </span>{' '}
+            to enable overflow mode
+          </p>
         </div>
       )}
     </Fragment>
