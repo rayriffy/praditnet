@@ -59,7 +59,7 @@ const Page: NextPage<Props> = props => {
   return (
     <Fragment>
       {result !== null ? (
-        <div className="sm:p-12 flex flex-wrap items-center w-full mx-auto justify-center h-screen overflow-hidden">
+        <div className="sm:p-12 flex flex-wrap items-center w-full mx-auto justify-center h-screen xl:overflow-hidden">
           {result.musics.map((music, i) => (
             <div className="mx-4 w-64 my-12">
               <RenderedMusic

@@ -57,7 +57,10 @@ const api: NextApiHandler = async (req, res) => {
         `EventMusic.difficulty as difficulty`,
         `${targetMusicTable}.level_master as level_master`,
         ...(gameId === 'maimai'
-          ? [`${targetMusicTable}.level_remaster as level_remaster`]
+          ? [
+              `${targetMusicTable}.level_remaster as level_remaster`,
+              `${targetMusicTable}.level_expert as level_expert`,
+            ]
           : [])
       )
 
