@@ -22,34 +22,34 @@ export const Leaderboard = memo<Props>(props => {
       {error ? (
         <div className="mt-12 px-4">
           <XCircleIcon className="w-16 h-16 text-red-500 mx-auto" />
-          <h1 className="font-semibold text-gray-900 text-center leading-none mt-4 text-lg dark:text-white">
+          <h1 className="font-semibold text-gray-900 text-center leading-none mt-4 text-lg">
             Failed to fetch
           </h1>
-          <p className="text-sm text-gray-700 text-center dark:text-white">
+          <p className="text-sm text-gray-700 text-center">
             Pleae check internet connection, and then try again
           </p>
         </div>
       ) : (
         <Fragment>
           {!loading && (
-            <p className="py-2 text-gray-800 dark:text-white">
+            <p className="py-2 text-gray-800">
               <b>Updated at:</b>{' '}
               {dayjs(updatedAt).format('DD MMM YYYY HH:mm:ss')}
             </p>
           )}
-          <div className="overflow-x-scroll shadow ring-1 ring-black dark:ring-white ring-opacity-5 rounded-lg mt-4">
-            <table className="min-w-full divide-y divide-gray-300 dark:divide-white">
-              <thead className="bg-gray-50 dark:bg-neutral-700">
+          <div className="overflow-x-scroll shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">
+            <table className="min-w-full divide-y divide-gray-300">
+              <thead className="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-6"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                   >
                     Order
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     Name
                   </th>
@@ -58,20 +58,20 @@ export const Leaderboard = memo<Props>(props => {
                       <th
                         key={`table-header-${column}`}
                         scope="col"
-                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white truncate"
+                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 truncate"
                       >
                         {column}
                       </th>
                     ))}
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
                     Total
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white dark:bg-neutral-700">
+              <tbody className="bg-white">
                 {loading
                   ? Array.from({ length: 8 }).map((_, i) => (
                       <tr key={`rank-loading-${i}`}>
@@ -95,28 +95,24 @@ export const Leaderboard = memo<Props>(props => {
                   : ranks.map((rank, i) => (
                       <tr
                         key={`rank-${rank.id}`}
-                        className={
-                          i % 2 === 0
-                            ? undefined
-                            : 'bg-gray-50 dark:bg-neutral-600'
-                        }
+                        className={i % 2 === 0 ? undefined : 'bg-gray-50'}
                       >
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6 dark:text-gray-200">
+                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-500 sm:pl-6">
                           {rank.order}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 dark:text-white">
+                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                           {rank.name}
                         </td>
                         {!loading &&
                           columns.map(column => (
                             <td
                               key={`table-body-${column}`}
-                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 dark:text-gray-200"
+                              className="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                             >
                               {rank.score[column]}
                             </td>
                           ))}
-                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-700 dark:text-white">
+                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-700">
                           {rank.sums}
                         </td>
                       </tr>

@@ -28,36 +28,30 @@ const Page: NextPage<Props> = props => {
 
   return (
     <div>
-      <h1 className="font-bold text-3xl my-4 dark:text-white">
-        Applying for an event
-      </h1>
-      <h2 className="text-2xl font-semibold dark:text-white">
-        Qualification rules
-      </h2>
+      <h1 className="font-bold text-3xl my-4">Applying for an event</h1>
+      <h2 className="text-2xl font-semibold">Qualification rules</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-        <div className="bg-gray-50 dark:bg-neutral-700 rounded-xl p-4">
-          <h3 className="text-lg font-bold dark:text-white">1 Game</h3>
-          <p className="text-sm text-gray-700 dark:text-gray-100">
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h3 className="text-lg font-bold">1 Game</h3>
+          <p className="text-sm text-gray-700">
             You're only able to apply for 1 game to contest
           </p>
         </div>
-        <div className="bg-gray-50 dark:bg-neutral-700 rounded-xl p-4">
-          <h3 className="text-lg font-bold dark:text-white">2 Attempts</h3>
-          <p className="text-sm text-gray-700 dark:text-gray-100">
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h3 className="text-lg font-bold">2 Attempts</h3>
+          <p className="text-sm text-gray-700">
             You will have only 2 attmpts to record your best score for each
             tracks
           </p>
         </div>
-        <div className="bg-gray-50 dark:bg-neutral-700 rounded-xl p-4">
-          <h3 className="text-lg font-bold dark:text-white">8 Contestants</h3>
-          <p className="text-sm text-gray-700 dark:text-gray-100">
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h3 className="text-lg font-bold">8 Contestants</h3>
+          <p className="text-sm text-gray-700">
             Only 8 contestants will be qualified to the main event day
           </p>
         </div>
       </div>
-      <h2 className="text-2xl font-semibold my-4 dark:text-white">
-        Application form
-      </h2>
+      <h2 className="text-2xl font-semibold my-4">Application form</h2>
       <Form eventId={event.id} musics={musics} />
     </div>
   )

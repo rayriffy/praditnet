@@ -29,7 +29,7 @@ const Page: NextPage<Props> = props => {
     <div className="mt-4">
       <Navbar />
       <div className="mx-auto max-w-xl">
-        <div className="bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 p-6 rounded-md sm:flex">
+        <div className="bg-gradient-to-r from-slate-100 to-gray-100 p-6 rounded-md sm:flex">
           <div className="w-64 sm:w-48 shrink-0 mx-auto sm:mx-0 mb-4 sm:mb-0">
             <Image
               className="overflow-hidden rounded-md"
@@ -40,10 +40,10 @@ const Page: NextPage<Props> = props => {
           </div>
           <div className="sm:ml-6 flex flex-col justify-between w-full">
             <div>
-              <h1 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white">
+              <h1 className="font-bold text-xl sm:text-2xl text-gray-900">
                 {music.name}
               </h1>
-              <h2 className="text-gray-700 text-sm sm:text-base dark:text-gray-300">
+              <h2 className="text-gray-700 text-sm sm:text-base">
                 {music.artist}
               </h2>
             </div>
@@ -69,10 +69,10 @@ const Page: NextPage<Props> = props => {
             </div>
           </div>
         </div>
-        <h1 className="text-gray-800 font-bold text-2xl sm:text-3xl mt-6 mb-2 dark:text-white">
+        <h1 className="text-gray-800 font-bold text-2xl sm:text-3xl mt-6 mb-2">
           Leaderboard
         </h1>
-        <div className="dark:text-white">
+        <div>
           {leaderboard.map(({ playerName, score }, i) => (
             <div
               key={`leaderboard-${playerName}-${i}`}

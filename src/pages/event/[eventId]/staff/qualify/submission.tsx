@@ -65,16 +65,14 @@ const Page: NextPage<Props> = props => {
         </p>
       </div>
       <div className="mt-6 space-y-4">
-        <h1 className="text-2xl font-bold dark:text-white">
-          Qualification submission
-        </h1>
+        <h1 className="text-2xl font-bold">Qualification submission</h1>
 
-        <div className="bg-white dark:bg-neutral-700 shadow rounded-lg border">
+        <div className="bg-white shadow rounded-lg border">
           <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 dark:text-white">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
               Identify
             </h3>
-            <div className="mt-2 max-w-xl text-sm text-gray-500 dark:text-white">
+            <div className="mt-2 max-w-xl text-sm text-gray-500">
               <p>Please type in identification ID of target user</p>
             </div>
             <div className="mt-5 sm:flex sm:items-center">

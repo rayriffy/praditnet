@@ -35,7 +35,7 @@ export const Metadata = memo<Props>(props => {
           <div className="ml-3 text-sm">
             <label
               htmlFor={`music-${musicId}-${item.key}`}
-              className="font-medium text-gray-700 dark:text-white"
+              className="font-medium text-gray-700"
             >
               {item.label}
             </label>

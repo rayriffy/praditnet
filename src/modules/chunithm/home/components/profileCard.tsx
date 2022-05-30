@@ -25,7 +25,7 @@ export const ProfileCard = memo<Props>(props => {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="flex bg-gradient-to-r from-amber-100 dark:from-amber-200 to-yellow-100 dark:to-yellow-200 p-4 rounded-lg max-w-lg w-full">
+        <div className="flex bg-gradient-to-r from-amber-100 to-yellow-100 p-4 rounded-lg max-w-lg w-full">
           <div className="shrink-0 flex items-center">
             <div className="bg-gray-50 border-2 border-gray-700 rounded-md overflow-hidden shadow aspect-square">
               <Image

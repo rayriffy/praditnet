@@ -21,7 +21,7 @@ interface Props {
 const Page: NextPage<Props> = props => {
   return (
     <div>
-      <h1 className="font-bold text-3xl my-4 dark:text-white">Leaderboard</h1>
+      <h1 className="font-bold text-3xl my-4">Leaderboard</h1>
       <div>
         <GameTabs {...props} />
       </div>

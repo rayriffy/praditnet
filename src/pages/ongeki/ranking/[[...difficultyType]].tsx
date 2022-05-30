@@ -46,7 +46,7 @@ const Page: NextPage<Props> = props => {
               className={classNames(
                 difficulty.color.primary,
                 difficulty.color.ring,
-                'text-white py-1 px-4 rounded-md border-2 border-white dark:border-neutral-900 hover:ring-2 transition text-center'
+                'text-white py-1 px-4 rounded-md border-2 border-white hover:ring-2 transition text-center'
               )}
             >
               {difficulty.name}

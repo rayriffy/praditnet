@@ -25,7 +25,7 @@ const Page: NextPage<Props> = props => {
         </p>
       </div>
       <div className="mt-6 space-y-4">
-        <h1 className="text-2xl font-bold dark:text-white">Contestants</h1>
+        <h1 className="text-2xl font-bold">Contestants</h1>
       </div>
 
       <div className="overflow-x-scroll shadow ring-1 ring-black ring-opacity-5 rounded-lg mt-4">

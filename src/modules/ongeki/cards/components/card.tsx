@@ -34,7 +34,7 @@ const CardContent = memo<Pick<Props, 'card'>>(props => {
             <div className="absolute top-1 bottom-1 left-1 right-1 z-[1] flex justify-center items-center">
               <img src="/assets/ongeki/lock.png" />
             </div>
-            <div className="absolute bg-white dark:bg-neutral-700 top-1 bottom-1 left-1 right-1 z-[1] opacity-40" />
+            <div className="absolute bg-white top-1 bottom-1 left-1 right-1 z-[1] opacity-40" />
           </Fragment>
         )}
         <Image
@@ -44,7 +44,7 @@ const CardContent = memo<Pick<Props, 'card'>>(props => {
           height={526}
         />
       </div>
-      <p className="text-xs text-center font-medium pb-1 text-gray-900 dark:text-white">
+      <p className="text-xs text-center font-medium pb-1 text-gray-900">
         {card.serial}
       </p>
     </Fragment>
@@ -61,7 +61,7 @@ export const Card = memo<Props>(props => {
       {card.owned ? (
         <Link href={`/ongeki/card/${card.id}`}>
           <a>
-            <div className="bg-slate-50 dark:bg-neutral-700 dark:border-gray-500 border rounded-md px-2 py-1">
+            <div className="bg-slate-50 border rounded-md px-2 py-1">
               <CardContent card={card} />
             </div>
           </a>
@@ -72,7 +72,7 @@ export const Card = memo<Props>(props => {
           onClick={() => {
             setShowGet(true)
           }}
-          className="bg-slate-50 dark:bg-neutral-700 dark:border-gray-500 border rounded-md px-2 py-1"
+          className="bg-slate-50 border rounded-md px-2 py-1"
         >
           <CardContent card={card} />
           <GetDialog

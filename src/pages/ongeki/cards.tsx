@@ -58,13 +58,13 @@ const Page: NextPage<Props> = props => {
           {['n', 'r', 'sr', 'srp', 'ssr'].map(rarity => (
             <div
               key={`overview-${rarity}`}
-              className="m-2 w-20 rounded-full bg-white dark:bg-neutral-800 border-2 border-pink-500 aspect-square flex flex-col items-center justify-center shrink-0"
+              className="m-2 w-20 rounded-full bg-white border-2 border-pink-500 aspect-square flex flex-col items-center justify-center shrink-0"
             >
               <img
                 src={`/assets/ongeki/cardRarity/${rarity}.png`}
                 className="h-7 w-auto m-1"
               />
-              <p className="font-medium text-gray-700 dark:text-gray-50 text-xs">
+              <p className="font-medium text-gray-700 text-xs">
                 {overview[rarity].owned} / {overview[rarity].total}
               </p>
             </div>
@@ -88,18 +88,18 @@ const Page: NextPage<Props> = props => {
             </div>
           </div>
           <button
-            className="w-full bg-gray-100 mt-2 text-xs rounded leading-none px-2 py-1 text-center relative dark:bg-neutral-600 dark:text-white"
+            className="w-full bg-gray-100 mt-2 text-xs rounded leading-none px-2 py-1 text-center relative"
             onClick={() => setRarityToggle(o => !o)}
           >
             <div className="absolute inset-y-0 left-0 pl-1 flex items-center pointer-events-none">
               {rarityToggle ? (
                 <ChevronDownIcon
-                  className="h-4 w-4 text-gray-400 dark:text-white"
+                  className="h-4 w-4 text-gray-400"
                   aria-hidden="true"
                 />
               ) : (
                 <ChevronRightIcon
-                  className="h-4 w-4 text-gray-400 dark:text-white"
+                  className="h-4 w-4 text-gray-400"
                   aria-hidden="true"
                 />
               )}

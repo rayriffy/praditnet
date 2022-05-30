@@ -88,18 +88,18 @@ export const TransferDialog = memo<AimeTransferDialogProps>(props => {
           >
             <form
               onSubmit={onSubmit}
-              className="inline-block align-bottom bg-white dark:bg-neutral-800 rounded-lg px-4 py-6 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6"
+              className="inline-block align-bottom bg-white rounded-lg px-4 py-6 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full sm:p-6"
             >
               <div>
                 <div className="text-left">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl leading-6 font-medium text-gray-900 dark:text-white"
+                    className="text-xl leading-6 font-medium text-gray-900"
                   >
                     {cardId !== null ? 'Transfer' : 'Bind'} card
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500 dark:text-gray-100">
+                    <p className="text-sm text-gray-500">
                       Please refer access code directly from nearby game
                       cabinets that connected to Pradit Amusement.{' '}
                       <b>

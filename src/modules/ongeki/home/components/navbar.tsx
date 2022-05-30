@@ -45,7 +45,7 @@ export const Navbar = memo(props => {
           href={`/ongeki/${navbar.id}`}
           key={`ongeki-navigation-${navbar.id}`}
         >
-          <a className="border text-gray-900 hover:bg-gray-50 dark:bg-neutral-700 hover:dark:bg-neutral-600 dark:text-gray-100 py-2 px-4 rounded-lg font-medium text-sm text-center">
+          <a className="border text-gray-900 hover:bg-gray-50 py-2 px-4 rounded-lg font-medium text-sm text-center">
             {navbar.title}
           </a>
         </Link>

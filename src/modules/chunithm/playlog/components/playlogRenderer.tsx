@@ -19,7 +19,7 @@ export const PlaylogRenderer = memo<Props>(props => {
     <div className="grid grid-cols-1 gap-6">
       {playlogs.map(playlog => (
         <div
-          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 rounded-xl sm:flex"
+          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-gray-100 rounded-xl sm:flex"
           key={`playlog-${playlog.id}`}
         >
           <div className="mx-auto mb-4 sm:m-0 w-60 md:w-48 shrink-0 flex items-start">
@@ -32,7 +32,7 @@ export const PlaylogRenderer = memo<Props>(props => {
           </div>
           <div className="sm:ml-6 w-full mt-4 sm:mt-0">
             <div className="flex flex-row sm:flex-col-reverse justify-between items-start">
-              <h1 className="font-bold text-2xl text-gray-900 dark:text-white mr-4 mt-0 sm:mt-2">
+              <h1 className="font-bold text-2xl text-gray-900 mr-4 mt-0 sm:mt-2">
                 {playlog.musicTitle}
               </h1>
 
@@ -48,10 +48,10 @@ export const PlaylogRenderer = memo<Props>(props => {
                     New Record!!
                   </p>
                 )}
-                <p className="pb-2 text-4xl font-light dark:text-white">
+                <p className="pb-2 text-4xl font-light">
                   {playlog.score.toLocaleString()}
                 </p>
-                <p className="text-gray-700 text-sm dark:text-gray-300">
+                <p className="text-gray-700 text-sm">
                   Track {playlog.track} · {playlog.playDate}
                 </p>
               </div>

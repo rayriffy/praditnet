@@ -21,7 +21,7 @@ export const Layout: FunctionComponent<Props> = props => {
           <div className="flex shrink-0 items-center">
             <Link href="/">
               <a>
-                <PAmuse className="h-7 w-auto fill-gray-700 dark:fill-white" />
+                <PAmuse className="h-7 w-auto fill-gray-700" />
               </a>
             </Link>
             <div className="mx-4 h-6 border-l-2 border-gray-300" />
@@ -30,7 +30,7 @@ export const Layout: FunctionComponent<Props> = props => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <R className="h-8 w-auto fill-gray-700 dark:fill-white" />
+              <R className="h-8 w-auto fill-gray-700" />
             </a>
           </div>
           {(aime !== undefined || eamuse !== undefined) && (
@@ -44,15 +44,15 @@ export const Layout: FunctionComponent<Props> = props => {
                 </div>
               )}
               <Link href="/card">
-                <a className="border rounded px-2 py-1 flex items-center hover:cursor-pointer dark:bg-neutral-700">
-                  <p className="text-gray-700 dark:text-gray-100 font-medium mr-2">
+                <a className="border rounded px-2 py-1 flex items-center hover:cursor-pointer">
+                  <p className="text-gray-700 font-medium mr-2">
                     {aime === null && eamuse === null ? (
                       <span className="text-sm">Not set up</span>
                     ) : (
                       (aime ?? eamuse).substring((aime ?? eamuse).length - 4)
                     )}
                   </p>
-                  <CreditCardIcon className="w-6 h-6 text-gray-700 dark:text-gray-100" />
+                  <CreditCardIcon className="w-6 h-6 text-gray-700" />
                 </a>
               </Link>
             </div>
@@ -60,7 +60,7 @@ export const Layout: FunctionComponent<Props> = props => {
         </header>
         <main>{children}</main>
       </div>
-      <footer className="py-10 text-gray-400 dark:text-gray-100">
+      <footer className="py-10 text-gray-400">
         <p className="text-center text-base">
           Version <b>{process.env.buildNumber}</b>
         </p>
