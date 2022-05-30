@@ -83,7 +83,7 @@ export const Item = memo<Props>(props => {
     <div
       className={classNames(
         type !== 'icon' ? 'flex-col-reverse' : '',
-        'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100 dark:bg-radial-at-r dark:from-sky-300 dark:to-blue-300'
+        'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100'
       )}
     >
       {type !== 'icon' && setButtonElement}
@@ -117,10 +117,8 @@ export const Item = memo<Props>(props => {
       >
         <div>
           <h1 className="font-semibold">{item.name}</h1>
-          <div className="border-t-4 border-dotted border-gray-400 dark:border-gray-600 my-1"></div>
-          <p className="text-sm text-gray-500 dark:text-gray-700">
-            {item.description}
-          </p>
+          <div className="border-t-4 border-dotted border-gray-400 my-1"></div>
+          <p className="text-sm text-gray-500">{item.description}</p>
         </div>
         {type === 'icon' && setButtonElement}
       </div>

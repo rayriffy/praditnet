@@ -23,7 +23,7 @@ export const MusicListing = memo<MusicListingProps>(props => {
     <Disclosure>
       {({ open }) => (
         <>
-          <Disclosure.Button className="py-6 border-2 dark:border-gray-100 dark:bg-neutral-700 dark:text-white rounded-xl place-content-center flex mb-4 relative w-full">
+          <Disclosure.Button className="py-6 border-2 rounded-xl place-content-center flex mb-4 relative w-full">
             <h2 className="text-xl font-bold">{genre}</h2>
             {!open ? (
               <PlusIcon className="w-4 h-4 absolute right-4 top-0 bottom-0 my-auto" />

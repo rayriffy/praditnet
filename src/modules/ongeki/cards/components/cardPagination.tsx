@@ -27,7 +27,7 @@ const DisabledButton: FunctionComponent<{ showWhen?: 'small' | 'large' }> = ({
         : showWhen === 'small'
         ? 'inline-flex sm:hidden'
         : 'inline-flex',
-      'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-600 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-700 dark:hover:text-white transition cursor-not-allowed'
+      'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-gray-100 rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 transition cursor-not-allowed'
     )}
     {...props}
   />
@@ -45,7 +45,7 @@ const TriggerableButton: FunctionComponent<{
         : showWhen === 'small'
         ? 'inline-flex sm:hidden'
         : 'inline-flex',
-      'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-neutral-700 dark:border-white dark:text-gray-200 dark:hover:bg-neutral-600 dark:hover:text-white transition'
+      'items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 transition'
     )}
     onClick={() => onPaginate(leapSize)}
     {...props}
@@ -93,7 +93,7 @@ export const CardPagination = memo<Props>(props => {
           <ArrowRightIcon className="ml-2 w-5 h-5" />
         </Button>
       </div>
-      <p className="px-2 text-gray-700 dark:text-gray-100">
+      <p className="px-2 text-gray-700">
         Page{' '}
         <span className="font-bold">
           {current}/{max}

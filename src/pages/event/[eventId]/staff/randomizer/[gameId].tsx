@@ -64,7 +64,7 @@ const Page: NextPage<Props> = props => {
       ) : (
         <div className="max-w-3xl mx-auto">
           <div className="mt-6 space-y-4">
-            <h1 className="text-2xl font-bold dark:text-white">Randomizer</h1>
+            <h1 className="text-2xl font-bold">Randomizer</h1>
             {/* <p className="my-4 p-4 bg-red-100 text-red-800 rounded-lg leading-tight text-sm">{JSON.stringify(props)}</p> */}
             <Input pools={pools} disabled={progress} onRequest={onSearch} />
           </div>

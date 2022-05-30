@@ -19,7 +19,7 @@ export const PlaylogRenderer = memo<Props>(props => {
     <div className="grid grid-cols-1 gap-6">
       {playlogs.map(playlog => (
         <div
-          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-neutral-100 dark:from-neutral-700 dark:to-stone-700 rounded-xl"
+          className="p-4 md:p-6 bg-gradient-to-r from-slate-100 to-neutral-100 rounded-xl"
           key={`playlog-${playlog.id}`}
         >
           <div className="sm:flex">
@@ -34,7 +34,7 @@ export const PlaylogRenderer = memo<Props>(props => {
             <div className="sm:ml-6 w-full mt-4 sm:mt-0">
               <div className="flex flex-row sm:flex-col-reverse justify-between items-start">
                 <div>
-                  <h1 className="font-bold text-2xl text-gray-900 dark:text-white mr-4 mt-0 sm:mt-2">
+                  <h1 className="font-bold text-2xl text-gray-900 mr-4 mt-0 sm:mt-2">
                     {playlog.music.name}
                   </h1>
                   <p className="text-gray-700 text-sm">{playlog.playDate}</p>
@@ -47,8 +47,8 @@ export const PlaylogRenderer = memo<Props>(props => {
               </div>
               <div className="grid grid-cols-2 gap-2 sm:gap-4 my-2 items-start">
                 <div className="space-y-4">
-                  <div className="bg-gray-50 dark:bg-neutral-600 dark:text-white shadow-sm rounded-md overflow-hidden">
-                    <h1 className="text-xs uppercase font-bold bg-neutral-600 dark:bg-neutral-100 dark:text-gray-700 text-white py-1 px-2">
+                  <div className="bg-gray-50 shadow-sm rounded-md overflow-hidden">
+                    <h1 className="text-xs uppercase font-bold bg-neutral-600 text-white py-1 px-2">
                       Battle
                     </h1>
                     <div className="px-3 py-2">
@@ -102,8 +102,8 @@ export const PlaylogRenderer = memo<Props>(props => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 dark:bg-neutral-600 dark:text-white shadow-sm rounded-md overflow-hidden">
-                  <h1 className="text-xs uppercase font-bold bg-neutral-600 dark:bg-neutral-100 dark:text-gray-700 text-white py-1 px-2">
+                <div className="bg-gray-50 shadow-sm rounded-md overflow-hidden">
+                  <h1 className="text-xs uppercase font-bold bg-neutral-600 text-white py-1 px-2">
                     Technical
                   </h1>
                   <div className="px-3 py-2">

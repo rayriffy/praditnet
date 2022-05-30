@@ -25,7 +25,7 @@ export const Preview = memo<Props>(props => {
   return (
     <Fragment>
       <div className="border-4 border-dashed p-6 rounded-lg">
-        <h1 className="text-center font-bold text-lg text-gray-900 dark:text-white mb-2">
+        <h1 className="text-center font-bold text-lg text-gray-900 mb-2">
           You're not registered for competition yet!
         </h1>
         <div className="flex justify-center">
@@ -40,7 +40,7 @@ export const Preview = memo<Props>(props => {
         {Object.entries(musics).map(([game, musics]) => (
           <div
             key={`music-grid-${game}`}
-            className="bg-gray-100 dark:bg-neutral-700 rounded-md mt-14 px-6 pb-4"
+            className="bg-gray-100 rounded-md mt-14 px-6 pb-4"
           >
             <img
               src={`/assets/logo/${game}.png`}
@@ -49,9 +49,7 @@ export const Preview = memo<Props>(props => {
                 'h-auto mx-auto -mt-12'
               )}
             />
-            <h1 className="font-bold text-xl my-2 dark:text-white">
-              Qualifying songs
-            </h1>
+            <h1 className="font-bold text-xl my-2">Qualifying songs</h1>
             <div className="my-2 grid grid-cols-2 items-start gap-6">
               {musics.map(music => (
                 <div
@@ -65,7 +63,7 @@ export const Preview = memo<Props>(props => {
                       height={200}
                     />
                   </div>
-                  <p className="text-gray-900 dark:text-white text-sm font-bold text-center mt-2">
+                  <p className="text-gray-900 text-sm font-bold text-center mt-2">
                     {music.name}
                   </p>
                   <div className="flex mt-2">

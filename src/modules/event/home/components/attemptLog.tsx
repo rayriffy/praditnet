@@ -22,7 +22,7 @@ export const AttemptLog = memo<Props>(props => {
   const { game, music, targetAttemptLog } = props
 
   return (
-    <div className="flex flex-col sm:flex-row bg-gradient-to-r from-slate-100 to-gray-100 dark:from-neutral-700 dark:to-stone-700 px-5 py-6 sm:py-4 rounded-md">
+    <div className="flex flex-col sm:flex-row bg-gradient-to-r from-slate-100 to-gray-100 px-5 py-6 sm:py-4 rounded-md">
       <div className="flex shrink-0 justify-center sm:justify-start items-start">
         <div className="flex rounded-md overflow-hidden w-48 sm:w-40">
           <Image
@@ -40,10 +40,10 @@ export const AttemptLog = memo<Props>(props => {
               level={music.level}
             />
           </div>
-          <h2 className="font-bold text-xl sm:text-2xl text-gray-900 dark:text-white">
+          <h2 className="font-bold text-xl sm:text-2xl text-gray-900">
             {music.name}
           </h2>
-          <p className="text-4xl font-light dark:text-white">
+          <p className="text-4xl font-light">
             {game === 'maimai'
               ? (targetAttemptLog?.[1] ?? 0).toFixed(4)
               : (targetAttemptLog?.[1] ?? 0).toLocaleString()}

@@ -91,7 +91,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start">
               <label
                 htmlFor="real-name"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
                 Real name
               </label>
@@ -108,7 +108,7 @@ export const Form = memo<Props>(props => {
                     'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   )}
                 />
-                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
+                <p className="text-sm text-gray-500 mt-3">
                   Please write your name in Thai, and without intitials (e.g.
                   นาย ด.ช.)
                 </p>
@@ -118,7 +118,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="in-game-name"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
                 In-game name
               </label>
@@ -133,7 +133,7 @@ export const Form = memo<Props>(props => {
                   required
                   className="max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md"
                 />
-                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
+                <p className="text-sm text-gray-500 mt-3">
                   You can copy in-game name from{' '}
                   <a
                     href="https://maimaidx-eng.com/"
@@ -163,7 +163,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="facebook"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
                 Link to Facebook
               </label>
@@ -181,7 +181,7 @@ export const Form = memo<Props>(props => {
                     'max-w-lg block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:max-w-xs sm:text-sm border-gray-300 rounded-md'
                   )}
                 />
-                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
+                <p className="text-sm text-gray-500 mt-3">
                   We will contact you in case you has been qualified for the
                   main event day
                 </p>
@@ -191,7 +191,7 @@ export const Form = memo<Props>(props => {
             <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label
                 htmlFor="shirtSize"
-                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2 dark:text-white"
+                className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
               >
                 Shirt size
               </label>
@@ -212,7 +212,7 @@ export const Form = memo<Props>(props => {
                   <option value="2XL">2XL</option>
                   <option value="3XL">3XL</option>
                 </select>
-                <p className="text-sm text-gray-500 mt-3 dark:text-gray-200">
+                <p className="text-sm text-gray-500 mt-3">
                   If you're qualified, you will get a shirt for finalists as
                   well.
                 </p>
@@ -224,7 +224,7 @@ export const Form = memo<Props>(props => {
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-baseline">
                   <div>
                     <div
-                      className="text-base font-medium sm:text-sm text-gray-700 dark:text-white"
+                      className="text-base font-medium sm:text-sm text-gray-700"
                       id="label-participated-game"
                     >
                       Participated game
@@ -249,7 +249,7 @@ export const Form = memo<Props>(props => {
                           />
                           <label
                             htmlFor="la-participated-game"
-                            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                            className="ml-3 block text-sm font-medium text-gray-700"
                           >
                             <span>maimai DX</span>
                             <div className="mt-1 flex space-x-2">
@@ -283,7 +283,7 @@ export const Form = memo<Props>(props => {
                           />
                           <label
                             htmlFor="push-email"
-                            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                            className="ml-3 block text-sm font-medium text-gray-700"
                           >
                             <span>CHUNITHM NEW!!</span>
                             <div className="mt-1 flex space-x-2">

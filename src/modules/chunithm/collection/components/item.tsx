@@ -93,7 +93,7 @@ export const Item = memo<Props>(props => {
     <div
       className={classNames(
         !isSmallLayout ? 'flex-col-reverse' : '',
-        'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100 dark:bg-radial-at-r dark:from-sky-300 dark:to-blue-300'
+        'rounded-lg flex p-4 bg-gradient-to-r from-sky-100 to-blue-100'
       )}
     >
       {!isSmallLayout && (
@@ -142,9 +142,7 @@ export const Item = memo<Props>(props => {
         <div>
           <h1 className="font-semibold">{item.name}</h1>
           {item.works !== null && (
-            <p className="text-sm text-gray-500 dark:text-gray-700">
-              {item.works}
-            </p>
+            <p className="text-sm text-gray-500">{item.works}</p>
           )}
         </div>
         {isSmallLayout && setButtonElement}
