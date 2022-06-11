@@ -17,24 +17,34 @@ interface Props {
       difficulty: number
     }[]
   }
+  isEventEnded: boolean
 }
 
 export const Preview = memo<Props>(props => {
-  const { eventId, musics } = props
+  const { eventId, musics, isEventEnded } = props
 
   return (
     <Fragment>
       <div className="border-4 border-dashed p-6 rounded-lg">
-        <h1 className="text-center font-bold text-lg text-gray-900 mb-2">
-          You're not registered for competition yet!
+        <h1
+          className={classNames(
+            isEventEnded ? '' : 'mb-2',
+            'text-center font-bold text-lg text-gray-900'
+          )}
+        >
+          {isEventEnded
+            ? 'Event is over! Registration closed'
+            : "You're not registered for competition yet!"}
         </h1>
-        <div className="flex justify-center">
-          <Link href={`/event/${eventId}/apply`}>
-            <a className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Apply now
-            </a>
-          </Link>
-        </div>
+        {!isEventEnded && (
+          <div className="flex justify-center">
+            <Link href={`/event/${eventId}/apply`}>
+              <a className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Apply now
+              </a>
+            </Link>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {Object.entries(musics).map(([game, musics]) => (

@@ -106,7 +106,10 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
     })
     .first()
 
-  if (existingRegistration !== undefined) {
+  if (
+    existingRegistration !== undefined ||
+    dayjs(targetEvent.endAt).isBefore(dayjs())
+  ) {
     await knex.destroy()
     return {
       redirect: {

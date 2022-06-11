@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
-
 import { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
+
+import dayjs from 'dayjs'
 
 import { Image } from '../../../core/components/image'
 import { Preview } from '../../../modules/event/home/components/preview'
 import { Entry } from '../../../modules/event/home/components/entry'
 import { useTitle } from '../../../core/services/useTitle'
+import { useMemo } from 'react'
 
 export interface Props {
   user: {
@@ -42,6 +43,8 @@ const Page: NextPage<Props> = props => {
   const { user, event, musics, entry, isStaff, ranking } = props
 
   useTitle(event.name)
+
+  const isEventEnded = useMemo(() => dayjs(event.endAt).isBefore(dayjs()), [])
 
   return (
     <div className="space-y-4">
@@ -96,7 +99,11 @@ const Page: NextPage<Props> = props => {
         </Link>
       </div>
       {entry === null ? (
-        <Preview eventId={event.id} musics={musics} />
+        <Preview
+          eventId={event.id}
+          musics={musics}
+          isEventEnded={isEventEnded}
+        />
       ) : (
         <Entry {...{ user, entry, musics, event, ranking }} />
       )}
